@@ -1,6 +1,6 @@
 # Corso Ingegneria del Software 2023 - Cremona
 
-## Project Setupp
+## Project Setup
 
 In order to set up your project, follow these steps
 
