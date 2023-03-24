@@ -1,4 +1,8 @@
+package src;
+
 import org.junit.Test;
+import src.Position;
+
 import static org.junit.Assert.assertEquals;
 
 class PositionTest {

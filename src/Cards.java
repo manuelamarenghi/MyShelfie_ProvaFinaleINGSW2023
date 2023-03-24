@@ -1,3 +1,7 @@
+package src;
+
+import src.Position;
+
 public class Cards {
 
     private String colour;
