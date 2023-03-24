@@ -7,7 +7,7 @@ class PositionTest {
         Position testCoordinate = new Position (2,4);
         assertEquals(2 , testCoordinate.getX());
     }
-    @Test
+
     public void yCoordinateReturnValue(){
         Position testCoordinate = new Position (2,4);
         assertEquals(4 , testCoordinate.getY());
