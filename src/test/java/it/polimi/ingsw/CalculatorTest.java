@@ -60,7 +60,7 @@ class CalculatorTest {
     @Test
     public void testSubstraction() {
         int result = 10 - 3;
-        int ciao;
+
         assertTrue(result == 9);
     }
 }
