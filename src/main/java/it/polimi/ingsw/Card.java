@@ -10,6 +10,14 @@ public class Card {
         this.coordinates=coordinates;
     }
 
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public void setCoordinates(Position coordinates) {
+        this.coordinates = coordinates;
+    }
+
     public String getColour(){
         return colour;
     }
