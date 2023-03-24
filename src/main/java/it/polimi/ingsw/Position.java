@@ -6,15 +6,15 @@ public class Position {
 
     public Position(int x , int y){
         this.x=x;
-        this.y=0y;
+        this.y=y;
 
     }
 
-    public void getX(){
+    public int getX(){
         return x;
 
     }
-    public void getY(){
+    public int getY(){
         return y;
 
     }
