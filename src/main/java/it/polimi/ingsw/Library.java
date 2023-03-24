@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,4 +115,9 @@ public class Library {
         }
 
     }
+=======
+public class Library {
+    private Card library[][];
+    public Library (){}
+>>>>>>> 2511dce (modifica pom)
 }
