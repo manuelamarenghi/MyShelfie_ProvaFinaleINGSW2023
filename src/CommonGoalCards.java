@@ -1,6 +1,6 @@
 public interface CommonGoalCards{
 
     public boolean check();
-    public boolean eexpiered();
+    public boolean expiered();
     public void getImage();
 }
