@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 public class PersonalGoalCard {
-    private final DIMENSION=6
+    private final DIMENSION=6;
     private Card personalObjective=new Card[DIMENSION];
     public PersonalGoalCard(Card[] personalObjective){
         for(int i;i<DIMENSION;i++){
