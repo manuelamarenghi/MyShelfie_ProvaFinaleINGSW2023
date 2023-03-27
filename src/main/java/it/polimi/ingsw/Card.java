@@ -5,11 +5,9 @@ public class Card {
     private String colour;
     private Position coordinates;
 
-    public Card(String colour){
+    public Cards(String colour , Position coordinates){
         this.colour=colour;
-    }
-    public void setCoordinates(Position coordinatesParametre){
-        coordinates=coordinatesParametre; //Coordinates to be set at the value passed as parametre in the method
+        this.coordinates=coordinates;
     }
 
     public String getColour(){
