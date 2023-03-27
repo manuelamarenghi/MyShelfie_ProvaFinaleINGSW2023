@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.util.Arrays;
+
 public class PersonalGoalCard {
     private static final int DIMENSION = 6;
     private Card[] personalObjective=new Card[DIMENSION];
@@ -10,7 +12,7 @@ public class PersonalGoalCard {
     }
 
     public Card[] getPersonalObjective() {
-        return this.personalObjective;
+        return Arrays.copyOf(personalObjective,personalObjective.length);
     }
 
     public void showPersonalGoalCard(){
