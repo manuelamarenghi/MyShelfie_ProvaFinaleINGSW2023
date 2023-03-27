@@ -59,14 +59,13 @@ public class Library implements Iterable<Card> {
         for(int i=0;i<6;i++){
             for(int j=0;j<5;j++){
                 if( library[i][j]!=null){
-                    System.out.print(" | "+library[i][j].getColour());
+                    System.out.print(" ["+library[i][j].getColour()+"] ");
                 }
-                else {  System.out.print(" | "+"  "+"  ");
+                else {  System.out.print("  ["+"  "+"]  ");
+                }
             }
-        }
-            System.out.print(" | ");
             System.out.println();
-    }}
+        }}
     /*
      * setColumn() puts n cards in a chosen column
      */
@@ -74,8 +73,8 @@ public class Library implements Iterable<Card> {
         int i=5;
         int l=0;
         while(i>0 && l!= cards.length){
-            if(library[i-1][n].getColour().isEmpty()){
-                library[i-1][n]=cards[l];
+            if(library[i][n].getColour().isEmpty()){
+                library[i][n]=cards[l];
                 l++;
             }
             i--;
@@ -92,8 +91,8 @@ public class Library implements Iterable<Card> {
         System.out.println("You can put your cards in columns:"+ Arrays.toString(showColumn(cards.length)));
         do {
             System.out.println("Select column or -1 to stop:");
-             a = in.nextInt();
-             if(a==-1){ break;}
+            a = in.nextInt();
+            if(a==-1){ break;}
             if (list.contains(a)){
                 setColumn(cards,a);
             }
@@ -105,9 +104,9 @@ public class Library implements Iterable<Card> {
     public void getgroup(){
         List<List<Object>> list;
         for(int i=0;i<6;i++){
-          for(int j=0;j<5;j++){
+            for(int j=0;j<5;j++){
 
-          }
+            }
         }
 
     }
