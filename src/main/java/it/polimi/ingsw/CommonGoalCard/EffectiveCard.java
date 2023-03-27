@@ -12,6 +12,7 @@ public class EffectiveCard {
 
     public void update(Player player){
         commonCard.check(player.getLibrary());
+        commonCard.expired(player);
     }
 
     public void show(){
