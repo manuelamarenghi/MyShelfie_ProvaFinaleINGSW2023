@@ -108,10 +108,10 @@ public class Board {
 
         return null;
     }
-    public void getBag(){
+    public Bag getBag(){
         return bag;
     }
-    public void getBoard(){
+    public Card[][] getBoard(){
         return board;
     }
 }
