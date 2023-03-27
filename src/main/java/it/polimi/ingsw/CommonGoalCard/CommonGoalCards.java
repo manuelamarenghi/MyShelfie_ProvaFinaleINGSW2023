@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CommonGoalCard;
 
 public interface CommonGoalCards {
     public boolean check();
