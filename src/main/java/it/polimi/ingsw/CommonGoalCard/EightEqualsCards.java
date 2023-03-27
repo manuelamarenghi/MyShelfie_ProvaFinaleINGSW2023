@@ -4,14 +4,17 @@ import it.polimi.ingsw.*;
 
 public class EightEqualsCards implements CommonGoalCards {
     private final int DIMENSION=8;
+    private final int MAX=4;
+    int indexLightBLue=0;
+
     @Override
     public boolean check(Library library) {
-        int indexRed=0;
-        int indexBlue=0;
-        int indexWhite=0;
-        int indexYellow=0;
-        int indexPink=0;
-        int indexLightBLue=0;
+        int indexRed = 0;
+         int indexBlue=0;
+         int indexWhite=0;
+         int indexYellow=0;
+         int indexPink=0;
+         int indexLightBLue=0;
         for(Card card:library){
             if(card.getColour().equals("blue"))indexBlue++;
             if(card.getColour().equals("red"))indexRed++;
@@ -30,11 +33,13 @@ public class EightEqualsCards implements CommonGoalCards {
 
     @Override
     public boolean expired(Player player) {
+        //in this particular CommonGoalCard, using the expired method bring more difficulties than not using it
+        //to prove the impossibility of completing the task I would have to control tons of cases and to verify all one at a time
         return false;
     }
 
     @Override
     public void getImage() {
-
+    //it's better to insert here the path of the image we're going to display on the GUI
     }
 }
