@@ -1,12 +1,14 @@
 package it.polimi.ingsw.CommonGoalCard;
 
+import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
+import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 /*
  * Col2G goal needs two columns each formed by 6 different types of tiles
  */
-public class Col2G implements CommonGoalCards{
+public class Col2G implements CommonGoalCards {
     /*
      * check() returns true if the library match the goal,otherwise false
      */
@@ -63,5 +65,10 @@ public class Col2G implements CommonGoalCards{
         l.getCardinPos(5,4).setColour("Y");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
+    }
+
+    @Override
+    public boolean expired(Player player) {
+        return false;
     }
 }
