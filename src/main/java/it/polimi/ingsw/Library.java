@@ -1,10 +1,5 @@
 package it.polimi.ingsw;
 
-<<<<<<< HEAD
-public class Library {
-    private Card library[][];
-    public Library (){}
-=======
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -119,5 +114,4 @@ public class Library {
         }
 
     }
->>>>>>> origin/testb
 }
