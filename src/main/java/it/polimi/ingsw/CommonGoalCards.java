@@ -1,8 +1,7 @@
 package it.polimi.ingsw;
 
 public interface CommonGoalCards {
-    public boolean check(Library library);
-    //public boolean expired(Player player);
+    public boolean check();
+    public boolean expiered();
     public void getImage();
-
 }

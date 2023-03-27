@@ -1,16 +1,16 @@
 package it.polimi.ingsw;
 
 public class PersonalGoalCard {
-    private final DIMENSION=6;
-    private Card personalObjective=new Card[DIMENSION];
+    private static final int DIMENSION = 6;
+    private Card[] personalObjective=new Card[DIMENSION];
     public PersonalGoalCard(Card[] personalObjective){
-        for(int i;i<DIMENSION;i++){
+        for(int i=0;i<DIMENSION;i++){
             this.personalObjective[i]=new Card(personalObjective[i].getColour(),personalObjective[i].getCoordinates());
         }
     }
 
-    public Card getPersonalObjective() {
-        return personalObjective;
+    public Card[] getPersonalObjective() {
+        return this.personalObjective;
     }
 
     public void showPersonalGoalCard(){
