@@ -1,15 +1,12 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*
  * this class is about personal library
  */
-public class Library {
+public class Library implements Iterable<Card> {
     /*
      * library is a matrix of cards that are insert from library's player
      */
@@ -113,5 +110,10 @@ public class Library {
           }
         }
 
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new LibraryIterator(this.library);
     }
 }
