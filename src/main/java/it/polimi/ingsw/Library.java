@@ -62,12 +62,11 @@ public class Library {
         for(int i=0;i<6;i++){
             for(int j=0;j<5;j++){
                 if( library[i][j]!=null){
-                    System.out.print(" | "+library[i][j].getColour());
+                    System.out.print(" ["+library[i][j].getColour()+"] ");
                 }
-                else {  System.out.print(" | "+"  "+"  ");
+                else {  System.out.print("  ["+"  "+"]  ");
             }
         }
-            System.out.print(" | ");
             System.out.println();
     }}
     /*
@@ -77,8 +76,8 @@ public class Library {
         int i=5;
         int l=0;
         while(i>0 && l!= cards.length){
-            if(library[i-1][n].getColour().isEmpty()){
-                library[i-1][n]=cards[l];
+            if(library[i][n].getColour().isEmpty()){
+                library[i][n]=cards[l];
                 l++;
             }
             i--;
@@ -114,4 +113,5 @@ public class Library {
         }
 
     }
+
 }
