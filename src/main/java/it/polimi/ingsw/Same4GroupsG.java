@@ -1,6 +1,9 @@
 package it.polimi.ingsw.CommonGoalCard;
 
+import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
+import it.polimi.ingsw.Player;
+
 /*
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
  */
@@ -37,5 +40,10 @@ public class Same4GroupsG implements CommonGoalCards {
         l.getCardinPos(5,4).setColour("B");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
+    }
+
+    @Override
+    public boolean expired(Player player) {
+        return false;
     }
 }

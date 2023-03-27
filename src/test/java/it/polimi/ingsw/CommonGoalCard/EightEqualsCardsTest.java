@@ -1,6 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.CommonGoalCard.EightEqualsCards;
+import it.polimi.ingsw.CommonGoalCards;
+import it.polimi.ingsw.Library;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

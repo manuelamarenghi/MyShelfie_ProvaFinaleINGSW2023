@@ -1,13 +1,15 @@
 package it.polimi.ingsw.CommonGoalCard;
 
+import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
+import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 
 /*
  * Line4G goal needs 4 lines formed by 5 tiles of maximum 3 different types. Different lines can have different combination of types
  */
-public class Line4G implements CommonGoalCards{
+public class Line4G implements CommonGoalCards {
     /*
      * check() returns true if the library match the goal,otherwise false
      */
@@ -69,5 +71,10 @@ public class Line4G implements CommonGoalCards{
       System.out.println("This is an example of a library that respects this goal");
       l.showLibrary();
 
+    }
+
+    @Override
+    public boolean expired(Player player) {
+        return false;
     }
 }
