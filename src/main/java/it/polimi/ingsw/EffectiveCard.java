@@ -1,8 +1,9 @@
-package it.polimi.ingsw.CommonGoalCard;
+package it.polimi.ingsw;
+
 
 import it.polimi.ingsw.CommonGoalCard.CommonGoalCards;
 
-public class EffectiveCard {
+public class EffectiveCard extends Observer{
     private CommonGoalCards commonCard;
     private int[] allScores;
 
