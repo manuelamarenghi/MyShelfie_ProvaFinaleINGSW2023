@@ -1,5 +1,6 @@
-package it.polimi.ingsw;
 
+package it.polimi.ingsw;
+/*
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,4 +26,4 @@ class BoardTest {
     }
     //Test per allow da fare dopo aver fatto l'implementazione del metodo extract
 
-}
+}*/

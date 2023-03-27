@@ -17,7 +17,7 @@ public class LibraryIterator implements Iterator<Card> {
 
     @Override
     public Card next() {
-        if(column<current[row].length){
+        if(column<current[row].length-1){
             column++;
             return current[row][column];
         }else{
