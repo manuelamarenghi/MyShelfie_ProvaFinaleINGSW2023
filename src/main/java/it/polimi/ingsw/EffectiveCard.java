@@ -1,7 +1,11 @@
 package it.polimi.ingsw;
 
 
+<<<<<<< HEAD
 import it.polimi.ingsw.CommonGoalCard.CommonGoalCards;
+=======
+
+>>>>>>> origin/testb
 
 public class EffectiveCard extends Observer{
     private CommonGoalCards commonCard;
