@@ -76,14 +76,18 @@ public class Board {
     }
 
     public void fill(){
-        int indexOdCards=0 , indexOfColours=0;
+        int indexOfCards=0 , indexOfColours=0;
         ArrayList<Card> cardsForBoard  = new ArrayList<Card>();
         ArrayList<String> arrayOfColours = new ArrayList<String>();
+        Card tempCard;
         arrayOfColours=bag.extract(numOfPlayers);
         for(c=0 ; c<9 ; c++){
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]!=notUsableCard){
-                    cardsForBoard.set(indexOdCards , new(arrayOfColours.get(indexOfColours) , new Position(r,c)));
+                    tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
+                    cardsForBoard.set(indexOfCards , tempCard);
+                    indexOfCards++;
+                    indexOfColours++;
                 }
             }
         }
