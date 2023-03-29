@@ -10,37 +10,37 @@ public class Board {
     private int c , r;
     private Card notUsableCard=new Card();
 
-    public void setNotPossibleCardsToNull (){
+    public Board(){
         for(c=0 ; c<9 ; c++){//To put Null the first line
             if(c!=4 && c!=5){
                 board[0][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the second line
-            if(c!=4 && c!=5 && c!=6){
+            if(c!=3 && c!=4 && c!=5){
                 board[1][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the third line
-            if(c!=3 && c!=4 && c!=5 && c!=6){
+            if(c!=2 && c!=3 && c!=4 && c!=5 && c!=6){
                 board[2][c]=notUsableCard;
             }
         }
-        board[3][0]=notUsableCard;//To put Null the Fourth line
-        board[5][8]=notUsableCard;//To put null the sixth line
+        board[3][8]=notUsableCard;//To put Null the Fourth line
+        board[5][0]=notUsableCard;//To put null the sixth line
 
         for(c=0 ; c<9 ; c++){//To put Null the seventh line
-            if(c!=3 && c!=4 && c!=5 && c!=6){
+            if(c!=2 && c!=3 && c!=4 && c!=5 && c!=6){
                 board[6][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the second line
-            if(c!=4 && c!=5 && c!=6){
+            if(c!=3 && c!=4 && c!=5){
                 board[7][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c!=4 && c!=5){
+            if(c!=3 && c!=4){
                 board[8][c]=notUsableCard;
             }
         }
@@ -98,6 +98,7 @@ public class Board {
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==null ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==notUsableCard ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==null){
+
 
             }
             else{
