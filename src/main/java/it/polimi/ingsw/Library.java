@@ -113,18 +113,18 @@ public class Library implements Iterable<Card> {
     public int getFilledColumnNumber(int columnNumber){
         int counter=0;
         for(int i=0;i<6;i++){
-                if(this.library[i][columnNumber].getColour()!="") counter++;
+                if(!this.library[i][columnNumber].getColour().equals("")) counter++;
         }return counter;
     }
     public int getFilledRowNumber(int rowNumber){
         int counter=0;
         for(int i=0;i<5;i++){
-            if(this.library[rowNumber][i].getColour()!="") counter++;
+            if(!this.library[rowNumber][i].getColour().equals("")) counter++;
         }return counter;
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<Card> iterator() {
         return new LibraryIterator(this.library);
     }
 }
