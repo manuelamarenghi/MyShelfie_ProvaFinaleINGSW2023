@@ -10,22 +10,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
     @Test
     public void checkZeroZeroHasCoordinatesNull(){
-        Board board = new Board();
+        Board board = new Board(4);
         assertEquals(null , board.getBoard()[0][0].getCoordinates());
     }
     @Test
-    public void checkOneThreeHasCoordinatesNull(){
-        Board board = new Board();
-        assertEquals(null ,board.getBoard()[1][3].getCoordinates());
+    public void checkOneTwoHasCoordinatesNull(){
+        Board board = new Board(4);
+        assertEquals(null ,board.getBoard()[1][2].getCoordinates());
     }
     @Test
-    public void checkSixTwoHasCoordinatesNull(){
-        Board board = new Board();
-        assertEquals(null ,board.getBoard()[6][2].getCoordinates());
+    public void checkSixOneHasCoordinatesNull(){
+        Board board = new Board(4);
+        assertEquals(null ,board.getBoard()[6][1].getCoordinates());
     }
     @Test
     public void checkOneCardAllow(){
-        Board board = new Board();
+        Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
         testCards.add(test1);
@@ -33,7 +33,7 @@ class BoardTest {
     }
     @Test
     public void allowWithMoreThanThreeCardsReturnFalse(){
-        Board board = new Board();
+        Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
         Card test2 = new Card("Green" , new Position(3,6));
@@ -48,7 +48,7 @@ class BoardTest {
 
     @Test
     public void AllowReturnFalseWithSameCard(){
-        Board board = new Board();
+        Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
         Card test2 = new Card("Green" , new Position(3,7));
@@ -58,7 +58,7 @@ class BoardTest {
     }
     @Test
     public void AllowReturnFalseWithNotAdjacentCards(){
-        Board board = new Board();
+        Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
         Card test2 = new Card("Green" , new Position(6,7));
