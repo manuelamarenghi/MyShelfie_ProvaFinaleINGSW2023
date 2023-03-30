@@ -1,10 +1,9 @@
 package it.polimi.ingsw.CommonGoalCard;
 
-import it.polimi.ingsw.Card;
-import it.polimi.ingsw.Library;
-import it.polimi.ingsw.Player;
+import it.polimi.ingsw.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CornersCommG implements CommonGoalCards{
 
@@ -16,11 +15,9 @@ public class CornersCommG implements CommonGoalCards{
 
 
 
-        if(carta00.getColour() != "" && carta05.getColour() != "" && carta60.getColour() != "" && carta65.getColour() != ""){
-            if(carta00.getColour() == carta05.getColour() && carta05.getColour() == carta60.getColour()
-                    && carta60.getColour() == carta65.getColour())
-                return true;
-            else return false;
+        if(!carta00.getColour().equals("") && !carta05.getColour().equals("") && !carta60.getColour().equals("") && !carta65.getColour().equals("")){
+            return carta00.getColour().equals(carta05.getColour()) && carta05.getColour().equals(carta60.getColour())
+                    && carta60.getColour().equals(carta65.getColour());
         }
         else {
             expired(library);
@@ -30,21 +27,22 @@ public class CornersCommG implements CommonGoalCards{
 
     public boolean expired(Library library){
         boolean expire = false;
-        ArrayList<Card> carte = new ArrayList<Card>();
-        if(library.getCardinPos(0,0).getColour()!="")
+        ArrayList<Card> carte = new ArrayList<>();
+        if(!Objects.equals(library.getCardinPos(0, 0).getColour(), ""))
             carte.add(new Card(library.getCardinPos(0,0).getColour(),library.getCardinPos(0,0).getCoordinates()));
-        if(library.getCardinPos(0,4).getColour()!="")
+        if(!Objects.equals(library.getCardinPos(0, 4).getColour(), ""))
             carte.add(new Card(library.getCardinPos(0,4).getColour(),library.getCardinPos(0,4).getCoordinates()));
-        if(library.getCardinPos(5,0).getColour()!="")
+        if(!Objects.equals(library.getCardinPos(5, 0).getColour(), ""))
             carte.add(new Card(library.getCardinPos(5,0).getColour(),library.getCardinPos(5,0).getCoordinates()));
-        if(library.getCardinPos(5,4).getColour()!="")
+        if(!Objects.equals(library.getCardinPos(5, 4).getColour(), ""))
             carte.add(new Card(library.getCardinPos(5,4).getColour(),library.getCardinPos(5,4).getCoordinates()));
 
         String colore = carte.get(0).getColour();
 
         for ( Card c: carte){
-            if(c.getColour().equals(colore) == false){
+            if (!colore.equals(c.getColour())) {
                 expire = true;
+                break;
             }
         }
 
@@ -54,6 +52,5 @@ public class CornersCommG implements CommonGoalCards{
 
     @Override
     public void getImage() {
-
     }
 }

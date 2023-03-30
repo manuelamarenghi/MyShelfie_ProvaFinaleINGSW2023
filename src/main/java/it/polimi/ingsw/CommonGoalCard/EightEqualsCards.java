@@ -4,9 +4,6 @@ import it.polimi.ingsw.*;
 
 public class EightEqualsCards implements CommonGoalCards {
     private final int DIMENSION=8;
-    private final int MAX=4;
-    int indexLightBLue=0;
-
     @Override
     public boolean check(Library library) {
         int indexRed = 0;
