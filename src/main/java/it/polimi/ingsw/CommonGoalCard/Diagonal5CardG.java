@@ -1,8 +1,9 @@
 package it.polimi.ingsw.CommonGoalCard;
 
+import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
 
-public class Diagonal5CardG implements CommonGoalCards{
+public class Diagonal5CardG implements CommonGoalCards {
 
     @Override
     public boolean check(Library library) {

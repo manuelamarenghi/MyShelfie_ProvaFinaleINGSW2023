@@ -1,12 +1,12 @@
 package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.Card;
+import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
-import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 
-public class CornersCommG implements CommonGoalCards{
+public class CornersCommG implements CommonGoalCards {
 
     public boolean check(Library library){
 
