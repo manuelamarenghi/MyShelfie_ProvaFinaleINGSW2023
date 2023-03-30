@@ -3,14 +3,15 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 
 public class Board {
-    private int row=9 , col=9;
+    private int row=9 , col=9 , numOfPlayers;
     private Card[][] board = new Card[row][col];
     private Card ca;
     private Bag bag;
     private int c , r;
     private Card notUsableCard=new Card();
 
-    public Board(){
+    public Board(int numOfPlayers){
+        this.numOfPlayers=numOfPlayers;
         for(c=0 ; c<9 ; c++){//To put Null the first line
             if(c!=4 && c!=5){
                 board[0][c]=notUsableCard;
@@ -44,14 +45,49 @@ public class Board {
                 board[8][c]=notUsableCard;
             }
         }
+        if(numOfPlayers==2){//Positions that can not be used with 2 players playing
+            board[3][8]=notUsableCard;//Positions with 3 points
+            board[2][6]=notUsableCard;
+            board[0][3]=notUsableCard;
+            board[2][2]=notUsableCard;
+            board[5][0]=notUsableCard;
+            board[6][2]=notUsableCard;
+            board[8][5]=notUsableCard;
+            board[6][6]=notUsableCard;
+
+            board[4][8]=notUsableCard;//Positions with 4 points
+            board[0][4]=notUsableCard;
+            board[3][1]=notUsableCard;
+            board[4][0]=notUsableCard;
+            board[7][3]=notUsableCard;
+            board[8][4]=notUsableCard;
+            board[5][7]=notUsableCard;
+        }
+        else if(numOfPlayers==3){
+            board[4][8]=notUsableCard;//Positions with 4 points
+            board[0][4]=notUsableCard;
+            board[3][1]=notUsableCard;
+            board[4][0]=notUsableCard;
+            board[7][3]=notUsableCard;
+            board[8][4]=notUsableCard;
+            board[5][7]=notUsableCard;
+        }
 
     }
 
     public void fill(){
+        int indexOfCards=0 , indexOfColours=0;
+        ArrayList<Card> cardsForBoard  = new ArrayList<Card>();
+        ArrayList<String> arrayOfColours = new ArrayList<String>();
+        Card tempCard;
+        arrayOfColours=bag.extract(numOfPlayers);
         for(c=0 ; c<9 ; c++){
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]!=notUsableCard){
-                    //board[r][c]=bag.extract();//Extract ancora da implemnetare
+                    tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
+                    cardsForBoard.set(indexOfCards , tempCard);
+                    indexOfCards++;
+                    indexOfColours++;
                 }
             }
         }
@@ -114,5 +150,8 @@ public class Board {
     }
     public Card[][] getBoard(){
         return board;
+    }
+    public int getNumOfPlayers(){
+        return numOfPlayers;
     }
 }

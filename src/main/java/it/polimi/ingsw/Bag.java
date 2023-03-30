@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Bag {
     private int dim=132 , i;
+    private static int cardsFor2Players=30 , cardsFor3Players=38 , cardsFor4Player=45;
     ArrayList<Integer> remainingCards = new ArrayList<Integer>(dim);
 
     public Bag(){
@@ -12,12 +13,20 @@ public class Bag {
             remainingCards.set(i,22);
         }
     }
-    public ArrayList<String> extract(int numberOfCards){
+    public ArrayList<String> extract(int numberOfPlayers){
         //Va bene ritornare un arrayList di String in cui ogni elemento rappresenta il colore di una carta
-        i=0;
+        if(numberOfPlayers==2){
+            i=cardsFor2Players;
+        }
+        else if(numberOfPlayers==3){
+            i=cardsFor3Players;
+        }
+        else{
+            i=cardsFor4Player;
+        }
         int index;
-        ArrayList<String> arrayOfCards  = new ArrayList<String>(numberOfCards);
-        while(i!=numberOfCards){
+        ArrayList<String> arrayOfCards  = new ArrayList<String>(numberOfPlayers);
+        while(i!=numberOfPlayers){
             index=(int)(Math.random()*6)+0;
             if(remainingCards.get(index)==0){
                 continue;
