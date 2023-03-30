@@ -166,5 +166,23 @@ class LibraryTest {
             Assertions.assertTrue(expected.equals(actual));
         }
     }
-
+    /*
+     * getGroup1() tests if it works
+     */
+    @Test
+    void getGroup1(){
+        library.getCardinPos(5,0).setColour("V");
+        library.getCardinPos(4,0).setColour("G");
+        library.getCardinPos(3,0).setColour("G");
+        library.getCardinPos(5,1).setColour("V");
+        library.getCardinPos(4,1).setColour("B");
+        library.getCardinPos(3,1).setColour("V");
+        library.getCardinPos(5,2).setColour("V");
+        library.getCardinPos(4,2).setColour("V");
+        library.getCardinPos(5,3).setColour("G");
+        library.getCardinPos(4,3).setColour("V");
+        library.getCardinPos(3,3).setColour("V");
+        library.showLibrary();
+        library.getgroup();
+    }
 }

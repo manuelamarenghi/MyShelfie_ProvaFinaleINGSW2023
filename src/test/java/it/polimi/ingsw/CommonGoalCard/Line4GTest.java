@@ -1,12 +1,14 @@
 package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.Library;
+import it.polimi.ingsw.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class Line4GTest {
+    private static Player player=new Player();
     private static Library library = new Library();
     private static Line4G card = new Line4G();
     /*
@@ -112,13 +114,13 @@ class Line4GTest {
     @Test
     void check6() {
         library.getCardinPos(5, 0).setColour("V");
-        library.getCardinPos(5, 1).setColour("V");
-        library.getCardinPos(5, 2).setColour("V");
+        library.getCardinPos(5, 1).setColour("Y");
+        library.getCardinPos(5, 2).setColour("W");
         library.getCardinPos(5, 3).setColour("V");
         library.getCardinPos(5, 4).setColour("V");
         library.getCardinPos(4, 0).setColour("V");
-        library.getCardinPos(4, 1).setColour("R");
-        library.getCardinPos(4, 2).setColour("R");
+        library.getCardinPos(4, 1).setColour("b");
+        library.getCardinPos(4, 2).setColour("c");
         library.getCardinPos(4, 3).setColour("R");
         library.getCardinPos(4, 4).setColour("V");
         library.getCardinPos(3, 0).setColour("V");
@@ -137,8 +139,8 @@ class Line4GTest {
         library.getCardinPos(1, 3).setColour("V");
         library.getCardinPos(1, 4).setColour("V");
         library.getCardinPos(0, 0).setColour("V");
-        library.getCardinPos(0, 1).setColour("V");
-        library.getCardinPos(0, 2).setColour("V");
+        library.getCardinPos(0, 1).setColour("Y");
+        library.getCardinPos(0, 2).setColour("R");
         library.getCardinPos(0, 3).setColour("V");
         library.getCardinPos(0, 4).setColour("V");
         library.showLibrary();
@@ -188,5 +190,86 @@ class Line4GTest {
     @Test
     void getImage() {
         card.getImage();
+    }
+    /*
+     * expired1() tests when library's full and doesn't respect the goal
+     */
+    @Test
+    void expired1(){
+        library.getCardinPos(5, 0).setColour("V");
+        library.getCardinPos(5, 1).setColour("B");
+        library.getCardinPos(5, 2).setColour("V");
+        library.getCardinPos(5, 3).setColour("C");
+        library.getCardinPos(5, 4).setColour("V");
+        library.getCardinPos(4, 0).setColour("V");
+        library.getCardinPos(4, 1).setColour("R");
+        library.getCardinPos(4, 2).setColour("B");
+        library.getCardinPos(4, 3).setColour("R");
+        library.getCardinPos(4, 4).setColour("V");
+        library.getCardinPos(3, 0).setColour("V");
+        library.getCardinPos(3, 1).setColour("B");
+        library.getCardinPos(3, 2).setColour("C");
+        library.getCardinPos(3, 3).setColour("X");
+        library.getCardinPos(3, 4).setColour("V");
+        library.getCardinPos(2, 0).setColour("V");
+        library.getCardinPos(2, 1).setColour("D");
+        library.getCardinPos(2, 2).setColour("V");
+        library.getCardinPos(2, 3).setColour("V");
+        library.getCardinPos(2, 4).setColour("V");
+        library.getCardinPos(1, 0).setColour("V");
+        library.getCardinPos(1, 1).setColour("D");
+        library.getCardinPos(1, 2).setColour("W");
+        library.getCardinPos(1, 3).setColour("C");
+        library.getCardinPos(1, 4).setColour("V");
+        library.getCardinPos(0, 0).setColour("R");
+        library.getCardinPos(0, 1).setColour("W");
+        library.getCardinPos(0, 2).setColour("B");
+        library.getCardinPos(0, 3).setColour("C");
+        library.getCardinPos(0, 4).setColour("V");
+        library.showLibrary();
+        Assertions.assertFalse(card.expired(library));
+    }
+    /*
+     * expired2() tests when library's empty
+     */
+    @Test
+    void expired2(){
+        Assertions.assertTrue(card.expired(library));
+    }
+    /*
+     * expired3() tests when library has four columns that violates condition x<4 in while
+     */
+    @Test
+    void expired3(){
+        library.getCardinPos(5, 0).setColour("V");
+        library.getCardinPos(5, 1).setColour("B");
+        library.getCardinPos(5, 2).setColour("V");
+        library.getCardinPos(5, 3).setColour("C");
+        library.getCardinPos(5, 4).setColour("V");
+        library.getCardinPos(4, 0).setColour("V");
+        library.getCardinPos(4, 1).setColour("R");
+        library.getCardinPos(4, 2).setColour("B");
+        library.getCardinPos(4, 3).setColour("P");
+        library.getCardinPos(4, 4).setColour("V");
+        library.getCardinPos(3, 0).setColour("V");
+        library.getCardinPos(3, 1).setColour("B");
+        library.getCardinPos(3, 2).setColour("C");
+        library.getCardinPos(3, 3).setColour("V");
+        Assertions.assertTrue(card.expired(library));
+    }
+    /*
+     * expired4() tests when there are some columns and rows not fullfilled
+     */
+    @Test
+    void expired4(){
+        library.getCardinPos(5, 1).setColour("B");
+        library.getCardinPos(5, 3).setColour("C");
+        library.getCardinPos(5, 4).setColour("V");
+        library.getCardinPos(4, 1).setColour("R");
+        library.getCardinPos(4, 3).setColour("P");
+        library.getCardinPos(4, 4).setColour("V");
+        library.getCardinPos(3, 1).setColour("B");
+        library.getCardinPos(3, 3).setColour("V");
+        Assertions.assertTrue(card.expired(library));
     }
 }

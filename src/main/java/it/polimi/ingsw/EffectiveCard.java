@@ -13,7 +13,7 @@ public class EffectiveCard extends Observer{
 
     public void update(Player player){
         commonCard.check(player.getLibrary());
-        commonCard.expired(player);
+        commonCard.expired(player.getLibrary());
     }
 
     public void show(){
