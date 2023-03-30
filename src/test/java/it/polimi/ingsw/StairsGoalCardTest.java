@@ -185,6 +185,7 @@ class StairsGoalCardTest {
         library.getCardinPos(5, 3).setColour("blue");
         library.getCardinPos(5, 4).setColour("blue");
         //third row
+
         library.getCardinPos(3, 4).setColour("blue");
         library.getCardinPos(3, 3).setColour("blue");
         library.getCardinPos(3, 2).setColour("blue");
