@@ -68,7 +68,7 @@ public class Col2G implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         return false;
     }
 }

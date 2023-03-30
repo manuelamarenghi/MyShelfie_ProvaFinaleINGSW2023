@@ -43,7 +43,7 @@ public class Same4GroupsG implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         return false;
     }
 }

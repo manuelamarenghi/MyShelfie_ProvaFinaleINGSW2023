@@ -32,7 +32,7 @@ public class EightEqualsCards implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         //in this particular CommonGoalCard, using the expired method bring more difficulties than not using it
         //to prove the impossibility of completing the task I would have to control tons of cases and to verify all one at a time
         return false;

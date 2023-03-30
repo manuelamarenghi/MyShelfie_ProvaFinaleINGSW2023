@@ -209,7 +209,7 @@ class StairsGoalCardTest {
     }
     @Test
     void checkIfExpired(){
-        Player player=new Player();
-        assertFalse(stair.expired(player));
+        Library library = new Library();
+        assertFalse(stair.expired(library));
     }
 }

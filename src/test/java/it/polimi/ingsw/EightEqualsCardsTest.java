@@ -92,7 +92,7 @@ class EightEqualsCardsTest {
     }
     @Test
     void checkIfExpired(){
-        Player player=new Player();
-        assertFalse(eightEC.expired(player));
+        Library library = new Library();
+        assertFalse(eightEC.expired(library));
     }
 }

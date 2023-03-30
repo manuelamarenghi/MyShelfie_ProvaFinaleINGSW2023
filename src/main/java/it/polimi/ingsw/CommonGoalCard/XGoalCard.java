@@ -19,7 +19,7 @@ public class XGoalCard implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         return false;
     }
 

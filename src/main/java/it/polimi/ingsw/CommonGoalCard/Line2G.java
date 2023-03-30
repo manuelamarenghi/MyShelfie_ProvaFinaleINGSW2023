@@ -1,11 +1,10 @@
 package it.polimi.ingsw.CommonGoalCard;
 
-import it.polimi.ingsw.Card;
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
-import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Line2G implements CommonGoalCards {
 
@@ -55,7 +54,7 @@ public class Line2G implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         int r , c , i;
         ArrayList<Integer> differentTypes = new ArrayList<Integer>(6);
         int differentLines=6 , totalTypes;
@@ -65,22 +64,22 @@ public class Line2G implements CommonGoalCards {
                 differentTypes.set(i , 0);
             }
             for(c=0 ; c<5 ; c++){
-                if(player.getLibrary().getCardinPos(r,c).getColour()=="Green"){
+                if(Objects.equals(library.getCardinPos(r, c).getColour(), "Green")){
                     differentTypes.set(0,differentTypes.get(0)+1);
                 }
-                else if(player.getLibrary().getCardinPos(r,c).getColour()=="White"){
+                else if(library.getCardinPos(r,c).getColour()=="White"){
                     differentTypes.set(1,differentTypes.get(1)+1);
                 }
-                else if(player.getLibrary().getCardinPos(r,c).getColour()=="Yellow"){
+                else if(library.getCardinPos(r,c).getColour()=="Yellow"){
                     differentTypes.set(2,differentTypes.get(2)+1);
                 }
-                else if(player.getLibrary().getCardinPos(r,c).getColour()=="Navy"){
+                else if(library.getCardinPos(r,c).getColour()=="Navy"){
                     differentTypes.set(3,differentTypes.get(3)+1);
                 }
-                else if(player.getLibrary().getCardinPos(r,c).getColour()=="Blue"){
+                else if(library.getCardinPos(r, c).getColour().equals("Blue")){
                     differentTypes.set(4,differentTypes.get(4)+1);
                 }
-                else if(player.getLibrary().getCardinPos(r,c).getColour()=="Pink"){
+                else if(library.getCardinPos(r,c).getColour()=="Pink"){
                     differentTypes.set(5,differentTypes.get(5)+1);
                 }
             }

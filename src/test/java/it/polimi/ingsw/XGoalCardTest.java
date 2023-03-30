@@ -42,8 +42,8 @@ class XGoalCardTest {
     }
     @Test
     void checkIfExpired(){
-        Player player=new Player();
-        assertFalse(xcard.expired(player));
+        Library library = new Library();
+        assertFalse(xcard.expired(library));
     }
     }
 
