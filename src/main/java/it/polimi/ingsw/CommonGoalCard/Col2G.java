@@ -66,9 +66,32 @@ public class Col2G implements CommonGoalCards {
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
-
+    /*
+     * expired() let you know if the player can still reach the goal or not
+     */
     @Override
     public boolean expired(Library library) {
+        ArrayList<String> n = new ArrayList<String>();
+        int temp=0;
+        int j=6;
+        /* x is the number of invalid columns*/
+        int x=0;
+        for(int i=0;i<5;i++){
+            while(j>0){
+                if(!library.getCardinPos(j-1,i).getColour().isEmpty() && !n.contains(library.getCardinPos(j-1, i).getColour())){
+                    n.add(temp,library.getCardinPos(j-1, i).getColour());
+                    temp++;
+                }
+                else{ if(!library.getCardinPos(j-1,i).getColour().isEmpty()){x++;}j=0;}
+                j--;
+            }
+            j=6;
+            n.clear();
+            temp=0;
+        }
+        if(x>3){
+            return true;
+        }
         return false;
     }
 }

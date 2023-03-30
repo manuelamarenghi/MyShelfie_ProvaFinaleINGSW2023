@@ -102,30 +102,84 @@ public class Library implements Iterable<Card> {
      * getgroup() returns adjacent items in a given library
      */
     public void getgroup(){
-        List<List<Object>> list;
+        ArrayList<Integer> list1=new ArrayList<Integer>();
+        ArrayList<String> list2=new ArrayList<String>();
+        ArrayList<Position> n=new ArrayList<Position>();
         for(int i=0;i<6;i++){
-            for(int j=0;j<5;j++){
+        for(int j=0;j<5;j++){
+            if(!this.getCardinPos(i,j).getVisited()){
+            searchrecursive(i,j,this.getCardinPos(i,j).getColour(),n);
+            System.out.println("iteration:"+i+j+" "+n);
+            if(n.size()>1){
+            list1.add(n.size());
+            list2.add(this.getCardinPos(i,j).getColour());
+            }}
+            n.clear();
+        }}
+       System.out.println(list1);
+        System.out.println(list2);
+        for(Card l : this){
+            l.setVisited(false);
+        }
+    }
+    /*
+     * searchrecursive() add(if not present) to an arraylist of Position items that are adjacent starting from a card
+     */
+    public void searchrecursive(int r,int c,String color,ArrayList<Position> n) {
+        /* first conditions check is a valid place and if it wasn't already visited*/
+        if (isValid(r,c) && !this.getCardinPos(r,c).getVisited() &&  !this.getCardinPos(r,c).getColour().isEmpty()) {
+            /* then the second checks if the position in line i-1 is valid and there's the same item*/
+            if(isValid(r-1,c) && this.getCardinPos(r-1,c).getColour().equals(color)) {
+                Position p=new Position(r-1,c);
+                /* third checks others recursive calls already add this, then we add and change visited status of the card and call the recursive on the object */
+                if (!n.contains(p)) {
+                    n.add(p);
+                    this.getCardinPos(r - 1, c).setVisited(true);
+                    searchrecursive(r - 1, c,this.getCardinPos(r-1,c).getColour(), n);
+                }
+            }
+                /* now we check in i+1 direction*/
+                if(isValid(r+1,c) && this.getCardinPos(r+1,c).getColour().equals(color)) {
+                    Position p=new Position(r+1,c);
+                    if (!n.contains(p)) {
+                        n.add(p);
+                        this.getCardinPos(r + 1, c).setVisited(true);
+                        searchrecursive(r+1,c,this.getCardinPos(r+1,c).getColour(),n);
+                    }
+                }
 
+            /* now we check in j+1 direction, adjacent column*/
+            if(isValid(r,c+1) && this.getCardinPos(r,c+1).getColour().equals(color)) {
+                Position p=new Position(r,c+1);
+                if (!n.contains(p)){
+                    n.add(p);
+                    this.getCardinPos(r , c+1).setVisited(true);
+                    searchrecursive(r,c+1,this.getCardinPos(r,c+1).getColour(),n);
+                }
+            }
+            /* now we check in j-1 direction, adjacent column*/
+            if(isValid(r,c-1) && this.getCardinPos(r,c-1).getColour().equals(color)) {
+                Position p=new Position(r,c-1);
+                if (!n.contains(p)){
+                    n.add(p);
+                    this.getCardinPos(r , c-1).setVisited(true);
+                    searchrecursive(r,c-1,this.getCardinPos(r,c-1).getColour(),n);
+                }
             }
         }
-
     }
-    public int getFilledColumnNumber(int columnNumber){
-        int counter=0;
-        for(int i=0;i<6;i++){
-                if(!this.library[i][columnNumber].getColour().equals("")) counter++;
-        }return counter;
+
+    /*
+     * isValid() returns if the position is valid
+     */
+    public boolean isValid(int r, int c){
+        if(r>=0 && c<5 && c>=0 && r<6){
+            return true;
+        }
+        return false;
     }
     @Override
-    public Iterator<Card> iterator() {
+    public Iterator iterator() {
         return new LibraryIterator(this.library);
     }
-    public int getFilledRowNumber(int rowNumber){
-        int counter=0;
-        for(int i=0;i<5;i++){
-            if(!this.library[rowNumber][i].getColour().equals("")) counter++;
-        }return counter;
-    }
-
-
 }
