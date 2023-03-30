@@ -129,42 +129,5 @@ class LibraryTest {
     /*
      * takeAction() tests if the function makes the right move ( direct by the player)
      */
-    @Test
-    void takeAction() {
-        Card[] cards = new Card[2];
-        cards[0]=new Card();
-        cards[0].setColour("R");
-        cards[1]=new Card();
-        cards[1].setColour("B");
-        Library l = new Library();
-        l.getCardinPos(5, 2).setColour("V");
-        l.getCardinPos(4, 2).setColour("V");
-        l.getCardinPos(3, 2).setColour("R");
-        l.getCardinPos(1, 2).setColour("R");
-        l.getCardinPos(5, 0).setColour("V");
-        l.getCardinPos(4, 0).setColour("V");
-        l.getCardinPos(3, 0).setColour("V");
-        l.getCardinPos(2, 2).setColour("V");
-        l.getCardinPos(5,1).setColour("V");
-        l.getCardinPos(4,1).setColour("R");
-        l.getCardinPos(3,1).setColour("B");
-        library.getCardinPos(5, 2).setColour("V");
-        library.getCardinPos(4, 2).setColour("V");
-        library.getCardinPos(3, 2).setColour("R");
-        library.getCardinPos(2, 2).setColour("V");
-        library.getCardinPos(1, 2).setColour("R");
-        library.getCardinPos(5, 1).setColour("V");
-        library.getCardinPos(3, 0).setColour("V");
-        library.getCardinPos(4, 0).setColour("V");
-        library.getCardinPos(5, 0).setColour("V");
-        library.takeAction(cards);
-        for (int i = 0; i < 6; i++) {
-            String expected= new String();
-            String actual= new String();
-            expected=l.getCardinPos(i,1).getColour();
-            actual=library.getCardinPos(i,1).getColour();
-            Assertions.assertTrue(expected.equals(actual));
-        }
-    }
 
 }

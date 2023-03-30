@@ -116,6 +116,10 @@ public class Library implements Iterable<Card> {
                 if(!this.library[i][columnNumber].getColour().equals("")) counter++;
         }return counter;
     }
+    @Override
+    public Iterator<Card> iterator() {
+        return new LibraryIterator(this.library);
+    }
     public int getFilledRowNumber(int rowNumber){
         int counter=0;
         for(int i=0;i<5;i++){
@@ -123,8 +127,5 @@ public class Library implements Iterable<Card> {
         }return counter;
     }
 
-    @Override
-    public Iterator<Card> iterator() {
-        return new LibraryIterator(this.library);
-    }
+
 }
