@@ -4,29 +4,30 @@ import java.sql.Array;
 import java.util.ArrayList;
 
 public class Bag {
-    private int dim=132 , i;
-    private static int cardsFor2Players=30 , cardsFor3Players=38 , cardsFor4Player=45;
+    private int dim=132 , i , numberOfCards , l;
+    private static int cardsFor2Players=29 , cardsFor3Players=37 , cardsFor4Player=45;
     ArrayList<Integer> remainingCards = new ArrayList<Integer>(dim);
 
     public Bag(){
         for(i=0 ; i<6 ; i++){
-            remainingCards.set(i,22);
+            remainingCards.add(22);
         }
     }
     public ArrayList<String> extract(int numberOfPlayers){
         //Va bene ritornare un arrayList di String in cui ogni elemento rappresenta il colore di una carta
         if(numberOfPlayers==2){
-            i=cardsFor2Players;
+            numberOfCards=cardsFor2Players;
         }
         else if(numberOfPlayers==3){
-            i=cardsFor3Players;
+            numberOfCards=cardsFor3Players;
         }
         else{
-            i=cardsFor4Player;
+            numberOfCards=cardsFor4Player;
         }
+        i=0;
         int index;
-        ArrayList<String> arrayOfCards  = new ArrayList<String>(numberOfPlayers);
-        while(i!=numberOfPlayers){
+        ArrayList<String> arrayOfCards  = new ArrayList<String>(numberOfCards);
+        while(i!=numberOfCards){
             index=(int)(Math.random()*6)+0;
             if(remainingCards.get(index)==0){
                 continue;

@@ -2,7 +2,6 @@ package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
-import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public class Square2G implements CommonGoalCards {
     @Override
     public boolean check(Library library) {
         int r , c , i , indexToSkip1=-1 , indexToSkip2=-1;
-        ArrayList<Integer> numOfSquares = new ArrayList<Integer>(6);
+        ArrayList<Integer> numOfSquares = new ArrayList<>(6);
         for(i=0 ; i<6 ; i++){
             numOfSquares.set(i,0);
         }
@@ -23,25 +22,25 @@ public class Square2G implements CommonGoalCards {
                 else if (c==indexToSkip2){
                     continue;
                 }
-                if(library.getCardinPos(r,c).getColour()==library.getCardinPos(r,c+1).getColour() &&
-                    library.getCardinPos(r,c).getColour()==library.getCardinPos(r+1,c).getColour() &&
-                    library.getCardinPos(r,c).getColour()==library.getCardinPos(r+1,c+1).getColour()){
-                    if(library.getCardinPos(r,c).getColour()=="Green"){
+                if(library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r, c + 1).getColour()) &&
+                        library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c).getColour()) &&
+                        library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c + 1).getColour())){
+                    if(library.getCardinPos(r, c).getColour().equals("Green")){
                         numOfSquares.set(0 , numOfSquares.get(0)+1);
                     }
-                    else if(library.getCardinPos(r,c).getColour()=="White"){
+                    else if(library.getCardinPos(r, c).getColour().equals("White")){
                         numOfSquares.set(1 , numOfSquares.get(1)+1);
                     }
-                    else if(library.getCardinPos(r,c).getColour()=="Yellow"){
+                    else if(library.getCardinPos(r, c).getColour().equals("Yellow")){
                         numOfSquares.set(2 , numOfSquares.get(2)+1);
                     }
-                    else if(library.getCardinPos(r,c).getColour()=="Navy"){
+                    else if(library.getCardinPos(r, c).getColour().equals("Navy")){
                         numOfSquares.set(3 , numOfSquares.get(3)+1);
                     }
-                    else if(library.getCardinPos(r,c).getColour()=="Blue"){
+                    else if(library.getCardinPos(r, c).getColour().equals("Blue")){
                         numOfSquares.set(4 , numOfSquares.get(4)+1);
                     }
-                    else if(library.getCardinPos(r,c).getColour()=="Pink"){
+                    else if(library.getCardinPos(r, c).getColour().equals("Pink")){
                         numOfSquares.set(5 , numOfSquares.get(5)+1);
                     }
                     indexToSkip1=c;
@@ -56,7 +55,7 @@ public class Square2G implements CommonGoalCards {
     }
 
     @Override
-    public boolean expired(Player player) {
+    public boolean expired(Library library) {
         return false;
     }
 
