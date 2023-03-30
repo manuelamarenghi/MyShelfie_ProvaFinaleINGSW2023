@@ -1,15 +1,12 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*
  * this class is about personal library
  */
-public class Library {
+public class Library implements Iterable<Card> {
     /*
      * library is a matrix of cards that are insert from library's player
      */
@@ -65,10 +62,10 @@ public class Library {
                     System.out.print(" ["+library[i][j].getColour()+"] ");
                 }
                 else {  System.out.print("  ["+"  "+"]  ");
+                }
             }
-        }
             System.out.println();
-    }}
+        }}
     /*
      * setColumn() puts n cards in a chosen column
      */
@@ -94,8 +91,8 @@ public class Library {
         System.out.println("You can put your cards in columns:"+ Arrays.toString(showColumn(cards.length)));
         do {
             System.out.println("Select column or -1 to stop:");
-             a = in.nextInt();
-             if(a==-1){ break;}
+            a = in.nextInt();
+            if(a==-1){ break;}
             if (list.contains(a)){
                 setColumn(cards,a);
             }
@@ -107,11 +104,28 @@ public class Library {
     public void getgroup(){
         List<List<Object>> list;
         for(int i=0;i<6;i++){
-          for(int j=0;j<5;j++){
+            for(int j=0;j<5;j++){
 
-          }
+            }
         }
 
     }
+    public int getFilledColumnNumber(int columnNumber){
+        int counter=0;
+        for(int i=0;i<6;i++){
+                if(!this.library[i][columnNumber].getColour().equals("")) counter++;
+        }return counter;
+    }
+    @Override
+    public Iterator<Card> iterator() {
+        return new LibraryIterator(this.library);
+    }
+    public int getFilledRowNumber(int rowNumber){
+        int counter=0;
+        for(int i=0;i<5;i++){
+            if(!this.library[rowNumber][i].getColour().equals("")) counter++;
+        }return counter;
+    }
+
 
 }

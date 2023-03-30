@@ -15,6 +15,7 @@ public class Card {
         this.colour=colour;
     }
 
+
     public String getColour(){
         return colour;}
 
