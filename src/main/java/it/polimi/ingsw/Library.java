@@ -119,7 +119,10 @@ public class Library implements Iterable<Card> {
 
 
         for(ArrayList<Card> g:groups){
-            Adjacent.add(g.size());
+            if(g.size()>1) {
+                Adjacent.add(g.size());
+                System.out.println(g.size());
+            }
         }
         return Adjacent;
     }
