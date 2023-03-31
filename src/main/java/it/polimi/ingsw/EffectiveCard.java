@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
 
-
-
 public class EffectiveCard extends Observer{
     private CommonGoalCards commonCard;
     private int[] allScores;

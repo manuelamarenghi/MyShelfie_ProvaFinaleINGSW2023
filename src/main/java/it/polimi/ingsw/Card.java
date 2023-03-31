@@ -17,6 +17,7 @@ public class Card {
         this.visited=false;
     }
 
+
     public String getColour(){
         return colour;}
 
