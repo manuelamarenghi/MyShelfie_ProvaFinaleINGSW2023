@@ -51,5 +51,19 @@ class Square2GTest {
         l.getCardinPos(1,4).setColour("Blue");
         assertFalse(square2G.check(l));
     }
+    @Test
+    public void checkIfcheckReturnsTrue2(){
+        Library l  =new Library();
+        l.getCardinPos(0,3).setColour("Green");
+        l.getCardinPos(0,4).setColour("Green");
+        l.getCardinPos(1,3).setColour("Green");
+        l.getCardinPos(1,4).setColour("Green");
 
+        l.getCardinPos(4,0).setColour("Green");
+        l.getCardinPos(4,1).setColour("Green");
+        l.getCardinPos(5,0).setColour("Green");
+        l.getCardinPos(5,1).setColour("Green");
+        assertTrue(square2G.check(l));
+
+    }
 }
