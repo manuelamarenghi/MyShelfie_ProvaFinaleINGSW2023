@@ -1,6 +1,7 @@
 package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.Library;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,5 +14,29 @@ class Same4GroupsGTest {
     @Test
     void getImage() {
         card.getImage();
+    }
+    /*
+     * check1() to see if it works
+     */
+    @Test
+    void check1() {
+        Library library=new Library();
+        library.getCardinPos(5, 0).setColour("V");
+        library.getCardinPos(5, 1).setColour("B");
+        library.getCardinPos(5, 2).setColour("B");
+        library.getCardinPos(5, 3).setColour("C");
+        library.getCardinPos(5, 4).setColour("C");
+        library.getCardinPos(4, 0).setColour("V");
+        library.getCardinPos(4, 1).setColour("V");
+        library.getCardinPos(4, 2).setColour("B");
+        library.getCardinPos(4, 3).setColour("C");
+        library.getCardinPos(4, 4).setColour("C");
+        library.getCardinPos(3, 0).setColour("V");
+        library.getCardinPos(3, 2).setColour("V");
+        library.getCardinPos(3, 3).setColour("C");
+        library.getCardinPos(3, 4).setColour("C");
+        library.getCardinPos(2, 2).setColour("V");
+        library.showLibrary();
+        Assertions.assertFalse(card.check(library));
     }
 }

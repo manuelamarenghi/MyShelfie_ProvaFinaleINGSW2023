@@ -3,6 +3,8 @@ package it.polimi.ingsw.CommonGoalCard;
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
 
+import java.util.ArrayList;
+
 /*
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
  */
@@ -12,8 +14,16 @@ public class Same4GroupsG implements CommonGoalCards {
      */
     @Override
     public boolean check(Library library) {
+        ArrayList<Integer> adjacent = library.getgroup();
+        int count=0;
 
-        return false;
+        for(Integer i : adjacent){
+            if(i>=4)
+                count ++;
+        }
+        if(count >=4)
+            return true;
+        else return false;
     }
     /*
      * getImage() let you see this goal
