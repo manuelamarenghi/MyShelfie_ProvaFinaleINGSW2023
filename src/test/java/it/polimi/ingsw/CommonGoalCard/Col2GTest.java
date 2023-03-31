@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Col2GTest {
-    private static Library library = new Library();
     private static Col2G card = new Col2G();
     /*
      * check1() tests when the library is empty
      */
     @Test
     void check1() {
+        Library library = new Library();
         Assertions.assertFalse(card.check(library));
     }
     /*
@@ -21,6 +21,7 @@ class Col2GTest {
      */
     @Test
     void check2(){
+        Library library = new Library();
         library.getCardinPos(0, 4).setColour("V");
         library.getCardinPos(1, 4).setColour("V");
         library.getCardinPos(2, 4).setColour("V");
@@ -34,6 +35,7 @@ class Col2GTest {
      */
     @Test
     void check3(){
+        Library library = new Library();
         library.getCardinPos(0, 4).setColour("V");
         library.getCardinPos(1, 4).setColour("R");
         library.getCardinPos(2, 4).setColour("T");
@@ -48,6 +50,7 @@ class Col2GTest {
      */
     @Test
     void check4(){
+        Library library = new Library();
         library.getCardinPos(0, 4).setColour("V");
         library.getCardinPos(1, 4).setColour("R");
         library.getCardinPos(2, 4).setColour("T");
@@ -67,6 +70,7 @@ class Col2GTest {
      */
     @Test
     void check5(){
+        Library library = new Library();
         library.getCardinPos(0, 4).setColour("V");
         library.getCardinPos(1, 4).setColour("R");
         library.getCardinPos(2, 4).setColour("T");
@@ -99,6 +103,7 @@ class Col2GTest {
      */
     @Test
     void check6(){
+        Library library = new Library();
         library.getCardinPos(0, 4).setColour("V");
         library.getCardinPos(1, 4).setColour("R");
         library.getCardinPos(2, 4).setColour("T");
@@ -144,6 +149,7 @@ class Col2GTest {
      */
     @Test
     void expired1() {
+        Library library = new Library();
         Assertions.assertFalse(card.expired(library));
     }
     /*
@@ -151,6 +157,7 @@ class Col2GTest {
      */
     @Test
     void expired2() {
+        Library library = new Library();
         library.getCardinPos(5, 0).setColour("V");
         library.getCardinPos(5, 1).setColour("V");
         library.getCardinPos(4, 1).setColour("V");
@@ -167,6 +174,7 @@ class Col2GTest {
      */
     @Test
     void expired3(){
+        Library library = new Library();
         library.getCardinPos(5, 0).setColour("R");
         library.getCardinPos(4, 0).setColour("V");
         library.getCardinPos(3, 0).setColour("P");
@@ -201,6 +209,7 @@ class Col2GTest {
      */
     @Test
     void expired4(){
+        Library library = new Library();
         library.getCardinPos(5, 0).setColour("R");
         library.getCardinPos(4, 0).setColour("V");
         library.getCardinPos(3, 0).setColour("P");
@@ -235,6 +244,7 @@ class Col2GTest {
      */
     @Test
     void expired5(){
+        Library library = new Library();
         library.getCardinPos(5, 0).setColour("R");
         library.getCardinPos(4, 0).setColour("R");
         library.getCardinPos(5, 1).setColour("R");

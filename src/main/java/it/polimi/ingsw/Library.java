@@ -94,7 +94,7 @@ public class Library implements Iterable<Card> {
             a = in.nextInt();
             if(a==-1){ break;}
             if (list.contains(a)){
-                setColumn(cards,a);
+                setColumn(cards,a-1);
             }
         }while(!list.contains(a));
     }

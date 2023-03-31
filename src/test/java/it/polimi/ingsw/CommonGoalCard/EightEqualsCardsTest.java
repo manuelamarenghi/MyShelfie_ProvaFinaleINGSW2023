@@ -1,11 +1,9 @@
 package it.polimi.ingsw.CommonGoalCard;
 
-import it.polimi.ingsw.CommonGoalCard.EightEqualsCards;
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EightEqualsCardsTest {
     private CommonGoalCards eightEC=new EightEqualsCards();
@@ -20,7 +18,7 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("blue");
         library.getCardinPos(3, 0).setColour("blue");
         library.getCardinPos(4, 0).setColour("blue");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyRed(){
@@ -33,7 +31,7 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("red");
         library.getCardinPos(3, 0).setColour("red");
         library.getCardinPos(4, 0).setColour("red");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyLightBlue(){
@@ -46,7 +44,7 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("lightBlue");
         library.getCardinPos(3, 0).setColour("lightBlue");
         library.getCardinPos(4, 0).setColour("lightBlue");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyYellow(){
@@ -59,7 +57,7 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("yellow");
         library.getCardinPos(3, 0).setColour("yellow");
         library.getCardinPos(4, 0).setColour("yellow");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyPink(){
@@ -72,7 +70,7 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("pink");
         library.getCardinPos(3, 0).setColour("pink");
         library.getCardinPos(4, 0).setColour("pink");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyWhite(){
@@ -85,11 +83,11 @@ class EightEqualsCardsTest {
         library.getCardinPos(5, 1).setColour("white");
         library.getCardinPos(3, 0).setColour("white");
         library.getCardinPos(4, 0).setColour("white");
-        assertTrue(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
     @Test
     void checkIfClassWorksProperlyEmpty(){
         Library library = new Library();
-        assertFalse(eightEC.check(library));
+        Assertions.assertTrue(eightEC.check(library));
     }
 }

@@ -2,8 +2,6 @@ package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
-import it.polimi.ingsw.LibraryIterator;
-import it.polimi.ingsw.Player;
 
 import java.util.ArrayList;
 

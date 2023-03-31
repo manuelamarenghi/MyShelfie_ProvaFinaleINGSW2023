@@ -2,7 +2,6 @@ package it.polimi.ingsw.CommonGoalCard;
 
 import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
-import it.polimi.ingsw.Player;
 
 /*
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
