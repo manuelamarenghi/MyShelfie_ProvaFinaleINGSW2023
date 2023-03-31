@@ -12,8 +12,7 @@ public class ThreePlayers extends Matchmanager{
     }
 
     @Override
-    public Player turn(Player p) {
-        return null;
+    public void turn(Player p) {
     }
 
     @Override
