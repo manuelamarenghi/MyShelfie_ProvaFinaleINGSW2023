@@ -8,7 +8,7 @@ public class Player {
     private List<Observer> observers;
     private Library library;
     private boolean state;
-    //private PersonalGoalCard personalCard;
+    private PersonalGoalCard personalCard;
     //private PlayerManager plManag;
 
     public String getNickname(){
@@ -26,5 +26,27 @@ public class Player {
     }
     public boolean getState(){
         return state;
+    }
+
+    public PersonalGoalCard getPersonalCard(){return personalCard;}
+
+    public void setNickname(String nickname){
+        this.nickname= nickname;
+    }
+
+    public void setCommonGoalScore(int score){
+        this.commonGoalScore=score;
+    }
+
+    public void addObserver(Observer observer)
+    {
+        observers.add(observer);
+    }
+    public void removeObserver(Observer observer){
+        observers.remove(observer);
+    }
+
+    public void setState(boolean state){
+        this.state = state;
     }
 }
