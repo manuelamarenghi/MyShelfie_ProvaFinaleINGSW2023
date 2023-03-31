@@ -42,6 +42,9 @@ public class Player {
     {
         observers.add(observer);
     }
+    public void removeObserver(Observer observer){
+        observers.remove(observer);
+    }
 
     public void setState(boolean state){
         this.state = state;
