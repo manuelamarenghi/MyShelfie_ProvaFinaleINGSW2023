@@ -168,23 +168,21 @@ public class Library implements Iterable<Card> {
             }
         }
     }
-<<<<<<<<< Temporary merge branch 1
 
     /*
      * isValid() returns if the position is valid
      */
-    public boolean isValid(int r, int c){
-        if(r>=0 && c<5 && c>=0 && r<6){
+    public boolean isValid(int r, int c) {
+        if (r >= 0 && c < 5 && c >= 0 && r < 6) {
             return true;
         }
         return false;
-=========
+    }
     public int getFilledColumnNumber(int columnNumber){
         int counter=0;
         for(int i=0;i<6;i++){
                 if(!this.library[i][columnNumber].getColour().equals("")) counter++;
         }return counter;
->>>>>>>>> Temporary merge branch 2
     }
     @Override
     public Iterator<Card> iterator() {

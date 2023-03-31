@@ -169,4 +169,6 @@ public class Board {
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
+    public Card getCard(int x , int y){ return board[x][y];}
+
 }
