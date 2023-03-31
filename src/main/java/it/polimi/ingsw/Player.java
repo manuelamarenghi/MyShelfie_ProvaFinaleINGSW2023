@@ -8,7 +8,7 @@ public class Player {
     private List<Observer> observers;
     private Library library;
     private boolean state;
-    //private PersonalGoalCard personalCard;
+    private PersonalGoalCard personalCard;
     //private PlayerManager plManag;
 
     public String getNickname(){
