@@ -71,43 +71,44 @@ public class Col3G implements CommonGoalCards {
     @Override
     public boolean expired(Library library) {
         int r , c , i ;
-        ArrayList<Integer> differentTypes= new ArrayList<Integer>(6);
+        //ArrayList<Integer> differentTypes= new ArrayList<Integer>(6);
+        int [] differentTypes = {0,0,0,0,0,0};
         int differentCols=5 , totalTypes;
-        for(c=0 ; c<6 ; c++){
+        for(c=0 ; c<5 ; c++){
             totalTypes=0;
             for(i=0 ; i<6 ; i++){
-                differentTypes.set(i , 0);
+                differentTypes[i]=0;
             }
-            for(r=0 ;r<5 ; r++){
+            for(r=0 ;r<6 ; r++){
                 if(library.getCardinPos(r,c).getColour()=="Green"){
-                    differentTypes.set(0 , differentTypes.get(0)+1);
+                    differentTypes[0]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="White"){
-                    differentTypes.set(1 , differentTypes.get(1)+1);
+                    differentTypes[1]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Yellow"){
-                    differentTypes.set(2 , differentTypes.get(2)+1);
+                    differentTypes[2]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Navy"){
-                    differentTypes.set(3 , differentTypes.get(3)+1);
+                    differentTypes[3]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Blue"){
-                    differentTypes.set(4 , differentTypes.get(4)+1);
+                    differentTypes[4]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Pink"){
-                    differentTypes.set(5 , differentTypes.get(5)+1);
+                    differentTypes[5]++;
                 }
             }
             for(i=0 ; i<6 ; i++){
-                if(differentTypes.get(i)!=0){
+                if(differentTypes[i]!=0){
                     totalTypes++;
                 }
             }
-            if(totalTypes<=3){
+            if(totalTypes>3){
                 differentCols--;
             }
         }
-        if(differentCols>=3){
+        if(differentCols<3){
             return true;
         }
 
