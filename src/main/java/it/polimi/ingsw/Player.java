@@ -49,4 +49,8 @@ public class Player {
     public void setState(boolean state){
         this.state = state;
     }
+
+    public PlayerManager getPlayerManager(){
+        return plManag;
+    }
 }

@@ -8,6 +8,7 @@ public class Board {
     private Card ca;
     private Bag bag;
     private int c , r;
+    private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
 
     public Board(int numOfPlayers){
@@ -159,6 +160,13 @@ public class Board {
             }
         }
         return l;
+    }
+
+    public void takeCard (Position position){
+        if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
+            return;
+        }
+        board[position.getX()][position.getY()]=emptyCard;
     }
     public Bag getBag(){
         return bag;

@@ -18,14 +18,13 @@ public class PlayerManager {
         //Chiedere come si fa ad accedere alle 2 carte
     }
     public void selectCard(Player player , Board board){
-        int numberOfCards , i , x , y , coloumn , founded;
-        int [] coloumnsForCards ;
+        int i , x , y , l;
         Scanner value = new Scanner(System.in);
+        Position tempPosition;
         Card tempCard = new Card();
         String answer;
-        ArrayList<Card> selectedCards  = new ArrayList<Card>(3);
+        Card [] selectedCards  = {};
         ArrayList<Card> selectedCardsTemp  = new ArrayList<Card>(3);
-        Card [] selsectedCardsArray = {};
         while(true){//A while loop to select cards from board and to see if they can be taken or not
             for(i=0 ; i<3 ; i++){
                 System.out.println("Select a card from the board");
@@ -44,40 +43,17 @@ public class PlayerManager {
             if(!board.allow(selectedCardsTemp)){
                 System.out.println("The cards selected can not be taken");
                 System.out.println("Please select other cards");
-                selectedCards=selectedCardsTemp;
-            }
-            else{
-                break;
-            }
-        }
-        //Per le carte scelte bisogna inizializzarle a null nelle posizioni da cui sono state scelte
-        numberOfCards=i+1;
-        coloumnsForCards=player.getLibrary().showColumn(numberOfCards);
-        while(true){//While loop to find coloumns to put cards
-            founded=0;
-            System.out.println("Select among the following coloumns to put cards");
-            for(i=0 ; i< coloumnsForCards.length ; i++){
-                System.out.println(coloumnsForCards[i]);
-            }
-            coloumn= value.nextInt();
-            for(i=0 ; i<coloumnsForCards.length ; i++){
-                if(coloumnsForCards[i]==coloumn){
-                    founded=1;
+                for(l=0 ; l<selectedCardsTemp.size() ; l++){
+                    selectedCards[i]=selectedCardsTemp.get(i);
+                    tempPosition=new Position(selectedCardsTemp.get(i).getCoordinates().getX() , selectedCardsTemp.get(i).getCoordinates().getY());
+                    board.takeCard(tempPosition);
                 }
             }
-            if(founded==1){
+            else{
                 break;
             }
-            else{
-                System.out.println("Please select another coloumn");
-            }
         }
-        for(i=0 ; i<numberOfCards ; i++){
-            selsectedCardsArray[i]=selectedCards.get(i);
-        }
-        //Method to put cards in the selected coloumns
-        player.getLibrary().setColumn(selsectedCardsArray, numberOfCards);
-        //Penso che non ci sia bisogno di ritornare nulla , bisogna trasformare il metodo al void
+        player.getLibrary().takeAction(selectedCards);
     }
     public void showPersonalGoal (){
 
