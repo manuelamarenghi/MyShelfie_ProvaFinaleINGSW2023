@@ -55,14 +55,46 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
-    public void showPersonalGoal (){
-
+    public void showPersonalGoal (Player player){
+        player.getPersonalCard().showPersonalGoalCard();
     }
-    public void showPersonalPoint(){
-
+    public int showPersonalPoint(Player player){
+        int sameCards=0 , x , y, i , points=0;
+        String colour;
+        Card [] personalCards = {};
+        personalCards=player.getPersonalCard().getPersonalObjective();
+        for(i=0 ; i<6 ; i++){
+            colour=personalCards[i].getColour();
+            x=personalCards[i].getCoordinates().getX();
+            y=personalCards[i].getCoordinates().getY();
+            //Forse x e y sono da scambiare per la confusione con righe e colonne
+            if(colour == player.getLibrary()[x][y].getColour){
+                //da rivedere come mettere la condizione dell'If perche nonva bene
+                sameCards++;
+            }
+        }
+        if(sameCards==1){
+            points=1;
+        }
+        else if(sameCards==2){
+            points=2;
+        }
+        else if(sameCards==3){
+            points=4;
+        }
+        else if(sameCards==4){
+            points=6;
+        }
+        else if(sameCards==5){
+            points=9;
+        }
+        else if(sameCards==6){
+            points=12;
+        }
+        return points;
     }
     public void showProgressScore(){
-
+        //da rivedere con l'algoritmo di adicenza implementata da silvia
     }
 
 
