@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 public class TwoPlayers extends Matchmanager{
 
-    @Override
-    public void calcPoint(Player p) {
-
-    }
     /*
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
      */
@@ -33,12 +29,15 @@ public class TwoPlayers extends Matchmanager{
         l.add(new EightEqualsCards());
         l.add(new Line4G());
         l.add(new Same4GroupsG());
+        l.add(new Col3G());
+        l.add(new Line2G());
+        l.add(new Square2G());
         score.add(8);
         score.add(4);
         int i,j;
-        i=(int)Math.floor(Math.random() * (7) );
+        i=(int)Math.floor(Math.random() * (10) );
         do {
-            j=(int)Math.floor(Math.random() * (7) );
+            j=(int)Math.floor(Math.random() * (10) );
         }while(i==j);
         chosen[0]=new EffectiveCard(l.get(i));
         chosen[0].setAllScores(score);

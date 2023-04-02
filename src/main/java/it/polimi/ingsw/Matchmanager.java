@@ -9,7 +9,9 @@ abstract class Matchmanager{
   /*
    * calcPoint() calculates and shows final point of a player
    */
-  public abstract void calcPoint(Player p);
+  public int calcPoint(Player p){
+    return 0;
+  }
   /*
    * checkState() returns the state of a player's connection
    */
