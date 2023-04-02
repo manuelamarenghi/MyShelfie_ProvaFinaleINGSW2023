@@ -14,7 +14,7 @@ public class PlayerManager {
         }
 
     }
-    public void showCommGoal(){
+    public void showCommGoal(Player player){
         //Chiedere come si fa ad accedere alle 2 carte
     }
     public void selectCard(Player player , Board board){
@@ -68,7 +68,7 @@ public class PlayerManager {
             x=personalCards[i].getCoordinates().getX();
             y=personalCards[i].getCoordinates().getY();
             //Forse x e y sono da scambiare per la confusione con righe e colonne
-            if(colour == player.getLibrary()[x][y].getColour){
+            if(colour == player.getLibrary()[x][y].getColour()){
                 //da rivedere come mettere la condizione dell'If perche nonva bene
                 sameCards++;
             }
@@ -93,8 +93,8 @@ public class PlayerManager {
         }
         return points;
     }
-    public void showProgressScore(){
-        //da rivedere con l'algoritmo di adicenza implementata da silvia
+    public void showProgressScore(Player player){
+        System.out.println(player.getCommonGoalScore());
     }
 
 
