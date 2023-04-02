@@ -10,14 +10,13 @@ public class ThreePlayers extends Matchmanager{
     public Boolean checkState(Player p) {
         return null;
     }
-
-    @Override
-    public void turn(Player p) {
-    }
-
+    /*
+     * createBoard() create new Board giving number of players to the constructor, that initialize the right places
+     */
     @Override
     public void createBoard(Match m) {
-
+        Board b=new Board(3);
+        m.setBoard(b);
     }
 
     @Override

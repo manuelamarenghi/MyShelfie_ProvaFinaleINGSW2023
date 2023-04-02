@@ -17,7 +17,9 @@ abstract class Matchmanager{
   /*
    * turn() manage a player's turn
    */
-  public abstract void turn(Player p);
+  public void turn(Player p){
+
+  }
   /*
    * createBoard() create a board with different allowed position according to number of players
    */
