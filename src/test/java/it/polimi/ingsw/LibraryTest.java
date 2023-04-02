@@ -129,7 +129,6 @@ class LibraryTest {
     /*
      * takeAction() tests if the function makes the right move ( direct by the player)
      */
-<<<<<<<<< Temporary merge branch 1
     @Test
     void takeAction() {
         Card[] cards = new Card[2];
@@ -186,7 +185,4 @@ class LibraryTest {
         library.showLibrary();
         library.getgroup();
     }
-=========
-
->>>>>>>>> Temporary merge branch 2
 }
