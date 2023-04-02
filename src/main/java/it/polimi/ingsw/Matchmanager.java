@@ -13,7 +13,7 @@ abstract class Matchmanager{
   /*
    * checkState() returns the state of a player's connection
    */
-  public abstract Boolean checkState(Player p);
+  public Boolean checkState(Player p){return null;};
   /*
    * turn() manage a player's turn
    */
@@ -25,7 +25,7 @@ abstract class Matchmanager{
    */
   public abstract void createBoard(Match m);
   /*
-   * setEffectivecards() choose two card per match
+   * setEffectiveCards() choose two card per match
    */
-  public abstract void setEffectivecards(Match m);
+  public abstract void setEffectiveCards(Match m);
 }

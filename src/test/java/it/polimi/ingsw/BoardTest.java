@@ -66,4 +66,6 @@ class BoardTest {
         testCards.add(test2);
         assertEquals(false , board.allow(testCards));
     }
+
+
 }

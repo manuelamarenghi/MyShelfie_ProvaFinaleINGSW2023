@@ -8,11 +8,11 @@ public class Match {
 private Board board;
 private Player firstFinish;
 private Player chair;
-private EffectiveCard[] Commoncards=new EffectiveCard[2];
+private EffectiveCard[] CommonCards=new EffectiveCard[2];
 private Matchmanager matchmanager;
     /*
      *  the constructor initialize the manager based on number of players
-     *  matchmanager is an abstract class and has 3 classes that extends it
+     *  MatchManager is an abstract class and has 3 classes that extends it
      */
     public Match(int n) {
         players=new Player[n];
@@ -25,8 +25,8 @@ private Matchmanager matchmanager;
         return board;
     }
 
-    public EffectiveCard[] getCommoncards() {
-        return Commoncards;
+    public EffectiveCard[] getCommonCards() {
+        return CommonCards;
     }
 
     public Player getChair() {
@@ -49,8 +49,8 @@ private Matchmanager matchmanager;
         this.chair = chair;
     }
 
-    public void setCommoncards(EffectiveCard[] commoncards) {
-        Commoncards = commoncards;
+    public void setCommonCards(EffectiveCard[] commoncards) {
+        CommonCards = commoncards;
     }
 
     public void setFirstFinish(Player firstFinish) {
@@ -60,4 +60,5 @@ private Matchmanager matchmanager;
     public void setMatchmanager(Matchmanager matchmanager) {
         this.matchmanager = matchmanager;
     }
+
 }
