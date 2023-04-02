@@ -9,7 +9,7 @@ public class Player {
     private Library library;
     private boolean state;
     private PersonalGoalCard personalCard;
-    //private PlayerManager plManag;
+    private PlayerManager plManag;
 
     public String getNickname(){
         return  nickname;
@@ -48,5 +48,9 @@ public class Player {
 
     public void setState(boolean state){
         this.state = state;
+    }
+
+    public PlayerManager getPlayerManager(){
+        return plManag;
     }
 }

@@ -66,6 +66,44 @@ class BoardTest {
         testCards.add(test2);
         assertEquals(false , board.allow(testCards));
     }
+    @Test
+    public void checkNumberOfCardsFilled(){
+        Board board = new Board(2);
+        assertEquals(29 , board.getFreeposition());
+    }
+    @Test
+    public void checkIfCardIsNull(){
+        Board board = new Board(2);
+        board.fill();
+        assertEquals("" , board.getBoard()[3][0].getColour());
 
+    }
+    @Test
+    public void checkIfCardIsNull2(){
+        Board board = new Board(2);
+        board.fill();
+        assertEquals("" , board.getBoard()[3][8].getColour());
 
+    }
+    @Test
+    public void checkIfCardIsNotNull(){
+        Board board = new Board(2);
+        board.fill();
+        assertNotEquals("" , board.getBoard()[3][3].getColour());
+
+    }
+    @Test
+    public void checkIfCardIsNotNull2(){
+        Board board = new Board(3);
+        board.fill();
+        assertNotEquals("" , board.getBoard()[3][8].getColour());
+
+    }
+    @Test
+    public void checkIfCardIsNotNull3(){
+        Board board = new Board(4);
+        board.fill();
+        assertNotEquals("" , board.getBoard()[3][1].getColour());
+
+    }
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 class LibraryTest {
     /*
@@ -182,11 +181,7 @@ class LibraryTest {
         library.getCardinPos(5,3).setColour("G");
         library.getCardinPos(4,3).setColour("V");
         library.getCardinPos(3,3).setColour("V");
-        library.getCardinPos(3,2).setColour("V");
-        library.getCardinPos(1,2).setColour("R");
-        library.getCardinPos(5,4).setColour("G");
         library.showLibrary();
-
         library.getgroup();
     }
 }

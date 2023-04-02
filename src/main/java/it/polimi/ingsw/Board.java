@@ -8,12 +8,14 @@ public class Board {
     private Card ca;
     private Bag bag;
     private int c , r;
+    private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
 
     public Board(int numOfPlayers){
+        bag = new Bag();
         this.numOfPlayers=numOfPlayers;
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c!=4 && c!=5){
+            if(c!=4 && c!=3){
                 board[0][c]=notUsableCard;
             }
         }
@@ -27,8 +29,8 @@ public class Board {
                 board[2][c]=notUsableCard;
             }
         }
-        board[3][8]=notUsableCard;//To put Null the Fourth line
-        board[5][0]=notUsableCard;//To put null the sixth line
+        board[3][0]=notUsableCard;//To put Null the Fourth line
+        board[5][8]=notUsableCard;//To put null the sixth line
 
         for(c=0 ; c<9 ; c++){//To put Null the seventh line
             if(c!=2 && c!=3 && c!=4 && c!=5 && c!=6){
@@ -41,7 +43,7 @@ public class Board {
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c!=3 && c!=4){
+            if(c!=5 && c!=4){
                 board[8][c]=notUsableCard;
             }
         }
@@ -62,6 +64,8 @@ public class Board {
             board[7][3]=notUsableCard;
             board[8][4]=notUsableCard;
             board[5][7]=notUsableCard;
+            board[1][5]=notUsableCard;
+
         }
         else if(numOfPlayers==3){
             board[4][8]=notUsableCard;//Positions with 4 points
@@ -71,22 +75,22 @@ public class Board {
             board[7][3]=notUsableCard;
             board[8][4]=notUsableCard;
             board[5][7]=notUsableCard;
+            board[1][5]=notUsableCard;
         }
 
     }
 
     public void fill(){
         int indexOfCards=0 , indexOfColours=0;
-        ArrayList<Card> cardsForBoard  = new ArrayList<Card>();
-        ArrayList<String> arrayOfColours = new ArrayList<>();
+        ArrayList<String> arrayOfColours=new ArrayList<>();
         Card tempCard;
         arrayOfColours=bag.extract(numOfPlayers);
         for(c=0 ; c<9 ; c++){
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]!=notUsableCard){
                     tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
-                    cardsForBoard.set(indexOfCards , tempCard);
-                    indexOfCards++;
+                    //cardsForBoard.set(indexOfCards , tempCard);
+                    board[r][c]=tempCard;
                     indexOfColours++;
                 }
             }
@@ -145,6 +149,24 @@ public class Board {
 
         return null;
     }
+    public int getFreeposition(){
+        int l=0 , row,col ;
+        for(row=0 ; row<9 ; row++){
+            for(col=0 ; col<9 ; col++){
+                if(board[row][col]!=notUsableCard){
+                    l++;
+                }
+            }
+        }
+        return l;
+    }
+
+    public void takeCard (Position position){
+        if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
+            return;
+        }
+        board[position.getX()][position.getY()]=emptyCard;
+    }
     public Bag getBag(){
         return bag;
     }
@@ -175,4 +197,7 @@ public class Board {
             System.out.println();
         }
     }
+    public Card getCard(int x , int y){ return board[x][y];}
+
+
 }
