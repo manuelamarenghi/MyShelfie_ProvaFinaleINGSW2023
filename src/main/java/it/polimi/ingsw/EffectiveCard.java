@@ -7,9 +7,9 @@ public class EffectiveCard extends Observer{
     private CommonGoalCards commonCard;
     private ArrayList<Integer> allScores;
 
-    public EffectiveCard(CommonGoalCards commoncard ){
+    public EffectiveCard(CommonGoalCards commonCard ){
 
-        this.commonCard = commoncard;
+        this.commonCard = commonCard;
         allScores =new ArrayList<Integer>();
     }
 
