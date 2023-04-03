@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class FourPlayers extends Matchmanager{
 
-    /*
+    /**
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
      */
     @Override
@@ -14,7 +14,7 @@ public class FourPlayers extends Matchmanager{
         Board b=new Board(4);
         m.setBoard(b);
     }
-    /*
+    /**
      * setEffectiveCards() setting EffectiveCards choosing randomly in CommonCards of the match and their scores based on number of players
      */
     @Override

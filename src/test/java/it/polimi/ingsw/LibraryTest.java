@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 class LibraryTest {
-    /*
+    /**
      * showColumn1() tests where you can put 2 cards with some column permitted
      */
     @Test
@@ -31,7 +31,7 @@ class LibraryTest {
         actual = library.showColumn(2);
         Assertions.assertArrayEquals(expected, actual);
     }
-    /*
+    /**
      * showColumn2() tests where you can put 3 cards when not permitted
      */
     @Test
@@ -57,7 +57,7 @@ class LibraryTest {
         actual = library.showColumn(3);
         Assertions.assertTrue(actual.length==0);
     }
-    /*
+    /**
      * showColumn3() tests where you can put 3 cards when library's empty
      */
     @Test
@@ -73,7 +73,7 @@ class LibraryTest {
         actual = library.showColumn(2);
         Assertions.assertArrayEquals(expected, actual);
     }
-    /*
+    /**
      * setColumn1() testing to put 1 card in an empty column
      */
     @Test
@@ -93,7 +93,7 @@ class LibraryTest {
           Assertions.assertTrue(expected.equals(actual));
         }
     }
-    /*
+    /**
      * setColumn2() testing to put 2 cards in a library given
      */
     @Test
@@ -130,7 +130,7 @@ class LibraryTest {
             Assertions.assertTrue(expected.equals(actual));
         }
     }
-    /*
+    /**
      * takeAction() tests if the function makes the right move ( direct by the player)
      */
     @Test
@@ -164,7 +164,7 @@ class LibraryTest {
         library.getCardinPos(5, 0).setColour("V");
         //library.takeAction(cards);
     }
-    /*
+    /**
      * getGroup1() tests if it works
      */
     @Test

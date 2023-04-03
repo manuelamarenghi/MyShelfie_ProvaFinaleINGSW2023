@@ -12,7 +12,7 @@ private Player firstFinish;
 private Player chair;
 private EffectiveCard[] CommonCards=new EffectiveCard[2];
 private Matchmanager matchmanager;
-    /*
+    /**
      *  the constructor initialize the manager based on number of players
      *  MatchManager is an abstract class and has 3 classes that extends it
      */

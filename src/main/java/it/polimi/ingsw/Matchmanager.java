@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 abstract class Matchmanager{
-  /*
+  /**
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number
    */
   public Matchmanager(){}
-  /*
+  /**
    * results() calculates all players' scores and gives you classification
    */
   public void results(Match m){
@@ -54,12 +54,12 @@ abstract class Matchmanager{
     }
     System.out.println("The winner is:"+p[max].getNickname());
   }
-  /*
+  /**
    * checkState() returns the state of a player's connection
    */
   public Boolean checkState(Player p){return null;};
-  /*
-   * turn() manage a player's turn
+  /**
+   * setPersonalGoal() assigns per
    */
   public void setPersonalGoal(Player[] p){
     int max_rnd=12;
@@ -100,6 +100,9 @@ abstract class Matchmanager{
       return arrayList;
     }
   }
+  /**
+   * turn() manage a player's turn
+   */
   public void turn(Player p,Match m){
     Scanner in=new Scanner(System.in);
     System.out.println(p.getNickname()+"turn:");
@@ -132,7 +135,7 @@ abstract class Matchmanager{
       }
     }
   }
-  /*
+  /**
    * showCommGoal() let you see CommonCards in a given match
    */
   public void showCommGoal(Match match){
@@ -140,12 +143,12 @@ abstract class Matchmanager{
     cards[0].getCommonCard().getImage();
     cards[1].getCommonCard().getImage();
   }
-  /*
+  /**
    * createBoard() create a board with different allowed position according to number of players
    */
 
   public abstract void createBoard(Match m);
-  /*
+  /**
    * setEffectiveCards() choose two card per match
    */
   public abstract void setEffectiveCards(Match m);
