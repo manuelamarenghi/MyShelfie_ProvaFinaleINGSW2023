@@ -39,7 +39,7 @@ class Col3GTest {
         l.getCardinPos(0,0).setColour("Green");
         l.getCardinPos(1,0).setColour("Yellow");
         l.getCardinPos(2,0).setColour("Navy");
-        l.getCardinPos(3,0).setColour("Green");
+        l.getCardinPos(3,0).setColour("White");
         l.getCardinPos(4,0).setColour("Navy");
         l.getCardinPos(5,0).setColour("Green");
 
@@ -55,6 +55,7 @@ class Col3GTest {
         l.getCardinPos(2,4).setColour("Blue");
         l.getCardinPos(3,4).setColour("Blue");
         l.getCardinPos(4,4).setColour("Blue");
+        l.getCardinPos(5,4).setColour("Green");
 
         assertFalse(col3G.check(l));
     }

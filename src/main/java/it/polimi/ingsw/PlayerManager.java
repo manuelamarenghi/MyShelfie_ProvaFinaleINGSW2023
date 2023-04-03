@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerManager {
-
+    //the method notifies the observer about the state of the player
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -14,6 +14,7 @@ public class PlayerManager {
         }
 
     }
+    //the method selects card from the board and puts them in the player's library
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -52,9 +53,11 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
+    //the method returnn the personal goal
     public void showPersonalGoal (Player player){
         player.getPersonalCard().showPersonalGoalCard();
     }
+   //the method returns the personal points
     public int showPersonalPoint(Player player){
         int sameCards=0 , x , y, i , points=0;
         String colour;
