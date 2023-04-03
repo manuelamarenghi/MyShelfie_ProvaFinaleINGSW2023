@@ -31,13 +31,15 @@ public class ThreePlayers extends Matchmanager{
         l.add(new EightEqualsCards());
         l.add(new Line4G());
         l.add(new Same4GroupsG());
+        l.add(new StairsGoalCard());
+        l.add(new XGoalCard());
         score.add(8);
         score.add(6);
         score.add(4);
         int i,j;
-        i=(int)Math.floor(Math.random() * (10) );
+        i=(int)Math.floor(Math.random() * (12) );
         do {
-            j=(int)Math.floor(Math.random() * (10) );
+            j=(int)Math.floor(Math.random() * (12) );
         }while(i==j);
         chosen[0]=new EffectiveCard(l.get(i));
         chosen[0].setAllScores(score);

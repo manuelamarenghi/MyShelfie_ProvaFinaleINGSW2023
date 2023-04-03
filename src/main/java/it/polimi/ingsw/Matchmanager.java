@@ -12,33 +12,22 @@ abstract class Matchmanager{
   /*
    * calcPoint() calculates and returns final point of a player
    */
-  public int calcPoint(Player p,Match m){
-    int score=p.getCommonGoalScore();
-    System.out.println("Your score starts from your CommonCards' score:"+score);
-    // calculate personalgoalcard's achievment and its score
-    System.out.println("You achieve from your PersonalGoalCard:");
-    // calculate scores about adjacent items
-    System.out.println("You achieve from your adjacent items:");
-    ArrayList<Integer> groups=p.getLibrary().getgroup();
-    for(Integer i: groups){
-      if(i==3){
-        System.out.println("items"+i+" score: 2");
-        score+=2;}
-      if(i==4){
-        System.out.println("items"+i+" score: 3");
-        score+=3;}
-      if(i==5){
-        System.out.println("items"+i+" score: 5");
-        score+=5;}
-      if(i>6){
-        System.out.println("items"+i+" score: 6");
-        score+=8;}
-    }
-    if(p.equals(m.getFirstFinish())){
+  public void classifica(Match m){
+    int[] scores=new int[m.getPlayers().length];
+    int max=0;
+    Player[] p=m.getPlayers();
+    int j=0;
+    for(Integer i: scores){
+      i=p[j].getPlayerManager().showProgressScore(p[j]);
+    if(p[j].equals(m.getFirstFinish())){
       System.out.println("You have 1 point from your End Game Token");
-      score++;}
-    System.out.println("Final score:"+score);
-    return score;
+      i++;}
+    if(i>max){
+      max=j;
+    }
+    System.out.println("Final score for player"+p[j].getNickname()+":"+i);
+  }
+    System.out.println("The winner is:"+p[max].getNickname());
   }
   /*
    * checkState() returns the state of a player's connection
