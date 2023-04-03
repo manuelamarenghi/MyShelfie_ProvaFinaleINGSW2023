@@ -88,6 +88,6 @@ class EightEqualsCardsTest {
     @Test
     void checkIfClassWorksProperlyEmpty(){
         Library library = new Library();
-        Assertions.assertTrue(eightEC.check(library));
+        Assertions.assertFalse(eightEC.check(library));
     }
 }
