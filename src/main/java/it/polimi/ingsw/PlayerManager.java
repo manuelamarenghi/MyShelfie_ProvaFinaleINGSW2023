@@ -14,9 +14,6 @@ public class PlayerManager {
         }
 
     }
-    public void showCommGoal(){
-        //Chiedere come si fa ad accedere alle 2 carte
-    }
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);

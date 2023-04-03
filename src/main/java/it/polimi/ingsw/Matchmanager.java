@@ -10,9 +10,9 @@ abstract class Matchmanager{
    */
   public Matchmanager(){}
   /*
-   * calcPoint() calculates and returns final point of a player
+   * results() calculates all players' scores and gives you classification
    */
-  public void classifica(Match m){
+  public void results(Match m){
     int[] scores=new int[m.getPlayers().length];
     int max=0;
     Player[] p=m.getPlayers();
@@ -27,6 +27,24 @@ abstract class Matchmanager{
     }
     System.out.println("Final score for player"+p[j].getNickname()+":"+i);
   }
+    j=0;
+    int[] position= new int[]{0, 1, 2, 3};
+    for (int i = 0; i < 4; ++i) {
+      int key = scores[i];
+      while(j!=4 && key>scores[j]){
+        int temp=position[i];
+        position[i]=position[j];
+        position[j]=temp;
+        temp=scores[j];
+        scores[j]=scores[i];
+        scores[i]=temp;
+        j++;
+      }
+    }
+    System.out.println("Classification:");
+    for(int i: position){
+      System.out.println(4-i+"-"+p[i].getNickname());
+    }
     System.out.println("The winner is:"+p[max].getNickname());
   }
   /*
@@ -42,11 +60,11 @@ abstract class Matchmanager{
      m.getBoard().showBoard();
     System.out.println("Insert 1 to see CommonCards, 0 to go ahead:");
      int a=in.nextInt();
-     if(a==1){  //mostra commoncard
+     if(a==1){  this.showCommGoal(m);
         }
     System.out.println("Insert 2 to see PersonalCards, 0 to go ahead:");
     a=in.nextInt();
-    if(a==2){  //mostra personalcard
+    if(a==2){  p.getPersonalCard().showPersonalGoalCard();
     }
     System.out.println("Insert -1 to skip your turn:");
     a=in.nextInt();
@@ -67,6 +85,14 @@ abstract class Matchmanager{
         System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
       }
     }
+  }
+  /*
+   * showCommGoal() let you see CommonCards in a given match
+   */
+  public void showCommGoal(Match match){
+    EffectiveCard[]  cards=match.getCommonCards();
+    cards[0].getCommonCard().getImage();
+    cards[1].getCommonCard().getImage();
   }
   /*
    * createBoard() create a board with different allowed position according to number of players
