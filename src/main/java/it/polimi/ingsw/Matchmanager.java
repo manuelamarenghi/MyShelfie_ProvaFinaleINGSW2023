@@ -59,7 +59,8 @@ abstract class Matchmanager{
    */
   public Boolean checkState(Player p){return null;};
   /**
-   * setPersonalGoal() assigns per
+   * setPersonalGoal() assigns to each player inside the given array a random PersonalGoalCard, randomly extracted
+   * by the PersonalGoalCards.json File
    */
   public void setPersonalGoal(Player[] p){
     int max_rnd=12;
