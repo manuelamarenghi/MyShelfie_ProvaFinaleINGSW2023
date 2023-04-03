@@ -10,8 +10,9 @@ public class Board {
     private int c , r;
     private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
-
-    //board get initialized based on number of players
+    /**
+     * board get initialized based on number of player
+     */
     public Board(int numOfPlayers){
         bag = new Bag();
         this.numOfPlayers=numOfPlayers;
@@ -139,7 +140,10 @@ public class Board {
         }
 
     }
-    //The method return true/false if the cards can be taken or not
+
+    /**
+     * The method return true/false if the cards can be taken or not
+     */
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
             if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
@@ -218,7 +222,7 @@ public class Board {
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
-    /*
+    /**
      * showBoard() let you see the board
      */
     public void showBoard(){

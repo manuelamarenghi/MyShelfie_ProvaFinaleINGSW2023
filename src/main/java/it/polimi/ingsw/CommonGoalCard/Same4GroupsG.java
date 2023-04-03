@@ -5,11 +5,11 @@ import it.polimi.ingsw.Library;
 
 import java.util.ArrayList;
 
-/*
+/**
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
  */
 public class Same4GroupsG implements CommonGoalCards {
-    /*
+    /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
@@ -25,7 +25,7 @@ public class Same4GroupsG implements CommonGoalCards {
             return true;
         else return false;
     }
-    /*
+    /**
      * getImage() let you see this goal
      */
     @Override
@@ -50,7 +50,9 @@ public class Same4GroupsG implements CommonGoalCards {
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
-
+    /**
+     * expired() returns false and doesn't control if the goal couldn't be reached
+     */
     @Override
     public boolean expired(Library library) {
         return false;

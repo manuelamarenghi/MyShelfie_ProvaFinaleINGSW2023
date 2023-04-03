@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Same4GroupsGTest {
     private static Same4GroupsG card = new Same4GroupsG();
-    /*
+    /**
      * getImage() to see the output of the method in the card
      */
     @Test
     void getImage() {
         card.getImage();
     }
-    /*
+    /**
      * check1() to see if it works when the library doesn't reach the goal
      */
     @Test
@@ -38,7 +38,7 @@ class Same4GroupsGTest {
         library.getCardinPos(2, 2).setColour("V");
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check2() to see when the library has reached the goal
      */
     @Test
@@ -69,7 +69,7 @@ class Same4GroupsGTest {
         library.showLibrary();
         Assertions.assertTrue(card.check(library));
     }
-    /*
+    /**
      * check3() to see when the library is empty
      */
     @Test
