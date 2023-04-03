@@ -10,7 +10,6 @@ public class PersonalGoalCard {
             this.personalObjective[i]=new Card(personalObjective[i].getColour(),personalObjective[i].getCoordinates());
         }
     }
-
     public Card[] getPersonalObjective() {
         return Arrays.copyOf(personalObjective,personalObjective.length);
     }
