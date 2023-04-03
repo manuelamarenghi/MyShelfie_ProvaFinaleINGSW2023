@@ -108,4 +108,11 @@ class BoardTest {
         b.fill(4);
         b.showBoard();
     }
+    @Test
+    public void showBoardtest2(){
+        Board b = new Board(2);
+        b.fill(0);
+        System.out.println(b.getBoard()[4][7].getColour());
+        b.showBoard();
+    }
 }
