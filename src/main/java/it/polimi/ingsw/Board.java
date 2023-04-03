@@ -83,8 +83,7 @@ public class Board {
     //Board gets filled up with cards from bag
     public void fill(){
         int indexOfCards=0 , indexOfColours=0;
-        //ArrayList<Card> cardsForBoard  = new ArrayList<Card>();
-        ArrayList<String> arrayOfColours = new ArrayList<String>();
+        ArrayList<String> arrayOfColours=new ArrayList<>();
         Card tempCard;
         arrayOfColours=bag.extract(numOfPlayers);
         for(c=0 ; c<9 ; c++){
@@ -178,6 +177,28 @@ public class Board {
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
+    /*
+     * showBoard() let you see the board
+     */
+    public void showBoard(){
+        System.out.println(" *** living room ***");
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if( board[i][j]==notUsableCard){
+                    System.out.print(" [ X ] ");
+                }
+                else{
+                if( board[i][j]!=null){
+                    System.out.print(" ["+board[i][j].getColour()+"] ");
+                }
+                else{
+                    System.out.print(" [  ] ");
+                }
+            }}
+            System.out.println();
+        }
+    }
     public Card getCard(int x , int y){ return board[x][y];}
+
 
 }

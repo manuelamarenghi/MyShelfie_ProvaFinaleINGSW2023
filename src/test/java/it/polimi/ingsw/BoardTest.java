@@ -106,4 +106,13 @@ class BoardTest {
         assertNotEquals("" , board.getBoard()[3][1].getColour());
 
     }
+    /*
+     * showBoard() we test the board in 4 players version
+     */
+    @Test
+    public void showBoard(){
+        Board b=new Board(4);
+        b.fill();
+        b.showBoard();
+    }
 }
