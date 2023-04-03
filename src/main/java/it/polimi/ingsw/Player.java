@@ -29,6 +29,9 @@ public class Player {
     }
 
     public PersonalGoalCard getPersonalCard(){return personalCard;}
+    public void setPersonalCard(PersonalGoalCard personalCard){
+        this.personalCard=new PersonalGoalCard(personalCard.getPersonalObjective());
+    }
 
     public void setNickname(String nickname){
         this.nickname= nickname;
