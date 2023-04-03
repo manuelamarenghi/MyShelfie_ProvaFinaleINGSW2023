@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Line4GTest {
     private static Line4G card = new Line4G();
-    /*
+    /**
      * check1() tests when the library is empty
      */
     @Test
@@ -17,7 +17,7 @@ class Line4GTest {
         Library library = new Library();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check2() tests when the library has only one line filled
      */
     @Test
@@ -31,7 +31,7 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check3() tests when the library has 4 lines filled but with more than 3 types
      */
     @Test
@@ -60,7 +60,7 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check4() tests when the library has 3 lines with less or equal than 3 types
      */
     @Test
@@ -83,7 +83,7 @@ class Line4GTest {
         library.getCardinPos(3, 4).setColour("V");
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check5() tests when the library has 4 lines filled with less or equal than 3 types
      */
     @Test
@@ -111,7 +111,7 @@ class Line4GTest {
         library.getCardinPos(2, 4).setColour("V");
         Assertions.assertTrue(card.check(library));
     }
-    /*
+    /**
      * check6() tests when the library is full and has more than 4 lines with less or equal than 3 types
      */
     @Test
@@ -150,7 +150,7 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertTrue(card.check(library));
     }
-    /*
+    /**
      * check7() tests when the library is full and hasn't 4 lines with less or equal than 3 types
      */
     @Test
@@ -189,14 +189,14 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * getImage() to see the output of the method in the card
      */
     @Test
     void getImage() {
         card.getImage();
     }
-    /*
+    /**
      * expired1() tests when library's full and doesn't respect the goal
      */
     @Test
@@ -235,7 +235,7 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertFalse(card.expired(library));
     }
-    /*
+    /**
      * expired2() tests when library's empty
      */
     @Test
@@ -243,7 +243,7 @@ class Line4GTest {
         Library library = new Library();
         Assertions.assertTrue(card.expired(library));
     }
-    /*
+    /**
      * expired3() tests when library has four columns that violates condition x<4 in while
      */
     @Test
@@ -265,7 +265,7 @@ class Line4GTest {
         library.getCardinPos(3, 3).setColour("V");
         Assertions.assertTrue(card.expired(library));
     }
-    /*
+    /**
      * expired4() tests when there are some columns and rows not fullfilled
      */
     @Test

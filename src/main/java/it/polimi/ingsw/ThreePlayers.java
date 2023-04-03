@@ -5,7 +5,7 @@ import it.polimi.ingsw.CommonGoalCard.*;
 import java.util.ArrayList;
 
 public class ThreePlayers extends Matchmanager{
-    /*
+    /**
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
      */
     @Override
@@ -13,7 +13,7 @@ public class ThreePlayers extends Matchmanager{
         Board b=new Board(3);
         m.setBoard(b);
     }
-    /*
+    /**
      * setEffectiveCards() setting EffectiveCards choosing randomly in CommonCards of the match and their scores based on number of players
      */
     @Override
