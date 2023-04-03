@@ -2,9 +2,13 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ *  this class manage player's logic
+ */
 public class PlayerManager {
-
+    /**
+     *  notifyAllObservers() is called during a turn to manage list of observers
+     */
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -14,6 +18,9 @@ public class PlayerManager {
         }
 
     }
+    /**
+     *  selectedCard() let you choose cards in board and put them in your library
+     */
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -52,9 +59,15 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
+    /**
+     *  showPersonalGoal() let you see your PersonalGoal
+     */
     public void showPersonalGoal (Player player){
         player.getPersonalCard().showPersonalGoalCard();
     }
+    /**
+     *  showPersonalPoint() returns and let you see your score based on PersonalGoalCard
+     */
     public int showPersonalPoint(Player player){
         int sameCards=0 , x , y, i , points=0;
         String colour;
@@ -88,6 +101,9 @@ public class PlayerManager {
         }
         return points;
     }
+    /**
+     *  showProgressScore() returns and let you see your progress score ( personal+common+adjacent items)
+     */
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
         System.out.println("Your score starts from your CommonCards' score:"+score);

@@ -121,6 +121,7 @@ abstract class Matchmanager{
     if(a!=-1) {
       p.getLibrary().showLibrary();
       p.getPlayerManager().selectCard(p, m.getBoard());
+      p.getPlayerManager().notifyAllObservers(p);
       p.getLibrary().showLibrary();
       int i = 0;
       for (Card c : p.getLibrary()) {
