@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
        //Test of json file reading
-    /*String jsonPath;
+    String jsonPath;
         ArrayList<PersonalGoalCard> test=new ArrayList<>(12);
         Card[] cards;
 
@@ -35,13 +35,13 @@ public class Main {
             }
             for(PersonalGoalCard pgc:test){
                 System.out.println("PersonalGoalCard");
-                /*for(Card card:pgc.getPersonalObjective()){
+                for(Card card:pgc.getPersonalObjective()){
                     System.out.println(card.getColour().toString()+" "+card.getCoordinates().getX()+","+card.getCoordinates().getY());
                 }
                 pgc.showPersonalGoalCard();
                 System.out.println("---------------------");
 
             }
-    }*/
-}
+    }
+    }
 }
