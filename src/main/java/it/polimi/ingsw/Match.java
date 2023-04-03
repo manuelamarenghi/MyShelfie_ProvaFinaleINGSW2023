@@ -70,4 +70,7 @@ private Matchmanager matchmanager;
         this.matchmanager = matchmanager;
     }
 
+    public Player[] getPlayers() {
+        return players;
+    }
 }
