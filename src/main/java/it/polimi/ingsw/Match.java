@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.util.Scanner;
+
 public class Match {
     /*
      *  this class is used to initialize the match in Main Class
@@ -16,6 +18,13 @@ private Matchmanager matchmanager;
      */
     public Match(int n) {
         players=new Player[n];
+        Scanner in=new Scanner(System.in);
+        for(Player p: players){
+            System.out.println("Inserire nickname giocatore");
+            String nickname= in.nextLine();
+            p.setNickname(nickname);
+        }
+        this.setChair(players[0]);
         if(n==4){  matchmanager=new FourPlayers();}
         if(n==3){matchmanager=new ThreePlayers();}
         if(n==2){matchmanager=new TwoPlayers();}
