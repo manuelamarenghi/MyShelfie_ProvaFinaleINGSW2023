@@ -64,6 +64,17 @@ public class Square2G implements CommonGoalCards {
 
     @Override
     public void getImage() {
+        Library l  =new Library();
+        l.getCardinPos(0,0).setColour("Green");
+        l.getCardinPos(0,1).setColour("Green");
+        l.getCardinPos(1,0).setColour("Green");
+        l.getCardinPos(1,1).setColour("Green");
 
+        l.getCardinPos(2,0).setColour("Green");
+        l.getCardinPos(2,1).setColour("Green");
+        l.getCardinPos(3,0).setColour("Green");
+        l.getCardinPos(3,1).setColour("Green");
+        System.out.println("This is an example of a library that respects this goal");
+        l.showLibrary();
     }
 }

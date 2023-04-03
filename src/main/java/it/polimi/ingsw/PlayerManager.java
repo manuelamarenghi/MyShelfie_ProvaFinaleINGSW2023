@@ -14,9 +14,6 @@ public class PlayerManager {
         }
 
     }
-    public void showCommGoal(Player player){
-        //Chiedere come si fa ad accedere alle 2 carte
-    }
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -67,11 +64,9 @@ public class PlayerManager {
             colour=personalCards[i].getColour();
             x=personalCards[i].getCoordinates().getX();
             y=personalCards[i].getCoordinates().getY();
-            //Forse x e y sono da scambiare per la confusione con righe e colonne
-            /*if(colour == player.getLibrary()[x][y].getColour()){
-                //da rivedere come mettere la condizione dell'If perche nonva bene
+            if(colour.equals(player.getLibrary().getCardinPos(x,y).getColour())){
                 sameCards++;
-            }*/
+            }
         }
         if(sameCards==1){
             points=1;
