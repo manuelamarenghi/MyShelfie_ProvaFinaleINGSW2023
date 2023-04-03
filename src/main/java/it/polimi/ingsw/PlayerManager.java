@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerManager {
-    //the method notifies the observer about the state of the player
+
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -14,7 +14,9 @@ public class PlayerManager {
         }
 
     }
-    //the method selects card from the board and puts them in the player's library
+    public void showCommGoal(){
+        //Chiedere come si fa ad accedere alle 2 carte
+    }
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -53,11 +55,9 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
-    //the method returnn the personal goal
     public void showPersonalGoal (Player player){
         player.getPersonalCard().showPersonalGoalCard();
     }
-   //the method returns the personal points
     public int showPersonalPoint(Player player){
         int sameCards=0 , x , y, i , points=0;
         String colour;
@@ -91,8 +91,30 @@ public class PlayerManager {
         }
         return points;
     }
-    public void showProgressScore(Player player){
-        System.out.println(player.getCommonGoalScore());
+    public int showProgressScore(Player player){
+        int score=player.getCommonGoalScore();
+        System.out.println("Your score starts from your CommonCards' score:"+score);
+        // calculate personalgoalcard's achievment and its score
+        System.out.println("You achieve from your PersonalGoalCard:"+this.showPersonalPoint(player));
+        score+=this.showPersonalPoint(player);
+        // calculate scores about adjacent items
+        System.out.println("You achieve from your adjacent items:");
+        ArrayList<Integer> groups=player.getLibrary().getgroup();
+        for(Integer i: groups){
+            if(i==3){
+                System.out.println("items"+i+" score: 2");
+                score+=2;}
+            if(i==4){
+                System.out.println("items"+i+" score: 3");
+                score+=3;}
+            if(i==5){
+                System.out.println("items"+i+" score: 5");
+                score+=5;}
+            if(i>6){
+                System.out.println("items"+i+" score: 6");
+                score+=8;}
+        }
+        return score;
     }
 
 

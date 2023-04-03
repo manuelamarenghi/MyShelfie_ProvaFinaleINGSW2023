@@ -145,12 +145,21 @@ public class Library implements Iterable<Card> {
         Adjacent(library,visited,row,col-1,color,groupCard);
         Adjacent(library,visited,row,col+1,color,groupCard);
     }
-
-
-
+    public int getFilledColumnNumber(int columnNumber){
+        int counter=0;
+        for(int i=0;i<6;i++){
+            if(!this.library[i][columnNumber].getColour().equals("")) counter++;
+        }return counter;
+    }
 
     @Override
     public Iterator iterator() {
         return new LibraryIterator(this.library);
+    }
+    public int getFilledRowNumber(int rowNumber){
+        int counter=0;
+        for(int i=0;i<5;i++){
+            if(!this.library[rowNumber][i].getColour().equals("")) counter++;
+        }return counter;
     }
 }

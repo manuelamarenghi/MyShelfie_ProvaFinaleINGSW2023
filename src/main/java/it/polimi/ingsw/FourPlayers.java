@@ -32,14 +32,16 @@ public class FourPlayers extends Matchmanager{
         l.add(new Col3G());
         l.add(new Line2G());
         l.add(new Square2G());
+        l.add(new StairsGoalCard());
+        l.add(new XGoalCard());
         points.add(8);
         points.add(6);
         points.add(4);
         points.add(2);
         int i,j;
-        i=(int)Math.floor(Math.random() * (10) );
+        i=(int)Math.floor(Math.random() * (12) );
         do {
-            j=(int)Math.floor(Math.random() * (10) );
+            j=(int)Math.floor(Math.random() * (12) );
         }while(i==j);
         chosen[0]=new EffectiveCard(l.get(i));
         chosen[0].setAllScores(points);
