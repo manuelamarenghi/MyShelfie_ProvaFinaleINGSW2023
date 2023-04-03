@@ -68,10 +68,10 @@ public class PlayerManager {
             x=personalCards[i].getCoordinates().getX();
             y=personalCards[i].getCoordinates().getY();
             //Forse x e y sono da scambiare per la confusione con righe e colonne
-            if(colour == player.getLibrary()[x][y].getColour()){
+            /*if(colour == player.getLibrary()[x][y].getColour()){
                 //da rivedere come mettere la condizione dell'If perche nonva bene
                 sameCards++;
-            }
+            }*/
         }
         if(sameCards==1){
             points=1;
