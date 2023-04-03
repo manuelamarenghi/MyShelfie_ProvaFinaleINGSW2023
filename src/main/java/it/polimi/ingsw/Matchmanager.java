@@ -46,6 +46,7 @@ abstract class Matchmanager{
         scores[i]=temp;
         j++;
       }
+      j=i+1;
     }
     System.out.println("Classification:");
     for(int i: position){
