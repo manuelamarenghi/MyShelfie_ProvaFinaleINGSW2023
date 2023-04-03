@@ -2,23 +2,27 @@ package it.polimi.ingsw;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class EffectiveCard extends Observer{
     private CommonGoalCards commonCard;
     private ArrayList<Integer> allScores;
 
-    public EffectiveCard(CommonGoalCards commoncard ){
+    public EffectiveCard(CommonGoalCards commonCard ){
 
-        this.commonCard = commoncard;
+        this.commonCard = commonCard;
         allScores =new ArrayList<Integer>();
     }
 
     public CommonGoalCards getCommonCard(){
+
         return commonCard;
     }
 
     public ArrayList<Integer> getAllScores(){
-        return  allScores;
+        ArrayList<Integer>tmp=new ArrayList<>();
+        Collections.copy(this.allScores,tmp);
+        return tmp;
     }
 
     public void setAllScores(ArrayList<Integer> scores)

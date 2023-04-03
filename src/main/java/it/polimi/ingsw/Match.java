@@ -1,18 +1,17 @@
 package it.polimi.ingsw;
 
 import java.util.Scanner;
-
+/**
+ *  this class is used to initialize the match in Main Class
+ */
 public class Match {
-    /*
-     *  this class is used to initialize the match in Main Class
-     */
     private Player[] players;
 private Board board;
 private Player firstFinish;
 private Player chair;
 private EffectiveCard[] CommonCards=new EffectiveCard[2];
 private Matchmanager matchmanager;
-    /*
+    /**
      *  the constructor initialize the manager based on number of players
      *  MatchManager is an abstract class and has 3 classes that extends it
      */

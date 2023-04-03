@@ -3,7 +3,7 @@ package it.polimi.ingsw;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-/*
+/**
  * this class tests setEffectiveCards and createBoard in FourPlayers' version of the game
  */
 class FourPlayersTest {

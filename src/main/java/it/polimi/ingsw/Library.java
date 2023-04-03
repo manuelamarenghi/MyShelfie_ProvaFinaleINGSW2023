@@ -3,15 +3,15 @@ package it.polimi.ingsw;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/*
+/**
  * this class is about personal library
  */
 public class Library implements Iterable<Card> {
-    /*
+    /**
      * library is a matrix of cards that are insert from library's player
      */
     private Card[][] library=new Card[6][5];
-    /*
+    /**
      * the constructor initialize 6x5 matrix
      */
     public Library() {
@@ -20,7 +20,7 @@ public class Library implements Iterable<Card> {
             library[i][j]=new Card();}
         }
     }
-    /*
+    /**
      * getCardinPos() returns the card in the position you asked for
      */
     public Card getCardinPos(int x, int y){
@@ -28,7 +28,7 @@ public class Library implements Iterable<Card> {
         {return library[x][y];}
         return null;
     }
-    /*
+    /**
      * showColumn() returns where you can put n cards ( chosen from the player)
      */
     public int[] showColumn (int n){
@@ -51,7 +51,7 @@ public class Library implements Iterable<Card> {
             }
         }
         return results;}
-    /*
+    /**
      * showLibrary() let you see your library
      */
     public void showLibrary(){
@@ -66,7 +66,7 @@ public class Library implements Iterable<Card> {
             }
             System.out.println();
         }}
-    /*
+    /**
      * setColumn() puts n cards in a chosen column
      */
     public void setColumn(Card[] cards,int n){
@@ -80,7 +80,7 @@ public class Library implements Iterable<Card> {
             i--;
         }
     }
-    /*
+    /**
      * takeAction() makes the player decide where to put the selected cards
      */
     public void takeAction(Card[] cards){
@@ -98,7 +98,7 @@ public class Library implements Iterable<Card> {
             }
         }while(!list.contains(a));
     }
-    /*
+    /**
      * getgroup() returns adjacent items in a given library
      */
     public ArrayList<Integer> getgroup(){
@@ -125,7 +125,7 @@ public class Library implements Iterable<Card> {
         }
         return Adjacent;
     }
-    /*
+    /**
      * Adjacent() add(if not present) to an arraylist of Position items that are adjacent starting from a card
      */
     private static void Adjacent(Card[][] library,boolean[][] visited, int row, int col,String color,ArrayList<Card> groupCard)
@@ -145,6 +145,8 @@ public class Library implements Iterable<Card> {
         Adjacent(library,visited,row,col-1,color,groupCard);
         Adjacent(library,visited,row,col+1,color,groupCard);
     }
+    /** getFilledColumnNumber return the amount of cards that are inserted in the given column
+     * */
     public int getFilledColumnNumber(int columnNumber){
         int counter=0;
         for(int i=0;i<6;i++){
@@ -156,6 +158,8 @@ public class Library implements Iterable<Card> {
     public Iterator iterator() {
         return new LibraryIterator(this.library);
     }
+    /** getFilledRowNumber return the amount of cards that are inserted in the given row
+     * */
     public int getFilledRowNumber(int rowNumber){
         int counter=0;
         for(int i=0;i<5;i++){

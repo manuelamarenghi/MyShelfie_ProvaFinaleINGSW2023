@@ -2,6 +2,9 @@ package it.polimi.ingsw;
 
 import java.util.List;
 
+/**
+ * this class is used to create instance of players without managing their logic
+ */
 public class Player {
     private String nickname;
     private int commonGoalScore ;
@@ -29,6 +32,9 @@ public class Player {
     }
 
     public PersonalGoalCard getPersonalCard(){return personalCard;}
+    public void setPersonalCard(PersonalGoalCard personalCard){
+        this.personalCard=new PersonalGoalCard(personalCard.getPersonalObjective());
+    }
 
     public void setNickname(String nickname){
         this.nickname= nickname;

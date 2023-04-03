@@ -4,11 +4,11 @@ import it.polimi.ingsw.CommonGoalCards;
 import it.polimi.ingsw.Library;
 
 import java.util.ArrayList;
-/*
+/**
  * Col2G goal needs two columns each formed by 6 different types of tiles
  */
 public class Col2G implements CommonGoalCards {
-    /*
+    /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
@@ -38,7 +38,7 @@ public class Col2G implements CommonGoalCards {
         return true;}
         return false;
     }
-    /*
+    /**
      * getImage() let you see this goal
      */
     @Override
@@ -65,7 +65,7 @@ public class Col2G implements CommonGoalCards {
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
-    /*
+    /**
      * expired() let you know if the player can still reach the goal or not
      */
     @Override

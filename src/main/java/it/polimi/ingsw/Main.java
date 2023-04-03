@@ -15,7 +15,7 @@ public class Main {
         Card[] cards;
 
         {
-            try {
+            try{
                 jsonPath = new String(Files.readAllBytes(Paths.get("./src/json/PersonalGoalCards.json")));
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -36,7 +36,7 @@ public class Main {
             for(PersonalGoalCard pgc:test){
                 System.out.println("PersonalGoalCard");
                 for(Card card:pgc.getPersonalObjective()){
-                    System.out.println(card.getColour().toString()+" "+card.getCoordinates().getX()+","+card.getCoordinates().getY());
+                    System.out.println(card.getColour()+" "+card.getCoordinates().getX()+","+card.getCoordinates().getY());
                 }
                 pgc.showPersonalGoalCard();
                 System.out.println("---------------------");

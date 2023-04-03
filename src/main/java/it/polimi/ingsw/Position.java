@@ -1,5 +1,8 @@
 package it.polimi.ingsw;
 
+/**
+ * this class gives positions of a card. It is used for places in library and board
+ */
 public class Position {
     private int x;
     private int y;

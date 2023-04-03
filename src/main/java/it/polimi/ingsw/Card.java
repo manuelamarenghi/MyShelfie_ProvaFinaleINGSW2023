@@ -1,20 +1,26 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Position;
-
+/**
+ * this class creates items for the game
+ */
 public class Card {
 
     private String colour;
     private Position coordinates;
-    private boolean visited;
+    /**
+     * this constructor initialize an empty place in library or board
+     */
     public Card(){
         this.colour="";
         this.coordinates=null;
-        this.visited=false;}
+       }
+    /**
+     * this constructor initialize a card in a determinate position
+     */
     public Card(String colour,Position position){
         this.coordinates=position;
         this.colour=colour;
-        this.visited=false;
     }
 
 
@@ -34,11 +40,4 @@ public class Card {
 
     }
 
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
-    public boolean getVisited() {
-        return visited;
-    }
 }

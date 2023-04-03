@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Col2GTest {
     private static Col2G card = new Col2G();
-    /*
+    /**
      * check1() tests when the library is empty
      */
     @Test
@@ -16,7 +16,7 @@ class Col2GTest {
         Library library = new Library();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check2() tests when the library has only one column filled with the same type
      */
     @Test
@@ -30,7 +30,7 @@ class Col2GTest {
         library.getCardinPos(5, 4).setColour("V");
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check3() tests when the library has only one column filled with all different type
      */
     @Test
@@ -45,7 +45,7 @@ class Col2GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * check4() tests when the library has only two columns filled with all different type
      */
     @Test
@@ -65,7 +65,7 @@ class Col2GTest {
         library.getCardinPos(5, 3).setColour("D");
         Assertions.assertTrue(card.check(library));
     }
-    /*
+    /**
      * check5() tests when the library has some columns with two of them filled with all different type
      */
     @Test
@@ -98,7 +98,7 @@ class Col2GTest {
         library.showLibrary();
         Assertions.assertTrue(card.check(library));
     }
-    /*
+    /**
      * check6() tests when the library is full of no valid columns
      */
     @Test
@@ -137,14 +137,14 @@ class Col2GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-    /*
+    /**
      * getImage() to see the output of the method in the card
      */
     @Test
     void getImage() {
         card.getImage();
     }
-    /*
+    /**
      * expired1() to see when the library is empty
      */
     @Test
@@ -152,7 +152,7 @@ class Col2GTest {
         Library library = new Library();
         Assertions.assertFalse(card.expired(library));
     }
-    /*
+    /**
      * expired2() to see when the library has 3 columns not full but can still reach the goal
      */
     @Test
@@ -169,7 +169,7 @@ class Col2GTest {
         library.getCardinPos(4, 1).setColour("V");
         Assertions.assertFalse(card.expired(library));
     }
-    /*
+    /**
      * expired3() to see when the library has 4 columns not full and cannot reach the goal
      */
     @Test
@@ -204,7 +204,7 @@ class Col2GTest {
         library.getCardinPos(0, 4).setColour("V");
         assertTrue(card.expired(library));
     }
-    /*
+    /**
      * expired4() similar to test 3 but can still reach the goal
      */
     @Test
@@ -239,7 +239,7 @@ class Col2GTest {
         library.getCardinPos(0, 4).setColour("V");
         assertFalse(card.expired(library));
     }
-    /*
+    /**
      * expired5() with no column full but can't reach the goal
      */
     @Test

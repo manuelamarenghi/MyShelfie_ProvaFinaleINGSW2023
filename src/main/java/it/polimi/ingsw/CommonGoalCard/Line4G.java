@@ -5,11 +5,11 @@ import it.polimi.ingsw.Library;
 
 import java.util.ArrayList;
 
-/*
+/**
  * Line4G goal needs 4 lines formed by 5 tiles of maximum 3 different types. Different lines can have different combination of types
  */
 public class Line4G implements CommonGoalCards {
-    /*
+    /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
@@ -41,7 +41,7 @@ public class Line4G implements CommonGoalCards {
             }
             return false;
         }
-    /*
+    /**
      * getImage() let you see this goal
      */
     @Override
@@ -71,7 +71,7 @@ public class Line4G implements CommonGoalCards {
       l.showLibrary();
 
     }
-    /*
+    /**
      * expired() let you know if the player can still reach the goal or not
      */
     @Override
