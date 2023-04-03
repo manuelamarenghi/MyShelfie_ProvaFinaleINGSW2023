@@ -32,12 +32,14 @@ public class TwoPlayers extends Matchmanager{
         l.add(new Col3G());
         l.add(new Line2G());
         l.add(new Square2G());
+        l.add(new StairsGoalCard());
+        l.add(new XGoalCard());
         score.add(8);
         score.add(4);
         int i,j;
-        i=(int)Math.floor(Math.random() * (10) );
+        i=(int)Math.floor(Math.random() * (12) );
         do {
-            j=(int)Math.floor(Math.random() * (10) );
+            j=(int)Math.floor(Math.random() * (12) );
         }while(i==j);
         chosen[0]=new EffectiveCard(l.get(i));
         chosen[0].setAllScores(score);

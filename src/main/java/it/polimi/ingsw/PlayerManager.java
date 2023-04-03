@@ -55,17 +55,48 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
-    public void showPersonalGoal (){
-
+    public void showPersonalGoal (Player player){
+        player.getPersonalCard().showPersonalGoalCard();
     }
-    public void showPersonalPoint(){
-
+    public int showPersonalPoint(Player player){
+        int sameCards=0 , x , y, i , points=0;
+        String colour;
+        Card [] personalCards = {};
+        personalCards=player.getPersonalCard().getPersonalObjective();
+        for(i=0 ; i<6 ; i++){
+            colour=personalCards[i].getColour();
+            x=personalCards[i].getCoordinates().getX();
+            y=personalCards[i].getCoordinates().getY();
+            if(colour.equals(player.getLibrary().getCardinPos(x,y).getColour())){
+                sameCards++;
+            }
+        }
+        if(sameCards==1){
+            points=1;
+        }
+        else if(sameCards==2){
+            points=2;
+        }
+        else if(sameCards==3){
+            points=4;
+        }
+        else if(sameCards==4){
+            points=6;
+        }
+        else if(sameCards==5){
+            points=9;
+        }
+        else if(sameCards==6){
+            points=12;
+        }
+        return points;
     }
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
         System.out.println("Your score starts from your CommonCards' score:"+score);
         // calculate personalgoalcard's achievment and its score
-        System.out.println("You achieve from your PersonalGoalCard:");
+        System.out.println("You achieve from your PersonalGoalCard:"+this.showPersonalPoint(player));
+        score+=this.showPersonalPoint(player);
         // calculate scores about adjacent items
         System.out.println("You achieve from your adjacent items:");
         ArrayList<Integer> groups=player.getLibrary().getgroup();
