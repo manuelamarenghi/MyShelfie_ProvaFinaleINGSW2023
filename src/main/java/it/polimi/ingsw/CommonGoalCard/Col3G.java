@@ -10,38 +10,48 @@ public class Col3G implements CommonGoalCards {
     @Override
     public boolean check(Library library) {
         int r , c , i;
-        ArrayList<Integer> differentCol = new ArrayList<Integer>(6);
-        int differentCols=0 ,totalCards;
+        int [] differentColours = {0,0,0,0,0,0};
+        int differentCols=0 ,totalTypes , numberOfCards=0;
         for(c=0 ;c<5 ; c++){
-            totalCards=0;
+            numberOfCards=0;
+            totalTypes=0;
             for(i=0 ; i<6 ; i++){
-                differentCol.set(i,0);
+                differentColours[i]=0;
             }
             for(r=0 ;r<6 ; r++){
                 if(library.getCardinPos(r,c).getColour()=="Green"){
-                    differentCol.set(0 , differentCol.get(0)+1);
+                    differentColours[0]++;
+                    numberOfCards++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="White"){
-                    differentCol.set(1 , differentCol.get(1)+1);
+                    differentColours[1]++;
+                    numberOfCards++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Yellow"){
-                    differentCol.set(2 , differentCol.get(2)+1);
+                    differentColours[2]++;
+                    numberOfCards++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Navy"){
-                    differentCol.set(3 , differentCol.get(3)+1);
+                    differentColours[3]++;
+                    numberOfCards++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Blue"){
-                    differentCol.set(4 , differentCol.get(4)+1);
+                    differentColours[4]++;
+                    numberOfCards++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Pink"){
-                    differentCol.set(5 , differentCol.get(5)+1);
+                    differentColours[5]++;
+                    numberOfCards++;
                 }
 
             }
             for(i=0 ; i<6 ; i++){
-                if(differentCol.get(i)!=0){
-                    totalCards++;
+                if(differentColours[i]!=0){
+                    totalTypes++;
                 }
+            }
+            if(totalTypes<=3 && numberOfCards==6){
+                differentCols++;
             }
 
 
@@ -55,35 +65,35 @@ public class Col3G implements CommonGoalCards {
     @Override
     public boolean expired(Library library) {
         int r , c , i ;
-        ArrayList<Integer> differentTypes= new ArrayList<Integer>(6);
+        int [] differentTypes= {0,0,0,0,0,0};
         int differentCols=5 , totalTypes;
-        for(c=0 ; c<6 ; c++){
+        for(c=0 ; c<5 ; c++){
             totalTypes=0;
             for(i=0 ; i<6 ; i++){
-                differentTypes.set(i , 0);
+                differentTypes[i]=0;
             }
-            for(r=0 ;r<5 ; r++){
+            for(r=0 ;r<6 ; r++){
                 if(library.getCardinPos(r,c).getColour()=="Green"){
-                    differentTypes.set(0 , differentTypes.get(0)+1);
+                    differentTypes[0]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="White"){
-                    differentTypes.set(1 , differentTypes.get(1)+1);
+                    differentTypes[1]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Yellow"){
-                    differentTypes.set(2 , differentTypes.get(2)+1);
+                    differentTypes[2]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Navy"){
-                    differentTypes.set(3 , differentTypes.get(3)+1);
+                    differentTypes[3]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Blue"){
-                    differentTypes.set(4 , differentTypes.get(4)+1);
+                    differentTypes[4]++;
                 }
                 else if(library.getCardinPos(r,c).getColour()=="Pink"){
-                    differentTypes.set(5 , differentTypes.get(5)+1);
+                    differentTypes[5]++;
                 }
             }
             for(i=0 ; i<6 ; i++){
-                if(differentTypes.get(i)!=0){
+                if(differentTypes[i]!=0){
                     totalTypes++;
                 }
             }

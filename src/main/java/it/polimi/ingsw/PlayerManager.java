@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerManager {
-
+    //the method notifies the observer about the state of the player
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -14,9 +14,7 @@ public class PlayerManager {
         }
 
     }
-    public void showCommGoal(){
-        //Chiedere come si fa ad accedere alle 2 carte
-    }
+    //the method selects card from the board and puts them in the player's library
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -55,14 +53,46 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
-    public void showPersonalGoal (){
-
+    //the method returnn the personal goal
+    public void showPersonalGoal (Player player){
+        player.getPersonalCard().showPersonalGoalCard();
     }
-    public void showPersonalPoint(){
-
+   //the method returns the personal points
+    public int showPersonalPoint(Player player){
+        int sameCards=0 , x , y, i , points=0;
+        String colour;
+        Card [] personalCards = {};
+        personalCards=player.getPersonalCard().getPersonalObjective();
+        for(i=0 ; i<6 ; i++){
+            colour=personalCards[i].getColour();
+            x=personalCards[i].getCoordinates().getX();
+            y=personalCards[i].getCoordinates().getY();
+            if(colour.equals(player.getLibrary().getCardinPos(x,y).getColour())){
+                sameCards++;
+            }
+        }
+        if(sameCards==1){
+            points=1;
+        }
+        else if(sameCards==2){
+            points=2;
+        }
+        else if(sameCards==3){
+            points=4;
+        }
+        else if(sameCards==4){
+            points=6;
+        }
+        else if(sameCards==5){
+            points=9;
+        }
+        else if(sameCards==6){
+            points=12;
+        }
+        return points;
     }
-    public void showProgressScore(){
-
+    public void showProgressScore(Player player){
+        System.out.println(player.getCommonGoalScore());
     }
 
 

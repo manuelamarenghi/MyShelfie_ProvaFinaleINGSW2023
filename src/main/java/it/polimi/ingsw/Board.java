@@ -11,6 +11,7 @@ public class Board {
     private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
 
+    //board get initialized based on number of players
     public Board(int numOfPlayers){
         bag = new Bag();
         this.numOfPlayers=numOfPlayers;
@@ -79,9 +80,9 @@ public class Board {
         }
 
     }
-
+    //Board gets filled up with cards from bag
     public void fill(){
-        int indexOfCards=0 , indexOfColours=0;
+        int indexOfColours=0;
         ArrayList<String> arrayOfColours=new ArrayList<>();
         Card tempCard;
         arrayOfColours=bag.extract(numOfPlayers);
@@ -89,7 +90,6 @@ public class Board {
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]!=notUsableCard){
                     tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
-                    //cardsForBoard.set(indexOfCards , tempCard);
                     board[r][c]=tempCard;
                     indexOfColours++;
                 }
@@ -97,7 +97,7 @@ public class Board {
         }
 
     }
-
+    //The method return true/false if the cards can be taken or not
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
             if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
@@ -160,7 +160,7 @@ public class Board {
         }
         return l;
     }
-
+    //If the card has been taken from the board it is put to null
     public void takeCard (Position position){
         if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
             return;
