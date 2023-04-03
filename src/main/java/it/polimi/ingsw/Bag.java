@@ -14,15 +14,15 @@ public class Bag {
         }
     }
     //Extracts cards depending on number of players
-    public ArrayList<String> extract(int numberOfPlayers){
+    public ArrayList<String> extract(int numberOfPlayers , int cardsOnTable){
         if(numberOfPlayers==2){
-            numberOfCards=cardsFor2Players;
+            numberOfCards=cardsFor2Players-cardsOnTable;
         }
         else if(numberOfPlayers==3){
-            numberOfCards=cardsFor3Players;
+            numberOfCards=cardsFor3Players-cardsOnTable;
         }
         else{
-            numberOfCards=cardsFor4Player;
+            numberOfCards=cardsFor4Player-cardsOnTable;
         }
         i=0;
         int index;

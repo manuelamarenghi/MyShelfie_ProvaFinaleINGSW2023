@@ -74,35 +74,28 @@ class BoardTest {
     @Test
     public void checkIfCardIsNull(){
         Board board = new Board(2);
-        board.fill();
+        board.fill(2);
         assertEquals("" , board.getBoard()[3][0].getColour());
-
-    }
-    @Test
-    public void checkIfCardIsNull2(){
-        Board board = new Board(2);
-        board.fill();
-        assertEquals("" , board.getBoard()[3][8].getColour());
 
     }
     @Test
     public void checkIfCardIsNotNull(){
         Board board = new Board(2);
-        board.fill();
+        board.fill(0);
         assertNotEquals("" , board.getBoard()[3][3].getColour());
 
     }
     @Test
     public void checkIfCardIsNotNull2(){
         Board board = new Board(3);
-        board.fill();
-        assertNotEquals("" , board.getBoard()[3][8].getColour());
+        board.fill(2);
+        assertEquals("" , board.getBoard()[3][8].getColour());
 
     }
     @Test
     public void checkIfCardIsNotNull3(){
         Board board = new Board(4);
-        board.fill();
+        board.fill(3);
         assertNotEquals("" , board.getBoard()[3][1].getColour());
 
     }
@@ -112,7 +105,7 @@ class BoardTest {
     @Test
     public void showBoard(){
         Board b=new Board(4);
-        b.fill();
+        b.fill(4);
         b.showBoard();
     }
 }

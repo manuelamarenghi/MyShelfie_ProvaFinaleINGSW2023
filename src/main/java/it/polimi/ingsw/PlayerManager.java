@@ -40,13 +40,13 @@ public class PlayerManager {
             if(!board.allow(selectedCardsTemp)){
                 System.out.println("The cards selected can not be taken");
                 System.out.println("Please select other cards");
+            }
+            else{
                 for(l=0 ; l<selectedCardsTemp.size() ; l++){
                     selectedCards[i]=selectedCardsTemp.get(i);
                     tempPosition=new Position(selectedCardsTemp.get(i).getCoordinates().getX() , selectedCardsTemp.get(i).getCoordinates().getY());
                     board.takeCard(tempPosition);
                 }
-            }
-            else{
                 break;
             }
         }
