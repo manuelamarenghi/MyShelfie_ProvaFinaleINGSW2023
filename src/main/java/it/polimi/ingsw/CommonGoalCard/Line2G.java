@@ -52,7 +52,8 @@ public class Line2G implements CommonGoalCards {
         }
         return false;
     }
-    //The method lets you know if the target is still possible to complete or not
+    //The method lets you know if the target is still possible to complete or not , it return true if it is not
+    //possible to complete the tatget anymore
     @Override
     public boolean expired(Library library) {
         int r , c , i;
