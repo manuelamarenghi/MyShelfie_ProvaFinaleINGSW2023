@@ -1,7 +1,9 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
-
+/**
+ * this class creates a board for the game ( called living room)
+ */
 public class Board {
     private int row=9 , col=9 , numOfPlayers;
     private Card[][] board = new Card[row][col];
@@ -81,7 +83,9 @@ public class Board {
         }
 
     }
-    //Board gets filled up with cards from bag
+    /**
+     * fill() fill up a board with cards from bag
+     */
     public void fill(){
         int indexOfColours=0;
         ArrayList<String> arrayOfColours=new ArrayList<>();
@@ -98,9 +102,8 @@ public class Board {
         }
 
     }
-
     /**
-     * The method return true/false if the cards can be taken or not
+     * allow() returns true/false if the cards can be taken or not
      */
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
@@ -165,18 +168,30 @@ public class Board {
         return l;
     }
     //If the card has been taken from the board it is put to null
+    /**
+     * takeCard() manage taking cards during a player's turn
+     */
     public void takeCard (Position position){
         if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
             return;
         }
         board[position.getX()][position.getY()]=emptyCard;
     }
+    /**
+     * getBag() returns the bag of the game
+     */
     public Bag getBag(){
         return bag;
     }
+    /**
+     * getBoard() returns the board of the game
+     */
     public Card[][] getBoard(){
         return board;
     }
+    /**
+     * getNumOfPlayers() returns number of players
+     */
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
@@ -201,6 +216,9 @@ public class Board {
             System.out.println();
         }
     }
+    /**
+     * getCard() returns a card in a given position
+     */
     public Card getCard(int x , int y){ return board[x][y];}
 
 

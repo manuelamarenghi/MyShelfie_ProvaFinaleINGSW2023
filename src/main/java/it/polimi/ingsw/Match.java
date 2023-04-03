@@ -1,11 +1,10 @@
 package it.polimi.ingsw;
 
 import java.util.Scanner;
-
+/**
+ *  this class is used to initialize the match in Main Class
+ */
 public class Match {
-    /*
-     *  this class is used to initialize the match in Main Class
-     */
     private Player[] players;
 private Board board;
 private Player firstFinish;
