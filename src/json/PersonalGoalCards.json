@@ -7,48 +7,48 @@
         "coordinates": {
           "x": 1,
           "y": 4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x": 0,
           "y": 2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x": 5,
           "y": 2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x": 3,
           "y": 1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x": 2,
           "y": 3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x": 0,
           "y": 0
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -60,48 +60,48 @@
         "coordinates": {
           "x":2 ,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":5 ,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":4 ,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":2 ,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":3,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":1 ,
           "y":1
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -113,48 +113,48 @@
         "coordinates": {
           "x":3 ,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":1,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":3,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":1,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":5,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":2,
           "y":2
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -166,48 +166,48 @@
         "coordinates": {
           "x":4 ,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":2,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":2,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":0,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":4,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":3,
           "y":3
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -219,48 +219,48 @@
         "coordinates": {
           "x":5,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":3,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":1,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":5,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":3,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":4,
           "y":4
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -272,48 +272,48 @@
         "coordinates": {
           "x":0,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":4,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":0,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":4,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":2,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":5,
           "y":0
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -325,48 +325,48 @@
         "coordinates": {
           "x":0,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":1,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":3,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":4,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":5,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":2,
           "y":1
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -378,48 +378,48 @@
         "coordinates": {
           "x":1,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":0,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":2,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":5,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":4,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":3,
           "y":0
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -431,48 +431,48 @@
         "coordinates": {
           "x":2,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":5,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":4,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":0,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":3,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":4,
           "y":4
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -484,48 +484,48 @@
         "coordinates": {
           "x":3,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":4,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":0,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":1,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":2,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":5,
           "y":3
-        },
-        "visited": 0
+        }
+
       }
     ]
   },
@@ -537,48 +537,47 @@
         "coordinates": {
           "x":4,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":3,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":5,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":2,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":1,
           "y":1
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":0,
           "y":2
-        },
-        "visited": 0
+        }
       }
     ]
   },
@@ -590,48 +589,47 @@
         "coordinates": {
           "x":5,
           "y":0
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "blue",
         "coordinates": {
           "x":2,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "lightBlue",
         "coordinates": {
           "x":3,
           "y":3
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "yellow",
         "coordinates": {
           "x":4,
           "y":4
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "white",
         "coordinates": {
           "x":0,
           "y":2
-        },
-        "visited": 0
+        }
+
       },
       {
         "colour": "pink",
         "coordinates": {
           "x":1,
           "y":1
-        },
-        "visited": 0
+        }
       }
     ]
   }
