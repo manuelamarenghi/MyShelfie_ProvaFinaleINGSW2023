@@ -11,7 +11,7 @@ class BagTest {
     public void checkNumberOfCardsWith2Player(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
-        cards=bag.extract(2);
+        cards=bag.extract(2 , 0);
         assertEquals(29 , cards.size());
     }
 
@@ -19,7 +19,7 @@ class BagTest {
     public void checkNumberOfCardsWith3Player(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
-        cards=bag.extract(3);
+        cards=bag.extract(3 , 0);
         assertEquals(37 , cards.size());
     }
 
@@ -27,7 +27,7 @@ class BagTest {
     public void checkNumberOfCardsWith4Player(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
-        cards=bag.extract(4);
-        assertEquals(45 , cards.size());
+        cards=bag.extract(4 , 2);
+        assertEquals(45-2 , cards.size());
     }
 }

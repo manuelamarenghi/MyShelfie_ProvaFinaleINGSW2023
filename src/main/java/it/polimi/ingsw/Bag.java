@@ -2,33 +2,27 @@ package it.polimi.ingsw;
 import java.lang.Math;
 import java.sql.Array;
 import java.util.ArrayList;
-/**
- * this class creates a bag that contains all items
- */
+
 public class Bag {
     private int dim=132 , i , numberOfCards , l;
     private static int cardsFor2Players=29 , cardsFor3Players=37 , cardsFor4Player=45;
     ArrayList<Integer> remainingCards = new ArrayList<Integer>(dim);
-    /**
-     * this constructor create a bag with 132 items
-     */
+
     public Bag(){
         for(i=0 ; i<6 ; i++){
             remainingCards.add(22);
         }
     }
-    /**
-     * extract() extracts cards depending on number of players
-     */
-    public ArrayList<String> extract(int numberOfPlayers){
+    //Extracts cards depending on number of players
+    public ArrayList<String> extract(int numberOfPlayers , int cardsOnTable){
         if(numberOfPlayers==2){
-            numberOfCards=cardsFor2Players;
+            numberOfCards=cardsFor2Players-cardsOnTable;
         }
         else if(numberOfPlayers==3){
-            numberOfCards=cardsFor3Players;
+            numberOfCards=cardsFor3Players-cardsOnTable;
         }
         else{
-            numberOfCards=cardsFor4Player;
+            numberOfCards=cardsFor4Player-cardsOnTable;
         }
         i=0;
         int index;
@@ -72,9 +66,6 @@ public class Bag {
         //Dichiare la variabile state in Card per vedere dove sta la carta sulla plancia , in libreria , in sacchetto
     }
     //The method return remaning Cards in bag
-    /**
-     * getRemainingCards() returns remaining items in bag
-     */
     public ArrayList<Integer> getRemainingCards(){
         return remainingCards;
     }
