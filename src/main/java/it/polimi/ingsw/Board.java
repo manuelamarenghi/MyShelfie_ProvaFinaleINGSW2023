@@ -81,6 +81,7 @@ public class Board {
 
     }
     //Board gets filled up with cards from bag
+
     public void fill(){
         int indexOfColours=0;
         ArrayList<String> arrayOfColours=new ArrayList<>();
