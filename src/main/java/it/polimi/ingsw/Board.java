@@ -82,7 +82,7 @@ public class Board {
     }
     //Board gets filled up with cards from bag
     public void fill(){
-        int indexOfCards=0 , indexOfColours=0;
+        int indexOfColours=0;
         ArrayList<String> arrayOfColours=new ArrayList<>();
         Card tempCard;
         arrayOfColours=bag.extract(numOfPlayers);
@@ -90,7 +90,6 @@ public class Board {
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]!=notUsableCard){
                     tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
-                    //cardsForBoard.set(indexOfCards , tempCard);
                     board[r][c]=tempCard;
                     indexOfColours++;
                 }
