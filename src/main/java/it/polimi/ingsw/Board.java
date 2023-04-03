@@ -249,7 +249,7 @@ public class Board {
     public Card getCard(int x , int y){ return board[x][y];}
 
 
-    public void Group(){
+    public ArrayList<Integer> Group(){
         ArrayList<Integer> group = new ArrayList<Integer>();
         ArrayList<ArrayList<Card>> groups = new ArrayList<>();
 
@@ -269,7 +269,7 @@ public class Board {
             group.add(g.size());
             System.out.println(g.size());
         }
-        //return  group;
+        return  group;
     }
     private void Adjacent(Card[][] board,boolean[][] visited, int row, int col,ArrayList<Card> groupCard)
     {
