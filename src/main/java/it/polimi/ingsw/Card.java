@@ -30,6 +30,8 @@ public class Card {
 
     public void setColour(String colour) {
         this.colour = colour;
+        if(colour == null) return;
+
     }
 
     public void setVisited(boolean visited) {
