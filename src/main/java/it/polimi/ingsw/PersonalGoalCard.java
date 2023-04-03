@@ -16,6 +16,21 @@ public class PersonalGoalCard {
     }
 
     public void showPersonalGoalCard(){
-        //da rivedere...
+        boolean printed;
+        for(int i=0;i<6;i++){
+            for (int j=0;j<5;j++){
+                printed=false;
+                for(Card card:this.personalObjective){
+                    if(card.getCoordinates().getX()==i&&card.getCoordinates().getY()==j){
+                        System.out.print("["+card.getColour()+"] ");
+                        printed=true;
+                    }
+
+                }
+                if(!printed) System.out.print("[ ]");
+
+            }
+            System.out.println();
+        }
     }
 }
