@@ -33,7 +33,7 @@ abstract class Matchmanager{
     }
     System.out.println("Final score for player"+p[j].getNickname()+":"+i);
   }
-    j=0;
+    j=1;
     int[] position= new int[]{0, 1, 2, 3};
     for (int i = 0; i < 4; ++i) {
       int key = scores[i];
@@ -46,6 +46,7 @@ abstract class Matchmanager{
         scores[i]=temp;
         j++;
       }
+      j=i+1;
     }
     System.out.println("Classification:");
     for(int i: position){
