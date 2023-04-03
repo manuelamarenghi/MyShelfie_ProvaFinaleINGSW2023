@@ -16,84 +16,125 @@ public class Board {
         bag = new Bag();
         this.numOfPlayers=numOfPlayers;
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c!=4 && c!=3){
+            if(c==4 || c==5){
+                board[0][c]=emptyCard;
+            }
+            else{
                 board[0][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the second line
-            if(c!=3 && c!=4 && c!=5){
+            if(c==3 || c==4 || c==5){
+                board[1][c]=emptyCard;
+            }
+            else {
                 board[1][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the third line
-            if(c!=2 && c!=3 && c!=4 && c!=5 && c!=6){
+            if(c==2 || c==3 || c==4 || c==5 || c==6){
+                board[2][c]=emptyCard;
+
+            }
+            else {
                 board[2][c]=notUsableCard;
             }
         }
-        board[3][0]=notUsableCard;//To put Null the Fourth line
-        board[5][8]=notUsableCard;//To put null the sixth line
+        for(c=0 ; c<9 ; c++){
+            if(c==8){
+                board[3][8]=notUsableCard;//To put Null the Fourth line
+            }
+            else{
+                board[3][c]=emptyCard;
+            }
+        }
+        for(c=0 ; c<9 ; c++){
+            if(c==0){
+                board[5][0]=notUsableCard;//To put Null the Fourth line
+            }
+            else{
+                board[5][c]=emptyCard;
+            }
+        }
 
         for(c=0 ; c<9 ; c++){//To put Null the seventh line
-            if(c!=2 && c!=3 && c!=4 && c!=5 && c!=6){
+            if(c==2 || c==3 || c==4 || c==5 || c==6){
+                board[6][c]=emptyCard;
+            }
+            else{
                 board[6][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the second line
-            if(c!=3 && c!=4 && c!=5){
+            if(c==3 || c==4 || c==5){
+                board[7][c]=emptyCard;
+            }
+            else{
                 board[7][c]=notUsableCard;
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c!=5 && c!=4){
+            if(c==3 || c==4){
+                board[8][c]=emptyCard;
+            }
+            else{
                 board[8][c]=notUsableCard;
             }
         }
         if(numOfPlayers==2){//Positions that can not be used with 2 players playing
-            board[3][8]=notUsableCard;//Positions with 3 points
-            board[2][6]=notUsableCard;
-            board[0][3]=notUsableCard;
+            board[3][0]=notUsableCard;//Positions with 3 points
             board[2][2]=notUsableCard;
-            board[5][0]=notUsableCard;
-            board[6][2]=notUsableCard;
-            board[8][5]=notUsableCard;
+            board[0][5]=notUsableCard;
+            board[2][6]=notUsableCard;
+            board[5][8]=notUsableCard;
             board[6][6]=notUsableCard;
+            board[8][3]=notUsableCard;
+            board[6][2]=notUsableCard;
 
-            board[4][8]=notUsableCard;//Positions with 4 points
+            board[4][0]=notUsableCard;//Positions with 4 points
+            board[1][3]=notUsableCard;
             board[0][4]=notUsableCard;
-            board[3][1]=notUsableCard;
-            board[4][0]=notUsableCard;
-            board[7][3]=notUsableCard;
+            board[3][7]=notUsableCard;
+            board[4][8]=notUsableCard;
+            board[7][5]=notUsableCard;
             board[8][4]=notUsableCard;
-            board[5][7]=notUsableCard;
-            board[1][5]=notUsableCard;
+            board[5][1]=notUsableCard;
 
         }
         else if(numOfPlayers==3){
-            board[4][8]=notUsableCard;//Positions with 4 points
+            board[4][0]=notUsableCard;//Positions with 4 points
+            board[1][3]=notUsableCard;
             board[0][4]=notUsableCard;
-            board[3][1]=notUsableCard;
-            board[4][0]=notUsableCard;
-            board[7][3]=notUsableCard;
+            board[3][7]=notUsableCard;
+            board[4][8]=notUsableCard;
+            board[7][5]=notUsableCard;
             board[8][4]=notUsableCard;
-            board[5][7]=notUsableCard;
-            board[1][5]=notUsableCard;
+            board[5][1]=notUsableCard;
         }
 
     }
     //Board gets filled up with cards from bag
 
-    public void fill(){
+    public void fill(int cardsOnTable){
         int indexOfColours=0;
         ArrayList<String> arrayOfColours=new ArrayList<>();
         Card tempCard;
-        arrayOfColours=bag.extract(numOfPlayers);
+        arrayOfColours=bag.extract(numOfPlayers , cardsOnTable);
         for(c=0 ; c<9 ; c++){
             for(r=0 ; r<9 ; r++){
-                if(board[r][c]!=notUsableCard){
-                    tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
-                    board[r][c]=tempCard;
-                    indexOfColours++;
+                if(board[r][c]==notUsableCard || board[r][c]!=emptyCard) {
                 }
+                else{
+                        tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
+                        board[r][c]=tempCard;
+                        indexOfColours++;
+                }
+                if(indexOfColours==arrayOfColours.size()-1){
+                    break;
+                }
+            }
+            if(indexOfColours==arrayOfColours.size()-1){
+                break;
             }
         }
 
