@@ -145,6 +145,8 @@ public class Library implements Iterable<Card> {
         Adjacent(library,visited,row,col-1,color,groupCard);
         Adjacent(library,visited,row,col+1,color,groupCard);
     }
+    /** getFilledColumnNumber return the amount of cards that are inserted in the given column
+     * */
     public int getFilledColumnNumber(int columnNumber){
         int counter=0;
         for(int i=0;i<6;i++){
@@ -156,6 +158,8 @@ public class Library implements Iterable<Card> {
     public Iterator iterator() {
         return new LibraryIterator(this.library);
     }
+    /** getFilledRowNumber return the amount of cards that are inserted in the given row
+     * */
     public int getFilledRowNumber(int rowNumber){
         int counter=0;
         for(int i=0;i<5;i++){
