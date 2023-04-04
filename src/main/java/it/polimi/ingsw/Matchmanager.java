@@ -16,61 +16,32 @@ abstract class Matchmanager {
      */
     public Matchmanager() {
     }
-
     /**
-     * results() calculates all players' scores and gives you classification
+     * results() calculates all players' scores
      */
-    public void results(Match m) {
+    public int[] results(Match m) {
         int[] scores = new int[m.getPlayers().size()];
-        int max = 0;
         ArrayList<Player> p = m.getPlayers();
         int j = 0;
         for (Integer i : scores) {
             i = p.get(j).getPlayerManager().showProgressScore(p.get(j));
-            if (p[j].equals(m.getFirstFinish())) {
-                System.out.println("You have 1 point from your End Game Token");
+            if (p.get(j).equals(m.getFirstFinish())) {
                 i++;
             }
-            if (i > max) {
-                max = j;
-            }
-            System.out.println("Final score for player" + p[j].getNickname() + ":" + i);
         }
-        j = 1;
-        int[] position = new int[]{0, 1, 2, 3};
-        for (int i = 0; i < 4; ++i) {
-            int key = scores[i];
-            while (j != 4 && key > scores[j]) {
-                int temp = position[i];
-                position[i] = position[j];
-                position[j] = temp;
-                temp = scores[j];
-                scores[j] = scores[i];
-                scores[i] = temp;
-                j++;
-            }
-            j = i + 1;
-        }
-        System.out.println("Classification:");
-        for (int i : position) {
-            System.out.println(4 - i + "-" + p[i].getNickname());
-        }
-        System.out.println("The winner is:" + p[max].getNickname());
+        return scores;
     }
-
     /**
      * checkState() returns the state of a player's connection
      */
     public Boolean checkState(Player p) {
         return null;
     }
-
-    ;
-
     /**
-     * setPersonalGoal() assigns per
+     * setPersonalGoal() assigns to each player inside the given array a random PersonalGoalCard, randomly extracted
+     * by the PersonalGoalCards.json File
      */
-    public void setPersonalGoal(Player[] p) {
+    public void setPersonalGoal(ArrayList<Player> p) {
         int max_rnd = 12;
         ArrayList<PersonalGoalCard> rand = generateArrayFromJSON();
         for (Player player : p) {
@@ -112,24 +83,9 @@ abstract class Matchmanager {
     }
 
     /**
-     * turn() manage a player's turn
+     * turn() manage a player's turn, a is for knowing if the player wants to pass his turn
      */
-    public void turn(Player p, Match m) {
-        Scanner in = new Scanner(System.in);
-        System.out.println(p.getNickname() + "turn:");
-        m.getBoard().showBoard();
-        System.out.println("Insert 1 to see CommonCards, 0 to go ahead:");
-        int a = in.nextInt();
-        if (a == 1) {
-            this.showCommGoal(m);
-        }
-        System.out.println("Insert 2 to see PersonalCards, 0 to go ahead:");
-        a = in.nextInt();
-        if (a == 2) {
-            p.getPersonalCard().showPersonalGoalCard();
-        }
-        System.out.println("Insert -1 to skip your turn:");
-        a = in.nextInt();
+    public void turn(Player p, Match m,int a) {
         if (a != -1) {
             p.getLibrary().showLibrary();
             p.getPlayerManager().selectCard(p, m.getBoard());
@@ -148,8 +104,18 @@ abstract class Matchmanager {
                 System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
             }
         }
+        /**
+         * check if board is empty
+         */
+        int countSingolCard = 0;
+        ArrayList<Integer> group = m.getBoard().Group();
+        for(Integer i: group){
+            if(i == 1)
+                countSingolCard++;
+        }
+        if(countSingolCard == group.size())
+            m.getBoard().fill(countSingolCard);
     }
-
     /**
      * showCommGoal() let you see CommonCards in a given match
      */
@@ -158,7 +124,32 @@ abstract class Matchmanager {
         cards[0].getCommonCard().getImage();
         cards[1].getCommonCard().getImage();
     }
-
+     /**
+      * classification() returns an arraylist of players based on their scores
+      */
+     public ArrayList<Player> classification(Match m){
+         ArrayList<Player> classification=new ArrayList<>(m.getPlayers().size());
+         int j=1;
+         int[] scores=m.getMatchmanager().results(m);
+         int[] position= new int[]{0, 1, 2, 3};
+         for (int i = 0; i < 4; ++i) {
+             int key = scores[i];
+             while(j!=4 && key>scores[j]){
+                 int temp=position[i];
+                 position[i]=position[j];
+                 position[j]=temp;
+                 temp=scores[j];
+                 scores[j]=scores[i];
+                 scores[i]=temp;
+                 j++;
+             }
+             j=i+1;
+         }
+         for(Integer i: position){
+             classification.add(m.getPlayers().get(i));
+         }
+         return classification;
+     }
     /**
      * createBoard() create a board with different allowed position according to number of players
      */

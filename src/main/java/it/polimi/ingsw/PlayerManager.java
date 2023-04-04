@@ -57,7 +57,6 @@ public class PlayerManager {
                 break;
             }
         }
-        player.getLibrary().takeAction(selectedCards);
     }
     /**
      *  showPersonalGoal() let you see your PersonalGoal
