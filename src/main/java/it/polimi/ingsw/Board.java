@@ -249,4 +249,43 @@ public class Board {
     public Card getCard(int x , int y){ return board[x][y];}
 
 
+    public ArrayList<Integer> Group(){
+        ArrayList<Integer> group = new ArrayList<Integer>();
+        ArrayList<ArrayList<Card>> groups = new ArrayList<>();
+
+        boolean[][] visited = new boolean[board.length][board[0].length];
+
+        for(int i=0;i<board.length;i++){
+            for(int j =0;j<board[0].length;j++){
+                if(!visited[i][j] && board[i][j]!= notUsableCard && board[i][j] != emptyCard){
+                    ArrayList<Card> groupCard = new ArrayList<>();
+                    Adjacent(board,visited,i,j,groupCard);
+                    groups.add(groupCard);
+                }
+            }
+        }
+
+        for(ArrayList<Card> g:groups){
+            group.add(g.size());
+            System.out.println(g.size());
+        }
+        return  group;
+    }
+    private void Adjacent(Card[][] board,boolean[][] visited, int row, int col,ArrayList<Card> groupCard)
+    {
+        if(row < 0 || row >=board.length || col<0 || col>=board[0].length || board[row][col] == notUsableCard || board[row][col] == emptyCard )
+            return;
+        if(visited[row][col])
+            return;
+
+
+        visited[row][col] =true;
+        Position position = new Position(row,col);
+        groupCard.add(new Card(board[row][col].getColour(),position));
+
+        Adjacent(board,visited,row-1,col,groupCard);
+        Adjacent(board,visited,row+1,col,groupCard);
+        Adjacent(board,visited,row,col-1,groupCard);
+        Adjacent(board,visited,row,col+1,groupCard);
+    }
 }

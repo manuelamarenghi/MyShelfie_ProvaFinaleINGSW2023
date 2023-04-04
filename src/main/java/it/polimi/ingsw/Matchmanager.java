@@ -136,6 +136,17 @@ abstract class Matchmanager{
         System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
       }
     }
+    /**
+     * check if board is empty
+     */
+    int countSingolCard = 0;
+    ArrayList<Integer> group = m.getBoard().Group();
+    for(Integer i: group){
+      if(i == 1)
+        countSingolCard++;
+    }
+    if(countSingolCard == group.size())
+      m.getBoard().fill(countSingolCard);
   }
   /**
    * showCommGoal() let you see CommonCards in a given match
