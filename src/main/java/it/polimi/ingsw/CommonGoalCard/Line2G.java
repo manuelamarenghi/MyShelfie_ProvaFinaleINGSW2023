@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Line2G implements CommonGoalCards {
+    /**
+     * The method checks if the target has been completed or not
+     */
 
     @Override
     public boolean check(Library library) {
@@ -53,6 +56,11 @@ public class Line2G implements CommonGoalCards {
         return false;
     }
 
+    /**
+     *  The method lets you know if the target is still possible to complete or not , it return true if it is not
+     *     possible to complete the tatget anymore
+     */
+
     @Override
     public boolean expired(Library library) {
         int r , c , i;
@@ -96,6 +104,10 @@ public class Line2G implements CommonGoalCards {
         }
         return false;
     }
+
+    /**
+     * The method shows you ana example of the target
+     */
 
     @Override
     public void getImage() {
