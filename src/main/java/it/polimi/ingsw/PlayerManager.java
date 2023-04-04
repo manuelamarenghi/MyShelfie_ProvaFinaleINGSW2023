@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayerManager {
-    //the method notifies the observer about the state of the player
+    /**
+     * the method notifies the observer about the state of the player
+     */
+
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -14,7 +17,11 @@ public class PlayerManager {
         }
 
     }
-    //the method lets you select the cards from the board ant put them in the library
+
+    /**
+     * the method lets you select the cards from the board ant put them in the library
+     */
+
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -53,11 +60,19 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
-    //the method lets you see the personal goal card
+
+    /**
+     * the method lets you see the personal goal card
+     */
+
     public void showPersonalGoal (Player player){
         player.getPersonalCard().showPersonalGoalCard();
     }
-    //the method calculates points of the personal objective and returns it's value
+
+    /**
+     * the method calculates points of the personal objective and returns it's value
+     */
+
     public int showPersonalPoint(Player player){
         int sameCards=0 , x , y, i , points=0;
         String colour;
@@ -91,7 +106,11 @@ public class PlayerManager {
         }
         return points;
     }
-    //The following method returns the points of the player
+
+    /**
+     * The following method returns the points of the player
+     */
+
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
         System.out.println("Your score starts from your CommonCards' score:"+score);
