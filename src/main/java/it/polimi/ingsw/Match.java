@@ -1,32 +1,35 @@
 package it.polimi.ingsw;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
- *  this class is used to initialize the match in Main Class
+ * this class is used to initialize the match in Main Class
  */
 public class Match {
-    private Player[] players;
-private Board board;
-private Player firstFinish;
-private Player chair;
-private EffectiveCard[] CommonCards=new EffectiveCard[2];
-private Matchmanager matchmanager;
+    private ArrayList<Player> players;
+    private Board board;
+    private Player firstFinish;
+    private Player chair;
+    private EffectiveCard[] CommonCards = new EffectiveCard[2];
+    private Matchmanager matchmanager;
+
     /**
-     *  the constructor initialize the manager based on number of players
-     *  MatchManager is an abstract class and has 3 classes that extends it
+     * the constructor initialize the manager based on number of players
+     * MatchManager is an abstract class and has 3 classes that extends it
      */
     public Match(int n) {
-        players=new Player[n];
-        Scanner in=new Scanner(System.in);
-        for(Player p: players){
-            System.out.println("Inserire nickname giocatore");
-            String nickname= in.nextLine();
-            p.setNickname(nickname);
+        players = new ArrayList<>(n);
+        this.setChair(players.get(0));
+        if (n == 4) {
+            matchmanager = new FourPlayers();
         }
-        this.setChair(players[0]);
-        if(n==4){  matchmanager=new FourPlayers();}
-        if(n==3){matchmanager=new ThreePlayers();}
-        if(n==2){matchmanager=new TwoPlayers();}
+        if (n == 3) {
+            matchmanager = new ThreePlayers();
+        }
+        if (n == 2) {
+            matchmanager = new TwoPlayers();
+        }
     }
 
     public Board getBoard() {
@@ -69,7 +72,11 @@ private Matchmanager matchmanager;
         this.matchmanager = matchmanager;
     }
 
-    public Player[] getPlayers() {
+    public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public void setPlayer(Player players) {
+        this.players.add(players);
     }
 }
