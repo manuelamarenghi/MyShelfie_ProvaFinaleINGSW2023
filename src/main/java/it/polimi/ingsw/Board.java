@@ -12,7 +12,10 @@ public class Board {
     private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
 
-    //board get initialized based on number of players
+    /**
+     * board get initialized based on number of players
+     */
+
     public Board(int numOfPlayers){
         bag = new Bag();
         this.numOfPlayers=numOfPlayers;
@@ -117,7 +120,11 @@ public class Board {
         }
 
     }
-    //Board gets filled up with cards from bag
+
+    /**
+     * Board gets filled up with cards from bag
+     */
+
 
     public void fill(int cardsOnTable){
         int indexOfColours=0;
@@ -145,7 +152,11 @@ public class Board {
 
 
     }
-    //The method return true/false if the cards can be taken or not
+
+    /**
+     * The method return true/false if the cards can be taken or not
+     */
+
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
             if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
@@ -197,7 +208,11 @@ public class Board {
 
         return null;
     }
-    //the method returns number of free positions on table
+
+    /**
+     * the method returns number of free positions on table
+     */
+
     public int getFreeposition(){
         int l=0 , row,col ;
         for(row=0 ; row<9 ; row++){
@@ -209,7 +224,11 @@ public class Board {
         }
         return l;
     }
-    //If the card has been taken from the board it is put to null
+
+    /**
+     * If the card has been taken from the board it is put to null
+     */
+
     public void takeCard (Position position){
         if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
             return;
@@ -225,7 +244,7 @@ public class Board {
     public int getNumOfPlayers(){
         return numOfPlayers;
     }
-    /*
+    /**
      * showBoard() let you see the board
      */
     public void showBoard(){

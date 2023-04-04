@@ -13,7 +13,11 @@ public class Bag {
             remainingCards.add(22);
         }
     }
-    //Extracts cards depending on number of players and cards already present on table
+
+    /**
+     * Extracts cards depending on number of players and cards already present on table
+     */
+
     public ArrayList<String> extract(int numberOfPlayers , int cardsOnTable){
         if(numberOfPlayers==2){
             numberOfCards=cardsFor2Players-cardsOnTable;
@@ -64,8 +68,10 @@ public class Bag {
         }
         return arrayOfCards;
     }
-    //The method return remaning Cards in bag
-    public ArrayList<Integer> getRemainingCards(){
+    /**
+    *The method return remaning Cards in bag
+     */
+     public ArrayList<Integer> getRemainingCards(){
         return remainingCards;
     }
 

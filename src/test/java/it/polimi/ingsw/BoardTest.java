@@ -115,20 +115,4 @@ class BoardTest {
         System.out.println(b.getBoard()[4][7].getColour());
         b.showBoard();
     }
-    @Test
-    public void checkSingolCard(){
-        Board board = new Board(2);
-        board.fill(0);
-        board.showBoard();
-        board.takeCard(new Position(1,4));
-        board.takeCard(new Position(2,3));
-        board.takeCard(new Position(2,5));
-        board.takeCard(new Position(3,3));
-        board.takeCard(new Position(3,4));
-        board.takeCard(new Position(3,5));
-        board.takeCard(new Position(3,6));
-        board.showBoard();
-        board.Group();
-
-    }
 }

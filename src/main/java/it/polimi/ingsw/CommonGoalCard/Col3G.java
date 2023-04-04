@@ -7,7 +7,10 @@ import it.polimi.ingsw.Player;
 import java.util.ArrayList;
 
 public class Col3G implements CommonGoalCards {
-    //the method checks if the target has been completed or not
+    /**
+     * the method checks if the target has been completed or not
+     */
+
     @Override
     public boolean check(Library library) {
         int r , c , i;
@@ -62,7 +65,11 @@ public class Col3G implements CommonGoalCards {
         }
         return false;
     }
-    //The method checks if the target can still be completed or not
+
+    /**
+     * The method checks if the target can still be completed or not
+     */
+
     @Override
     public boolean expired(Library library) {
         int r , c , i ;
@@ -108,7 +115,11 @@ public class Col3G implements CommonGoalCards {
 
         return false;
     }
-    //Th method lets you see an example of the target
+
+    /**
+     * The method lets you see an example of the target
+     */
+
 
     @Override
     public void getImage() {
