@@ -73,7 +73,7 @@ private Matchmanager matchmanager;
     public ArrayList<Player> getPlayers() {
         return players;
     }
-    public void addPlayer(Player p){
+    public void setPlayers(Player p){
         players.add(p);
     }
 }
