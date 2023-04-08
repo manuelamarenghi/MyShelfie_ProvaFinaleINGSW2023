@@ -80,23 +80,14 @@ public class Library implements Iterable<Card> {
             i--;
         }
     }
-    /**
-     * takeAction() makes the player decide where to put the selected cards
-     */
-    public void takeAction(Card[] cards){
-        Scanner in=new Scanner(System.in);
-        int a;
+    public void takeAction(Card[] cards,int n) throws NotUsableException{
         List<Integer> list=Arrays.stream(showColumn(cards.length)).boxed().collect(Collectors.toList());
-        showLibrary();
-        System.out.println("You can put your cards in columns:"+ Arrays.toString(showColumn(cards.length)));
-        do {
-            System.out.println("Select column or -1 to stop:");
-            a = in.nextInt();
-            if(a==-1){ break;}
-            if (list.contains(a)){
-                setColumn(cards,a-1);
-            }
-        }while(!list.contains(a));
+        if(!list.contains(n)){
+            throw new NotUsableException();
+        }
+        else{
+            setColumn(cards,n-1);
+        }
     }
     /**
      * getgroup() returns adjacent items in a given library
