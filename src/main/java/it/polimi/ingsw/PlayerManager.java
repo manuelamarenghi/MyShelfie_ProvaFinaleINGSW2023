@@ -58,7 +58,6 @@ public class PlayerManager {
                 break;
             }
         }
-        player.getLibrary().takeAction(selectedCards);
     }
 
     /**

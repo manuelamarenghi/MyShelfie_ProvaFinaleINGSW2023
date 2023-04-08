@@ -19,19 +19,19 @@ abstract class Matchmanager{
    * results() calculates all players' scores and gives you classification
    */
   public void results(Match m){
-    int[] scores=new int[m.getPlayers().length];
+    int[] scores=new int[m.getPlayers().size()];
     int max=0;
-    Player[] p=m.getPlayers();
+    ArrayList<Player> p=m.getPlayers();
     int j=0;
     for(Integer i: scores){
-      i=p[j].getPlayerManager().showProgressScore(p[j]);
-    if(p[j].equals(m.getFirstFinish())){
+      i=p.get(j).getPlayerManager().showProgressScore(p.get(j));
+    if(p.get(j).equals(m.getFirstFinish())){
       System.out.println("You have 1 point from your End Game Token");
       i++;}
     if(i>max){
       max=j;
     }
-    System.out.println("Final score for player"+p[j].getNickname()+":"+i);
+    System.out.println("Final score for player"+p.get(j).getNickname()+":"+i);
   }
     j=1;
     int[] position= new int[]{0, 1, 2, 3};
@@ -50,9 +50,8 @@ abstract class Matchmanager{
     }
     System.out.println("Classification:");
     for(int i: position){
-      System.out.println(4-i+"-"+p[i].getNickname());
+      System.out.println(4-i+"-"+p.get(i).getNickname());
     }
-    System.out.println("The winner is:"+p[max].getNickname());
   }
   /**
    * checkState() returns the state of a player's connection
