@@ -2,7 +2,6 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
-import it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard.Square2G;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

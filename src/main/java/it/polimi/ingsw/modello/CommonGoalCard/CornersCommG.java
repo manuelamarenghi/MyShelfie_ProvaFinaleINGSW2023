@@ -1,4 +1,4 @@
-package it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard;
+package it.polimi.ingsw.modello.CommonGoalCard;
 
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.CommonGoalCards;

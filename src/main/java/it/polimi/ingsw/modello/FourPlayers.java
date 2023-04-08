@@ -1,7 +1,7 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.CommonGoalCard.*;
-import it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard.*;
+import it.polimi.ingsw.modello.CommonGoalCard.*;
+
 
 import java.util.ArrayList;
 

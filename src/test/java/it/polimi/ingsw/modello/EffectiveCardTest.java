@@ -1,8 +1,6 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard.XGoalCard;
-import it.polimi.ingsw.modello.CommonGoalCards;
-import it.polimi.ingsw.modello.EffectiveCard;
+import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

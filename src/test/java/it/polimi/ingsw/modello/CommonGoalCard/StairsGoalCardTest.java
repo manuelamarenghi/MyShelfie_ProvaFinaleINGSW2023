@@ -1,6 +1,5 @@
 package it.polimi.ingsw.modello.CommonGoalCard;
 
-import it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard.StairsGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.modello.CommonGoalCard;
 
 import it.polimi.ingsw.modello.Library;
-import it.polimi.ingsw.modello.CommonGoalCard.CommonGoalCard.Line4G;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
