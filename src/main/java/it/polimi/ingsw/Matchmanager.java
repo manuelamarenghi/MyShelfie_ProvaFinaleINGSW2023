@@ -16,42 +16,19 @@ abstract class Matchmanager{
    */
   public Matchmanager(){}
   /**
-   * results() calculates all players' scores and gives you classification
+   * results() calculates all players' scores
    */
-  public void results(Match m){
-    int[] scores=new int[m.getPlayers().size()];
-    int max=0;
-    ArrayList<Player> p=m.getPlayers();
-    int j=0;
-    for(Integer i: scores){
-      i=p.get(j).getPlayerManager().showProgressScore(p.get(j));
-    if(p.get(j).equals(m.getFirstFinish())){
-      System.out.println("You have 1 point from your End Game Token");
-      i++;}
-    if(i>max){
-      max=j;
-    }
-    System.out.println("Final score for player"+p.get(j).getNickname()+":"+i);
-  }
-    j=1;
-    int[] position= new int[]{0, 1, 2, 3};
-    for (int i = 0; i < 4; ++i) {
-      int key = scores[i];
-      while(j!=4 && key>scores[j]){
-        int temp=position[i];
-        position[i]=position[j];
-        position[j]=temp;
-        temp=scores[j];
-        scores[j]=scores[i];
-        scores[i]=temp;
-        j++;
+  public int[] results(Match m) {
+    int[] scores = new int[m.getPlayers().size()];
+    ArrayList<Player> p = m.getPlayers();
+    int j = 0;
+    for (Integer i : scores) {
+      i = p.get(j).getPlayerManager().showProgressScore(p.get(j));
+      if (p.get(j).equals(m.getFirstFinish())) {
+        i++;
       }
-      j=i+1;
     }
-    System.out.println("Classification:");
-    for(int i: position){
-      System.out.println(4-i+"-"+p.get(i).getNickname());
-    }
+    return scores;
   }
   /**
    * checkState() returns the state of a player's connection
@@ -100,24 +77,12 @@ abstract class Matchmanager{
       return arrayList;
     }
   }
+
   /**
-   * turn() manage a player's turn
+   * turn() manage a player's turn, a is for knowing if the player wants to pass his turn
    */
-  public void turn(Player p,Match m){
-    Scanner in=new Scanner(System.in);
-    System.out.println(p.getNickname()+"turn:");
-     m.getBoard().showBoard();
-    System.out.println("Insert 1 to see CommonCards, 0 to go ahead:");
-     int a=in.nextInt();
-     if(a==1){  this.showCommGoal(m);
-        }
-    System.out.println("Insert 2 to see PersonalCards, 0 to go ahead:");
-    a=in.nextInt();
-    if(a==2){  p.getPersonalCard().showPersonalGoalCard();
-    }
-    System.out.println("Insert -1 to skip your turn:");
-    a=in.nextInt();
-    if(a!=-1) {
+  public void turn(Player p, Match m,int a) {
+    if (a != -1) {
       p.getLibrary().showLibrary();
       p.getPlayerManager().selectCard(p, m.getBoard());
       p.getPlayerManager().notifyAllObservers(p);
@@ -135,17 +100,45 @@ abstract class Matchmanager{
         System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
       }
     }
-    /**
-     * check if board is empty
-     */
+  }
+  /**
+   * IsEmpyBoard() checks if board is empty
+   */
+  public void IsEmpyBoard(Match m) {
     int countSingolCard = 0;
     ArrayList<Integer> group = m.getBoard().Group();
-    for(Integer i: group){
-      if(i == 1)
+    for (Integer i : group) {
+      if (i == 1)
         countSingolCard++;
     }
-    if(countSingolCard == group.size())
+    if (countSingolCard == group.size())
       m.getBoard().fill(countSingolCard);
+  }
+  /**
+   * classification() returns an arraylist of players based on their scores
+   */
+  public ArrayList<Player> classification(Match m){
+    ArrayList<Player> classification=new ArrayList<>(m.getPlayers().size());
+    int j=1;
+    int[] scores=m.getMatchmanager().results(m);
+    int[] position= new int[]{0, 1, 2, 3};
+    for (int i = 0; i < 4; ++i) {
+      int key = scores[i];
+      while(j!=4 && key>scores[j]){
+        int temp=position[i];
+        position[i]=position[j];
+        position[j]=temp;
+        temp=scores[j];
+        scores[j]=scores[i];
+        scores[i]=temp;
+        j++;
+      }
+      j=i+1;
+    }
+    for(Integer i: position){
+      classification.add(m.getPlayers().get(i));
+    }
+    return classification;
   }
   /**
    * showCommGoal() let you see CommonCards in a given match
