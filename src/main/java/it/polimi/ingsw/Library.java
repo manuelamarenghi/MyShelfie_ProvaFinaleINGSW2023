@@ -80,6 +80,9 @@ public class Library implements Iterable<Card> {
             i--;
         }
     }
+    /**
+     * takeAction() puts n cards in n-1 column
+     */
     public void takeAction(Card[] cards,int n) throws NotUsableException{
         List<Integer> list=Arrays.stream(showColumn(cards.length)).boxed().collect(Collectors.toList());
         if(!list.contains(n)){
