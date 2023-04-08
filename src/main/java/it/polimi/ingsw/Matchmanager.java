@@ -104,16 +104,18 @@ abstract class Matchmanager {
                 System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
             }
         }
-        /**
-         * check if board is empty
-         */
+    }
+    /**
+     * IsEmpyBoard() checks if board is empty
+     */
+    public void IsEmpyBoard(Match m) {
         int countSingolCard = 0;
         ArrayList<Integer> group = m.getBoard().Group();
-        for(Integer i: group){
-            if(i == 1)
+        for (Integer i : group) {
+            if (i == 1)
                 countSingolCard++;
         }
-        if(countSingolCard == group.size())
+        if (countSingolCard == group.size())
             m.getBoard().fill(countSingolCard);
     }
     /**

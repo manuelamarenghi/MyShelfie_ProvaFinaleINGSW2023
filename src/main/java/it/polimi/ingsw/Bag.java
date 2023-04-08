@@ -69,7 +69,7 @@ public class Bag {
         return arrayOfCards;
     }
     /**
-    *The method return remaning Cards in bag
+    *The method returns remaining Cards in bag
      */
      public ArrayList<Integer> getRemainingCards(){
         return remainingCards;
