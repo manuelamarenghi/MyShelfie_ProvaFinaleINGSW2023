@@ -2,13 +2,12 @@ package it.polimi.ingsw;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-/**
- *  this class manage player's logic
- */
+
 public class PlayerManager {
     /**
-     *  notifyAllObservers() is called during a turn to manage list of observers
+     * the method notifies the observer about the state of the player
      */
+
     public void notifyAllObservers(Player player){
 
         for(Observer observer: player.getObservers())
@@ -18,9 +17,11 @@ public class PlayerManager {
         }
 
     }
+
     /**
-     *  selectedCard() let you choose cards in board and put them in your library
+     * the method lets you select the cards from the board ant put them in the library
      */
+
     public void selectCard(Player player , Board board){
         int i , x , y , l;
         Scanner value = new Scanner(System.in);
@@ -59,15 +60,19 @@ public class PlayerManager {
         }
         player.getLibrary().takeAction(selectedCards);
     }
+
     /**
-     *  showPersonalGoal() let you see your PersonalGoal
+     * the method lets you see the personal goal card
      */
+
     public void showPersonalGoal (Player player){
         player.getPersonalCard().showPersonalGoalCard();
     }
+
     /**
-     *  showPersonalPoint() returns and let you see your score based on PersonalGoalCard
+     * the method calculates points of the personal objective and returns it's value
      */
+
     public int showPersonalPoint(Player player){
         int sameCards=0 , x , y, i , points=0;
         String colour;
@@ -101,9 +106,11 @@ public class PlayerManager {
         }
         return points;
     }
+
     /**
-     *  showProgressScore() returns and let you see your progress score ( personal+common+adjacent items)
+     * The following method returns the points of the player
      */
+
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
         System.out.println("Your score starts from your CommonCards' score:"+score);

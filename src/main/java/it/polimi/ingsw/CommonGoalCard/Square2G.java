@@ -6,6 +6,9 @@ import it.polimi.ingsw.Library;
 import java.util.ArrayList;
 
 public class Square2G implements CommonGoalCards {
+    /**
+     * the method checks if the the target is completed or not
+     */
 
     @Override
     public boolean check(Library library) {
@@ -61,6 +64,10 @@ public class Square2G implements CommonGoalCards {
     public boolean expired(Library library) {
         return false;
     }
+
+    /**
+     * The method shows an example of the target
+     */
 
     @Override
     public void getImage() {

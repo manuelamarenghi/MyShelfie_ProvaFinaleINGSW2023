@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Board {
@@ -10,14 +11,16 @@ public class Board {
     private int c , r;
     private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
+
     /**
-     * board get initialized based on number of player
+     * board get initialized based on number of players
      */
+
     public Board(int numOfPlayers){
         bag = new Bag();
         this.numOfPlayers=numOfPlayers;
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c==4 || c==5){
+            if(c==4 || c==3){
                 board[0][c]=emptyCard;
             }
             else{
@@ -42,16 +45,19 @@ public class Board {
             }
         }
         for(c=0 ; c<9 ; c++){
-            if(c==8){
-                board[3][8]=notUsableCard;//To put Null the Fourth line
+            if(c==0){
+                board[3][0]=notUsableCard;//To put Null the Fourth line
             }
             else{
                 board[3][c]=emptyCard;
             }
         }
+        for(c=0 ; c<9 ; c++ ){
+            board[4][c]=emptyCard;
+        }
         for(c=0 ; c<9 ; c++){
-            if(c==0){
-                board[5][0]=notUsableCard;//To put Null the Fourth line
+            if(c==8){
+                board[5][8]=notUsableCard;//To put Null the Fourth line
             }
             else{
                 board[5][c]=emptyCard;
@@ -75,7 +81,7 @@ public class Board {
             }
         }
         for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c==3 || c==4){
+            if(c==5 || c==4){
                 board[8][c]=emptyCard;
             }
             else{
@@ -83,38 +89,42 @@ public class Board {
             }
         }
         if(numOfPlayers==2){//Positions that can not be used with 2 players playing
-            board[3][0]=notUsableCard;//Positions with 3 points
+            board[0][3]=notUsableCard;//Positions with 3 points
             board[2][2]=notUsableCard;
-            board[0][5]=notUsableCard;
-            board[2][6]=notUsableCard;
-            board[5][8]=notUsableCard;
-            board[6][6]=notUsableCard;
-            board[8][3]=notUsableCard;
+            board[5][0]=notUsableCard;
             board[6][2]=notUsableCard;
+            board[8][5]=notUsableCard;
+            board[6][6]=notUsableCard;
+            board[3][8]=notUsableCard;
+            board[2][6]=notUsableCard;
 
-            board[4][0]=notUsableCard;//Positions with 4 points
-            board[1][3]=notUsableCard;
-            board[0][4]=notUsableCard;
-            board[3][7]=notUsableCard;
-            board[4][8]=notUsableCard;
-            board[7][5]=notUsableCard;
+            board[0][4]=notUsableCard;//Positions with 4 points
+            board[3][1]=notUsableCard;
+            board[4][0]=notUsableCard;
+            board[7][3]=notUsableCard;
             board[8][4]=notUsableCard;
-            board[5][1]=notUsableCard;
+            board[5][7]=notUsableCard;
+            board[4][8]=notUsableCard;
+            board[1][5]=notUsableCard;
 
         }
         else if(numOfPlayers==3){
-            board[4][0]=notUsableCard;//Positions with 4 points
-            board[1][3]=notUsableCard;
-            board[0][4]=notUsableCard;
-            board[3][7]=notUsableCard;
-            board[4][8]=notUsableCard;
-            board[7][5]=notUsableCard;
+            board[0][4]=notUsableCard;//Positions with 4 points
+            board[3][1]=notUsableCard;
+            board[4][0]=notUsableCard;
+            board[7][3]=notUsableCard;
             board[8][4]=notUsableCard;
-            board[5][1]=notUsableCard;
+            board[5][7]=notUsableCard;
+            board[4][8]=notUsableCard;
+            board[1][5]=notUsableCard;
         }
 
     }
-    //Board gets filled up with cards from bag
+
+    /**
+     * Board gets filled up with cards from bag
+     */
+
 
     public void fill(int cardsOnTable){
         int indexOfColours=0;
@@ -125,25 +135,28 @@ public class Board {
             for(r=0 ; r<9 ; r++){
                 if(board[r][c]==notUsableCard || board[r][c]!=emptyCard) {
                 }
-                else{
-                        tempCard = new Card(arrayOfColours.get(indexOfColours) , new Position(r,c));
-                        board[r][c]=tempCard;
-                        indexOfColours++;
+                else {
+
+                    tempCard = new Card(arrayOfColours.get(indexOfColours), new Position(r, c));
+                    board[r][c] = tempCard;
+                    indexOfColours++;
                 }
-                if(indexOfColours==arrayOfColours.size()-1){
+                if(indexOfColours==arrayOfColours.size()){
                     break;
                 }
             }
-            if(indexOfColours==arrayOfColours.size()-1){
+            if(indexOfColours==arrayOfColours.size()){
                 break;
             }
         }
+
 
     }
 
     /**
      * The method return true/false if the cards can be taken or not
      */
+
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
             if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
@@ -195,6 +208,11 @@ public class Board {
 
         return null;
     }
+
+    /**
+     * the method returns number of free positions on table
+     */
+
     public int getFreeposition(){
         int l=0 , row,col ;
         for(row=0 ; row<9 ; row++){
@@ -206,7 +224,11 @@ public class Board {
         }
         return l;
     }
-    //If the card has been taken from the board it is put to null
+
+    /**
+     * If the card has been taken from the board it is put to null
+     */
+
     public void takeCard (Position position){
         if(board[position.getX()][position.getY()].equals(notUsableCard) || board[position.getX()][position.getY()].equals(emptyCard)){
             return;
@@ -233,7 +255,7 @@ public class Board {
                     System.out.print(" [ X ] ");
                 }
                 else{
-                if( board[i][j]!=null){
+                if( board[i][j]!=emptyCard){
                     System.out.print(" ["+board[i][j].getColour()+"] ");
                 }
                 else{
@@ -246,4 +268,43 @@ public class Board {
     public Card getCard(int x , int y){ return board[x][y];}
 
 
+    public ArrayList<Integer> Group(){
+        ArrayList<Integer> group = new ArrayList<Integer>();
+        ArrayList<ArrayList<Card>> groups = new ArrayList<>();
+
+        boolean[][] visited = new boolean[board.length][board[0].length];
+
+        for(int i=0;i<board.length;i++){
+            for(int j =0;j<board[0].length;j++){
+                if(!visited[i][j] && board[i][j]!= notUsableCard && board[i][j] != emptyCard){
+                    ArrayList<Card> groupCard = new ArrayList<>();
+                    Adjacent(board,visited,i,j,groupCard);
+                    groups.add(groupCard);
+                }
+            }
+        }
+
+        for(ArrayList<Card> g:groups){
+            group.add(g.size());
+            System.out.println(g.size());
+        }
+        return  group;
+    }
+    private void Adjacent(Card[][] board,boolean[][] visited, int row, int col,ArrayList<Card> groupCard)
+    {
+        if(row < 0 || row >=board.length || col<0 || col>=board[0].length || board[row][col] == notUsableCard || board[row][col] == emptyCard )
+            return;
+        if(visited[row][col])
+            return;
+
+
+        visited[row][col] =true;
+        Position position = new Position(row,col);
+        groupCard.add(new Card(board[row][col].getColour(),position));
+
+        Adjacent(board,visited,row-1,col,groupCard);
+        Adjacent(board,visited,row+1,col,groupCard);
+        Adjacent(board,visited,row,col-1,groupCard);
+        Adjacent(board,visited,row,col+1,groupCard);
+    }
 }
