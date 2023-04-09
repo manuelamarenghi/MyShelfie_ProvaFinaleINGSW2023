@@ -30,18 +30,16 @@ public class PlayerManager {
         String answer;
         Card [] selectedCards  = {};
         //ArrayList<Card> selectedCardsTemp  = new ArrayList<Card>(3);
-            if(!board.allow(selectedCardsTemp)){
-                System.out.println("The cards selected can not be taken");
-                System.out.println("Please select other cards");
+        if(!board.allow(selectedCardsTemp)){
+            return;
+        }
+        else{
+            for(l=0 ; l<selectedCardsTemp.size() ; l++){
+                selectedCards[l]=selectedCardsTemp.get(l);
+                tempPosition=new Position(selectedCardsTemp.get(l).getCoordinates().getX() , selectedCardsTemp.get(l).getCoordinates().getY());
+                board.takeCard(tempPosition);
             }
-            else{
-                for(l=0 ; l<selectedCardsTemp.size() ; l++){
-                    selectedCards[l]=selectedCardsTemp.get(l);
-                    tempPosition=new Position(selectedCardsTemp.get(l).getCoordinates().getX() , selectedCardsTemp.get(l).getCoordinates().getY());
-                    board.takeCard(tempPosition);
-                }
-            }
-
+        }
         player.getLibrary().takeAction(selectedCards);
         //Da sistemare i test qunado il metodo take action in library e quando il metodo turn in library saranno aggiornati
     }
