@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.modello;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,16 +22,12 @@ public class PlayerManager {
      * the method lets you select the cards from the board ant put them in the library
      */
 
-    public void selectCard(Player player , Board board , ArrayList<Card> selectedCardsTemp  ){
-        int i , x , y , l;
-        Scanner value = new Scanner(System.in);
+    public Card[] selectCard(Player player , Board board , ArrayList<Card> selectedCardsTemp ){
+        int l;
         Position tempPosition;
-        Card tempCard = new Card();
-        String answer;
         Card [] selectedCards  = {};
-        //ArrayList<Card> selectedCardsTemp  = new ArrayList<Card>(3);
         if(!board.allow(selectedCardsTemp)){
-            return;
+            return null;
         }
         else{
             for(l=0 ; l<selectedCardsTemp.size() ; l++){
@@ -40,8 +36,15 @@ public class PlayerManager {
                 board.takeCard(tempPosition);
             }
         }
-        player.getLibrary().takeAction(selectedCards);
+        return selectedCards;
         //Da sistemare i test qunado il metodo take action in library e quando il metodo turn in library saranno aggiornati
+    }
+
+    /**
+     * Put cards in the library
+     */
+    public void putCards (Player player ,Card [] selectedCards){
+        player.getLibrary().takeAction(selectedCards);
     }
 
     /**
