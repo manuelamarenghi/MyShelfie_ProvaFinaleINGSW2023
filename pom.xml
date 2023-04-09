@@ -104,7 +104,7 @@
                     <archive>
                         <manifest>
                             <!-- Change with the name of your main class -->
-                            <mainClass>it.polimi.ingsw.Main</mainClass>
+                            <mainClass>it.polimi.ingsw.modello.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
