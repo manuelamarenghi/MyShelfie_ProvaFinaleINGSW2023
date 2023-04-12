@@ -9,7 +9,6 @@ public abstract  class Message {
     public String getPayload() {
         return payload;
     }
-
     public Player getNickname() {
         return nickname;
     }
