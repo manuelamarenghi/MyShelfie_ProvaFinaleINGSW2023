@@ -4,7 +4,11 @@ import it.polimi.ingsw.modello.Player;
 
 public abstract  class Message {
     protected Player nickname;
+    protected MessageType messageType;
     protected String payload;
+    public Message(MessageType messageType){
+        this.messageType = messageType;
+    }
 
     public String getPayload() {
         return payload;
@@ -12,6 +16,10 @@ public abstract  class Message {
 
     public Player getNickname() {
         return nickname;
+    }
+
+    public MessageType getCode(){
+        return messageType;
     }
     /**
      * set each specific payload based on override made in a subclass
@@ -22,4 +30,5 @@ public abstract  class Message {
      * redirectAnswer() let clientHandler "find" method to handle this request
      */
     abstract void redirectAnswer();
+
 }

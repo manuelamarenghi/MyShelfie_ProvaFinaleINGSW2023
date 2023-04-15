@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-abstract class Matchmanager{
+public abstract class Matchmanager{
   /**
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number

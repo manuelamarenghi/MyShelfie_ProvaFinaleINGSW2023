@@ -39,12 +39,11 @@ public class PlayerManager {
         return selectedCards;
         //Da sistemare i test qunado il metodo take action in library e quando il metodo turn in library saranno aggiornati
     }
-
     /**
-     * Put cards in the library
+     *Puts the card in the library
      */
-    public void putCards (Player player ,Card [] selectedCards){
-        player.getLibrary().takeAction(selectedCards);
+    public void putCard ( Card[] selectedCards , Player player) throws NotUsableException {
+        player.getLibrary().takeAction(selectedCards , selectedCards.length);
     }
 
     /**
