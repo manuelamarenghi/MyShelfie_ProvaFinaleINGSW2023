@@ -4,6 +4,6 @@ package it.polimi.ingsw.message;
  */
 public class Show_Ccard extends MessageContent{
     public Show_Ccard(){
-        super("Show_CommonGoal_Card");
+        super("Show_CommonGoal_Card",null);
     }
 }

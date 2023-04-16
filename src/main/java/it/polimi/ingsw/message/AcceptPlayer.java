@@ -5,6 +5,6 @@ package it.polimi.ingsw.message;
  */
 public class AcceptPlayer extends MessageContent{
     public AcceptPlayer(){
-        super("accepted_in_the_match");
+        super("accepted_in_the_match",null);
     }
 }

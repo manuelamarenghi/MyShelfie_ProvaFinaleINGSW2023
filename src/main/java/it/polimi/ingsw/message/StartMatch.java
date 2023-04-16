@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.Client;
 public class StartMatch extends MessageContent{
 
     public StartMatch() {
-        super("start_game");
+        super("start_game",null);
     }
 
 }

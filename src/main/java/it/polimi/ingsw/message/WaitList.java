@@ -5,6 +5,6 @@ package it.polimi.ingsw.message;
  */
 public class WaitList extends MessageContent{
     public WaitList(){
-        super("Game_full");
+        super("Game_full",null);
     }
 }

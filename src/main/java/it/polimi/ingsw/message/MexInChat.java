@@ -5,7 +5,7 @@ package it.polimi.ingsw.message;
 public class MexInChat extends MessageContent{
     public String mex;
     public MexInChat(String s){
-        super("Mex_in_chat");
+        super("Mex_in_chat",s);
         this.mex=s;
     }
 

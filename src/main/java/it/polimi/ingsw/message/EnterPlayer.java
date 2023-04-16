@@ -10,7 +10,7 @@ public class EnterPlayer extends MessageContent{
     private String nick;
 
     public EnterPlayer(String nick){
-        super("enter_player");
+        super("enter_player",nick);
         this.nick=nick;
     }
 

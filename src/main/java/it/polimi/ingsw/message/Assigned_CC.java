@@ -6,7 +6,7 @@ package it.polimi.ingsw.message;
 public class Assigned_CC extends  MessageContent{
     public int point;
     public Assigned_CC(int x){
-        super("Has_reach_point");
+        super("Has_reach_point",null);
         this.point=x;
     }
     public int getPoint() {

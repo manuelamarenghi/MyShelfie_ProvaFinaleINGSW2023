@@ -9,7 +9,7 @@ import it.polimi.ingsw.network.Client;
 public class TakeCardBoard extends MessageContent{
     private Card[] cards;
     public TakeCardBoard(Card[] c){
-        super("takes_cards_board");
+        super("takes_cards_board",c);
         this.cards=c;
     }
 

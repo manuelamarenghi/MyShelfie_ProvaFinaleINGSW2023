@@ -5,6 +5,6 @@ package it.polimi.ingsw.message;
  */
 public class Disconnection_Answer extends MessageContent{
     public Disconnection_Answer(){
-        super("you_are_disconnected");
+        super("you_are_disconnected",null);
     }
 }

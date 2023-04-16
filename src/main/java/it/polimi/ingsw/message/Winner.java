@@ -5,6 +5,6 @@ package it.polimi.ingsw.message;
  */
 public class Winner extends MessageContent{
     public Winner(){
-        super("You_are_the_winner");
+        super("You_are_the_winner",null);
     }
 }

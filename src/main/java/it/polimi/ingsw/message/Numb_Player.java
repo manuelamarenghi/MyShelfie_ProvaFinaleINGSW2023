@@ -8,7 +8,7 @@ import it.polimi.ingsw.network.Client;
 public class Numb_Player extends MessageContent {
     private int numb;
     public Numb_Player(int x){
-        super("numb_player");
+        super("numb_player",x);
         this.numb=x;
     }
 

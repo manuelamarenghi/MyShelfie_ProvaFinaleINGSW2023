@@ -5,6 +5,6 @@ package it.polimi.ingsw.message;
  */
 public class ChairAssigned extends MessageContent{
     public ChairAssigned(){
-        super("assigned_chair");
+        super("assigned_chair",null);
     }
 }

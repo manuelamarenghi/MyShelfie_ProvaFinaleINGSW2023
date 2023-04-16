@@ -6,7 +6,7 @@ package it.polimi.ingsw.message;
 public class Final_point extends MessageContent{
     public int point;
     public Final_point(int x){
-        super("final_point");
+        super("final_point",x);
         this.point=x;
     }
 

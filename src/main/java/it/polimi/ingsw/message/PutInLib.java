@@ -8,7 +8,7 @@ import it.polimi.ingsw.network.Client;
 public class PutInLib extends MessageContent{
     private int column;
     public PutInLib(int x){
-        super("puts_in_library");
+        super("puts_in_library",x);
         this.column=x;
     }
 
