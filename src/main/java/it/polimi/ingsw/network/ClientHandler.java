@@ -3,6 +3,7 @@ package it.polimi.ingsw.network;
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.StartMatch;
 
+import java.io.IOError;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -38,13 +39,28 @@ public class ClientHandler implements Runnable{
      */
     @Override
     public void run () {
-
+        try{
+            handleClientConnection();
+        }catch(IOError e){
+            disconnect();
+        }
     }
     /**
      * disconnect() handles the disconnection of a client
      */
     private void disconnect() {
+        if (connected) {
+            try {
+                if (!client.isClosed()) {
+                    client.close();
+                }
+            } catch (IOException e) {
 
+            }
+            connected = false;
+            Thread.currentThread().interrupt();
+            server.HandleDisconnection();
+        }
     }
     /**
      * handleClientConnection() after deserialization of message handle it with server's methods
@@ -63,13 +79,14 @@ public class ClientHandler implements Runnable{
                     server.startGame();
                     }
                     else{
-                        // altri messaggi e gestione chat
+                        if(message.getMessage().equals("Mex_in_chat")){
+                            server.broadcastMessage(this);
+                        }
                     }
             }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
 
         }
-      //  client.close();
 
     }
 

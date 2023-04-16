@@ -19,13 +19,16 @@ public class Server {
      * addClient() when a new client connected to the game
      */
     public void addClient(String nickname,ClientHandler clientHandler){
-
+        // controllo nickname da input controller
+        clientHandlerMap.put(nickname,clientHandler);
+        // gamecontroller che aggiunge giocatore
     }
     /**
      * removeClient() when a client leave the game
      */
     public void removeClient(String nickname){
-
+        clientHandlerMap.remove(nickname);
+        //game controller che toglie giocatore
     }
     /**
      * HandleDisconnection() when the connection ends
@@ -42,6 +45,11 @@ public class Server {
     }
 
     public void startGame() {
+        // game controller
+    }
+
+    public void broadcastMessage(ClientHandler clientHandler) {
+         // manda ad ogni clienthandler il messaggio scritto in chat
 
     }
 }
