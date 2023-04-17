@@ -7,10 +7,10 @@ import java.io.Serializable;
  * this class create a generic message serializable
  */
 
-public abstract  class Message implements Serializable {
+public class Message implements Serializable {
     protected String nickname;
     private MessageContent message;
-    Message(String c,MessageContent m){
+    public Message(String c,MessageContent m){
         this.nickname =c;
         this.message=m;
     }
@@ -21,4 +21,11 @@ public abstract  class Message implements Serializable {
         return nickname;
     }
 
+    public void setMessage(MessageContent message) {
+        this.message = message;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

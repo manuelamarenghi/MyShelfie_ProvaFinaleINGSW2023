@@ -76,11 +76,11 @@ public class ClientHandler implements Runnable{
                         server.removeClient(message.getnickname());
                     }
                     else if(message.getMessage().equals("start_game")){
-                    server.startGame();
+                        server.startGame();
                     }
                     else{
                         if(message.getMessage().equals("Mex_in_chat")){
-                            server.broadcastMessage(this);
+                            server.broadcastMessage(this,message);
                         }
                     }
             }
@@ -90,6 +90,19 @@ public class ClientHandler implements Runnable{
 
     }
 
+    /**
+     * sendMessage() is used to send message to the client of this specific clientHanlder
+     * @param message
+     */
+    public void sendMessage(Message message){
+        try {
+                output.writeObject(message);
+                output.reset();
+
+        } catch (IOException e) {
+            disconnect();
+        }
+    }
     public boolean isConnected() {
         return connected;
     }

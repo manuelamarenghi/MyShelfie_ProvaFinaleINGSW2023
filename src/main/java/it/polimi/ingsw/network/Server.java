@@ -2,10 +2,13 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.message.Message;
+import it.polimi.ingsw.message.MessageContent;
+import it.polimi.ingsw.message.MexInChat;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Server {
     private final GameController gameController;
@@ -34,7 +37,7 @@ public class Server {
      * HandleDisconnection() when the connection ends
      */
     public void HandleDisconnection(){
-
+           //gestione disconnessione in base a fase del gioco
     }
     /**
      * onMessageReceived() send the message to the controller
@@ -47,9 +50,19 @@ public class Server {
     public void startGame() {
         // game controller
     }
-
-    public void broadcastMessage(ClientHandler clientHandler) {
-         // manda ad ogni clienthandler il messaggio scritto in chat
-
+    /**
+     * broadcastMessage() shares message in chat to other clientHandler
+     * @param clientHandler
+     * @param message
+     */
+    public void broadcastMessage(ClientHandler clientHandler,Message message) {
+         Set set=clientHandlerMap.keySet();
+         for(Object o: set){
+             if(!o.equals(message.getnickname())){
+                 MessageContent mex=new MexInChat((String)message.getMessage().getObject());
+                 Message m= new Message("Server",mex);
+                 clientHandlerMap.get(o).sendMessage(message);
+             }
+         }
     }
 }
