@@ -1,34 +1,31 @@
 package it.polimi.ingsw.message;
+import it.polimi.ingsw.network.Client;
 
-import it.polimi.ingsw.modello.Player;
+import java.io.Serializable;
 
-public abstract  class Message {
-    protected Player nickname;
-    protected MessageType messageType;
-    protected String payload;
-    public Message(MessageType messageType){
-        this.messageType = messageType;
+/**
+ * this class create a generic message serializable
+ */
+
+public class Message implements Serializable {
+    protected String nickname;
+    private MessageContent message;
+    public Message(String c,MessageContent m){
+        this.nickname =c;
+        this.message=m;
     }
-
-    public String getPayload() {
-        return payload;
+    public MessageContent getMessage() {
+        return message;
     }
-
-    public Player getNickname() {
+    public String getnickname() {
         return nickname;
     }
 
-    public MessageType getCode(){
-        return messageType;
+    public void setMessage(MessageContent message) {
+        this.message = message;
     }
-    /**
-     * set each specific payload based on override made in a subclass
-     * @param s
-     */
-    abstract void setPayload(String s);
-    /**
-     * redirectAnswer() let clientHandler "find" method to handle this request
-     */
-    abstract void redirectAnswer();
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
