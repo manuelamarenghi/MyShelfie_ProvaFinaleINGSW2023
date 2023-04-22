@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 
 /**
@@ -19,4 +20,5 @@ public class Final_point extends Message{
     public void visit(MatchController c) {
         // metodo che gestisce messaggio specifico
     }
+
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 
 /**
@@ -12,5 +13,5 @@ public class AcceptPlayer extends Message{
     @Override
     public void visit(MatchController c) {
         // metodo che gestisce messaggio specifico
-    }
+        }
 }

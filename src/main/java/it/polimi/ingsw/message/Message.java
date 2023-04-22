@@ -1,7 +1,9 @@
 package it.polimi.ingsw.message;
+
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.ClientHandler;
+
 
 import java.io.Serializable;
 
@@ -11,7 +13,6 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     protected String nickname;
-
     protected String type;
 
     public Message(String c, String m) {
@@ -25,12 +26,12 @@ public class Message implements Serializable {
 
     public String getType() {
         return type;
+
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
     public void setType(String type) {
         this.type = type;
     }
@@ -46,4 +47,5 @@ public class Message implements Serializable {
 
     public void MextoClientHandler(ClientHandler c) {
     }
+
 }

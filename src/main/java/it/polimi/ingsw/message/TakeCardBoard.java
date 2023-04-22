@@ -1,13 +1,15 @@
 package it.polimi.ingsw.message;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Position;
-import it.polimi.ingsw.network.Client;
+
 
 /**
  * message from client to server when the player is taking cards from board
  */
+
 public class TakeCardBoard extends Message{
     private Position[] cards;
     public TakeCardBoard(Position[] c, String name){
@@ -22,5 +24,4 @@ public class TakeCardBoard extends Message{
     public void visit(MatchController c) {
         // metodo che gestisce messaggio specifico
     }
-
 }
