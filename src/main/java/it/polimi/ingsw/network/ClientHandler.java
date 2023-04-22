@@ -69,17 +69,17 @@ public class ClientHandler implements Runnable{
         try {
             while (!Thread.currentThread().isInterrupted()) {
                     Message message = (Message) input.readObject();
-                    if(message.getMessage().equals("enter_player")){
+                    if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
-                    else if(message.getMessage().equals("Client_has_disconnected")){
+                    else if(message.getType().equals("Client_has_disconnected")){
                         server.removeClient(message.getnickname());
                     }
-                    else if(message.getMessage().equals("start_game")){
+                    else if(message.getType().equals("start_game")){
                         server.startGame();
                     }
                     else{
-                        if(message.getMessage().equals("Mex_in_chat")){
+                        if(message.getType().equals("Mex_in_chat")){
                             server.broadcastMessage(this,message);
                         }
                     }
