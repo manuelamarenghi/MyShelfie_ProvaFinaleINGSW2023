@@ -1,9 +1,8 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.Controller.GameController;
+
+import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.message.Message;
-import it.polimi.ingsw.message.MessageContent;
-import it.polimi.ingsw.message.MexInChat;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,12 +10,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class Server {
-    private final GameController gameController;
-
+    private final MatchController matchController;
+    private Map<String,ClientHandler>    disconnettedclientMap;
     private final Map<String, ClientHandler> clientHandlerMap;
-    public Server(GameController gameController){
-        this.gameController = gameController;
+    public Server(MatchController matchController){
+        this.matchController = matchController;
         this.clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
+        this.disconnettedclientMap = Collections.synchronizedMap(new HashMap<>());
     }
     /**
      * addClient() when a new client connected to the game
@@ -30,6 +30,7 @@ public class Server {
      * removeClient() when a client leave the game
      */
     public void removeClient(String nickname){
+        disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
         //game controller che toglie giocatore
     }
@@ -59,9 +60,8 @@ public class Server {
          Set set=clientHandlerMap.keySet();
          for(Object o: set){
              if(!o.equals(message.getnickname())){
-                 MessageContent mex=new MexInChat((String)message.getMessage().getObject());
-                 Message m= new Message("Server",mex);
-                 clientHandlerMap.get(o).sendMessage(message);
+                message.MextoClientHandler(clientHandlerMap.get(o));
+
              }
          }
     }
