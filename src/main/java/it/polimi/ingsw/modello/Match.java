@@ -6,7 +6,11 @@ import java.util.ArrayList;
  *  this class is used to initialize the match in Main Class
  */
 public class Match {
+    public static final int MAX_PLAYERS = 4;
+    public static final int MIN_PLAYERS = 2;
     private ArrayList<Player> players;
+
+    private int playerNumber;
 private Board board;
 private Player firstFinish;
 private Player chair;
@@ -16,16 +20,20 @@ private Matchmanager matchmanager;
      *  the constructor initialize the manager based on number of players
      *  MatchManager is an abstract class and has 3 classes that extends it
      */
-    public Match(int n) {
-        players = new ArrayList<>(n);
+    public Match(){
+
+    }
+    public void setMatch(int number) {
+        players = new ArrayList<>(number);
+        playerNumber =number;
         this.setChair(players.get(0));
-        if (n == 4) {
+        if (number == 4) {
             matchmanager = new FourPlayers();
         }
-        if (n == 3) {
+        if (number == 3) {
             matchmanager = new ThreePlayers();
         }
-        if (n == 2) {
+        if (number == 2) {
             matchmanager = new TwoPlayers();
         }
     }
@@ -38,6 +46,9 @@ private Matchmanager matchmanager;
         return CommonCards;
     }
 
+    public int getPlayerNumber(){
+        return playerNumber;
+    }
     public Player getChair() {
         return chair;
     }
