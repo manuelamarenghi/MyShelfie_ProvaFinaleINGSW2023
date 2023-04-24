@@ -9,16 +9,22 @@ import java.io.Serializable;
 
 public class Message implements Serializable {
     protected String nickname;
+    private MessageType messageType;
     private MessageContent message;
-    public Message(String c,MessageContent m){
+    public Message(String c,MessageContent m , MessageType messageType){
         this.nickname =c;
         this.message=m;
+        this.messageType=messageType;
     }
     public MessageContent getMessage() {
         return message;
     }
     public String getnickname() {
         return nickname;
+    }
+
+    public MessageType getCode(){
+        return messageType;
     }
 
     public void setMessage(MessageContent message) {

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.modello.Matchmanager;
 
@@ -27,5 +28,9 @@ public class TwoPlayersMessage extends Message{
 
     @Override
     void redirectAnswer() {
+    }
+
+    public void visit(ClientController clientController){
+        clientController.handleTwoPlayersBoard(this);
     }
 }
