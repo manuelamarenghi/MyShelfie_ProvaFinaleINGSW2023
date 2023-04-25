@@ -2,6 +2,8 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.enumeration.GameState;
 import it.polimi.ingsw.enumeration.TurnPhase;
+import it.polimi.ingsw.message.TakeCardBoard;
+import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
@@ -56,6 +58,28 @@ public class MatchController {
             //avviso virtualview che ci sono già abbastanza giocatori
 
         }
+    }
+
+    /**
+     *
+     * @param m
+     */
+    public void handler(TakeCardBoard m){
+        ArrayList<Card> cardSelect = m.getCards();
+        if(match.getBoard().allow(cardSelect)){
+            for(Card card : cardSelect){
+                match.getBoard().takeCard(card.getCoordinates());
+            }
+
+            Player player = match.getPlayerByNickname(m.getnickname());
+
+            int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
+            //messaggio virtualview per dire al giocatore le colonne possibili
+        }
+        else{
+            //messagio virtualview non può prenderli
+        }
+
     }
 
     //----------------------VIRTUALVIEW METHODS----------------
