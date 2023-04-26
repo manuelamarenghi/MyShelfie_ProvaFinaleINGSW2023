@@ -15,17 +15,15 @@ public class TurnController {
     private String activePlayer;
 
     private TurnPhase turnPhase;
-    private Map<String, VirtualView> viewPlayer;
 
     private final MatchController matchController;
 
-    public TurnController(Map<String,VirtualView> virtualview,MatchController matchController){
+    public TurnController(MatchController matchController,ArrayList<String> nicknames,String activePlayer,Match match){
 
-        match = new Match();
-        nicknamePlayers = new ArrayList<>(match.getPlayersNickname());
+        this.match = match;
+        this.nicknamePlayers = nicknames;
 
-        this.activePlayer = nicknamePlayers.get(0);
-        this. viewPlayer = virtualview;
+        this.activePlayer = activePlayer;
         this.matchController = matchController;
     }
 
@@ -35,5 +33,19 @@ public class TurnController {
 
     public void setActivePlayer(String nickname){
         this.activePlayer= nickname;
+    }
+
+    /**
+     * checks if the turn is completed
+     */
+    public void nextTurn(){
+
+    }
+
+    /**
+     * check if the player have completed a round and next player
+     */
+    public void nextPlayer(){
+
     }
 }

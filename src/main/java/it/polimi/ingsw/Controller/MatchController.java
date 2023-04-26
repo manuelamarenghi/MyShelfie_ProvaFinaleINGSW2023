@@ -2,6 +2,8 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.enumeration.GameState;
 import it.polimi.ingsw.enumeration.TurnPhase;
+import it.polimi.ingsw.message.Message;
+import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
@@ -39,8 +41,9 @@ public class MatchController {
 
 
     /**
-     *
-     *
+     * connect new player and his virtualview
+     * the first player, he need choose how many player play
+     *  other player, add virtualview and wait the game start
      */
     public void loginHandler(String nickname,VirtualView virtualView){
         if(connectClients.isEmpty()){
@@ -61,8 +64,47 @@ public class MatchController {
     }
 
     /**
-     *
-     * @param m
+     * Start game
+     */
+    public void startGame(){
+        for(String name : players){
+            this.match.setPlayers(new Player(name));
+        }
+
+        match.getMatchmanager().startGame();
+        //virtualview per far vedere le personal card e far iniziare il turno al primo giocatore.
+
+        this.turnController = new TurnController(this,players,match.getChair().getNickname(),match);
+
+    }
+
+    //------------------------On message received-------------------------------------------
+
+    /**
+     * received generic message
+     * @param m message
+     */
+    public void messageHandler (Message m){
+        if(turnController.getActivePlayer().equals(m.getnickname())){
+            m.visit(this);
+        }
+        else{
+            //virtualview avvisa al cliente che non è il sup turno.
+        }
+    }
+
+    /**
+     * this message received, the first player decide how many players play the game
+     * @param numberPlayer number of player who play the game
+     */
+    public void handler(Numb_Player numberPlayer){
+        match.setMatch(numberPlayer.getNumb());
+
+        //virtualview che dice che attende gli altri giocatori
+    }
+    /**
+     * this message the server received the card chosen by the player
+     * @param m ArrayList of Card choose by the player
      */
     public void handler(TakeCardBoard m){
         ArrayList<Card> cardSelect = m.getCards();

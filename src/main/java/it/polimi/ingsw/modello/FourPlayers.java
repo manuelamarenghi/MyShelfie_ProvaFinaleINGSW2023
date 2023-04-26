@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class FourPlayers extends Matchmanager {
 
+    public FourPlayers(Match m ){
+        super(m);
+    }
     /**
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
      */

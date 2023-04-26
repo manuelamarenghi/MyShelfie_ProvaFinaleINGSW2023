@@ -5,6 +5,10 @@ import it.polimi.ingsw.modello.CommonGoalCard.*;
 import java.util.ArrayList;
 
 public class ThreePlayers extends Matchmanager {
+
+    public ThreePlayers(Match m){
+        super(m);
+    }
     /**
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
      */
