@@ -14,6 +14,10 @@ public class Player {
     private PersonalGoalCard personalCard;
     private PlayerManager plManag;
 
+    public Player(String nickname){
+        this.nickname = nickname;
+    }
+
     public String getNickname(){
         return  nickname;
     }

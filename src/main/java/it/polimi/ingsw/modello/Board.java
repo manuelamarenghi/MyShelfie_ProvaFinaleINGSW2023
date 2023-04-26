@@ -266,7 +266,10 @@ public class Board {
     }
     public Card getCard(int x , int y){ return board[x][y];}
 
-
+    /**
+     * this method you can see the stacks of adjacent cards on the board
+     * @return ArrayList integer, the number of the group of adjacent
+     */
     public ArrayList<Integer> Group(){
         ArrayList<Integer> group = new ArrayList<Integer>();
         ArrayList<ArrayList<Card>> groups = new ArrayList<>();
@@ -289,6 +292,15 @@ public class Board {
         }
         return  group;
     }
+
+    /**
+     *
+     * @param board
+     * @param visited
+     * @param row
+     * @param col
+     * @param groupCard
+     */
     private void Adjacent(Card[][] board,boolean[][] visited, int row, int col,ArrayList<Card> groupCard)
     {
         if(row < 0 || row >=board.length || col<0 || col>=board[0].length || board[row][col] == notUsableCard || board[row][col] == emptyCard )
