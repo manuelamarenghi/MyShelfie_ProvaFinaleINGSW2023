@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.FourPlayers;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.modello.Matchmanager;
@@ -9,7 +10,7 @@ public class FourPlayersMessage extends Message{
     private Matchmanager matchmanger;
 
     public FourPlayersMessage(Match match , Matchmanager matchmanager){
-        super(MessageType.FOUR_PLAYERS);
+        super(null , "Four_players_create_board");
         this.match=match;
         this.matchmanger=matchmanager;
     }
@@ -32,5 +33,9 @@ public class FourPlayersMessage extends Message{
     @Override
     void redirectAnswer() {
 
+    }
+    @Override
+    public void visit(ClientController clientController) {
+        clientController.handle(this);
     }
 }

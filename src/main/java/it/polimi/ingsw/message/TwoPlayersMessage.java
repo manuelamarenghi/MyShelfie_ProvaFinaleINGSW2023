@@ -1,6 +1,7 @@
 package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.modello.Matchmanager;
 
@@ -9,7 +10,7 @@ public class TwoPlayersMessage extends Message{
     private Matchmanager matchmanger;
 
     public TwoPlayersMessage(Match match , Matchmanager matchmanager){
-        super(MessageType.TWO_PLAYERS);
+        super(null , "Two_Players_Create_Board");
         this.match=match;
         this.matchmanger=matchmanager;
     }
@@ -30,7 +31,11 @@ public class TwoPlayersMessage extends Message{
     void redirectAnswer() {
     }
 
-    public void visit(ClientController clientController){
-        clientController.handleTwoPlayersBoard(this);
+    @Override
+    public void visit(ClientController clientController) {
+       clientController.handle(this);
     }
+
+
+
 }

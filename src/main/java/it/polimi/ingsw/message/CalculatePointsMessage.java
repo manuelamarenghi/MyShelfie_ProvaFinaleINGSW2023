@@ -3,20 +3,22 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Match;
 
-public class ShowCommonGoalMessage extends Message{
+public class CalculatePointsMessage extends Message{
+
     private Match match;
 
-    public ShowCommonGoalMessage(Match match){
-        super(null , "Show_commom_goal_card");
+    public CalculatePointsMessage(Match match){
+        super(null , "Calculate_Points");
         this.match=match;
     }
 
-    public Match getMatch() {
+    public Match getMatch(){
         return match;
     }
 
     @Override
     void setPayload(String s) {
+
     }
 
     @Override

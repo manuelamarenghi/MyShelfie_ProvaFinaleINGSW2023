@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
 
@@ -8,7 +9,7 @@ public class PutCardInLibraryMessage extends Message{
     private Player player;
 
     public PutCardInLibraryMessage(Card[] selectedCards , Player player){
-        super(MessageType.PUT_CARDS_IN_LIBRARY);
+        super(null , "Put_cards_in_library");
         this.player=player;
         this.selectedCards=selectedCards;
     }
@@ -29,5 +30,9 @@ public class PutCardInLibraryMessage extends Message{
     @Override
     void redirectAnswer() {
 
+    }
+    @Override
+    public void visit (ClientController clientController){
+        clientController.handle(this);
     }
 }

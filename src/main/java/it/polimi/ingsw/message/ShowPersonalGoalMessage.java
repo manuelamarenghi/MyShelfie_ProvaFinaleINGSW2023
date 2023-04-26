@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Player;
 
 public class ShowPersonalGoalMessage extends Message{
@@ -22,5 +23,10 @@ public class ShowPersonalGoalMessage extends Message{
     @Override
     void redirectAnswer() {
 
+    }
+
+    @Override
+    public void visit(ClientController clientController){
+        clientController.handle(this);
     }
 }

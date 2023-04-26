@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.ClientHandler;
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * this class create a generic message serializable
  */
 
-public class Message implements Serializable {
+public abstract class Message implements Serializable {
     protected String nickname;
     protected String type;
 
@@ -45,7 +46,15 @@ public class Message implements Serializable {
         // metodo che gestisce messaggio
     }
 
+    public void visit(ClientController clientController){
+        //Gestisce i messaggi
+    }
+
+
     public void MextoClientHandler(ClientHandler c) {
     }
 
+    abstract void setPayload(String s);
+
+    abstract void redirectAnswer();
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
@@ -12,7 +13,7 @@ public class PickCardFromBoardMessage extends Message{
     private ArrayList<Card> selectedCardsTemp ;
 
     public PickCardFromBoardMessage(Board board , Player player , ArrayList<Card> selectedCardsTemp){
-        super(MessageType.PICK_CARD_FROM_BOARD);
+        super(null , "Pick_card_from_board_message");
         this.board=board;
         this.player=player;
         this.selectedCardsTemp=selectedCardsTemp;
@@ -36,5 +37,10 @@ public class PickCardFromBoardMessage extends Message{
     @Override
     void redirectAnswer() {
 
+    }
+
+    @Override
+    public void visit(ClientController clientController){
+        clientController.handle(this);
     }
 }
