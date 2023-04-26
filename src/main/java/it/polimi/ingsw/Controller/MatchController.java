@@ -9,6 +9,7 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
+import org.apache.maven.properties.internal.EnvironmentUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ public class MatchController {
     private TurnController turnController;
     private ArrayList<String> disconnectClients;
     private Map<String, VirtualView> connectClients;
+    private boolean isStarted;
     private GameState gameState;
     private TurnPhase turnPhase;
 
@@ -30,6 +32,15 @@ public class MatchController {
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
     }
 
+    public VirtualView getVirtualView(String nickname){
+            return connectClients.get(nickname);
+    }
+    public int getNumberOfPlayers(){
+        return numberOfPlayers;
+    }
+    public boolean getIsStarted(){
+        return isStarted;
+    }
     /**
      * Set the State of the Game.
      *
@@ -72,7 +83,7 @@ public class MatchController {
         }
 
         match.getMatchmanager().startGame();
-        //virtualview per far vedere le personal card e far iniziare il turno al primo giocatore.
+        //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
 
         this.turnController = new TurnController(this,players,match.getChair().getNickname(),match);
 
