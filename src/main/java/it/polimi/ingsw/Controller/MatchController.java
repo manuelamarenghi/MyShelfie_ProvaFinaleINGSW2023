@@ -36,8 +36,6 @@ public class MatchController {
     private void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
-
-
     /**
      *
      *
@@ -59,7 +57,6 @@ public class MatchController {
 
         }
     }
-
     /**
      *
      * @param m
@@ -70,11 +67,9 @@ public class MatchController {
             for(Card card : cardSelect){
                 match.getBoard().takeCard(card.getCoordinates());
             }
-
             Player player = match.getPlayerByNickname(m.getnickname());
-
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
-            //messaggio virtualview per dire al giocatore le colonne possibili
+            connectClients.get(m.getnickname()).showPossibleColumn(m.getnickname(),coloum);
         }
         else{
             //messagio virtualview non può prenderli
