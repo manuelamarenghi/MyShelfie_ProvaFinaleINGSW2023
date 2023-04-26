@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Matchmanager{
-
   Match match;
   /**
    * this class manage actions in a match

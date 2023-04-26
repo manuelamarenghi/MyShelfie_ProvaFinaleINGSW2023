@@ -35,6 +35,7 @@ public class TurnController {
         this.activePlayer= nickname;
     }
 
+
     /**
      * checks if the turn is completed
      */

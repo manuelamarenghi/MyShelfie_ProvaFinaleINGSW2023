@@ -42,7 +42,7 @@ public class MatchController {
 
     /**
      * connect new player and his virtualview
-     * the first player, he need choose how many player play
+     * the first player, he needs choose how many player play
      *  other player, add virtualview and wait the game start
      */
     public void loginHandler(String nickname,VirtualView virtualView){
