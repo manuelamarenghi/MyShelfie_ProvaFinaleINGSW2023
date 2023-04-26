@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.ClientHandler;
 
@@ -17,6 +18,6 @@ public class MexInChat extends Message{
     }
     @Override
     public void MextoClientHandler(ClientHandler c) {
-
+         
     }
 }

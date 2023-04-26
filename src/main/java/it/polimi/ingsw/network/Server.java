@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.message.Message;
 
@@ -60,6 +61,7 @@ public class Server {
          for(Object o: set){
              if(!o.equals(message.getnickname())){
                 message.MextoClientHandler(clientHandlerMap.get(o));
+
              }
          }
     }

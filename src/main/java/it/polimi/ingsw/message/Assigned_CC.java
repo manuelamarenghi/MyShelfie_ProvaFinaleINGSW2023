@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+
 import it.polimi.ingsw.Controller.MatchController;
 
 /**
@@ -18,4 +19,5 @@ public class Assigned_CC extends  Message{
     public void visit(MatchController c) {
         // metodo che gestisce messaggio specifico
     }
+
 }
