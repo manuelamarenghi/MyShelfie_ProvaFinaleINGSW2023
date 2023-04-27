@@ -3,6 +3,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.message.Message;
+import it.polimi.ingsw.view.VirtualView;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class Server {
     public void addClient(String nickname,ClientHandler clientHandler){
         // controllo nickname da input controller
         clientHandlerMap.put(nickname,clientHandler);
-        // gamecontroller che aggiunge giocatore
+        matchController.loginHandler(nickname,new VirtualView(clientHandler));
     }
     /**
      * removeClient() when a client leave the game
@@ -38,6 +39,16 @@ public class Server {
      * HandleDisconnection() when the connection ends
      */
     public void HandleDisconnection(){
+        String nickname = null;
+        Set set=clientHandlerMap.keySet();
+        for(Object o: set){
+            if(clientHandlerMap.get(o).isConnected()==false){
+                nickname=(String)o;
+                break;
+            }
+        }
+        disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
+        clientHandlerMap.remove(nickname);
            //gestione disconnessione in base a fase del gioco
     }
     /**
@@ -45,11 +56,11 @@ public class Server {
      * @param message
      */
     public void onMessageReceived(Message message){
-        // gestione game controller
+        matchController.messageHandler(message);
     }
 
     public void startGame() {
-        // game controller
+        matchController.startGame();
     }
     /**
      * broadcastMessage() shares message in chat to other clientHandler
