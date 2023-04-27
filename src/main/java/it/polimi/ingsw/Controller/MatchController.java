@@ -10,7 +10,9 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
+
 import org.apache.maven.properties.internal.EnvironmentUtils;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +26,9 @@ public class MatchController {
     private TurnController turnController;
     private ArrayList<String> disconnectClients;
     private Map<String, VirtualView> connectClients;
+
     private boolean isStarted;
+
     private GameState gameState;
     private TurnPhase turnPhase;
 
@@ -32,6 +36,7 @@ public class MatchController {
         this.match = new Match();
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
     }
+
 
     public VirtualView getVirtualView(String nickname){
             return connectClients.get(nickname);
@@ -42,6 +47,7 @@ public class MatchController {
     public boolean getIsStarted(){
         return isStarted;
     }
+
     /**
      * Set the State of the Game.
      *
@@ -131,6 +137,7 @@ public class MatchController {
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
             //TODO messaggio virtualview per dire al giocatore le colonne possibili
+            //messaggio virtualview per dire al giocatore le colonne possibili
         }
         else{
             //messagio virtualview non può prenderli

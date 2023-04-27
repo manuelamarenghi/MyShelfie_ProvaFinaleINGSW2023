@@ -36,6 +36,7 @@ public class TurnController {
     }
 
 
+
     /**
      * checks if the turn is completed
      */
@@ -49,4 +50,5 @@ public class TurnController {
     public void nextPlayer(){
 
     }
+
 }

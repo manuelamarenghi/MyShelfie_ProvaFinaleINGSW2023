@@ -92,7 +92,6 @@ private Matchmanager matchmanager;
         return  nickname;
     }
 
-
     public Player getPlayerByNickname(String nickname){
         for(Player p: players){
             if(p.getNickname().equals(nickname))
