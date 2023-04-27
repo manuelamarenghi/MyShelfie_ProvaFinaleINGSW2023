@@ -23,8 +23,8 @@ public class ShowCommonGoalMessage extends Message{
     void redirectAnswer() {
 
     }
-    @Override
+    /*@Override
     public void visit(ClientController clientController){
         clientController.handle(this);
-    }
+    }*/
 }

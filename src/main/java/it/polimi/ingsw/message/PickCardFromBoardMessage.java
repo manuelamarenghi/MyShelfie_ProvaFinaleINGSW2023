@@ -39,8 +39,8 @@ public class PickCardFromBoardMessage extends Message{
 
     }
 
-    @Override
+    /*@Override
     public void visit(ClientController clientController){
         clientController.handle(this);
-    }
+    }*/
 }

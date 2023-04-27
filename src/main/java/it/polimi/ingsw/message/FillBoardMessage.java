@@ -5,15 +5,15 @@ import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Match;
 
 public class FillBoardMessage extends Message {
-    private Match match;
+    private Board board;
 
-    public FillBoardMessage(Match match){
+    public FillBoardMessage(Board board){
         super(null , "Fill_Board_Message");
-        this.match=match;
+        this.board=board;
     }
 
-    public Match getMatch() {
-        return match;
+    public Match getBoard() {
+        return board;
     }
 
     @Override
@@ -26,8 +26,8 @@ public class FillBoardMessage extends Message {
 
     }
 
-    @Override
+    /*@Override
     public void visit (ClientController clientController){
         clientController.handle(this);
-    }
+    }*/
 }

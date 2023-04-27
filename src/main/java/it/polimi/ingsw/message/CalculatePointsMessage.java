@@ -2,18 +2,19 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.modello.PlayerManager;
 
 public class CalculatePointsMessage extends Message{
 
-    private Match match;
+    private PlayerManager playerManager;
 
-    public CalculatePointsMessage(Match match){
+    public CalculatePointsMessage(PlayerManager playerManager){
         super(null , "Calculate_Points");
-        this.match=match;
+        this.playerManager = playerManager;
     }
 
-    public Match getMatch(){
-        return match;
+    public Match getPlayerManager(){
+        return playerManager;
     }
 
     @Override
@@ -25,8 +26,8 @@ public class CalculatePointsMessage extends Message{
     void redirectAnswer() {
 
     }
-    @Override
+    /*@Override
     public void visit(ClientController clientController){
         clientController.handle(this);
-    }
+    }*/
 }

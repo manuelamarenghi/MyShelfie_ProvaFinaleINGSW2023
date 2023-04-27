@@ -31,10 +31,10 @@ public class TwoPlayersMessage extends Message{
     void redirectAnswer() {
     }
 
-    @Override
+    /*@Override
     public void visit(ClientController clientController) {
        clientController.handle(this);
-    }
+    }*/
 
 
 

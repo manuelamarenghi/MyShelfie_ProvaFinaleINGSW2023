@@ -32,7 +32,7 @@ public class PutCardInLibraryMessage extends Message{
 
     }
     @Override
-    public void visit (ClientController clientController){
+    /*public void visit (ClientController clientController){
         clientController.handle(this);
-    }
+    }*/
 }
