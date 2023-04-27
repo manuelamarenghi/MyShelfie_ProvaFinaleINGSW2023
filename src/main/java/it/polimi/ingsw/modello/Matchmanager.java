@@ -7,13 +7,34 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Random;
 
-abstract class Matchmanager{
+public abstract class Matchmanager{
+  Match match;
   /**
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number
    */
-  public Matchmanager(){}
+  public Matchmanager(Match m){
+    this.match = m;
+  }
+
+  /**
+   * Choose the common card and personal card
+   * fill the board
+   * start game
+   */
+  public void startGame(){
+
+    setPersonalGoal(match.getPlayers());
+    setEffectiveCards(match);
+
+    match.getBoard().fill(0);
+
+    int position = (int)(Math.random() * 4);
+    match.setChair(match.getPlayers().get(position));
+
+  }
   /**
    * results() calculates all players' scores
    */
@@ -37,7 +58,7 @@ abstract class Matchmanager{
    * setPersonalGoal() assigns to each player inside the given array a random PersonalGoalCard, randomly extracted
    * by the PersonalGoalCards.json File
    */
-  public void setPersonalGoal(Player[] p){
+  public void setPersonalGoal(ArrayList<Player> p){
     int max_rnd=12;
     ArrayList<PersonalGoalCard> rand=generateArrayFromJSON();
     for(Player player:p){
@@ -103,7 +124,7 @@ abstract class Matchmanager{
   /**
    * IsEmpyBoard() checks if board is empty
    */
-  public void IsEmpyBoard(Match m) {
+  public void IsEmptyBoard(Match m) {
     int countSingolCard = 0;
     ArrayList<Integer> group = m.getBoard().Group();
     for (Integer i : group) {
