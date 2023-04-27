@@ -29,9 +29,10 @@ public abstract class Matchmanager{
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
 
+    match.getBoard().fill(0);
+
     int position = (int)(Math.random() * 4);
     match.setChair(match.getPlayers().get(position));
-
 
   }
   /**

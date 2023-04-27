@@ -4,6 +4,7 @@ import it.polimi.ingsw.enumeration.GameState;
 import it.polimi.ingsw.enumeration.TurnPhase;
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.Numb_Player;
+import it.polimi.ingsw.message.PutInLib;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Player;
@@ -83,10 +84,12 @@ public class MatchController {
         }
 
         match.getMatchmanager().startGame();
-        //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
+
 
         this.turnController = new TurnController(this,players,match.getChair().getNickname(),match);
+        turnController.setActivePlayer(match.getChair().getNickname());
 
+        //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
     }
 
     //------------------------On message received-------------------------------------------
@@ -100,7 +103,7 @@ public class MatchController {
             m.visit(this);
         }
         else{
-            //virtualview avvisa al cliente che non è il sup turno.
+            // TODO virtualview avvisa al cliente che non è il sup turno.
         }
     }
 
@@ -111,7 +114,7 @@ public class MatchController {
     public void handler(Numb_Player numberPlayer){
         match.setMatch(numberPlayer.getNumb());
 
-        //virtualview che dice che attende gli altri giocatori
+        // TODO virtualview che dice che attende gli altri giocatori
     }
     /**
      * this message the server received the card chosen by the player
@@ -127,7 +130,7 @@ public class MatchController {
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
-            //messaggio virtualview per dire al giocatore le colonne possibili
+            //TODO messaggio virtualview per dire al giocatore le colonne possibili
         }
         else{
             //messagio virtualview non può prenderli
@@ -135,9 +138,24 @@ public class MatchController {
 
     }
 
+    /**
+     * Put the card in the library and notify the common cards
+     * @param m
+     */
+    public void handler(PutInLib m){
+        int coloum = m.getColumn();
+        String player = m.getnickname();
+        ArrayList<Card> cards = m.getCardsInOrder();
+
+        match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
+
+        //TODO turncontroller cambia turno.
+    }
+
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
-        //se si vuole aggiungere l'observer della virtualview
+        //TODO se si vuole aggiungere l'observer della virtualview
     }
 }

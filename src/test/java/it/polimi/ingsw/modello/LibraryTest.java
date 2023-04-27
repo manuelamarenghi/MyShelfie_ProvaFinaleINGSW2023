@@ -5,6 +5,8 @@ import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 class LibraryTest {
     /**
      * showColumn1() tests where you can put 2 cards with some column permitted
@@ -78,9 +80,9 @@ class LibraryTest {
     @Test
     void setColumn1() {
         Library library = new Library();
-        Card[] cards = new Card[1];
-        cards[0]=new Card();
-        cards[0].setColour("V");
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card());
+        cards.get(0).setColour("V");
         Library l = new Library();
         l.getCardinPos(5,2).setColour("V");
         library.setColumn(cards, 2);
@@ -98,11 +100,11 @@ class LibraryTest {
     @Test
     void setColumn2() {
         Library library = new Library();
-        Card[] cards = new Card[2];
-        cards[0]=new Card();
-        cards[0].setColour("V");
-        cards[1]=new Card();
-        cards[1].setColour("V");
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(new Card());
+        cards.get(0).setColour("V");
+        cards.add(new Card());
+        cards.get(1).setColour("V");
         Library l = new Library();
         l.getCardinPos(5,2).setColour("V");
         l.getCardinPos(4,2).setColour("R");
