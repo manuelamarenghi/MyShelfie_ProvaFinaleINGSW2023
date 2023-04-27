@@ -2,6 +2,9 @@ package it.polimi.ingsw.message;
 
 
 import it.polimi.ingsw.Controller.MatchController;
+import it.polimi.ingsw.modello.Card;
+
+import java.util.ArrayList;
 
 
 /**
@@ -10,13 +13,16 @@ import it.polimi.ingsw.Controller.MatchController;
 
 public class PutInLib extends Message{
     private int column;
-    public PutInLib(int x,String name){
+    private ArrayList<Card> cardsInOrder;
+    public PutInLib(int x,String name,ArrayList<Card> cards){
         super(name,"puts_in_library");
         this.column=x;
+        this.cardsInOrder = cards;
     }
     public int getColumn() {
         return column;
     }
+    public ArrayList<Card> getCardsInOrder(){return  cardsInOrder;}
     @Override
     public void visit(MatchController c) {
         // metodo che gestisce messaggio specifico
