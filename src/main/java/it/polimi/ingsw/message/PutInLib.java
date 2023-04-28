@@ -1,18 +1,31 @@
 package it.polimi.ingsw.message;
 
-import it.polimi.ingsw.network.Client;
+
+import it.polimi.ingsw.Controller.MatchController;
+import it.polimi.ingsw.modello.Card;
+
+import java.util.ArrayList;
+
 
 /**
  * message from client to server to put cards in library
  */
-public class PutInLib extends MessageContent{
-    private int column;
-    public PutInLib(int x){
-        super("puts_in_library",x);
-        this.column=x;
-    }
 
+public class PutInLib extends Message{
+    private int column;
+    private ArrayList<Card> cardsInOrder;
+    public PutInLib(int x,String name,ArrayList<Card> cards){
+        super(name,"puts_in_library");
+        this.column=x;
+        this.cardsInOrder = cards;
+    }
     public int getColumn() {
         return column;
     }
+    public ArrayList<Card> getCardsInOrder(){return  cardsInOrder;}
+    @Override
+    public void visit(MatchController c) {
+        // metodo che gestisce messaggio specifico
+    }
+
 }

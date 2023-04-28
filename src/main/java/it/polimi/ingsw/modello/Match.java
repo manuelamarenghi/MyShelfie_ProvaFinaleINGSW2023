@@ -6,7 +6,11 @@ import java.util.ArrayList;
  *  this class is used to initialize the match in Main Class
  */
 public class Match {
+    public static final int MAX_PLAYERS = 4;
+    public static final int MIN_PLAYERS = 2;
     private ArrayList<Player> players;
+
+    private int playerNumber;
 private Board board;
 private Player firstFinish;
 private Player chair;
@@ -16,17 +20,20 @@ private Matchmanager matchmanager;
      *  the constructor initialize the manager based on number of players
      *  MatchManager is an abstract class and has 3 classes that extends it
      */
-    public Match(int n) {
-        players = new ArrayList<>(n);
-        this.setChair(players.get(0));
-        if (n == 4) {
-            matchmanager = new FourPlayers();
+    public Match(){
+
+    }
+    public void setMatch(int number) {
+        players = new ArrayList<>(number);
+        playerNumber =number;
+        if (number == 4) {
+            matchmanager = new FourPlayers(this);
         }
-        if (n == 3) {
-            matchmanager = new ThreePlayers();
+        if (number == 3) {
+            matchmanager = new ThreePlayers(this);
         }
-        if (n == 2) {
-            matchmanager = new TwoPlayers();
+        if (number == 2) {
+            matchmanager = new TwoPlayers(this);
         }
     }
 
@@ -38,6 +45,9 @@ private Matchmanager matchmanager;
         return CommonCards;
     }
 
+    public int getPlayerNumber(){
+        return playerNumber;
+    }
     public Player getChair() {
         return chair;
     }
@@ -73,7 +83,25 @@ private Matchmanager matchmanager;
     public ArrayList<Player> getPlayers() {
         return players;
     }
+
+    public ArrayList<String> getPlayersNickname(){
+        ArrayList<String> nickname = new ArrayList<>();
+        for(Player p:players){
+            nickname.add(p.getNickname());
+        }
+        return  nickname;
+    }
+
+    public Player getPlayerByNickname(String nickname){
+        for(Player p: players){
+            if(p.getNickname().equals(nickname))
+                return p;
+        }
+        return null;
+    }
     public void setPlayers(Player p){
         players.add(p);
     }
+
+
 }
