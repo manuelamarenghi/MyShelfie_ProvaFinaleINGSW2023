@@ -69,12 +69,13 @@ public class Library implements Iterable<Card> {
     /**
      * setColumn() puts n cards in a chosen column
      */
-    public void setColumn(Card[] cards,int n){
+    public void setColumn(ArrayList<Card> cards,int n){
         int i=5;
         int l=0;
-        while(i>0 && l!= cards.length){
+
+        while(i>0 && l!= cards.size()){
             if(library[i][n].getColour().isEmpty()){
-                library[i][n]=cards[l];
+                library[i][n]=cards.get(l);
                 l++;
             }
             i--;
@@ -83,7 +84,7 @@ public class Library implements Iterable<Card> {
     /**
      * takeAction() puts n cards in n-1 column
      */
-    public void takeAction(Card[] cards,int n) throws NotUsableException {
+    /*public void takeAction(Card[] cards,int n) throws NotUsableException {
         List<Integer> list=Arrays.stream(showColumn(cards.length)).boxed().collect(Collectors.toList());
         if(!list.contains(n)){
             throw new NotUsableException();
@@ -91,7 +92,7 @@ public class Library implements Iterable<Card> {
         else{
             setColumn(cards,n-1);
         }
-    }
+    }*/
     /**
      * getgroup() returns adjacent items in a given library
      */
