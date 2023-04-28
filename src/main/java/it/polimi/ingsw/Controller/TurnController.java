@@ -38,16 +38,16 @@ public class TurnController {
 
 
     /**
-     * checks if the turn is completed
-     */
-    public void nextTurn(){
-
-    }
-
-    /**
-     * check if the player have completed a round and next player
+     * next player
      */
     public void nextPlayer(){
+        int currentActive = nicknamePlayers.indexOf(activePlayer);
+        if(currentActive+1<match.getPlayerNumber())
+            currentActive +=1;
+        else
+            currentActive=0;
+        activePlayer = nicknamePlayers.get(currentActive);
+
 
     }
 

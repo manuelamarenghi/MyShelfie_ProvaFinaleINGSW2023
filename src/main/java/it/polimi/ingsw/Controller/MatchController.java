@@ -57,6 +57,10 @@ public class MatchController {
         this.gameState = gameState;
     }
 
+    private void addPlayers(String nickname){
+        players.add(nickname);
+    }
+
 
     /**
      * connect new player and his virtualview
@@ -66,14 +70,14 @@ public class MatchController {
     public void loginHandler(String nickname,VirtualView virtualView){
         if(connectClients.isEmpty()){
             addVirtualView(nickname,virtualView);
-            match.setPlayers(new Player(nickname));
+            addPlayers(nickname);
 
             //chiamata virtualview
 
         }
         else if(connectClients.size() < match.getPlayerNumber()){
             addVirtualView(nickname,virtualView);
-            match.setPlayers(new Player(nickname));
+            addPlayers(nickname);
         }
         else{
             //avviso virtualview che ci sono già abbastanza giocatori
@@ -91,11 +95,34 @@ public class MatchController {
 
         match.getMatchmanager().startGame();
 
+        String firstPlayer = match.getChair().getNickname();
+        int indexFirst = players.indexOf(firstPlayer);
+        ArrayList<String> playerInOrder = new ArrayList<>();
+
+        //Order player according with the chair
+        if(indexFirst !=0) {
+            for (int i = indexFirst; i < numberOfPlayers; i++) {
+                playerInOrder.add(players.get(i));
+            }
+            for(int i = 0;i<indexFirst;i++){
+                playerInOrder.add(players.get(i));
+            }
+        }
+        else {
+            for(int i = 0;i<numberOfPlayers;i++){
+                playerInOrder.add(players.get(i));
+            }
+        }
+        players=playerInOrder;
+
 
         this.turnController = new TurnController(this,players,match.getChair().getNickname(),match);
-        turnController.setActivePlayer(match.getChair().getNickname());
-
         //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
+    }
+
+    private void nextPlayer(){
+        turnController.nextPlayer();
+        //TODO avviso il player che deve giocare
     }
 
     //------------------------On message received-------------------------------------------
@@ -147,6 +174,7 @@ public class MatchController {
 
     /**
      * Put the card in the library and notify the common cards
+     * call next player
      * @param m
      */
     public void handler(PutInLib m){
@@ -157,7 +185,7 @@ public class MatchController {
         match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
 
-        //TODO turncontroller cambia turno.
+        nextPlayer();
     }
 
     //----------------------VIRTUALVIEW METHODS----------------
