@@ -35,6 +35,7 @@ public class EffectiveCard extends Observer {
 
         if(commonCard.check(player.getLibrary())){
             player.setCommonGoalScore(allScores.get(0));
+            player.getView().assignedCC(this, allScores.get(0), player.getNickname());
             allScores.remove(0);
         }
         return commonCard.expired(player.getLibrary());

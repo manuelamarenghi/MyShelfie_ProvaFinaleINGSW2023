@@ -67,17 +67,24 @@ public class MatchController {
         if(connectClients.isEmpty()){
             addVirtualView(nickname,virtualView);
             match.setPlayers(new Player(nickname));
-
+            match.getPlayerByNickname(nickname).setView(virtualView);
+            virtualView.askNumbPlayer();
             //chiamata virtualview
 
         }
         else if(connectClients.size() < match.getPlayerNumber()){
             addVirtualView(nickname,virtualView);
             match.setPlayers(new Player(nickname));
+            virtualView.acceptmatch();
+            for(String nick: connectClients.keySet()){
+                if(!nick.equals(nickname)){
+                    connectClients.get(nick).updateanotherplayerconnect(nickname);
+                }
+            }
         }
         else{
             //avviso virtualview che ci sono già abbastanza giocatori
-
+            virtualView.Gamefull();
         }
     }
 
@@ -132,12 +139,15 @@ public class MatchController {
             for(Card card : cardSelect){
                 match.getBoard().takeCard(card.getCoordinates());
             }
-
+            for(String s: connectClients.keySet()){
+                connectClients.get(s).updateboard(match.getBoard());
+            }
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
             //TODO messaggio virtualview per dire al giocatore le colonne possibili
             //messaggio virtualview per dire al giocatore le colonne possibili
+            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum);
         }
         else{
             //messagio virtualview non può prenderli
@@ -155,6 +165,9 @@ public class MatchController {
         ArrayList<Card> cards = m.getCardsInOrder();
 
         match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        for(String s: connectClients.keySet()) {
+            connectClients.get(s).updatelibrary(match.getPlayerByNickname(player).getLibrary(), player);
+        }
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
 
         //TODO turncontroller cambia turno.

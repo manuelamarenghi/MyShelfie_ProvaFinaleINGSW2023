@@ -27,7 +27,7 @@ public class VirtualView implements View {
      */
     @Override
     public void acceptmatch() {
-
+           clientHandler.sendMessage(new StartMatch("Server"));
     }
     /**
      * askNumbPlayer() for number of player
@@ -89,5 +89,17 @@ public class VirtualView implements View {
     public void updateanotherplayerconnect(String name){
         clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
     }
-
+    /**
+     * assignedCC() update the client when a common goal score is assigned
+     */
+    @Override
+    public void assignedCC(EffectiveCard e, int x,String name) {
+        clientHandler.sendMessage(new Assigned_CC(x,name,e));
+    }
+    /**
+     * assignedChair() assigned chair to a random player
+     */
+    public void assignedChair(String name){
+        clientHandler.sendMessage(new ChairAssigned(name));
+    }
 }

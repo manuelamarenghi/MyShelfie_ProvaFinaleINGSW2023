@@ -17,4 +17,6 @@ public interface View {
     void updateplayerconnect(String name);
     void sendCommonCard(EffectiveCard[] card);
     void sendPersonalCard(PersonalGoalCard p);
+    void assignedCC(EffectiveCard e,int x,String name);
+    void assignedChair(String name);
 }
