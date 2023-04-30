@@ -2,7 +2,7 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
 
-import java.util.Observable;
+import it.polimi.ingsw.network.observer.Observable;
 
 public abstract class Client extends Observable {
     //private final int IDClient;
