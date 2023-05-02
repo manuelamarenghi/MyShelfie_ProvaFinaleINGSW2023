@@ -80,6 +80,7 @@ public class Library implements Iterable<Card> {
             }
             i--;
         }
+
     }
     /**
      * takeAction() puts n cards in n-1 column
@@ -160,5 +161,18 @@ public class Library implements Iterable<Card> {
         for(int i=0;i<5;i++){
             if(!this.library[rowNumber][i].getColour().equals("")) counter++;
         }return counter;
+    }
+
+    /**
+     * check the library is full
+     * @return true if the library is full , false otherwise
+     */
+    public boolean isFull() {
+        for (int j=0;j<5;j++)
+        {
+            if(library[0][j].getColour().isEmpty())
+                return  false;
+        }
+        return true;
     }
 }
