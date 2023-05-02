@@ -121,7 +121,7 @@ public class PlayerManager {
                 score+=3;}
             if(i==5){
                 score+=5;}
-            if(i>6){
+            if(i>=6){
                 score+=8;}
         }
         return score;

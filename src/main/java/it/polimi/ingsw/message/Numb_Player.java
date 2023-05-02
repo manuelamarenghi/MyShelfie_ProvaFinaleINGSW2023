@@ -16,7 +16,7 @@ public class Numb_Player extends Message {
     }
     @Override
     public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
+        c.handler(this);
     }
 
 }
