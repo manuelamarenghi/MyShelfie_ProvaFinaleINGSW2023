@@ -25,7 +25,7 @@ public class PutInLib extends Message{
     public ArrayList<Card> getCardsInOrder(){return  cardsInOrder;}
     @Override
     public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
+        c.handler(this);
     }
 
 }
