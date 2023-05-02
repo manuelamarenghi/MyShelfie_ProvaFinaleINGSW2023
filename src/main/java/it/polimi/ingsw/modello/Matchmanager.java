@@ -32,11 +32,12 @@ public abstract class Matchmanager{
     setEffectiveCards(match);
 
     createBoard(match);
-
-
     int position = (int)(Math.random() * 4);
     match.setChair(match.getPlayers().get(position));
-
+    for(Player p: match.getPlayers()){
+      p.getView().CreateMatch(match);
+      p.getView().assignedChair(match.getChair().getNickname());
+    }
   }
   /**
    * results() calculates all players' scores

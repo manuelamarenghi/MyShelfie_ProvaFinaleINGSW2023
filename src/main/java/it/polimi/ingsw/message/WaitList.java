@@ -10,8 +10,5 @@ public class WaitList extends Message{
     public WaitList(String name){
         super(name,"Game_full");
     }
-    @Override
-    public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
-    }
+
 }
