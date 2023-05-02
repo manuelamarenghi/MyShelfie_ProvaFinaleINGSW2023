@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class ThreePlayers extends Matchmanager {
 
+
     public ThreePlayers(){
 
     }

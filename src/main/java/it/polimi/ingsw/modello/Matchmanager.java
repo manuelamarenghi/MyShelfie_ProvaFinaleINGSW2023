@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public abstract class Matchmanager{
+
   /**
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number
@@ -24,12 +25,14 @@ public abstract class Matchmanager{
    * fill the board
    * start game
    */
+
   public void startGame(Match match){
 
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
 
     createBoard(match);
+
 
     int position = (int)(Math.random() * 4);
     match.setChair(match.getPlayers().get(position));

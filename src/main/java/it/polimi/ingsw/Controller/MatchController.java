@@ -27,7 +27,9 @@ public class MatchController {
     private ArrayList<String> disconnectClients;
     private Map<String, VirtualView> connectClients;
 
+
     private boolean isStarted = false;
+
 
     private GameState gameState;
     private TurnPhase turnPhase;
@@ -49,6 +51,7 @@ public class MatchController {
     }
 
     public Match getMatch(){return match;}
+
 
     /**
      * Set the State of the Game.
@@ -95,6 +98,7 @@ public class MatchController {
         for(String name : players){
             this.match.setPlayers(new Player(name));
         }
+
 
         match.getMatchmanager().startGame(match);
 
@@ -174,6 +178,7 @@ public class MatchController {
         match.setMatch(numberPlayer.getNumb());
         numberOfPlayers = numberPlayer.getNumb();
 
+
         // TODO virtualview che dice che attende gli altri giocatori
     }
     /**
@@ -192,7 +197,6 @@ public class MatchController {
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
             //TODO messaggio virtualview per dire al giocatore le colonne possibili
-
 
         }
         else{

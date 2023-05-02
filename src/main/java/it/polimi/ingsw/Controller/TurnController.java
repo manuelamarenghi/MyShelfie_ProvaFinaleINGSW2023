@@ -15,13 +15,12 @@ public class TurnController {
     private String activePlayer;
     private boolean lastRound = false;
 
-
     public TurnController(ArrayList<String> nicknames,String activePlayer,Match match){
-
         this.match = match;
         this.nicknamePlayers = nicknames;
 
         this.activePlayer = activePlayer;
+
     }
 
     public String getActivePlayer(){
@@ -31,10 +30,12 @@ public class TurnController {
     public void setActivePlayer(String nickname){
         this.activePlayer= nickname;
     }
+
     public boolean getLastRound(){return lastRound;}
     public void setLastRound(boolean b){
         lastRound=b;
     }
+
 
 
 
@@ -52,6 +53,7 @@ public class TurnController {
 
         activePlayer = nicknamePlayers.get(currentActive);
         return true;
+
     }
 
 }
