@@ -11,8 +11,5 @@ public class Disconnection_Answer extends Message{
     public Disconnection_Answer(String name){
         super(name,"you_are_disconnected");
     }
-    @Override
-    public void MextoClientHandler(ClientHandler c) {
-        // metodo che gestisce messaggio specifico
-    }
+
 }

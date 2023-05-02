@@ -9,8 +9,5 @@ public class ChairAssigned extends Message{
     public ChairAssigned(String name){
         super(name,"assigned_chair");
     }
-    @Override
-    public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
-    }
+
 }

@@ -18,6 +18,6 @@ public class MexInChat extends Message{
     }
     @Override
     public void MextoClientHandler(ClientHandler c) {
-         
+         c.sendMessage(this);
     }
 }

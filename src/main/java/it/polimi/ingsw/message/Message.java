@@ -2,7 +2,6 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.MatchController;
-import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.ClientHandler;
 
 
@@ -38,11 +37,11 @@ public abstract class Message implements Serializable {
     }
 
     /**
-     * visit() let controller use the specific method to Handle this message
+     * visitServer() let controller use the specific method to Handle this message
      *
      * @param c
      */
-    public void visit(MatchController c) {
+    public void visitServer(MatchController c) {
         // metodo che gestisce messaggio
     }
 

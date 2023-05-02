@@ -10,8 +10,4 @@ public class AcceptPlayer extends Message{
     public AcceptPlayer(String name){
         super(name,"accepted_in_the_match");
     }
-    @Override
-    public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
-        }
 }
