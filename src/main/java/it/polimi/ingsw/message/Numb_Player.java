@@ -15,7 +15,7 @@ public class Numb_Player extends Message {
         return numb;
     }
     @Override
-    public void visit(MatchController c) {
+    public void visitServer(MatchController c) {
         c.handler(this);
     }
 

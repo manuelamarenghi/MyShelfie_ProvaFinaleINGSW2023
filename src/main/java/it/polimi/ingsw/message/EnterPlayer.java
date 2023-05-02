@@ -11,18 +11,9 @@ import it.polimi.ingsw.network.Client;
 
 
 public class EnterPlayer extends Message{
-    private String nick;
 
     public EnterPlayer(String nick){
         super(nick,"enter_player");
-        this.nick=nick;
-    }
-    public String getNick() {
-        return nick;
-    }
-    @Override
-    public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
     }
 
 }

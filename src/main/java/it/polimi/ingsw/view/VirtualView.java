@@ -1,11 +1,10 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.message.*;
-import it.polimi.ingsw.modello.Board;
-import it.polimi.ingsw.modello.EffectiveCard;
-import it.polimi.ingsw.modello.Library;
-import it.polimi.ingsw.modello.PersonalGoalCard;
+import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.ClientHandler;
+
+import java.util.HashMap;
 
 /**
  * this class implements methods to send message to a specific client
@@ -20,14 +19,7 @@ public class VirtualView implements View {
      */
     @Override
     public void askNickname() {
-
-    }
-    /**
-     * acceptmatch() response whe the match is started from a player
-     */
-    @Override
-    public void acceptmatch() {
-           clientHandler.sendMessage(new StartMatch("Server"));
+        clientHandler.sendMessage(new Message(null,"Change_nickname"));
     }
     /**
      * askNumbPlayer() for number of player
@@ -51,27 +43,6 @@ public class VirtualView implements View {
          clientHandler.sendMessage(new Updatelibrary(l,nickname));
     }
     /**
-     *  updateplayerconnect() update the match if a player has disconnected
-     */
-    @Override
-    public void updateplayerconnect(String name) {
-        clientHandler.sendMessage(new Disconnection_Answer(name));
-    }
-    /**
-     *  sendCommonCard() when a player enter the match
-     */
-    @Override
-    public void sendCommonCard(EffectiveCard[] card) {
-        clientHandler.sendMessage(new Show_Ccard(card));
-    }
-    /**
-     * sendPersonalCard() when a player enter the match
-     */
-    @Override
-    public void sendPersonalCard(PersonalGoalCard card) {
-            clientHandler.sendMessage(new Show_Pcard(card));
-    }
-    /**
      * showPossibleColumn() columns where the player can put items
      */
     public void showPossibleColumn(String s,int[] x){
@@ -86,8 +57,11 @@ public class VirtualView implements View {
     /**
      * updateanotherplayerconnect() update others player view when one has disconnected
      */
-    public void updateanotherplayerconnect(String name){
-        clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
+    public void updateanotherplayerconnect(String name,Boolean connected,Player p){
+        if(connected=false) {
+            clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
+        }
+        else{ clientHandler.sendMessage(new PlayerReturned(p));}
     }
     /**
      * assignedCC() update the client when a common goal score is assigned
@@ -102,4 +76,56 @@ public class VirtualView implements View {
     public void assignedChair(String name){
         clientHandler.sendMessage(new ChairAssigned(name));
     }
+
+    /**
+     * NotallowedCard() when a player choose card not adjacent
+     * @param name
+     */
+    public void NotallowedCard(String name){
+        clientHandler.sendMessage(new NotTakeCardBoard(name));
+    }
+    /**
+     * AcceptNewPlayer() when a player join the game
+     */
+    public void AcceptNewPlayer(String name){
+        clientHandler.sendMessage(new AcceptPlayer(name));
+    }
+    /**
+     * YourTurn() to notify when is your turn
+     */
+    public void YourTurn(){
+        clientHandler.sendMessage(new Message("Server","Your_turn"));
+    }
+    /**
+     * CreateMatch() create the game
+     */
+    @Override
+    public void CreateMatch(Match m) {
+        clientHandler.sendMessage(new Created_Match(m));
+    }
+    /**
+     * EndGame() send the classification to all players
+     */
+    public void EndGame(HashMap<String,Integer> x){
+        clientHandler.sendMessage(new Final_point(x,null));
+    }
+    /**
+     * FirstFinished() notify other player that the game is going to end
+     */
+    public void FirstFinished(String name){
+        clientHandler.sendMessage(new First_finish(name));
+    }
+    /**
+     * GenericMessage() send a generic message
+     */
+    public void GenericMessage(String s,String c){
+        clientHandler.sendMessage(new Message(c,s));
+    }
+    /**
+     * sendNumbPlayer() send to all players the number setted from the first entered
+     */
+    public void sendNumbPlayer(int x){
+        clientHandler.sendMessage(new Numb_Player_Answer(x));
+    }
+
 }

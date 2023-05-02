@@ -11,8 +11,6 @@ import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
 
-import org.apache.maven.properties.internal.EnvironmentUtils;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +22,7 @@ public class MatchController {
     private int numberOfPlayers;
     private ArrayList<String> players;
     private TurnController turnController;
-    private ArrayList<String> disconnectClients;
+    private Map<Player, VirtualView> disconnectClients;
     private Map<String, VirtualView> connectClients;
 
 
@@ -37,6 +35,7 @@ public class MatchController {
     public MatchController(){
         this.match = new Match();
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
+        this.disconnectClients=Collections.synchronizedMap(new HashMap<>());
     }
 
 
@@ -65,32 +64,34 @@ public class MatchController {
     private void addPlayers(String nickname){
         players.add(nickname);
     }
-
-
     /**
      * connect new player and his virtualview
      * the first player, he needs choose how many player play
      *  other player, add virtualview and wait the game start
      */
-    public void loginHandler(String nickname,VirtualView virtualView){
-        if(connectClients.isEmpty()){
-            addVirtualView(nickname,virtualView);
-            addPlayers(nickname);
-
-            //chiamata virtualview
-
-        }
-        else if(connectClients.size() < match.getPlayerNumber()){
-            addVirtualView(nickname,virtualView);
-            addPlayers(nickname);
-        }
-        else{
-            startGame();
-            //avviso virtualview che ci sono già abbastanza giocatori
-
+    public synchronized void loginHandler(String nickname, VirtualView virtualView) {
+        if (connectClients.keySet().contains(nickname)) {
+               virtualView.askNickname();
+        } else {
+            if (connectClients.isEmpty()) {
+                addVirtualView(nickname, virtualView);
+                addPlayers(nickname);
+                match.getPlayerByNickname(nickname).setView(virtualView);
+                connectClients.get(nickname).askNumbPlayer();
+            } else if (connectClients.size() < match.getPlayerNumber()) {
+                addVirtualView(nickname, virtualView);
+                addPlayers(nickname);
+                match.getPlayerByNickname(nickname).setView(virtualView);
+                for (VirtualView v : connectClients.values()) {
+                    if(!connectClients.equals(connectClients.get(nickname)))
+                             {v.AcceptNewPlayer(nickname);}
+                }
+                if(connectClients.size() == match.getPlayerNumber()){ startGame();}
+            } else {
+                connectClients.get(nickname).Gamefull();
+            }
         }
     }
-
     /**
      * Start game
      */
@@ -98,7 +99,6 @@ public class MatchController {
         for(String name : players){
             this.match.setPlayers(new Player(name));
         }
-
 
         match.getMatchmanager().startGame(match);
 
@@ -122,7 +122,6 @@ public class MatchController {
         }
 
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
-        //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
     }
 
     /**
@@ -130,28 +129,63 @@ public class MatchController {
      * call endgame when don't have a next player
      */
     private void nextPlayer(){
-        if(turnController.nextPlayer() == true);
-        //TODO avviso il player che deve giocare
+        if(turnController.nextPlayer() == true)
+            connectClients.get(turnController.getActivePlayer()).YourTurn();
         else{
             endGame();
-
         }
     }
-
     /**
      * END GAME
      * Send the score to the player
      */
     public void endGame(){
         HashMap<String,Integer> results = match.getMatchmanager().results(match);
-        //TODO avviso i giocatori che il gioco è finito e visualizza il punteggio.
-
+        for(VirtualView v: connectClients.values()){
+         v.EndGame(results);
+        }
     }
     private void firstFinish(Player p){
         turnController.setLastRound(true);
         match.setFirstFinish(p);
+        for(VirtualView v: connectClients.values()){
+            v.FirstFinished(match.getFirstFinish().getNickname());
+        }
     }
-
+    /**
+     * removeClient() when a client wants to live or has problem with the connection
+     * @param nickname
+     */
+    public void removeClient(String nickname){
+        Player p=match.getPlayerByNickname(nickname);
+        disconnectClients.put(p,connectClients.get(nickname));
+        connectClients.remove(nickname);
+        match.getPlayers().remove(p);
+        for(VirtualView v: connectClients.values()){
+            v.updateanotherplayerconnect(nickname,false,null);
+        }
+    }
+    /**
+     * PlayerBack() when a player before disconnected returns back
+     * @param name
+     */
+    public void PlayerBack(String name){
+        Player player=null;
+        for(Player p: disconnectClients.keySet())
+        {
+            if(p.getNickname().equals(name)){  player=p;}
+        }
+        connectClients.put(name,disconnectClients.get(player));
+        disconnectClients.remove(player);
+        match.getPlayers().add(player);
+        for(VirtualView v: connectClients.values()) {
+            if (v.equals(connectClients.get(player.getNickname()))) {
+                v.CreateMatch(match);
+            } else {
+                v.updateanotherplayerconnect(name, true, player);
+            }
+        }
+    }
     //------------------------On message received-------------------------------------------
 
     /**
@@ -161,13 +195,13 @@ public class MatchController {
     public void messageHandler (Message m){
         if(isStarted == true) {
             if (turnController.getActivePlayer().equals(m.getnickname())) {
-                m.visit(this);
+                m.visitServer(this);
             } else {
-                // TODO virtualview avvisa al cliente che non è il suo turno.
+                connectClients.get(m.getnickname()).GenericMessage(null,"WrongAction");
             }
         }
         else
-            m.visit(this);
+            m.visitServer(this);
     }
 
     /**
@@ -177,9 +211,9 @@ public class MatchController {
     public void handler(Numb_Player numberPlayer){
         match.setMatch(numberPlayer.getNumb());
         numberOfPlayers = numberPlayer.getNumb();
-
-
-        // TODO virtualview che dice che attende gli altri giocatori
+        for(VirtualView v: connectClients.values()){
+            v.sendNumbPlayer(numberOfPlayers);
+        }
     }
     /**
      * this message the server received the card chosen by the player
@@ -192,19 +226,18 @@ public class MatchController {
                 match.getBoard().takeCard(card.getCoordinates());
             }
             match.getMatchmanager().IsEmptyBoard(match);
-
+            for(VirtualView v: connectClients.values()){
+                v.updateboard(match.getBoard());
+            }
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
-            //TODO messaggio virtualview per dire al giocatore le colonne possibili
-
+            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum);
         }
         else{
-            //messagio virtualview non può prenderli
+            connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
         }
-
     }
-
     /**
      * Put the card in the library and notify the common cards
      * call next player
@@ -216,6 +249,9 @@ public class MatchController {
         ArrayList<Card> cards = m.getCardsInOrder();
 
         match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        for(VirtualView v: connectClients.values()){
+            v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(),m.getnickname());
+        }
         if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
@@ -228,6 +264,5 @@ public class MatchController {
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
-        //TODO se si vuole aggiungere l'observer della virtualview
     }
 }

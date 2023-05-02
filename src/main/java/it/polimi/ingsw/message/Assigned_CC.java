@@ -23,9 +23,6 @@ public class Assigned_CC extends  Message{
     public int getPoint() {
         return point;
     }
-    @Override
-    public void visit(MatchController c) {
-        // metodo che gestisce messaggio specifico
-    }
+
 
 }
