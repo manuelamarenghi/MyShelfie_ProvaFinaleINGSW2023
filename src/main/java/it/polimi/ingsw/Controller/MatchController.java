@@ -211,7 +211,8 @@ public class MatchController {
         String player = m.getnickname();
         ArrayList<Card> cards = m.getCardsInOrder();
 
-        if(match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum))
+        match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
 

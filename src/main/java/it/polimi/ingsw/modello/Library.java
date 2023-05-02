@@ -69,7 +69,7 @@ public class Library implements Iterable<Card> {
     /**
      * setColumn() puts n cards in a chosen column
      */
-    public boolean setColumn(ArrayList<Card> cards,int n){
+    public void setColumn(ArrayList<Card> cards,int n){
         int i=5;
         int l=0;
 
@@ -81,7 +81,6 @@ public class Library implements Iterable<Card> {
             i--;
         }
 
-        return isFull();
     }
     /**
      * takeAction() puts n cards in n-1 column
