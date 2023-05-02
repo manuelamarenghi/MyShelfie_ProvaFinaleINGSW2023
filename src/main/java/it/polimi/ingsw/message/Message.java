@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.ClientHandler;
 
@@ -43,6 +44,7 @@ public class Message implements Serializable {
     public void visitServer(MatchController c) {
         // metodo che gestisce messaggio
     }
+
 
     public void MextoClientHandler(ClientHandler c) {
     }
