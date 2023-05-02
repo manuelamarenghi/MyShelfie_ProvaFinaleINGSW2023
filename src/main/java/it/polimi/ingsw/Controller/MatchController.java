@@ -27,7 +27,7 @@ public class MatchController {
     private ArrayList<String> disconnectClients;
     private Map<String, VirtualView> connectClients;
 
-    private boolean isStarted;
+    private boolean isStarted = false;
 
     private GameState gameState;
     private TurnPhase turnPhase;
@@ -47,6 +47,8 @@ public class MatchController {
     public boolean getIsStarted(){
         return isStarted;
     }
+
+    public Match getMatch(){return match;}
 
     /**
      * Set the State of the Game.
@@ -80,6 +82,7 @@ public class MatchController {
             addPlayers(nickname);
         }
         else{
+            startGame();
             //avviso virtualview che ci sono già abbastanza giocatori
 
         }
@@ -113,8 +116,6 @@ public class MatchController {
                 playerInOrder.add(players.get(i));
             }
         }
-
-
 
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
         //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
@@ -154,12 +155,15 @@ public class MatchController {
      * @param m message
      */
     public void messageHandler (Message m){
-        if(turnController.getActivePlayer().equals(m.getnickname())){
+        if(isStarted == true) {
+            if (turnController.getActivePlayer().equals(m.getnickname())) {
+                m.visit(this);
+            } else {
+                // TODO virtualview avvisa al cliente che non è il suo turno.
+            }
+        }
+        else
             m.visit(this);
-        }
-        else{
-            // TODO virtualview avvisa al cliente che non è il suo turno.
-        }
     }
 
     /**
@@ -168,6 +172,7 @@ public class MatchController {
      */
     public void handler(Numb_Player numberPlayer){
         match.setMatch(numberPlayer.getNumb());
+        numberOfPlayers = numberPlayer.getNumb();
 
         // TODO virtualview che dice che attende gli altri giocatori
     }
