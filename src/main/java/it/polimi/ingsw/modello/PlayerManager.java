@@ -114,25 +114,16 @@ public class PlayerManager {
 
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
-        System.out.println("Your score starts from your CommonCards' score:"+score);
-        // calculate personalgoalcard's achievment and its score
-        System.out.println("You achieve from your PersonalGoalCard:"+this.showPersonalPoint(player));
         score+=this.showPersonalPoint(player);
-        // calculate scores about adjacent items
-        System.out.println("You achieve from your adjacent items:");
         ArrayList<Integer> groups=player.getLibrary().getgroup();
         for(Integer i: groups){
             if(i==3){
-                System.out.println("items"+i+" score: 2");
                 score+=2;}
             if(i==4){
-                System.out.println("items"+i+" score: 3");
                 score+=3;}
             if(i==5){
-                System.out.println("items"+i+" score: 5");
                 score+=5;}
             if(i>6){
-                System.out.println("items"+i+" score: 6");
                 score+=8;}
         }
         return score;
