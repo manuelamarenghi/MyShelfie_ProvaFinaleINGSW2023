@@ -72,7 +72,6 @@ public class Server {
          for(Object o: set){
              if(!o.equals(message.getnickname())){
                 message.MextoClientHandler(clientHandlerMap.get(o));
-
              }
          }
     }

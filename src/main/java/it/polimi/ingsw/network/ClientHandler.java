@@ -72,22 +72,28 @@ public class ClientHandler implements Runnable{
                     if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
-                    else if(message.getType().equals("Client_has_disconnected")){
-                        server.removeClient(message.getnickname());
-                    }
-                    else if(message.getType().equals("start_game")){
-                        server.startGame();
-                    }
                     else{
-                        if(message.getType().equals("Mex_in_chat")){
-                            server.broadcastMessage(this,message);
+                        if(message.getType().equals("Client_has_disconnected")){
+                            server.removeClient(message.getnickname());
+                        }
+                        else {
+                            if(message.getType().equals("start_game")){
+                                server.startGame();
+                            }
+                            else{
+                                if(message.getType().equals("Mex_in_chat")){
+                                    server.broadcastMessage(this,message);
+                                }
+                                else{
+                                    server.onMessageReceived(message);
+                                }
+                            }
                         }
                     }
             }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
 
         }
-
     }
 
     /**
