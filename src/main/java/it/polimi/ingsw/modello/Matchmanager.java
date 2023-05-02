@@ -119,6 +119,7 @@ public abstract class Matchmanager{
   /**
    * turn() manage a player's turn, a is for knowing if the player wants to pass his turn
    */
+  /*
   public void turn(Player p, Match m,int a) {
     if (a != -1) {
       p.getLibrary().showLibrary();
@@ -139,6 +140,7 @@ public abstract class Matchmanager{
       }
     }
   }
+  */
   /**
    * IsEmpyBoard() checks if board is empty
    */

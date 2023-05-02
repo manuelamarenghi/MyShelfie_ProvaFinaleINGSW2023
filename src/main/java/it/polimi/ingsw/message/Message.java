@@ -11,7 +11,7 @@ import java.io.Serializable;
  * this class create a generic message serializable
  */
 
-public abstract class Message implements Serializable {
+public class Message implements Serializable {
     protected String nickname;
     protected String type;
 
@@ -45,15 +45,8 @@ public abstract class Message implements Serializable {
         // metodo che gestisce messaggio
     }
 
-    public void visit(ClientController clientController){
-        //Gestisce i messaggi
-    }
-
 
     public void MextoClientHandler(ClientHandler c) {
     }
 
-    abstract void setPayload(String s);
-
-    abstract void redirectAnswer();
 }

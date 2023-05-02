@@ -20,4 +20,5 @@ public class MexInChat extends Message{
     public void MextoClientHandler(ClientHandler c) {
          c.sendMessage(this);
     }
+
 }
