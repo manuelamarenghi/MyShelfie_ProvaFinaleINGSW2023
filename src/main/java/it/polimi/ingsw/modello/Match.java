@@ -27,13 +27,13 @@ private Matchmanager matchmanager;
         players = new ArrayList<>(number);
         playerNumber =number;
         if (number == 4) {
-            matchmanager = new FourPlayers(this);
+            matchmanager = new FourPlayers();
         }
         if (number == 3) {
-            matchmanager = new ThreePlayers(this);
+            matchmanager = new ThreePlayers();
         }
         if (number == 2) {
-            matchmanager = new TwoPlayers(this);
+            matchmanager = new TwoPlayers();
         }
     }
 

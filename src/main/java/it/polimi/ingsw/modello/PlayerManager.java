@@ -22,28 +22,42 @@ public class PlayerManager {
      * the method lets you select the cards from the board ant put them in the library
      */
 
-    public Card[] selectCard(Player player , Board board , ArrayList<Card> selectedCardsTemp ){
-        int l;
+    public void selectCard(Player player , Board board){
+        int i , x , y , l;
+        Scanner value = new Scanner(System.in);
         Position tempPosition;
+        Card tempCard = new Card();
+        String answer;
         Card [] selectedCards  = {};
-        if(!board.allow(selectedCardsTemp)){
-            return null;
-        }
-        else{
-            for(l=0 ; l<selectedCardsTemp.size() ; l++){
-                selectedCards[l]=selectedCardsTemp.get(l);
-                tempPosition=new Position(selectedCardsTemp.get(l).getCoordinates().getX() , selectedCardsTemp.get(l).getCoordinates().getY());
-                board.takeCard(tempPosition);
+        ArrayList<Card> selectedCardsTemp  = new ArrayList<Card>(3);
+        while(true){//A while loop to select cards from board and to see if they can be taken or not
+            for(i=0 ; i<3 ; i++){
+                System.out.println("Select a card from the board");
+                System.out.println("Type card's x value");
+                x=value.nextInt();
+                System.out.println("Type card's y value");
+                y=value.nextInt();
+                tempCard=board.getCard(x,y);
+                selectedCardsTemp.add(tempCard);
+                System.out.println("Do you want to select other cards?");
+                answer = value.nextLine();
+                if(answer.equals("No") || answer.equals("NO") || answer.equals("no")){
+                    break;
+                }
+            }
+            if(!board.allow(selectedCardsTemp)){
+                System.out.println("The cards selected can not be taken");
+                System.out.println("Please select other cards");
+            }
+            else{
+                for(l=0 ; l<selectedCardsTemp.size() ; l++){
+                    selectedCards[i]=selectedCardsTemp.get(i);
+                    tempPosition=new Position(selectedCardsTemp.get(i).getCoordinates().getX() , selectedCardsTemp.get(i).getCoordinates().getY());
+                    board.takeCard(tempPosition);
+                }
+                break;
             }
         }
-        return selectedCards;
-        //Da sistemare i test qunado il metodo take action in library e quando il metodo turn in library saranno aggiornati
-    }
-    /**
-     *Puts the card in the library
-     */
-    public void putCard ( Card[] selectedCards , Player player) throws NotUsableException {
-        player.getLibrary().takeAction(selectedCards , selectedCards.length);
     }
 
     /**
@@ -98,25 +112,16 @@ public class PlayerManager {
 
     public int showProgressScore(Player player){
         int score=player.getCommonGoalScore();
-        System.out.println("Your score starts from your CommonCards' score:"+score);
-        // calculate personalgoalcard's achievment and its score
-        System.out.println("You achieve from your PersonalGoalCard:"+this.showPersonalPoint(player));
         score+=this.showPersonalPoint(player);
-        // calculate scores about adjacent items
-        System.out.println("You achieve from your adjacent items:");
         ArrayList<Integer> groups=player.getLibrary().getgroup();
         for(Integer i: groups){
             if(i==3){
-                System.out.println("items"+i+" score: 2");
                 score+=2;}
             if(i==4){
-                System.out.println("items"+i+" score: 3");
                 score+=3;}
             if(i==5){
-                System.out.println("items"+i+" score: 5");
                 score+=5;}
-            if(i>6){
-                System.out.println("items"+i+" score: 6");
+            if(i>=6){
                 score+=8;}
         }
         return score;
