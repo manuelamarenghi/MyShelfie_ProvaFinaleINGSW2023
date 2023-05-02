@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
-import it.polimi.ingsw.message.MessageContent;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,9 +15,9 @@ public class SocketClient extends Client{
     private final Socket socket;
     private final ObjectOutputStream outputStream;
     private final ObjectInputStream inputStream;
-    private String nickname;
 
     private final ExecutorService messageReader;
+    private String nickname;
 
     public SocketClient(String address,int port) throws IOException {
         this.socket = new Socket();
@@ -26,6 +25,14 @@ public class SocketClient extends Client{
         this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         this.inputStream = new ObjectInputStream(socket.getInputStream());
         this.messageReader = Executors.newSingleThreadExecutor();
+    }
+    public SocketClient(String address,int port,String nickname) throws IOException {
+        this.socket = new Socket();
+        this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
+        this.outputStream = new ObjectOutputStream(socket.getOutputStream());
+        this.inputStream = new ObjectInputStream(socket.getInputStream());
+        this.messageReader = Executors.newSingleThreadExecutor();
+        this.nickname=nickname;
     }
 
     @Override
@@ -36,7 +43,7 @@ public class SocketClient extends Client{
 
         }catch(IOException exception){
             disconnect();
-            notifyObservers(new Message(nickname,new MessageContent("Couldn't send message",null)));
+            notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
         }
     }
 
@@ -48,9 +55,9 @@ public class SocketClient extends Client{
                 try{
                     message=(Message)inputStream.readObject();
                 }catch(IOException|ClassNotFoundException exception){
-                    message=new Message(nickname,new MessageContent("Connection lost with server.",null));
+                    message=new Message(nickname,"Connection lost with server.");
                 }
-                notifyObservers(message);
+                notifyObserver(message);
             }
         });
     }
@@ -63,7 +70,7 @@ public class SocketClient extends Client{
                 socket.close();
             }
         }catch(IOException exception){
-            notifyObservers(new Message(nickname,new MessageContent("Couldn't disconnect",null)));
+            notifyObserver(new Message(nickname,"Couldn't disconnect"));
         }
 
     }
