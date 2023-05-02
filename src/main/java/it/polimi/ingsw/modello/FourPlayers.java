@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class FourPlayers extends Matchmanager {
 
-    public FourPlayers(Match m ){
-        super(m);
+    public FourPlayers(){
     }
 
     /**

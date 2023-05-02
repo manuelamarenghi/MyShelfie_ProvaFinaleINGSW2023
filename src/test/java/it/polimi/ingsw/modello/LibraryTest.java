@@ -185,4 +185,36 @@ class LibraryTest {
         library.showLibrary();
         library.getgroup();
     }
+
+    @Test
+    void isFullTrueTest(){
+        Library library = new Library();
+        library.getCardinPos(0,0).setColour("G");
+        library.getCardinPos(0,1).setColour("G");
+        library.getCardinPos(0,2).setColour("G");
+        library.getCardinPos(0,3).setColour("G");
+        library.getCardinPos(0,4).setColour("G");
+        Assertions.assertTrue(library.isFull());
+
+    }
+    @Test
+    void isFullFalseTest(){
+        Library library = new Library();
+        library.getCardinPos(0,0).setColour("G");
+        library.getCardinPos(0,1).setColour("G");
+        library.getCardinPos(0,2).setColour("G");
+        library.getCardinPos(0,4).setColour("G");
+        Assertions.assertFalse(library.isFull());
+
+    }
+    @Test
+    void isFullFalse2Test(){
+        Library library = new Library();
+        library.getCardinPos(0,0).setColour("G");
+        library.getCardinPos(0,1).setColour("G");
+        library.getCardinPos(0,3).setColour("G");
+        library.getCardinPos(0,4).setColour("G");
+        Assertions.assertFalse(library.isFull());
+
+    }
 }

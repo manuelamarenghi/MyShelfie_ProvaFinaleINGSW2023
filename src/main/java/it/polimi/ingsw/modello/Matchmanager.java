@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public abstract class Matchmanager{
-  Match match;
   /**
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number
    */
-  public Matchmanager(Match m){
-    this.match = m;
+  public Matchmanager(){
+
   }
 
   /**
@@ -24,12 +24,12 @@ public abstract class Matchmanager{
    * fill the board
    * start game
    */
-  public void startGame(){
+  public void startGame(Match match){
 
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
 
-    match.getBoard().fill(0);
+    createBoard(match);
 
     int position = (int)(Math.random() * 4);
     match.setChair(match.getPlayers().get(position));
@@ -38,7 +38,20 @@ public abstract class Matchmanager{
   /**
    * results() calculates all players' scores
    */
-  public int[] results(Match m) {
+  public HashMap<String,Integer> results(Match m) {
+    HashMap<String,Integer> scores = new HashMap<>();
+
+    int i=0;
+    for(Player p : m.getPlayers())
+    {
+      i=p.getPlayerManager().showProgressScore(p);
+      if(p.equals(m.getFirstFinish()))
+        i++;
+
+      scores.put(p.getNickname(),i);
+    }
+    return scores;
+    /*
     int[] scores = new int[m.getPlayers().size()];
     ArrayList<Player> p = m.getPlayers();
     int j = 0;
@@ -48,7 +61,8 @@ public abstract class Matchmanager{
         i++;
       }
     }
-    return scores;
+    return scores;*/
+
   }
   /**
    * checkState() returns the state of a player's connection
@@ -140,7 +154,15 @@ public abstract class Matchmanager{
   public ArrayList<Player> classification(Match m){
     ArrayList<Player> classification=new ArrayList<>(m.getPlayers().size());
     int j=1;
-    int[] scores=m.getMatchmanager().results(m);
+    HashMap<String,Integer> score = m.getMatchmanager().results(m);
+
+    int[]scores = new int[m.getPlayerNumber()];
+    int k=0;
+    for(Integer s : score.values())
+    {
+      scores[k] = s;
+      k++;
+    }
     int[] position= new int[]{0, 1, 2, 3};
     for (int i = 0; i < 4; ++i) {
       int key = scores[i];

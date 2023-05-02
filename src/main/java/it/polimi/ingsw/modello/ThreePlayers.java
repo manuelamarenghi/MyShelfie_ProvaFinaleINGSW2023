@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class ThreePlayers extends Matchmanager {
 
-    public ThreePlayers(Match m){
-        super(m);
+    public ThreePlayers(){
+
     }
 
     /**

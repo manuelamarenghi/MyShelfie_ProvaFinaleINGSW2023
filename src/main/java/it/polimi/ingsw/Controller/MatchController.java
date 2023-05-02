@@ -93,7 +93,7 @@ public class MatchController {
             this.match.setPlayers(new Player(name));
         }
 
-        match.getMatchmanager().startGame();
+        match.getMatchmanager().startGame(match);
 
         String firstPlayer = match.getChair().getNickname();
         int indexFirst = players.indexOf(firstPlayer);
@@ -113,16 +113,38 @@ public class MatchController {
                 playerInOrder.add(players.get(i));
             }
         }
-        players=playerInOrder;
 
 
-        this.turnController = new TurnController(this,players,match.getChair().getNickname(),match);
+
+        this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
         //virtualview per far vedere le personal card e manda un messagio al primo giocatore e farlo iniziare.
     }
 
+    /**
+     * next player
+     * call endgame when don't have a next player
+     */
     private void nextPlayer(){
-        turnController.nextPlayer();
+        if(turnController.nextPlayer() == true);
         //TODO avviso il player che deve giocare
+        else{
+            endGame();
+
+        }
+    }
+
+    /**
+     * END GAME
+     * Send the score to the player
+     */
+    public void endGame(){
+        HashMap<String,Integer> results = match.getMatchmanager().results(match);
+        //TODO avviso i giocatori che il gioco è finito e visualizza il punteggio.
+
+    }
+    private void firstFinish(Player p){
+        turnController.setLastRound(true);
+        match.setFirstFinish(p);
     }
 
     //------------------------On message received-------------------------------------------
@@ -136,7 +158,7 @@ public class MatchController {
             m.visit(this);
         }
         else{
-            // TODO virtualview avvisa al cliente che non è il sup turno.
+            // TODO virtualview avvisa al cliente che non è il suo turno.
         }
     }
 
@@ -159,12 +181,14 @@ public class MatchController {
             for(Card card : cardSelect){
                 match.getBoard().takeCard(card.getCoordinates());
             }
+            match.getMatchmanager().IsEmptyBoard(match);
 
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
             //TODO messaggio virtualview per dire al giocatore le colonne possibili
-            //messaggio virtualview per dire al giocatore le colonne possibili
+
+
         }
         else{
             //messagio virtualview non può prenderli
@@ -182,10 +206,13 @@ public class MatchController {
         String player = m.getnickname();
         ArrayList<Card> cards = m.getCardsInOrder();
 
-        match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        if(match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum))
+            firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
 
+
         nextPlayer();
+
     }
 
     //----------------------VIRTUALVIEW METHODS----------------

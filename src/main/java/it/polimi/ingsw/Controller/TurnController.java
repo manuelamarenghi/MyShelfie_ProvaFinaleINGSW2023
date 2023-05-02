@@ -13,18 +13,15 @@ public class TurnController {
     private final Match match;
     private final List<String> nicknamePlayers;
     private String activePlayer;
+    private boolean lastRound = false;
 
-    private TurnPhase turnPhase;
 
-    private final MatchController matchController;
-
-    public TurnController(MatchController matchController,ArrayList<String> nicknames,String activePlayer,Match match){
+    public TurnController(ArrayList<String> nicknames,String activePlayer,Match match){
 
         this.match = match;
         this.nicknamePlayers = nicknames;
 
         this.activePlayer = activePlayer;
-        this.matchController = matchController;
     }
 
     public String getActivePlayer(){
@@ -34,21 +31,27 @@ public class TurnController {
     public void setActivePlayer(String nickname){
         this.activePlayer= nickname;
     }
+    public boolean getLastRound(){return lastRound;}
+    public void setLastRound(boolean b){
+        lastRound=b;
+    }
 
 
 
     /**
      * next player
      */
-    public void nextPlayer(){
+    public boolean nextPlayer(){
         int currentActive = nicknamePlayers.indexOf(activePlayer);
         if(currentActive+1<match.getPlayerNumber())
             currentActive +=1;
-        else
+        else if(lastRound==false )
             currentActive=0;
+        else
+            return false;
+
         activePlayer = nicknamePlayers.get(currentActive);
-
-
+        return true;
     }
 
 }

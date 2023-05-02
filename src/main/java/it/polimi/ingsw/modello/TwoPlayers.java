@@ -6,8 +6,7 @@ import it.polimi.ingsw.modello.CommonGoalCard.*;
 import java.util.ArrayList;
 
 public class TwoPlayers extends Matchmanager {
-    public TwoPlayers(Match m){
-        super(m);
+    public TwoPlayers(){
     }
     /**
      * createBoard() create new Board giving number of players to the constructor, that initialize the right places
