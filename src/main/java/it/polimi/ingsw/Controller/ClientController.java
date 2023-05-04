@@ -47,8 +47,13 @@ public class ClientController {
     }
     */
 
+    public void handleCreateMatch(Match match){
+        Created_Match message = new Created_Match(match);
+        client.sendMessage(message);
+    }
+
     /**
-     * the sends a message to client in case it decides to pick a card from board
+     * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard( Card[] cards , String name ){
         TakeCardBoard message = new TakeCardBoard(cards , name);
@@ -56,18 +61,23 @@ public class ClientController {
     }
 
     /**
-     * The message sends a message to client to put a card in the library
+     * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary (int x , String name , ArrayList<Card> cards){
         PutInLib message = new PutInLib(x , name , cards);
         client.sendMessage(message);
     }
 
+    public void handleColoumnRequest(int numberOfCards , String name){
+        ColumnRequest message = new ColumnRequest(numberOfCards , name);
+        client.sendMessage(message);
+    }
+
     /**
-     * the method sends a message to board to calculate points for the player
+     * the method sends a message to socket client to calculate points for the player
      */
-    public void handleFinalPoint(HashMap<String , Integer> x, String name){
-        Final_point message =new Final_point(x , name);
+    public void handleFinalPoint(String name){
+        FinalPointRequest message =new FinalPointRequest(name);
         client.sendMessage(message);
     }
 
@@ -79,6 +89,14 @@ public class ClientController {
     public void handleDisconection(String name){
         Disconnection message = new Disconnection(name);
         client.sendMessage(message);
+    }
+
+    public void handleMessageFromSocketClient(Message message){
+        message.visit(this);
+    }
+
+    public void handle(UpdateBoard message){
+
     }
 
     /**

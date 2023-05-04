@@ -6,7 +6,7 @@ import it.polimi.ingsw.modello.*;
  *  this class create an observer for each view from server or client
  */
 public interface View {
-    void askNickname();
+    String askNickname();
     void askNumbPlayer();
     void updateboard(Board b);
     void updatelibrary(Library l,String nickname);
