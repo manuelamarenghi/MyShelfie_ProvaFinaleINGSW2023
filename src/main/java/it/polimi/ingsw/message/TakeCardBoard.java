@@ -26,7 +26,7 @@ public class TakeCardBoard extends Message{
         return cards;
     }
     @Override
-    public void visit(MatchController c) {
+    public void visitServer(MatchController c) {
         c.handler(this);
     }
 }

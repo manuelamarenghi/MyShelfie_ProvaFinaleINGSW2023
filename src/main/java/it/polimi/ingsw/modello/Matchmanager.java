@@ -32,11 +32,12 @@ public abstract class Matchmanager{
     setEffectiveCards(match);
 
     createBoard(match);
-
-
     int position = (int)(Math.random() * 4);
     match.setChair(match.getPlayers().get(position));
-
+    for(Player p: match.getPlayers()){
+      p.getView().CreateMatch(match);
+      p.getView().assignedChair(match.getChair().getNickname());
+    }
   }
   /**
    * results() calculates all players' scores
@@ -118,6 +119,7 @@ public abstract class Matchmanager{
   /**
    * turn() manage a player's turn, a is for knowing if the player wants to pass his turn
    */
+  /*
   public void turn(Player p, Match m,int a) {
     if (a != -1) {
       p.getLibrary().showLibrary();
@@ -138,6 +140,7 @@ public abstract class Matchmanager{
       }
     }
   }
+  */
   /**
    * IsEmpyBoard() checks if board is empty
    */

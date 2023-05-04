@@ -2,7 +2,9 @@ package it.polimi.ingsw.network;
 
 
 import it.polimi.ingsw.Controller.MatchController;
+import it.polimi.ingsw.message.Disconnection_Answer;
 import it.polimi.ingsw.message.Message;
+import it.polimi.ingsw.view.VirtualView;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,10 +23,16 @@ public class Server {
     /**
      * addClient() when a new client connected to the game
      */
-    public void addClient(String nickname,ClientHandler clientHandler){
-        // controllo nickname da input controller
-        clientHandlerMap.put(nickname,clientHandler);
-        // gamecontroller che aggiunge giocatore
+    public void addClient(String nickname,ClientHandler clientHandler) {
+        if (!disconnettedclientMap.containsKey(nickname)) {
+            clientHandlerMap.put(nickname, clientHandler);
+            matchController.loginHandler(nickname, new VirtualView(clientHandler));
+        }
+        else{
+            matchController.PlayerBack(nickname);
+            clientHandlerMap.put(nickname,clientHandler);
+            disconnettedclientMap.remove(nickname);
+        }
     }
     /**
      * removeClient() when a client leave the game
@@ -32,24 +40,31 @@ public class Server {
     public void removeClient(String nickname){
         disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
-        //game controller che toglie giocatore
+        matchController.removeClient(nickname);
+        disconnettedclientMap.get(nickname).sendMessage(new Disconnection_Answer(nickname));
     }
     /**
      * HandleDisconnection() when the connection ends
      */
     public void HandleDisconnection(){
-           //gestione disconnessione in base a fase del gioco
+        String nickname = null;
+        Set set=clientHandlerMap.keySet();
+        for(Object o: set){
+            if(!clientHandlerMap.get(o).isConnected()){
+                nickname=(String)o;
+                break;
+            }
+        }
+        disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
+        clientHandlerMap.remove(nickname);
+        matchController.removeClient(nickname);
     }
     /**
      * onMessageReceived() send the message to the controller
      * @param message
      */
     public void onMessageReceived(Message message){
-        // gestione game controller
-    }
-
-    public void startGame() {
-        // game controller
+        matchController.messageHandler(message);
     }
     /**
      * broadcastMessage() shares message in chat to other clientHandler
@@ -61,7 +76,6 @@ public class Server {
          for(Object o: set){
              if(!o.equals(message.getnickname())){
                 message.MextoClientHandler(clientHandlerMap.get(o));
-
              }
          }
     }

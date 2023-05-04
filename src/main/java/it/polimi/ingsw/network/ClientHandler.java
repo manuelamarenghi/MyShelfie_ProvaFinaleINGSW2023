@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
-import it.polimi.ingsw.message.StartMatch;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Map;
 
 /**
  * this class manage connection from a client to the server and handles message's requests
@@ -72,22 +70,23 @@ public class ClientHandler implements Runnable{
                     if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
-                    else if(message.getType().equals("Client_has_disconnected")){
-                        server.removeClient(message.getnickname());
-                    }
-                    else if(message.getType().equals("start_game")){
-                        server.startGame();
-                    }
                     else{
-                        if(message.getType().equals("Mex_in_chat")){
-                            server.broadcastMessage(this,message);
+                        if(message.getType().equals("Client_has_disconnected")){
+                            server.removeClient(message.getnickname());
+                        }
+                        else {
+                                if(message.getType().equals("Mex_in_chat")){
+                                    server.broadcastMessage(this,message);
+                                }
+                                else{
+                                    server.onMessageReceived(message);
+                                }
+                            }
                         }
                     }
-            }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
 
         }
-
     }
 
     /**
