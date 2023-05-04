@@ -16,27 +16,49 @@ public class Cli implements View{
     public Cli() {
         out = System.out;
     }
+    /**
+     * init_game() entering interface CLI version
+     */
+    public void init_game(){
 
+    }
+    /**
+     * askNickname() called by init_game() this method ask the user for a nickname that will be checked by server
+     */
     @Override
     public void askNickname() {
 
     }
-
+    /**
+     * askNumbPlayer() used when is entered the first player to set numb_of_player
+     */
     @Override
     public void askNumbPlayer() {
 
     }
-
+    /**
+     * updateboard() is used during a player turn when has to take card from board
+     * @param b
+     */
     @Override
     public void updateboard(Board b) {
 
     }
-
+    /**
+     * updatelibrary() when the player has
+     * @param l
+     * @param nickname
+     */
     @Override
     public void updatelibrary(Library l, String nickname) {
 
     }
-
+    /**
+     * let the player see when has reached a common goal
+     * @param e
+     * @param x
+     * @param name
+     */
     @Override
     public void assignedCC(EffectiveCard e, int x, String name) {
 
