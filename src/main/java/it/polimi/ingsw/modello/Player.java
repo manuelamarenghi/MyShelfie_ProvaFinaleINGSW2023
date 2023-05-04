@@ -63,4 +63,8 @@ public class Player {
     public PlayerManager getPlayerManager(){
         return plManag;
     }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
 }
