@@ -2,13 +2,16 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.network.observer.VMObserver;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class Cli implements View{
+public class Cli implements ObserverViewClient , VMObserver {
     private final PrintStream out;
     private final String nickname;
     private Thread inputThread;
@@ -18,7 +21,7 @@ public class Cli implements View{
      * Default constructor.
      */
     public Cli(ClientController clientController) {
-        this.nickname=askNicknameReturn();
+        this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
     }
@@ -84,7 +87,13 @@ public class Cli implements View{
         return number;
     }
 
-    public String askNicknameReturn() {
+    /**
+     *The method asks to the user the nickname it wants to use
+     * @return it returns the nickname typed by the user
+     */
+
+    @Override
+    public String askNickname() {
         out.println("Type your nickanme.");
         try{
             return readLine();
@@ -93,21 +102,11 @@ public class Cli implements View{
         }
         return null;
     }
-
-    /**
-     *The method asks to the user the nickname it wants to use
-     * @return it returns the nickname typed by the user
-     */
-
-    @Override
-    public void askNickname() {
-    }
-
     /**
      * the method asks to the first user the number of players that are going to play
      */
     @Override
-    public void askNumbPlayer() {
+    public void askNumberPlayer() {
         String question = "How many player are going to play 2,3 or 4?";
 
         try{
@@ -122,7 +121,7 @@ public class Cli implements View{
     /**
      * The method is used to select the cards tomtake from the board , and it sends the message to controller
      */
-
+    @Override
     public void askCardsToTakeFromBoard(){
         int numberOfCards , i , x , y;
         Card cards [] = {};
@@ -150,6 +149,35 @@ public class Cli implements View{
 
 
     }
+    /**
+     * The method asks the player if it wants to get dissconnected or not
+     */
+
+
+    @Override
+    public void askForDissconection() {
+        out.println("Are you sure that you want to dissconnect?");
+        try{
+            String answer = readLine();
+            if(answer.equalsIgnoreCase("yes")){
+                clientController.handleDisconection(nickname);
+            }
+            else if(answer.equalsIgnoreCase("no")){
+                return ;
+            }
+            else{
+                out.println("WRONG_INPUT");
+            }
+
+        }catch(ExecutionException e){
+            out.println("WRONG_INPUT");
+        }
+    }
+
+    @Override
+    public void createMatch(Match match) {
+        clientController.handleCreateMatch(match);
+    }
 
     /**
      * The method sends a request to get the coloumns where it can put its cards
@@ -170,54 +198,98 @@ public class Cli implements View{
         //Fare la richiesta di show final point al virtual model
     }
 
-    /**
-     * The method asks the player if it wants to get dissconnected or not
-     */
-
-    public void checkDissconnection(){
-        out.println("Are you sure that you want to dissconnect?");
-        try{
-            String answer = readLine();
-            if(answer.equalsIgnoreCase("yes")){
-                clientController.handleDisconection(nickname);
-            }
-            else if(answer.equalsIgnoreCase("no")){
-                return ;
-            }
-            else{
-                out.println("WRONG_INPUT");
-            }
-
-        }catch(ExecutionException e){
-            out.println("WRONG_INPUT");
-        }
-    }
-
     @Override
-    public void updateboard(Board b) {
+    public void onShowReq(String s) {
 
     }
 
     @Override
-    public void updatelibrary(Library l, String nickname) {
+    public void onNicknameReq() {
 
     }
 
     @Override
-    public void assignedCC(EffectiveCard e, int x, String name) {
+    public void onNumbPlayerReq() {
 
     }
 
     @Override
-    public void assignedChair(String name) {
+    public void onShowNewBoardReq(Board board) {
 
     }
 
     @Override
-    public void CreateMatch(Match m) {
-        clientController.handleCreateMatch(m);
+    public void onNotifyNewLibraryReq(String nickname, Library library) {
+
     }
 
+    @Override
+    public void onNotifyGameFullReq() {
 
+    }
 
+    @Override
+    public void onNotifyPlayerDisconnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyPlayerReconnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyPlayerConnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
+
+    }
+
+    @Override
+    public void onNotifyChairAssignedReq(String nickname) {
+
+    }
+
+    @Override
+    public void onShowPossibleColumnReq(int[] x, Library library) {
+
+    }
+
+    @Override
+    public void onNotifyCardsAreNotAdjacentReq() {
+
+    }
+
+    @Override
+    public void onNotifyConnectionAcceptedReq() {
+
+    }
+
+    @Override
+    public void onNotifyNumbPlayerReq(int playerNum) {
+
+    }
+
+    @Override
+    public void onNotifyPlayerFinishedFirstReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
+
+    }
+
+    @Override
+    public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
+
+    }
+
+    @Override
+    public void onShowNewMyLibraryReq(Library l) {
+
+    }
 }
