@@ -1,14 +1,16 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.modello.Board;
-import it.polimi.ingsw.modello.EffectiveCard;
-import it.polimi.ingsw.modello.Library;
-import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.network.observer.VMObservable;
+import it.polimi.ingsw.network.observer.VMObserver;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Cli implements View{
+public class Cli extends VMObservable implements VMObserver,ViewClient {
     private final PrintStream out;
+    private static final String INVALID_INPUT = "INVALID INPUT";
 
     /**
      * Default constructor.
@@ -22,57 +24,104 @@ public class Cli implements View{
     public void init_game(){
 
     }
+    @Override
+    public void onShowReq(String s) {
+
+    }
+
     /**
-     * askNickname() called by init_game() this method ask the user for a nickname that will be checked by server
+     * onNicknameReq() first method call when user connects to set valid nickname
      */
     @Override
-    public void askNickname() {
+    public void onNicknameReq() {
+
+    }
+
+    @Override
+    public void onNumbPlayerReq() {
+
+    }
+
+    @Override
+    public void onShowNewBoardReq(Board board) {
+
+    }
+
+    @Override
+    public void onNotifyNewLibraryReq(String nickname, Library library) {
+
+    }
+
+    @Override
+    public void onNotifyGameFullReq() {
+
+    }
+
+    @Override
+    public void onNotifyPlayerDisconnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyPlayerReconnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyPlayerConnectionReq(Player player) {
+
+    }
+
+    @Override
+    public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
+
+    }
+
+    @Override
+    public void onNotifyChairAssignedReq(String nickname) {
+
+    }
+
+    @Override
+    public void onShowPossibleColumnReq(int[] x, Library library) {
+
+    }
+
+    @Override
+    public void onNotifyCardsAreNotAdjacentReq() {
 
     }
     /**
-     * askNumbPlayer() used when is entered the first player to set numb_of_player
+     *  onNotifyConnectionAcceptedReq() notify user that its access went right
      */
     @Override
-    public void askNumbPlayer() {
-
-    }
-    /**
-     * updateboard() is used during a player turn when has to take card from board
-     * @param b
-     */
-    @Override
-    public void updateboard(Board b) {
-
-    }
-    /**
-     * updatelibrary() when the player has
-     * @param l
-     * @param nickname
-     */
-    @Override
-    public void updatelibrary(Library l, String nickname) {
-
-    }
-    /**
-     * let the player see when has reached a common goal
-     * @param e
-     * @param x
-     * @param name
-     */
-    @Override
-    public void assignedCC(EffectiveCard e, int x, String name) {
+    public void onNotifyConnectionAcceptedReq() {
+        out.println("You are connected to the game. Enjoy it !");
 
     }
 
     @Override
-    public void assignedChair(String name) {
+    public void onNotifyNumbPlayerReq(int playerNum) {
 
     }
 
     @Override
-    public void CreateMatch(Match m) {
+    public void onNotifyPlayerFinishedFirstReq(Player player) {
 
     }
 
+    @Override
+    public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
 
+    }
+
+    @Override
+    public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
+
+    }
+
+    @Override
+    public void onShowNewMyLibraryReq(Library l) {
+
+    }
 }

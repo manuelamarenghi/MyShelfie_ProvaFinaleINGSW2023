@@ -28,7 +28,7 @@ public class ClientHandler implements Runnable{
             this.output = new ObjectOutputStream(client.getOutputStream());
             this.input = new ObjectInputStream(client.getInputStream());
         } catch (IOException e) {
-
+             System.out.println("ERROR");
         }
     }
 
@@ -38,9 +38,11 @@ public class ClientHandler implements Runnable{
     @Override
     public void run () {
         try{
+            System.out.println("starting handle mex");
             handleClientConnection();
         }catch(IOError e){
             disconnect();
+            System.out.println("Errore nel clienthandler");
         }
     }
     /**
@@ -66,29 +68,31 @@ public class ClientHandler implements Runnable{
     private void handleClientConnection() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                    Message message = (Message) input.readObject();
-                    if(message.getType().equals("enter_player")){
-                        server.addClient(message.getnickname(),this);
-                    }
-                    else{
-                        if(message.getType().equals("Client_has_disconnected")){
+                System.out.println("osserviamo mex");
+                Message message = (Message) input.readObject();
+                if (message.getType().equals("Ping!")) {
+                    System.out.println(message.getType());
+                    this.sendMessage(new Message("Server", "Pong!"));
+                } else {
+                    if (message.getType().equals("enter_player")) {
+                        server.addClient(message.getnickname(), this);
+                    } else {
+                        if (message.getType().equals("Client_has_disconnected")) {
                             server.removeClient(message.getnickname());
-                        }
-                        else {
-                                if(message.getType().equals("Mex_in_chat")){
-                                    server.broadcastMessage(this,message);
-                                }
-                                else{
-                                    server.onMessageReceived(message);
-                                }
+                        } else {
+                            if (message.getType().equals("Mex_in_chat")) {
+                                server.broadcastMessage(this, message);
+                            } else {
+                                server.onMessageReceived(message);
                             }
                         }
                     }
+                }
+            }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
 
         }
     }
-
     /**
      * sendMessage() is used to send message to the client of this specific clientHanlder
      * @param message
