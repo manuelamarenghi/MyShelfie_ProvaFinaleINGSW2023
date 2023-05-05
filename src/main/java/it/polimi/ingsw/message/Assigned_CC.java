@@ -8,8 +8,8 @@ import it.polimi.ingsw.modello.EffectiveCard;
  * message from server to client when has reach common goal
  */
 public class Assigned_CC extends  Message{
-    public int point;
-    public EffectiveCard card;
+    private int point;
+    private EffectiveCard card;
     public Assigned_CC(int x, String name, EffectiveCard card){
         super(name,"Has_reach_point");
         this.point=x;
