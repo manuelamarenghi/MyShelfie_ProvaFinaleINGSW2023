@@ -1,5 +1,6 @@
 package it.polimi.ingsw.message;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Board;
 
 public class UpdateBoard extends Message{
@@ -10,5 +11,9 @@ public class UpdateBoard extends Message{
     }
     public Board getB() {
         return b;
+    }
+
+    public void visit (ClientController clientController){
+        clientController.handle(this);
     }
 }
