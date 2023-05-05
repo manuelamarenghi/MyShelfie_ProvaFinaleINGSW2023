@@ -3,6 +3,7 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.ClientHandler;
+import it.polimi.ingsw.network.MessageHandler;
 
 
 import java.io.Serializable;
@@ -47,6 +48,9 @@ public class Message implements Serializable {
 
 
     public void MextoClientHandler(ClientHandler c) {
+    }
+    public void visit(MessageHandler messageHandler){
+        messageHandler.handle(this);
     }
 
 }
