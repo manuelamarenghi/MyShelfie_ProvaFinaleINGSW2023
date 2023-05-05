@@ -18,10 +18,6 @@ public class ClientController {
         this.view = view;
     }
 
-    /*public void handleMessage (Message message){
-        message.visit(this);
-    }*/
-
     /**
      * The method creates board depending on number of players
      */
@@ -30,22 +26,6 @@ public class ClientController {
         Numb_Player message = new Numb_Player(numeberOfPlayers , name);
         client.sendMessage(message);
     }
-    /*
-    public void handleTwoPlayers(Match match , Matchmanager matchmanager){
-        TwoPlayersMessage message = new TwoPlayersMessage(match , matchmanager);
-        client.sendMessage(message);
-    }
-
-    public void handleThreePlayers(Match match , Matchmanager matchmanager){
-        ThreePlayersMessage message = new ThreePlayersMessage(match , matchmanager);
-        client.sendMessage(message);
-    }
-
-    public void handleFourPlayers(Match match , Matchmanager matchmanager){
-        FourPlayersMessage message = new FourPlayersMessage(match , matchmanager);
-        client.sendMessage(message);
-    }
-    */
 
     public void handleCreateMatch(Match match){
         Created_Match message = new Created_Match(match);
