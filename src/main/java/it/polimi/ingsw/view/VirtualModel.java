@@ -22,6 +22,29 @@ public class VirtualModel extends VMObservable {
         this.firstFinish=match.getFirstFinish();
         this.CommonCards=match.getCommonCards();
     }
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public Player getFirstFinish() {
+        return firstFinish;
+    }
+
+    public void setFirstFinish(String firstFinish) {
+        for(Player player:this.players){
+            if(player.getNickname().equals(firstFinish))this.firstFinish=player;
+        }
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+
     public void addPlayer(Player player){
         this.players.add(player);
     }
@@ -58,5 +81,11 @@ public class VirtualModel extends VMObservable {
         for(Player player:this.players){
             if(player.getNickname().equals(nickname))player.setCommonGoalScore(score);
         }
+    }
+    public Player getPlayer(String nickname) {
+        for(Player player:this.players){
+            if(player.getNickname().equals(nickname))return player;
+        }
+        return new Player(null);
     }
 }
