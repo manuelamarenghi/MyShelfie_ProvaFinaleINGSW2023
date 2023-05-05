@@ -91,9 +91,9 @@ public class ClientController {
         client.sendMessage(message);
     }
 
-    public void handleMessageFromSocketClient(Message message){
+    /*public void handleMessageFromSocketClient(Message message){
         message.visit(this);
-    }
+    }*/
 
     public void handle(UpdateBoard message){
 

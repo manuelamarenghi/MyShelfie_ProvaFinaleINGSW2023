@@ -18,7 +18,7 @@ public class Cli implements View{
      * Default constructor.
      */
     public Cli(ClientController clientController) {
-        this.nickname=askNickname();
+        this.nickname=askNicknameReturn();
         out = System.out;
         this.clientController=clientController;
     }
@@ -84,8 +84,7 @@ public class Cli implements View{
         return number;
     }
 
-    @Override
-    public String askNickname() {
+    public String askNicknameReturn() {
         out.println("Type your nickanme.");
         try{
             return readLine();
@@ -95,6 +94,18 @@ public class Cli implements View{
         return null;
     }
 
+    /**
+     *The method asks to the user the nickname it wants to use
+     * @return it returns the nickname typed by the user
+     */
+
+    @Override
+    public void askNickname() {
+    }
+
+    /**
+     * the method asks to the first user the number of players that are going to play
+     */
     @Override
     public void askNumbPlayer() {
         String question = "How many player are going to play 2,3 or 4?";
@@ -107,6 +118,10 @@ public class Cli implements View{
         }
 
     }
+
+    /**
+     * The method is used to select the cards tomtake from the board , and it sends the message to controller
+     */
 
     public void askCardsToTakeFromBoard(){
         int numberOfCards , i , x , y;
@@ -123,8 +138,8 @@ public class Cli implements View{
         for(i=0 ; i<numberOfCards ; i++){
             try{
                 x = numberInput(0,8 , null , questionX);
-                y= numberInput(0,0, null , questionY);
-                cards[i]=VirtualModel.getBoard().getCardInPos(x,y);
+                y= numberInput(0,8, null , questionY);
+                //cards[i]=VirtualModel.getBoard().getCardInPos(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
@@ -136,17 +151,28 @@ public class Cli implements View{
 
     }
 
+    /**
+     * The method sends a request to get the coloumns where it can put its cards
+     */
+
     public void requestForColumns(){
         int numberOfCards;
         //Accedere al metodo nella virtual model per vedere se le carte richieste sono valide e avere il loro numero
-        clientController.handleColoumnRequest(numberOfCards , nickname);
+        //clientController.handleColoumnRequest(numberOfCards , nickname);
     }
 
+    /**
+     * The method sends a request to get the final points
+     */
     public void requestForFinalPoint(){
         out.println("The Final points for every player are the following");
         clientController.handleFinalPoint(nickname);
         //Fare la richiesta di show final point al virtual model
     }
+
+    /**
+     * The method asks the player if it wants to get dissconnected or not
+     */
 
     public void checkDissconnection(){
         out.println("Are you sure that you want to dissconnect?");
