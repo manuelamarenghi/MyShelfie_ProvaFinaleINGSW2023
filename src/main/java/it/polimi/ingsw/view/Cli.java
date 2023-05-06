@@ -67,7 +67,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     private int numberInput(int minValue, int maxValue, List<Integer> jumpList, String question) throws ExecutionException {
         int number = minValue - 1;
 
-        // A null jumpList will be transformed in a empty list.
         if (jumpList == null) {
             jumpList = List.of();
         }
