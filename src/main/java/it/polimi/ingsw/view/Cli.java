@@ -17,13 +17,16 @@ public class Cli implements ObserverViewClient , VMObserver {
     private Thread inputThread;
     private ClientController clientController;
 
+    private VirtualModel virtualModel;
+
     /**
      * Default constructor.
      */
-    public Cli(ClientController clientController) {
+    public Cli(ClientController clientController ,  VirtualModel virtualModel) {
         this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
+        this.virtualModel=virtualModel;
     }
 
     /**
@@ -138,7 +141,7 @@ public class Cli implements ObserverViewClient , VMObserver {
             try{
                 x = numberInput(0,8 , null , questionX);
                 y= numberInput(0,8, null , questionY);
-                //cards[i]=VirtualModel.getBoard().getCardInPos(x,y);
+                cards[i]=virtualModel.getBoard().getCard(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
@@ -200,47 +203,55 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowReq(String s) {
-
+        //Show cosa?
     }
 
     @Override
     public void onNicknameReq() {
-
+        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
     }
 
     @Override
     public void onNumbPlayerReq() {
-
+        //Forse uguale all' askPlayerNumber
     }
 
     @Override
     public void onShowNewBoardReq(Board board) {
+        Board b = virtualModel.getBoard();
+        int i , j ;
+        for(i=0 ; i<9 ; i++){
+            for(j=0 ; j<9 ; j++){
+                out.print(b.getCard(i,j).getColour());
+            }
+            out.println("");
+        }
 
     }
 
     @Override
     public void onNotifyNewLibraryReq(String nickname, Library library) {
-
+        //??
     }
 
     @Override
     public void onNotifyGameFullReq() {
-
+        //??
     }
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-
+        //Mostrare la risposta del dissconnection?
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-
+        //Quando si ha reconnection?
     }
 
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
-
+        //Risposta di accept player?
     }
 
     @Override
@@ -250,46 +261,75 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-
+        //Controllare dal virtual model a chi viene assegnato la chair
     }
 
     @Override
     public void onShowPossibleColumnReq(int[] x, Library library) {
+        ArrayList<Integer> coloumns = new ArrayList<Integer>() ;//Fare get dal virtual model
+        ArrayList<Integer> excludedNumbers = new ArrayList<Integer>();
+        int selectedColumn;
+        int i;
+        //Controllare se la risposta per le carte scelte è true o no prima di procedere
+
+        for(i=0 ; i<5 ; i++){
+            if(coloumns.contains(i)){
+
+            }
+            else{
+                excludedNumbers.add(i);
+            }
+        }
+        String question = "Select the coloumn to put your cards from the shown coloumns.";
+
+        try{
+            selectedColumn = numberInput(0 , 4 , excludedNumbers , question);
+        }catch(ExecutionException e){
+            out.println("WRONG_INPUT");
+        }
 
     }
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-
+        //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
     }
 
     @Override
     public void onNotifyConnectionAcceptedReq() {
-
+        //per cosa serve?
     }
 
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-
+        //Forsegià fatto con askPlayerNumber
     }
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
-
+        //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-
+        //??
     }
 
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-
+        //Far vedere la risposta del Fianl_point
     }
 
     @Override
     public void onShowNewMyLibraryReq(Library l) {
+        Library library = virtualModel.getMe().getLibrary();
+        int i , j;
+        for(i=0 ; i<6 ; i++){
+            for(j=0 ; j<5 ; j++){
+                out.print(library.getCardinPos(j,i).getColour()+"   ");
+            }
+            out.println("");
+        }
 
     }
 }

@@ -88,4 +88,8 @@ public class VirtualModel extends VMObservable {
         }
         return new Player(null);
     }
+
+    public Board getBoard(){
+        return board;
+    }
 }
