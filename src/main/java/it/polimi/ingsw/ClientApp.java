@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.message.EnterPlayer;
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.SocketClient;
@@ -27,8 +28,9 @@ public class ClientApp {
         }*/
         SocketClient sClient=new SocketClient("localhost",16847);
         System.out.println("Trying to connect to the server");
-        Message m=new Message("niki","Ping!");
+        for(int i=0;i<2;i++){
+        Message m=new EnterPlayer("nadia");
         sClient.sendMessage(m);
         sClient.readMessage();
-    }
+    }}
 }

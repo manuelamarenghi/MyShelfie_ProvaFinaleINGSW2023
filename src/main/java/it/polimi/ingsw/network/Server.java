@@ -26,14 +26,16 @@ public class Server {
     public void addClient(String nickname,ClientHandler clientHandler) {
         if (!disconnettedclientMap.containsKey(nickname)) {
             clientHandlerMap.put(nickname, clientHandler);
-            matchController.loginHandler(nickname, new VirtualView(clientHandler));
+           matchController.loginHandler(nickname, new VirtualView(clientHandler));
         }
         else{
             matchController.PlayerBack(nickname);
             clientHandlerMap.put(nickname,clientHandler);
             disconnettedclientMap.remove(nickname);
+            System.out.println("sei gia entrato");
         }
     }
+
     /**
      * removeClient() when a client leave the game
      */

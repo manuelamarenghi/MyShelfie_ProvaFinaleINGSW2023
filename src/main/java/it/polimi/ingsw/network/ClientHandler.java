@@ -41,7 +41,7 @@ public class ClientHandler implements Runnable{
             System.out.println("starting handle mex");
             handleClientConnection();
         }catch(IOError e){
-            disconnect();
+            //disconnect();
             System.out.println("Errore nel clienthandler");
         }
     }
