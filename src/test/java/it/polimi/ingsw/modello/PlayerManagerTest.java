@@ -1,5 +1,7 @@
 package it.polimi.ingsw.modello;
 
+import it.polimi.ingsw.modello.CommonGoalCard.CornersCommG;
+import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -173,4 +175,45 @@ class PlayerManagerTest {
         Assertions.assertEquals(10,player.getPlayerManager().showProgressScore(player));
 
     }
+/*
+Commentato per il problema della view
+    @Test
+    public void calcCommonCardTest(){
+        Match m = new Match();
+        m.setMatch(2);
+        XGoalCard xGoalCard = new XGoalCard();
+        CornersCommG cornersCommG = new CornersCommG();
+        EffectiveCard c1 = new EffectiveCard(xGoalCard);
+        EffectiveCard c2 = new EffectiveCard(cornersCommG);
+
+        ArrayList<Integer> score = new ArrayList<>();
+        score.add(8);
+        score.add(4);
+        c1.setAllScores(score);
+        c2.setAllScores(score);
+
+        EffectiveCard[] e = new EffectiveCard[2];
+        e[0] = c1;
+        e[1] = c2;
+        m.setCommonCards(e);
+
+        Player player = new Player("pippo");
+        player.addObserver(c1);
+        player.addObserver(c2);
+        m.setPlayers(player);
+
+        Library library = new Library();
+        library.getCardinPos(0,0).setColour("V");
+        library.getCardinPos(5,0).setColour("V");
+        library.getCardinPos(0,4).setColour("V");
+        library.getCardinPos(5,4).setColour("V");
+
+        player.setLibrary(library);
+        player.getPlayerManager().notifyAllObservers(player);
+
+        Assertions.assertEquals(8,player.getCommonGoalScore());
+
+
+    }
+*/
 }

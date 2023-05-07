@@ -2,6 +2,7 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class Player {
         this.nickname = nickname;
         plManag = new PlayerManager();
         library = new Library();
+        observers = new ArrayList<>();
     }
 
     public String getNickname(){
