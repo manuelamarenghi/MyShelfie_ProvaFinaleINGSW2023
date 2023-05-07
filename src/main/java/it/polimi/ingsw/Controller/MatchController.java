@@ -69,9 +69,10 @@ public class MatchController {
      * the first player, he needs choose how many player play
      *  other player, add virtualview and wait the game start
      */
-    public synchronized void loginHandler(String nickname, VirtualView virtualView) {
-        if (connectClients.keySet().contains(nickname)) {
+    public boolean loginHandler(String nickname, VirtualView virtualView) {
+        if (players.contains(nickname)) {
                virtualView.askNickname();
+               return false;
         } else {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
@@ -83,14 +84,17 @@ public class MatchController {
                 addPlayers(nickname);
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 for (VirtualView v : connectClients.values()) {
-                    if(!connectClients.equals(connectClients.get(nickname)))
-                             {v.AcceptNewPlayer(nickname);}
+                    if (!connectClients.equals(connectClients.get(nickname))) {
+                        v.AcceptNewPlayer(nickname);
+                    }
                 }
                 if(connectClients.size() == match.getPlayerNumber()){ startGame();}
             } else {
                 connectClients.get(nickname).Gamefull();
+                return false;
             }
         }
+        return true;
     }
     /**
      * Start game

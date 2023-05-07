@@ -68,10 +68,8 @@ public class ClientHandler implements Runnable{
     private void handleClientConnection() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                System.out.println("osserviamo mex");
                 Message message = (Message) input.readObject();
                 if (message.getType().equals("Ping!")) {
-                    System.out.println(message.getType());
                     this.sendMessage(new Message("Server", "Pong!"));
                 } else {
                     if (message.getType().equals("enter_player")) {
@@ -90,7 +88,7 @@ public class ClientHandler implements Runnable{
                 }
             }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
-
+              sendMessage(new Message("Server","ERROR"));
         }
     }
     /**
