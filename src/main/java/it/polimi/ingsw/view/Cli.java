@@ -96,7 +96,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public String askNickname() {
-        out.println("Type your nickanme.");
+        out.println("Type your nickname.");
         try{
             return readLine();
         }catch(ExecutionException e){
@@ -240,16 +240,21 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
+        out.println("Il giocatore "+player.getNickname()+" si è disconnesso");
         //Mostrare la risposta del dissconnection?
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
+        out.println("Il giocatore "+player.getNickname()+" si è riconnesso");
         //Quando si ha reconnection?
     }
-
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
+        if(player.getNickname().equals(this.nickname))
+            out.println("Connesso");
+        else
+            out.println("Il giocatore "+player.getNickname()+" è entrato nel gioco");
         //Risposta di accept player?
     }
 
@@ -293,6 +298,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
         out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
+        askCardsToTakeFromBoard();
         //TODO chiamata metodo per estrarre le carte
         //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
     }
