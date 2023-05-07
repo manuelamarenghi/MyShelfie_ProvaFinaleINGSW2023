@@ -50,7 +50,7 @@ public class SocketClient extends Client{
         }catch(IOException exception){
             System.out.println("errore nel mandare mex");
             disconnect();
-           notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
+            notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
         }
     }
 
@@ -65,8 +65,8 @@ public class SocketClient extends Client{
                 }catch(IOException|ClassNotFoundException exception){
                     message=new Message(nickname,"Connection lost with server.");
                 }
-               notifyObserver(message);
-               System.out.println(message.getType());
+                notifyObserver(message);
+              System.out.println(message.getType());
             }
         });
     }

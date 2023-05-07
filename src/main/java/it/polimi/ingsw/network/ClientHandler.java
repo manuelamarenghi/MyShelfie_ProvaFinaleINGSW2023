@@ -31,17 +31,15 @@ public class ClientHandler implements Runnable{
              System.out.println("ERROR");
         }
     }
-
     /**
      * ClientHandler checks if the connection isn't dropped and shares the request with the server that has methods to satisfy it
      */
     @Override
     public void run () {
         try{
-            System.out.println("starting handle mex");
             handleClientConnection();
         }catch(IOError e){
-            //disconnect();
+            disconnect();
             System.out.println("Errore nel clienthandler");
         }
     }
@@ -67,7 +65,8 @@ public class ClientHandler implements Runnable{
      */
     private void handleClientConnection() {
         try {
-            while (!Thread.currentThread().isInterrupted()) {
+            System.out.println(Thread.currentThread().isInterrupted());
+            while(!Thread.currentThread().isInterrupted()){
                 Message message = (Message) input.readObject();
                 if (message.getType().equals("Ping!")) {
                     this.sendMessage(new Message("Server", "Pong!"));
