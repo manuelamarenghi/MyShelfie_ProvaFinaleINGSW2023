@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.enumeration.GameState;
-import it.polimi.ingsw.enumeration.TurnPhase;
+
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.PutInLib;
@@ -29,13 +28,12 @@ public class MatchController {
     private boolean isStarted = false;
 
 
-    private GameState gameState;
-    private TurnPhase turnPhase;
 
     public MatchController(){
         this.match = new Match();
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
         this.disconnectClients=Collections.synchronizedMap(new HashMap<>());
+        players = new ArrayList<>();
     }
 
 
@@ -52,15 +50,6 @@ public class MatchController {
     public Match getMatch(){return match;}
 
 
-    /**
-     * Set the State of the Game.
-     *
-     * @param gameState State of the current Game.
-     */
-    private void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
-
     private void addPlayers(String nickname){
         players.add(nickname);
     }
@@ -76,11 +65,13 @@ public class MatchController {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
+                match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
             } else if (connectClients.size() < match.getPlayerNumber()) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
+                match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 for (VirtualView v : connectClients.values()) {
                     if(!connectClients.equals(connectClients.get(nickname)))
@@ -96,9 +87,6 @@ public class MatchController {
      * Start game
      */
     public void startGame(){
-        for(String name : players){
-            this.match.setPlayers(new Player(name));
-        }
 
         match.getMatchmanager().startGame(match);
 
@@ -235,6 +223,7 @@ public class MatchController {
             connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum);
         }
         else{
+            System.out.println("Non puoi prenderli");
             connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
         }
     }

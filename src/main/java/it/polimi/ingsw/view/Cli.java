@@ -260,6 +260,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
+        out.println("La sedia è assegnata al giocatore "+nickname);
         //Controllare dal virtual model a chi viene assegnato la chair
     }
 
@@ -291,6 +292,8 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
+        out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
+        //TODO chiamata metodo per estrarre le carte
         //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
     }
 
@@ -306,6 +309,10 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
+        //Per me è così    LIU SILVIA
+        out.println("Il giocatore "+player.getNickname()+" ha finito");
+        out.println("ULTIMO ROUND");
+
         //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
@@ -315,8 +322,13 @@ public class Cli implements ObserverViewClient , VMObserver {
     }
 
     @Override
-    public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-        //Far vedere la risposta del Fianl_point
+    public void onShowFinalScoreBoardReq(HashMap<String, Integer> points) {
+        if(points.containsKey(nickname))
+            out.println("Hai vinto, il tuo punteggio è: "+ points.get(nickname));
+        points.forEach((key,value)->System.out.println("il punteggio di "+ key + " : " + value));
+
+        out.println("Il gioco è terminato");
+
     }
 
     @Override
