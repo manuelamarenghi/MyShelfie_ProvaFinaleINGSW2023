@@ -75,7 +75,7 @@ public class Library implements Iterable<Card> {
 
         while(i>0 && l!= cards.size()){
             if(library[i][n].getColour().isEmpty()){
-                library[i][n]=cards.get(l);
+                library[i][n]=new Card(cards.get(l).getColour(),new Position(i,n));
                 l++;
             }
             i--;

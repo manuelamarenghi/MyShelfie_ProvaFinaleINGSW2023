@@ -19,6 +19,8 @@ public class Player {
 
     public Player(String nickname){
         this.nickname = nickname;
+        plManag = new PlayerManager();
+        library = new Library();
     }
 
     public String getNickname(){
