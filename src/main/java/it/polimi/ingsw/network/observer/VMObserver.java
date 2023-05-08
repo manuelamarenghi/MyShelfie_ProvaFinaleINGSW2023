@@ -14,10 +14,7 @@ public interface VMObserver {
      void onNotifyPlayerDisconnectionReq(Player player);
      void onNotifyPlayerReconnectionReq(Player player);
      void onNotifyPlayerConnectionReq(String nickname);
-
- void onNotifyPlayerConnectionReq(Player player);
-
- void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
+     void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
      void onNotifyChairAssignedReq(String nickname);
      void onShowPossibleColumnReq(int[] x, Library library);
      void onNotifyCardsAreNotAdjacentReq();
