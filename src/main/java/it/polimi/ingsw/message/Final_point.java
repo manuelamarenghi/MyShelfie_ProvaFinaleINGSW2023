@@ -2,6 +2,7 @@ package it.polimi.ingsw.message;
 
 
 import it.polimi.ingsw.Controller.MatchController;
+import it.polimi.ingsw.network.MessageHandler;
 
 import java.util.HashMap;
 
@@ -17,6 +18,9 @@ public class Final_point extends Message{
 
     public HashMap<String,Integer> getPoint() {
         return point;
+    }
+    public void visit(MessageHandler controller){
+        controller.handle(this);
     }
 
 
