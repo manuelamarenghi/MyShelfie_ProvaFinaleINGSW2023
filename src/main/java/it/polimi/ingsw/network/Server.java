@@ -30,6 +30,7 @@ public class Server {
                if(matchController.loginHandler(nickname, new VirtualView(clientHandler)) ){
                 clientsconnected.add(nickname);
                 clientHandlerMap.put(nickname, clientHandler);
+                System.out.println("il giocatore "+nickname+" si è connesso");
             }}
         }
         else{

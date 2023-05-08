@@ -1,9 +1,11 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
+
 /**
  *  this interface is used to override check(),expired(),getImage() for each CommonGoal card
  */
-public interface CommonGoalCards {
+public interface CommonGoalCards extends Serializable {
     /**
      * check() returns true if the library match the goal,otherwise false
      */

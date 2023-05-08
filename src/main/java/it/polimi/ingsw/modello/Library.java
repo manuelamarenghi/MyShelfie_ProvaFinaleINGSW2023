@@ -1,12 +1,13 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * this class is about personal library
  */
-public class Library implements Iterable<Card> {
+public class Library implements Iterable<Card>, Serializable {
     /**
      * library is a matrix of cards that are insert from library's player
      */
