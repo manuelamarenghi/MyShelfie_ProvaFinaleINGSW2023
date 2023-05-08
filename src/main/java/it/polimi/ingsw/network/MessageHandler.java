@@ -102,7 +102,6 @@ public class MessageHandler implements Observer {
             virtualModel.notifyObserver(obs->obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));}
         );
     }
-
     /**
      * handle PlayerReturned messages, update virtualModel.players and notify the player's view the returning player's object.
      * @param message
