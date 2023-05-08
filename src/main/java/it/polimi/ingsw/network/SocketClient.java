@@ -44,7 +44,6 @@ public class SocketClient extends Client{
     public void sendMessage(Message message) {
         try {
             outputStream.writeObject(message);
-            System.out.println("mex inviato");
             outputStream.reset();
 
         }catch(IOException exception){

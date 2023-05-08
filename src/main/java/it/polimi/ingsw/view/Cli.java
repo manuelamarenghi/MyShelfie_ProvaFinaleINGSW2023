@@ -25,6 +25,12 @@ public class Cli extends ObservableViewClient implements ViewClient{
         out = System.out;
         //this.clientController=clientController;
     }
+    public void init(){
+
+        out.println("Welcome to My Shelfie Game!");
+
+        askNickname();
+    }
 
     /**
      * Reads a line from the standard input.

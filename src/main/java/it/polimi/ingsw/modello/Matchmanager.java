@@ -89,7 +89,7 @@ public abstract class Matchmanager{
 
     {
       try {
-        jsonPath = new String(Files.readAllBytes(Paths.get("./src/json/PersonalGoalCards.json")));
+        jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

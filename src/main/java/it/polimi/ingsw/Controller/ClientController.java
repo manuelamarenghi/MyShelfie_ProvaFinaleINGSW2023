@@ -22,12 +22,14 @@ public class ClientController implements ObserverViewClient {
         this.view = view;
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
+        socketClient.enablePinger(true);
     }
 
     public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
         this.view = view;
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
+        socketClient.enablePinger(true);
     }
 
 
