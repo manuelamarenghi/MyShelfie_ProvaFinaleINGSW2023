@@ -7,20 +7,20 @@ import java.util.HashMap;
 
 public interface VMObserver {
     void onShowReq(String s);
-    void onNicknameReq();
      void onNumbPlayerReq();
      void onShowNewBoardReq(Board board);
      void onNotifyNewLibraryReq(String nickname, Library library);
      void onNotifyGameFullReq();
      void onNotifyPlayerDisconnectionReq(Player player);
      void onNotifyPlayerReconnectionReq(Player player);
-     void onNotifyPlayerConnectionReq(Player player);
-     void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
+     void onNotifyPlayerConnectionReq(String nickname);
+
+ void onNotifyPlayerConnectionReq(Player player);
+
+ void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
      void onNotifyChairAssignedReq(String nickname);
      void onShowPossibleColumnReq(int[] x, Library library);
      void onNotifyCardsAreNotAdjacentReq();
-
-     void onNotifyConnectionAcceptedReq();
 
      void onNotifyNumbPlayerReq(int playerNum);
 
@@ -31,4 +31,14 @@ public interface VMObserver {
      void onShowFinalScoreBoardReq(HashMap<String, Integer> point);
 
      void onShowNewMyLibraryReq(Library l);
+
+    void onNotifyDisconnectionReqAcceptedAns();
+
+    void onNotifyNewNicknameReq();
+
+    void onNotifyIsYourTurnReq(Board board, Library library);
+
+    void onNotifyYourTurnIsEndedReq(String current_player);
+
+    void onNotifyWhoIsPlayingNowReq(String current_player);
 }

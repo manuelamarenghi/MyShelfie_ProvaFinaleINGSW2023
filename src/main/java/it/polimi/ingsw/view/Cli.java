@@ -13,17 +13,20 @@ import java.util.concurrent.FutureTask;
 
 public class Cli implements ObserverViewClient , VMObserver {
     private final PrintStream out;
+    private final String nickname;
     private Thread inputThread;
     private ClientController clientController;
-    private String nickname;
 
+    private VirtualModel virtualModel;
 
     /**
      * Default constructor.
      */
-    public Cli(ClientController clientController ) {
+    public Cli(ClientController clientController ,  VirtualModel virtualModel) {
+        this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
+        this.virtualModel=virtualModel;
     }
 
     /**
@@ -92,14 +95,14 @@ public class Cli implements ObserverViewClient , VMObserver {
      */
 
     @Override
-    public void askNickname() {
+    public String askNickname() {
         out.println("Type your nickname.");
         try{
-             nickname = readLine();
+            return readLine();
         }catch(ExecutionException e){
             out.println("WRONG_INPUT");
         }
-        clientController.handleEnterPlayer(nickname);
+        return null;
     }
     /**
      * the method asks to the first user the number of players that are going to play
@@ -123,7 +126,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     @Override
     public void askCardsToTakeFromBoard(){
         int numberOfCards , i , x , y;
-        Position positions [] = {};
+        Card cards [] = {};
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
         String questionY = "Type the y value of the card to take";
@@ -137,12 +140,12 @@ public class Cli implements ObserverViewClient , VMObserver {
             try{
                 x = numberInput(0,8 , null , questionX);
                 y= numberInput(0,8, null , questionY);
-                positions[i]=new Position(x,y);
+                cards[i]=virtualModel.getBoard().getCard(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
             }
-            clientController.handleTakeCard(positions , nickname);
+            clientController.handleTakeCard(cards , nickname);
         }
 
 
@@ -173,10 +176,6 @@ public class Cli implements ObserverViewClient , VMObserver {
         }
     }
 
-    /**
-     *The method sends a message to the server to create a match
-     * @param match
-     */
     @Override
     public void createMatch(Match match) {
         clientController.handleCreateMatch(match);
@@ -201,149 +200,101 @@ public class Cli implements ObserverViewClient , VMObserver {
         //Fare la richiesta di show final point al virtual model
     }
 
-    /**
-     *The method prints on the screen the payload of the player
-     * @param s
-     */
     @Override
     public void onShowReq(String s) {
-        out.println(s);
+        //Show cosa?
     }
 
-    /**
-     *
-     */
     @Override
     public void onNicknameReq() {
         //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
     }
 
-    /**
-     * The method calls the method askNumberPlayer() per chiedere all'utente il numero dei giocatori
-     */
     @Override
     public void onNumbPlayerReq() {
-        askNumberPlayer();
+        //Forse uguale all' askPlayerNumber
     }
 
-    /**
-     *The method prints the updated board
-     * @param board
-     */
     @Override
     public void onShowNewBoardReq(Board board) {
-        board.showBoard();
+        Board b = virtualModel.getBoard();
+        int i , j ;
+        for(i=0 ; i<9 ; i++){
+            for(j=0 ; j<9 ; j++){
+                out.print(b.getCard(i,j).getColour());
+            }
+            out.println("");
+        }
+
     }
 
-    /**
-     * The method prints the updated library of the player
-     * @param nickname
-     * @param library
-     */
     @Override
     public void onNotifyNewLibraryReq(String nickname, Library library) {
-        out.println(nickname +" your library is this :");
-        library.showLibrary();
+        //??
     }
 
-    /**
-     * The method prints the message when the game is over
-     */
     @Override
     public void onNotifyGameFullReq() {
-        out.println("You can not partecipate as the game is already full");
+        //??
     }
 
-    /**
-     * The method prints the name of tha player which has been disconnected
-     * @param player
-     */
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has left the game");
+        out.println("Il giocatore "+player.getNickname()+" si è disconnesso");
+        //Mostrare la risposta del dissconnection?
     }
 
-    /**
-     * The method notifies when the player has been reconnected
-     * @param player
-     */
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has returned to the game");
+        out.println("Il giocatore "+player.getNickname()+" si è riconnesso");
+        //Quando si ha reconnection?
     }
-
-    /**
-     * the method notifies the player if it has been connected or not
-     * @param player
-     */
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
-        if(player.getNickname().equals(this.nickname)) {
-            out.println("Conected");
-            nickname = player.getNickname();
-        }
-        else {
-            out.println("The player" + player.getNickname() + " has entered in the game");
-            //Risposta di accept player?
-        }
+        if(player.getNickname().equals(this.nickname))
+            out.println("Connesso");
+        else
+            out.println("Il giocatore "+player.getNickname()+" è entrato nel gioco");
+        //Risposta di accept player?
     }
 
-    /**
-     *The method shows the common goal card the has been completed and it's score
-     * @param completedEffectiveCard
-     * @param score
-     */
     @Override
     public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
-        out.println("You have completed the following goal");
-        completedEffectiveCard.show();
-        out.println("And your score is " + score);
+
     }
 
-    /**
-     * The method tells the player to who the chair has been assigned
-     * @param nickname
-     */
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-        out.println("The chair has been assigned to "+nickname);
+        out.println("La sedia è assegnata al giocatore "+nickname);
+        //Controllare dal virtual model a chi viene assegnato la chair
     }
 
-    /**
-     * The method returns the coloumns in which the card can be put
-     * @param x
-     * @param library
-     */
     @Override
     public void onShowPossibleColumnReq(int[] x, Library library) {
-        int[] excludedNumbers = {};
-        int i , indexExcludedNumbers=0 , selectedColumn;
-        ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
+        ArrayList<Integer> coloumns = new ArrayList<Integer>() ;//Fare get dal virtual model
+        ArrayList<Integer> excludedNumbers = new ArrayList<Integer>();
+        int selectedColumn;
+        int i;
+        //Controllare se la risposta per le carte scelte è true o no prima di procedere
+
         for(i=0 ; i<5 ; i++){
-            if(x[i]==i){
+            if(coloumns.contains(i)){
 
             }
             else{
-                excludedNumbers[indexExcludedNumbers]=i;
-                indexExcludedNumbers++;
+                excludedNumbers.add(i);
             }
         }
         String question = "Select the coloumn to put your cards from the shown coloumns.";
-        for(i=0 ; i<excludedNumbers.length ; i++){
-            excludedNumbersArrayList.add(excludedNumbers[i]);
-        }
 
         try{
-            selectedColumn = numberInput(0 , 4 , excludedNumbersArrayList , question);
+            selectedColumn = numberInput(0 , 4 , excludedNumbers , question);
         }catch(ExecutionException e){
             out.println("WRONG_INPUT");
         }
 
     }
 
-    /**
-     * The method tells the player that the cards selected are not adjacent so it needs to select other cards
-     */
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
         out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
@@ -351,77 +302,49 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     }
 
-    /**
-     * The method notifies the player that it has been accepted
-     */
     @Override
     public void onNotifyConnectionAcceptedReq() {
-        out.println("You have been accepted");
+        //per cosa serve?
     }
 
-    /**
-     * The method prints on the screen the number of players if it is requested by anyone
-     * @param playerNum
-     */
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-        out.println("The number of players is" + playerNum);
+        //Forsegià fatto con askPlayerNumber
     }
 
-    /**
-     * The method prints the name of the player that has finished it's library
-     * @param player
-     */
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
-        out.println("The player "+player.getNickname()+" has finished");
-        out.println("LAST ROUND");
+        //Per me è così    LIU SILVIA
+        out.println("Il giocatore "+player.getNickname()+" ha finito");
+        out.println("ULTIMO ROUND");
 
         //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
-    /**
-     * The method prints a message to tell everyone that the match has started and it prints name of all the players
-     * @param players
-     */
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-        out.println("The game has started and the names of the players are the following :");
-        for(Player p : players){
-            out.println(p.getNickname());
-        }
+        //??
     }
 
-    /**
-     * The method prints the final score of all the players
-     * @param points
-     */
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> points) {
 
-        points.forEach((key,value)->System.out.println("The points are "+ key + " : " + value));
+        points.forEach((key,value)->System.out.println("il punteggio di "+ key + " : " + value));
 
-        out.println("The game is finished");
+        out.println("Il gioco è terminato");
 
     }
 
-    /**
-     * The method prints the new updated library
-     * @param l
-     */
     @Override
     public void onShowNewMyLibraryReq(Library l) {
-        l.showLibrary();
-    }
+        Library library = virtualModel.getMe().getLibrary();
+        int i , j;
+        for(i=0 ; i<6 ; i++){
+            for(j=0 ; j<5 ; j++){
+                out.print(library.getCardinPos(j,i).getColour()+"   ");
+            }
+            out.println("");
+        }
 
-    /**
-     * The method shows the board
-     */
-    public void showBoard(Board board){
-        board.showBoard();
-    }
-
-    public void showLibrary(Library l){
-        l.showLibrary();
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.modello.Library;
+import it.polimi.ingsw.network.MessageHandler;
 
 public class Updatelibrary extends Message{
     Library l;
@@ -10,5 +11,8 @@ public class Updatelibrary extends Message{
     }
     public Library getL() {
         return l;
+    }
+    public void visit(MessageHandler controller){
+        controller.handle(this);
     }
 }
