@@ -164,6 +164,9 @@ public class MatchController {
     public void removeClient(String nickname){
         Player p=match.getPlayerByNickname(nickname);
         disconnectClients.put(p,connectClients.get(nickname));
+        for(EffectiveCard e: match.getCommonCards()){
+            e.removeObserver(connectClients.get(nickname));
+        }
         connectClients.remove(nickname);
         match.getPlayers().remove(p);
         for(VirtualView v: connectClients.values()){
@@ -181,6 +184,9 @@ public class MatchController {
             if(p.getNickname().equals(name)){  player=p;}
         }
         connectClients.put(name,disconnectClients.get(player));
+        for(EffectiveCard e: match.getCommonCards()){
+            e.addObserver(connectClients.get(name));
+        }
         disconnectClients.remove(player);
         match.getPlayers().add(player);
         for(VirtualView v: connectClients.values()) {
