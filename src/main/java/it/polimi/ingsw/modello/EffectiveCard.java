@@ -39,8 +39,6 @@ public class EffectiveCard extends Observer {
             allScores.remove(0);
         }
         return commonCard.expired(player.getLibrary());
-
-
     }
 
     public void show(){

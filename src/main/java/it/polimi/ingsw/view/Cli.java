@@ -6,7 +6,6 @@ import it.polimi.ingsw.network.observer.VMObserver;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -21,7 +20,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     /**
      * Default constructor.
      */
-    public Cli(ClientController clientController ,  VirtualModel virtualModel) {
+    public Cli(ClientController clientController) {
         this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
@@ -65,6 +64,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     private int numberInput(int minValue, int maxValue, List<Integer> jumpList, String question) throws ExecutionException {
         int number = minValue - 1;
 
+        // A null jumpList will be transformed in a empty list.
         if (jumpList == null) {
             jumpList = List.of();
         }
@@ -124,7 +124,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     @Override
     public void askCardsToTakeFromBoard(){
         int numberOfCards , i , x , y;
-        Position positions [] = {};
+        Card cards [] = {};
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
         String questionY = "Type the y value of the card to take";
@@ -138,12 +138,12 @@ public class Cli implements ObserverViewClient , VMObserver {
             try{
                 x = numberInput(0,8 , null , questionX);
                 y= numberInput(0,8, null , questionY);
-                positions[i]=new Position(x,y);
+                //cards[i]=VirtualModel.getBoard().getCardInPos(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
             }
-            clientController.handleTakeCard(positions , nickname);
+            clientController.handleTakeCard(cards , nickname);
         }
 
 
@@ -200,137 +200,96 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowReq(String s) {
-        out.println(s);
+
     }
 
     @Override
     public void onNicknameReq() {
-        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
+
     }
 
     @Override
     public void onNumbPlayerReq() {
-        askNumberPlayer();
+
     }
 
     @Override
     public void onShowNewBoardReq(Board board) {
-        int i , j ;
-        for(i=0 ; i<9 ; i++){
-            for(j=0 ; j<9 ; j++){
-                out.print(board.getCard(i,j).getColour());
-            }
-            out.println("");
-        }
 
     }
 
     @Override
     public void onNotifyNewLibraryReq(String nickname, Library library) {
-        onShowNewMyLibraryReq(library);
+
     }
 
     @Override
     public void onNotifyGameFullReq() {
-        out.println("You can not partecipate as the game is already full");
+
     }
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has left the game");
+
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has returned to the game");
+
     }
 
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
-        //Risposta di accept player?
+
     }
 
     @Override
     public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
-        out.println("You have completed the following goal");
-        completedEffectiveCard.show();
-        out.println("And your score is " + score);
+
     }
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-        out.println("The chair has been assigned to " + nickname);
+
     }
 
     @Override
     public void onShowPossibleColumnReq(int[] x, Library library) {
-        int[] excludedNumbers = {};
-        int i , indexExcludedNumbers=0 , selectedColumn;
-        ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
-        for(i=0 ; i<5 ; i++){
-            if(x[i]==i){
 
-            }
-            else{
-                excludedNumbers[indexExcludedNumbers]=i;
-                indexExcludedNumbers++;
-            }
-        }
-        String question = "Select the coloumn to put your cards from the shown coloumns.";
-        for(i=0 ; i<excludedNumbers.length ; i++){
-            excludedNumbersArrayList.add(excludedNumbers[i]);
-        }
-
-        try{
-            selectedColumn = numberInput(0 , 4 , excludedNumbersArrayList , question);
-        }catch(ExecutionException e){
-            out.println("WRONG_INPUT");
-        }
-        //classe messaggio per mettere le carte oin library
     }
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-        //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
+
     }
 
     @Override
     public void onNotifyConnectionAcceptedReq() {
-        out.println("You have been accepted");
+
     }
 
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-        out.println("The number of players is" + playerNum);
+
     }
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
-        out.println("The player that finished first is" + player.getNickname());
+
     }
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-        out.println("The game has started and the names of the players are the following :");
-        for(Player p : players){
-            out.println(p.getNickname());
-        }
+
     }
 
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-        //Far vedere la risposta del Fianl_point
+
     }
 
     @Override
     public void onShowNewMyLibraryReq(Library l) {
-        int i , j;
-        for(i=0 ; i<6 ; i++){
-            for(j=0 ; j<5 ; j++){
-                out.print(l.getCardinPos(j,i).getColour()+"   ");
-            }
-            out.println("");
-        }
 
     }
 }

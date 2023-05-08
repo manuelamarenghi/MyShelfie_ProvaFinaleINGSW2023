@@ -21,10 +21,10 @@ private Matchmanager matchmanager;
      *  MatchManager is an abstract class and has 3 classes that extends it
      */
     public Match(){
-
+        players = new ArrayList<>();
     }
     public void setMatch(int number) {
-        players = new ArrayList<>(number);
+
         playerNumber =number;
         if (number == 4) {
             matchmanager = new FourPlayers();
