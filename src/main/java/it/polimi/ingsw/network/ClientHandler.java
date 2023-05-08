@@ -13,9 +13,9 @@ import java.net.Socket;
  * this class manage connection from a client to the server and handles message's requests
  */
 public class ClientHandler implements Runnable{
-    private final Server server;
-    private final Socket client;
-    private final ServerSocket serversocket;
+    private  Server server;
+    private  Socket client;
+    private  ServerSocket serversocket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private boolean connected;
@@ -28,9 +28,13 @@ public class ClientHandler implements Runnable{
             this.output = new ObjectOutputStream(client.getOutputStream());
             this.input = new ObjectInputStream(client.getInputStream());
         } catch (IOException e) {
-             System.out.println("ERROR");
+
         }
     }
+    public ClientHandler(){
+
+    }
+
     /**
      * ClientHandler checks if the connection isn't dropped and shares the request with the server that has methods to satisfy it
      */
@@ -40,7 +44,6 @@ public class ClientHandler implements Runnable{
             handleClientConnection();
         }catch(IOError e){
             disconnect();
-            System.out.println("Errore nel clienthandler");
         }
     }
     /**
@@ -65,31 +68,30 @@ public class ClientHandler implements Runnable{
      */
     private void handleClientConnection() {
         try {
-            System.out.println(Thread.currentThread().isInterrupted());
-            while(!Thread.currentThread().isInterrupted()){
-                Message message = (Message) input.readObject();
-                if (message.getType().equals("Ping!")) {
-                    this.sendMessage(new Message("Server", "Pong!"));
-                } else {
-                    if (message.getType().equals("enter_player")) {
-                        server.addClient(message.getnickname(), this);
-                    } else {
-                        if (message.getType().equals("Client_has_disconnected")) {
+            while (!Thread.currentThread().isInterrupted()) {
+                    Message message = (Message) input.readObject();
+                    if(message.getType().equals("enter_player")){
+                        server.addClient(message.getnickname(),this);
+                    }
+                    else{
+                        if(message.getType().equals("Client_has_disconnected")){
                             server.removeClient(message.getnickname());
-                        } else {
-                            if (message.getType().equals("Mex_in_chat")) {
-                                server.broadcastMessage(this, message);
-                            } else {
-                                server.onMessageReceived(message);
+                        }
+                        else {
+                                if(message.getType().equals("Mex_in_chat")){
+                                    server.broadcastMessage(this,message);
+                                }
+                                else{
+                                    server.onMessageReceived(message);
+                                }
                             }
                         }
                     }
-                }
-            }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
-              sendMessage(new Message("Server","ERROR"));
+
         }
     }
+
     /**
      * sendMessage() is used to send message to the client of this specific clientHanlder
      * @param message
