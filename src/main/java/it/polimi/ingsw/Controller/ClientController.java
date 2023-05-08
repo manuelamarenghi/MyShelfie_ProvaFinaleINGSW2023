@@ -23,7 +23,7 @@ public class ClientController implements ObserverViewClient {
     public ClientController(View view , VirtualModel virtualModel) throws IOException {
         this.view = view;
         this.virtualModel=virtualModel;
-        socketClient= new SocketClient("local host" , 16000847);
+        socketClient= new SocketClient("localhost" , 16000847);
     }
 
     public ClientController(View view , VirtualModel virtualModel , SocketClient socketClient){
