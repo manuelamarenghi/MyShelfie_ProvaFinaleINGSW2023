@@ -23,7 +23,6 @@ public class ClientApp {
         }
 
         if (cliParam) {
-
         } else {
             //Application.launch(JavaFXGui.class);
         }
