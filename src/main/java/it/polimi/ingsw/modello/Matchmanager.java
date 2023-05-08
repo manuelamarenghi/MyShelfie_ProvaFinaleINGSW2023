@@ -19,13 +19,11 @@ public abstract class Matchmanager{
   public Matchmanager(){
 
   }
-
   /**
    * Choose the common card and personal card
    * fill the board
    * start game
    */
-
   public void startGame(Match match){
 
     setPersonalGoal(match.getPlayers());

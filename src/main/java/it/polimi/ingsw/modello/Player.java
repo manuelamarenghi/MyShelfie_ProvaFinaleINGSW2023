@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
     private String nickname;
     private int commonGoalScore ;
-    private List<Observer> observers;
+    private List<ObserverCC> observers;
     private Library library;
     private boolean state;
     private PersonalGoalCard personalCard;
@@ -28,7 +28,7 @@ public class Player {
     public int getCommonGoalScore(){
         return commonGoalScore;
     }
-    public List<Observer> getObservers(){
+    public List<ObserverCC> getObservers(){
         return observers;
     }
     public Library getLibrary(){
@@ -51,11 +51,11 @@ public class Player {
         this.commonGoalScore=score;
     }
 
-    public void addObserver(Observer observer)
+    public void addObserver(ObserverCC observer)
     {
         observers.add(observer);
     }
-    public void removeObserver(Observer observer){
+    public void removeObserver(ObserverCC observer){
         observers.remove(observer);
     }
 

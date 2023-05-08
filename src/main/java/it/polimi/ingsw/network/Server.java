@@ -31,7 +31,6 @@ public class Server {
                 clientsconnected.add(nickname);
                 clientHandlerMap.put(nickname, clientHandler);
             }}
-            System.out.println(clientsconnected);
         }
         else{
             matchController.PlayerBack(nickname);

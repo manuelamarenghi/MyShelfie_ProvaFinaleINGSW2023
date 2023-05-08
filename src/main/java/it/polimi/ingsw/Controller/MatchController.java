@@ -7,6 +7,7 @@ import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.PutInLib;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
+import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
@@ -259,8 +260,6 @@ public class MatchController {
         if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
-
-
         nextPlayer();
 
     }
@@ -268,5 +267,8 @@ public class MatchController {
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
+        for(EffectiveCard e: match.getCommonCards()){
+            e.addObserver(virtualView);
+        }
     }
 }

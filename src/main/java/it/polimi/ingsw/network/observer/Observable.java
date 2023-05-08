@@ -12,6 +12,9 @@ public class Observable {
 
     private final List<Observer> observers = new ArrayList<>();
 
+    public List<Observer> getObservers() {
+        return observers;
+    }
     /**
      * Adds an observer.
      *
