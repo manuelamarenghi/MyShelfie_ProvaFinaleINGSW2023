@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * this class implements methods to send message to a specific client
  */
-public class VirtualView implements View {
+public class VirtualView implements View{
     ClientHandler clientHandler;
     public VirtualView(ClientHandler c){
         this.clientHandler=c;
@@ -66,10 +66,10 @@ public class VirtualView implements View {
     /**
      * assignedCC() update the client when a common goal score is assigned
      */
-    @Override
-    public void assignedCC(EffectiveCard e, int x,String name) {
-        clientHandler.sendMessage(new Assigned_CC(x,name,e));
-    }
+
+    //public void assignedCC(EffectiveCard e, int x,String name) {
+    //    clientHandler.sendMessage(new Assigned_CC(x,name,e));
+   // }
     /**
      * assignedChair() assigned chair to a random player
      */
@@ -128,4 +128,8 @@ public class VirtualView implements View {
         clientHandler.sendMessage(new Numb_Player_Answer(x));
     }
 
+    @Override
+    public void update(Message message) {
+        clientHandler.sendMessage(message);
+    }
 }

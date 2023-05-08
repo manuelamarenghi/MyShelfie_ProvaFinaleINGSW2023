@@ -6,6 +6,7 @@ import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.PutInLib;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
+import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
@@ -58,9 +59,10 @@ public class MatchController {
      * the first player, he needs choose how many player play
      *  other player, add virtualview and wait the game start
      */
-    public synchronized void loginHandler(String nickname, VirtualView virtualView) {
-        if (connectClients.keySet().contains(nickname)) {
+    public boolean loginHandler(String nickname, VirtualView virtualView) {
+        if (players.contains(nickname)) {
                virtualView.askNickname();
+               return false;
         } else {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
@@ -74,14 +76,17 @@ public class MatchController {
                 match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 for (VirtualView v : connectClients.values()) {
-                    if(!connectClients.equals(connectClients.get(nickname)))
-                             {v.AcceptNewPlayer(nickname);}
+                    if (!connectClients.equals(connectClients.get(nickname))) {
+                        v.AcceptNewPlayer(nickname);
+                    }
                 }
                 if(connectClients.size() == match.getPlayerNumber()){ startGame();}
             } else {
                 connectClients.get(nickname).Gamefull();
+                return false;
             }
         }
+        return true;
     }
     /**
      * Start game
@@ -147,6 +152,9 @@ public class MatchController {
     public void removeClient(String nickname){
         Player p=match.getPlayerByNickname(nickname);
         disconnectClients.put(p,connectClients.get(nickname));
+        for(EffectiveCard e: match.getCommonCards()){
+            e.removeObserver(connectClients.get(nickname));
+        }
         connectClients.remove(nickname);
         match.getPlayers().remove(p);
         for(VirtualView v: connectClients.values()){
@@ -164,6 +172,9 @@ public class MatchController {
             if(p.getNickname().equals(name)){  player=p;}
         }
         connectClients.put(name,disconnectClients.get(player));
+        for(EffectiveCard e: match.getCommonCards()){
+            e.addObserver(connectClients.get(name));
+        }
         disconnectClients.remove(player);
         match.getPlayers().add(player);
         for(VirtualView v: connectClients.values()) {
@@ -243,8 +254,6 @@ public class MatchController {
         if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
-
-
         nextPlayer();
 
     }
@@ -252,5 +261,8 @@ public class MatchController {
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
+        for(EffectiveCard e: match.getCommonCards()){
+            e.addObserver(virtualView);
+        }
     }
 }
