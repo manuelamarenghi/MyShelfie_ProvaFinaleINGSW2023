@@ -3,6 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.Client;
+import it.polimi.ingsw.view.VirtualModel;
 
 import javax.swing.text.View;
 import java.util.ArrayList;
@@ -12,10 +13,12 @@ public class ClientController {
 
     private Client client;
     private View view;
+    private VirtualModel virtualModel;
 
-    public ClientController(Client client , View view){
+    public ClientController(Client client , View view , VirtualModel virtualModel){
         this.client = client;
         this.view = view;
+        this.virtualModel=virtualModel;
     }
 
     /**
@@ -35,7 +38,12 @@ public class ClientController {
     /**
      * the sends a message to socket client in case it decides to pick a card from board
      */
-    public void handleTakeCard( Card[] cards , String name ){
+    public void handleTakeCard(Position[] positions , String name ){
+        int i ;
+        Card cards[]={};
+        for(i=0 ; i< positions.length ; i++){
+            cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
+        }
         TakeCardBoard message = new TakeCardBoard(cards , name);
         client.sendMessage(message);
     }
@@ -72,12 +80,16 @@ public class ClientController {
     }
 
     /*public void handleMessageFromSocketClient(Message message){
-        message.visit(this);
-    }*/
+        message.visitView(this);
+    }
 
-    public void handle(UpdateBoard message){
+    public void handle(ShowColumn message){
 
     }
+
+    public void handle(NotTakeCardBoard message){
+
+    }*/
 
     /**
      * The method takes action on view based on the message recieved by the server , it could be implemented

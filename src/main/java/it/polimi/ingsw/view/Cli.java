@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.observer.VMObserver;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -17,8 +18,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     private Thread inputThread;
     private ClientController clientController;
 
-    private VirtualModel virtualModel;
-
     /**
      * Default constructor.
      */
@@ -26,7 +25,6 @@ public class Cli implements ObserverViewClient , VMObserver {
         this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
-        this.virtualModel=virtualModel;
     }
 
     /**
@@ -126,7 +124,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     @Override
     public void askCardsToTakeFromBoard(){
         int numberOfCards , i , x , y;
-        Card cards [] = {};
+        Position positions [] = {};
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
         String questionY = "Type the y value of the card to take";
@@ -140,12 +138,12 @@ public class Cli implements ObserverViewClient , VMObserver {
             try{
                 x = numberInput(0,8 , null , questionX);
                 y= numberInput(0,8, null , questionY);
-                cards[i]=virtualModel.getBoard().getCard(x,y);
+                positions[i]=new Position(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
             }
-            clientController.handleTakeCard(cards , nickname);
+            clientController.handleTakeCard(positions , nickname);
         }
 
 
@@ -202,7 +200,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowReq(String s) {
-        //Show cosa?
+        out.println(s);
     }
 
     @Override
@@ -212,16 +210,15 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNumbPlayerReq() {
-        //Forse uguale all' askPlayerNumber
+        askNumberPlayer();
     }
 
     @Override
     public void onShowNewBoardReq(Board board) {
-        Board b = virtualModel.getBoard();
         int i , j ;
         for(i=0 ; i<9 ; i++){
             for(j=0 ; j<9 ; j++){
-                out.print(b.getCard(i,j).getColour());
+                out.print(board.getCard(i,j).getColour());
             }
             out.println("");
         }
@@ -230,22 +227,22 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyNewLibraryReq(String nickname, Library library) {
-        //??
+        onShowNewMyLibraryReq(library);
     }
 
     @Override
     public void onNotifyGameFullReq() {
-        //??
+        out.println("You can not partecipate as the game is already full");
     }
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-        //Mostrare la risposta del dissconnection?
+        out.println("Player" + player.getNickname() + "has left the game");
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        //Quando si ha reconnection?
+        out.println("Player" + player.getNickname() + "has returned to the game");
     }
 
     @Override
@@ -255,38 +252,41 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
-
+        out.println("You have completed the following goal");
+        completedEffectiveCard.show();
+        out.println("And your score is " + score);
     }
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-        //Controllare dal virtual model a chi viene assegnato la chair
+        out.println("The chair has been assigned to " + nickname);
     }
 
     @Override
     public void onShowPossibleColumnReq(int[] x, Library library) {
-        ArrayList<Integer> coloumns = new ArrayList<Integer>() ;//Fare get dal virtual model
-        ArrayList<Integer> excludedNumbers = new ArrayList<Integer>();
-        int selectedColumn;
-        int i;
-        //Controllare se la risposta per le carte scelte è true o no prima di procedere
-
+        int[] excludedNumbers = {};
+        int i , indexExcludedNumbers=0 , selectedColumn;
+        ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
         for(i=0 ; i<5 ; i++){
-            if(coloumns.contains(i)){
+            if(x[i]==i){
 
             }
             else{
-                excludedNumbers.add(i);
+                excludedNumbers[indexExcludedNumbers]=i;
+                indexExcludedNumbers++;
             }
         }
         String question = "Select the coloumn to put your cards from the shown coloumns.";
+        for(i=0 ; i<excludedNumbers.length ; i++){
+            excludedNumbersArrayList.add(excludedNumbers[i]);
+        }
 
         try{
-            selectedColumn = numberInput(0 , 4 , excludedNumbers , question);
+            selectedColumn = numberInput(0 , 4 , excludedNumbersArrayList , question);
         }catch(ExecutionException e){
             out.println("WRONG_INPUT");
         }
-
+        //classe messaggio per mettere le carte oin library
     }
 
     @Override
@@ -296,22 +296,25 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyConnectionAcceptedReq() {
-        //per cosa serve?
+        out.println("You have been accepted");
     }
 
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-        //Forsegià fatto con askPlayerNumber
+        out.println("The number of players is" + playerNum);
     }
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
-        //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
+        out.println("The player that finished first is" + player.getNickname());
     }
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-        //??
+        out.println("The game has started and the names of the players are the following :");
+        for(Player p : players){
+            out.println(p.getNickname());
+        }
     }
 
     @Override
@@ -321,11 +324,10 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowNewMyLibraryReq(Library l) {
-        Library library = virtualModel.getMe().getLibrary();
         int i , j;
         for(i=0 ; i<6 ; i++){
             for(j=0 ; j<5 ; j++){
-                out.print(library.getCardinPos(j,i).getColour()+"   ");
+                out.print(l.getCardinPos(j,i).getColour()+"   ");
             }
             out.println("");
         }
