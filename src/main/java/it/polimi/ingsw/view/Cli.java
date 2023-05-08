@@ -299,8 +299,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     public void onNotifyCardsAreNotAdjacentReq() {
         out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
         askCardsToTakeFromBoard();
-        //TODO chiamata metodo per estrarre le carte
-        //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
+
     }
 
     @Override
@@ -329,8 +328,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> points) {
-        if(points.containsKey(nickname))
-            out.println("Hai vinto, il tuo punteggio è: "+ points.get(nickname));
+
         points.forEach((key,value)->System.out.println("il punteggio di "+ key + " : " + value));
 
         out.println("Il gioco è terminato");

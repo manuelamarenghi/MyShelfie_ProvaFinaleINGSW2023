@@ -118,7 +118,7 @@ public class MatchController {
      */
     private void nextPlayer(){
         if(turnController.nextPlayer() == true)
-            connectClients.get(turnController.getActivePlayer()).YourTurn();
+            connectClients.get(turnController.getActivePlayer()).YourTurn(turnController.getActivePlayer());
         else{
             endGame();
         }
@@ -223,7 +223,6 @@ public class MatchController {
             connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum);
         }
         else{
-            System.out.println("Non puoi prenderli");
             connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
         }
     }

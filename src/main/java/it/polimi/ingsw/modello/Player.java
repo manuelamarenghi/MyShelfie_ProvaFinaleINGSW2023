@@ -53,6 +53,7 @@ public class Player {
 
     public void setCommonGoalScore(int score){
         this.commonGoalScore=score;
+
     }
 
     public void addObserver(Observer observer)
