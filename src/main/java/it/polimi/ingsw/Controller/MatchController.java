@@ -221,7 +221,7 @@ public class MatchController {
         match.setMatch(numberPlayer.getNumb());
         numberOfPlayers = numberPlayer.getNumb();
 
-        System.out.println("il numero di giocatori è "+numberPlayer);
+        System.out.println("il numero di giocatori è "+numberPlayer.getNumb());
         for(VirtualView v: connectClients.values()){
             v.sendNumbPlayer(numberOfPlayers);
         }
