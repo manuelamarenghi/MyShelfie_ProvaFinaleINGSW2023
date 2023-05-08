@@ -13,9 +13,9 @@ import java.net.Socket;
  * this class manage connection from a client to the server and handles message's requests
  */
 public class ClientHandler implements Runnable{
-    private final Server server;
-    private final Socket client;
-    private final ServerSocket serversocket;
+    private  Server server;
+    private  Socket client;
+    private  ServerSocket serversocket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private boolean connected;
@@ -30,6 +30,9 @@ public class ClientHandler implements Runnable{
         } catch (IOException e) {
 
         }
+    }
+    public ClientHandler(){
+
     }
 
     /**
