@@ -4,9 +4,11 @@ import it.polimi.ingsw.message.AskNumbPlayer;
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualModel;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -151,10 +153,7 @@ public class MessageHandler implements Observer {
      */
     public void handle(AcceptPlayer message){
         executor.execute(()->{
-            if(virtualModel.getMe().getNickname().equals(message.getnickname()))
-                virtualModel.notifyObserver(obs->obs.onNotifyConnectionAcceptedReq());
-            else
-                virtualModel.notifyObserver(obs->obs.onNotifyPlayerConnectionReq(virtualModel.getPlayer(message.getnickname())));}
+                virtualModel.notifyObserver(obs->obs.onNotifyPlayerConnectionReq(message.getnickname()));}
         );
     }
 
@@ -201,5 +200,47 @@ public class MessageHandler implements Observer {
             virtualModel.setPlayerNumber(message.getX());
             virtualModel.notifyObserver(obs->obs.onNotifyNumbPlayerReq(message.getX()));}
         );
+    }
+    /**
+     * handle Disconnection_Answer messages, update the player's list and notify the player's view that server
+     * accepted its disconnection request.
+     * @param message
+     */
+    public void handle(Disconnection_Answer message){
+        executor.execute(()->{
+            virtualModel.removePlayer(message.getnickname());
+            virtualModel.notifyObserver(obs->obs.onNotifyDisconnectionReqAcceptedAns());}
+        );
+    }
+
+    /**
+     * handle AskNewNickname messages and notify the player's view that the nickname chosen it's unavailable.
+     * @param message
+     */
+    public void handle(AskNewNickname message){
+        executor.execute(()->{
+            virtualModel.notifyObserver(obs->obs.onNotifyNewNicknameReq());}
+        );
+    }
+
+    /**
+     * handle Turn messages, update virtualModel.isMyTurn attribute, and notify the player's view
+     * if it's his turn, if his turn is ended or the new current player.
+     * @param message
+     */
+    public void handle(Turn message){
+        executor.execute(()->{
+            if(!message.getnickname().equals(virtualModel.getMe().getNickname())){
+                if(!virtualModel.isMyTurn()){
+                    virtualModel.updateIsMyTurn();
+                    virtualModel.notifyObserver(obs->obs.onNotifyIsYourTurnReq(virtualModel.getBoard(),virtualModel.getMe().getLibrary()));
+                }
+            }else if(virtualModel.isMyTurn()){
+                    virtualModel.updateIsMyTurn();
+                    virtualModel.notifyObserver(obs->obs.onNotifyYourTurnIsEndedReq(message.getnickname()));
+            }else{
+                virtualModel.notifyObserver(obs->obs.onNotifyWhoIsPlayingNowReq(message.getnickname()));
+            }
+        });
     }
 }

@@ -4,6 +4,7 @@ package it.polimi.ingsw.modello;
 import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Position;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,22 +13,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
     @Test
-    public void checkZeroZeroHasCoordinatesNull(){
+    public void checkZeroZeroHasCoordinatesNullTest(){
         Board board = new Board(4);
         assertEquals(null , board.getBoard()[0][0].getCoordinates());
     }
     @Test
-    public void checkOneTwoHasCoordinatesNull(){
+    public void checkOneTwoHasCoordinatesNullTest(){
         Board board = new Board(4);
         assertEquals(null ,board.getBoard()[1][2].getCoordinates());
     }
     @Test
-    public void checkSixOneHasCoordinatesNull(){
+    public void checkSixOneHasCoordinatesNullTest(){
         Board board = new Board(4);
         assertEquals(null ,board.getBoard()[6][1].getCoordinates());
     }
     @Test
-    public void checkOneCardAllow(){
+    public void checkOneCardAllowTest(){
         Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
@@ -35,7 +36,7 @@ class BoardTest {
         assertEquals(true , board.allow(testCards));
     }
     @Test
-    public void allowWithMoreThanThreeCardsReturnFalse(){
+    public void allowWithMoreThanThreeCardsReturnFalseTest(){
         Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
@@ -50,7 +51,7 @@ class BoardTest {
     }
 
     @Test
-    public void AllowReturnFalseWithSameCard(){
+    public void AllowReturnFalseWithSameCardTest(){
         Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
@@ -60,7 +61,7 @@ class BoardTest {
         assertEquals(false , board.allow(testCards));
     }
     @Test
-    public void AllowReturnFalseWithNotAdjacentCards(){
+    public void AllowReturnFalseWithNotAdjacentCardsTest(){
         Board board = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
         Card test1 = new Card("Green" , new Position(3,7));
@@ -70,33 +71,33 @@ class BoardTest {
         assertEquals(false , board.allow(testCards));
     }
     @Test
-    public void checkNumberOfCardsFilled(){
+    public void checkNumberOfCardsFilledTest(){
         Board board = new Board(2);
         assertEquals(29 , board.getFreeposition());
     }
     @Test
-    public void checkIfCardIsNull(){
+    public void checkIfCardIsNullTest(){
         Board board = new Board(2);
         board.fill(2);
         assertEquals("" , board.getBoard()[3][0].getColour());
 
     }
     @Test
-    public void checkIfCardIsNotNull(){
+    public void checkIfCardIsNotNullTest(){
         Board board = new Board(2);
         board.fill(0);
         assertNotEquals("" , board.getBoard()[3][3].getColour());
 
     }
     @Test
-    public void checkIfCardIsNotNull2(){
+    public void checkIfCardIsNotNull2Test(){
         Board board = new Board(3);
         board.fill(2);
         assertEquals("" , board.getBoard()[3][8].getColour());
 
     }
     @Test
-    public void checkIfCardIsNotNull3(){
+    public void checkIfCardIsNotNull3Test(){
         Board board = new Board(4);
         board.fill(3);
         assertNotEquals("" , board.getBoard()[3][1].getColour());
@@ -106,16 +107,68 @@ class BoardTest {
      * showBoard() we test the board in 4 players version
      */
     @Test
-    public void showBoard(){
+    public void showBoardTest(){
         Board b=new Board(4);
         b.fill(4);
         b.showBoard();
     }
     @Test
-    public void showBoardtest2(){
+    public void showBoardtest2Test(){
         Board b = new Board(2);
         b.fill(0);
         System.out.println(b.getBoard()[4][7].getColour());
         b.showBoard();
+    }
+    @Test
+    public void groupTest(){
+        Board board= new Board(2);
+        board.setCard("V",new Position(1,3));
+        board.setCard("R",new Position(2,4));
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(1);
+        expected.add(1);
+        Assertions.assertEquals(expected,board.Group());
+    }
+
+    @Test
+    public void groupTest2(){
+        Board board= new Board(2);
+        board.setCard("V",new Position(1,3));
+        board.setCard("R",new Position(2,3));
+        board.setCard("R",new Position(2,4));
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(3);
+        Assertions.assertEquals(expected,board.Group());
+    }
+
+    @Test
+    public void groupTest3(){
+        Board board= new Board(2);
+        board.setCard("V",new Position(1,3));
+        board.setCard("R",new Position(2,3));
+        board.setCard("R",new Position(2,4));
+
+        board.setCard("T",new Position(5,2));
+        board.setCard("F",new Position(5,3));
+
+        board.setCard("G",new Position(7,4));
+
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(3);
+        expected.add(2);
+        expected.add(1);
+        Assertions.assertEquals(expected,board.Group());
+    }
+
+    @Test
+    public void takeCardTest(){
+
+        Board board = new Board(2);
+        board.fill(0);
+
+        board.takeCard(new Position(3,3));
+        System.out.println(board.getCard(3,3).getColour());
     }
 }

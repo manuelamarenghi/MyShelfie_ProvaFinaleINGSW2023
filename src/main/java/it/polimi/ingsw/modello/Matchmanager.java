@@ -30,6 +30,8 @@ public abstract class Matchmanager{
     setEffectiveCards(match);
 
     createBoard(match);
+    match.getBoard().fill(0);
+
     int position = (int)(Math.random() * match.getPlayerNumber());
     System.out.println(position);
 
@@ -57,17 +59,6 @@ public abstract class Matchmanager{
       scores.put(p.getNickname(),i);
     }
     return scores;
-    /*
-    int[] scores = new int[m.getPlayers().size()];
-    ArrayList<Player> p = m.getPlayers();
-    int j = 0;
-    for (Integer i : scores) {
-      i = p.get(j).getPlayerManager().showProgressScore(p.get(j));
-      if (p.get(j).equals(m.getFirstFinish())) {
-        i++;
-      }
-    }
-    return scores;*/
 
   }
   /**
@@ -118,31 +109,6 @@ public abstract class Matchmanager{
     }
   }
 
-  /**
-   * turn() manage a player's turn, a is for knowing if the player wants to pass his turn
-   */
-  /*
-  public void turn(Player p, Match m,int a) {
-    if (a != -1) {
-      p.getLibrary().showLibrary();
-      p.getPlayerManager().selectCard(p, m.getBoard());
-      p.getPlayerManager().notifyAllObservers(p);
-      p.getLibrary().showLibrary();
-      int i = 0;
-      for (Card c : p.getLibrary()) {
-        if (c.getColour() == null) {
-          break;
-        } else {
-          i++;
-        }
-      }
-      if (i == 30) {
-        m.setFirstFinish(p);
-        System.out.println("Your library is full, the game continues until the player sitting to the right to the player holding the first player seat");
-      }
-    }
-  }
-  */
   /**
    * IsEmpyBoard() checks if board is empty
    */

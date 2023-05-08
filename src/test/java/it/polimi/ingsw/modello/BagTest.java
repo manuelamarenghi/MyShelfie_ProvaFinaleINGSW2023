@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BagTest {
 
     @Test
-    public void checkNumberOfCardsWith2Player(){
+    public void checkNumberOfCardsWith2PlayerTest(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
         cards=bag.extract(2 , 0);
@@ -17,7 +17,7 @@ class BagTest {
     }
 
     @Test
-    public void checkNumberOfCardsWith3Player(){
+    public void checkNumberOfCardsWith3PlayerTest(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
         cards=bag.extract(3 , 0);
@@ -25,7 +25,7 @@ class BagTest {
     }
 
     @Test
-    public void checkNumberOfCardsWith4Player(){
+    public void checkNumberOfCardsWith4PlayerTest(){
         Bag bag = new Bag();
         ArrayList<String> cards = new ArrayList<>();
         cards=bag.extract(4 , 2);

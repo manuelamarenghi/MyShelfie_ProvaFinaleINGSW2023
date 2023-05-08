@@ -6,11 +6,10 @@ import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.PutInLib;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
-import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
-
+import it.polimi.ingsw.modello.EffectiveCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -263,6 +262,8 @@ public class MatchController {
         if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
+
+
         nextPlayer();
 
     }
