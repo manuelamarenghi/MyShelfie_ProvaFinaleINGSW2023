@@ -46,6 +46,7 @@ public class Server {
     public void removeClient(String nickname){
         disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
+        clientdisconnected.add(nickname);
         matchController.removeClient(nickname);
         disconnettedclientMap.get(nickname).sendMessage(new Disconnection_Answer(nickname));
     }
