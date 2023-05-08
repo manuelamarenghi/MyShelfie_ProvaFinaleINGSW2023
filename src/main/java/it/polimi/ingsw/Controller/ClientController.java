@@ -5,6 +5,8 @@ import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.network.observer.Observer;
+import it.polimi.ingsw.view.ObservableViewClient;
+import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
 import javax.swing.text.View;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ClientController{
+public class ClientController implements ObserverViewClient {
     private View view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
