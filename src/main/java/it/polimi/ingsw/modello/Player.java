@@ -2,6 +2,7 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 public class Player {
     private String nickname;
     private int commonGoalScore ;
-    private List<Observer> observers;
+    private List<ObserverCC> observers;
     private Library library;
     private boolean state;
     private PersonalGoalCard personalCard;
@@ -19,6 +20,9 @@ public class Player {
 
     public Player(String nickname){
         this.nickname = nickname;
+        plManag = new PlayerManager();
+        library = new Library();
+        observers = new ArrayList<>();
     }
 
     public String getNickname(){
@@ -28,7 +32,7 @@ public class Player {
     public int getCommonGoalScore(){
         return commonGoalScore;
     }
-    public List<Observer> getObservers(){
+    public List<ObserverCC> getObservers(){
         return observers;
     }
     public Library getLibrary(){
@@ -49,13 +53,14 @@ public class Player {
 
     public void setCommonGoalScore(int score){
         this.commonGoalScore=score;
+
     }
 
-    public void addObserver(Observer observer)
+    public void addObserver(ObserverCC observer)
     {
         observers.add(observer);
     }
-    public void removeObserver(Observer observer){
+    public void removeObserver(ObserverCC observer){
         observers.remove(observer);
     }
 

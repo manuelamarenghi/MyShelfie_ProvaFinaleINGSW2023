@@ -96,7 +96,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public String askNickname() {
-        out.println("Type your nickanme.");
+        out.println("Type your nickname.");
         try{
             return readLine();
         }catch(ExecutionException e){
@@ -204,6 +204,12 @@ public class Cli implements ObserverViewClient , VMObserver {
     public void onShowReq(String s) {
         //Show cosa?
     }
+
+    @Override
+    public void onNicknameReq() {
+        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
+    }
+
     @Override
     public void onNumbPlayerReq() {
         //Forse uguale all' askPlayerNumber
@@ -234,16 +240,21 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
+        out.println("Il giocatore "+player.getNickname()+" si è disconnesso");
         //Mostrare la risposta del dissconnection?
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
+        out.println("Il giocatore "+player.getNickname()+" si è riconnesso");
         //Quando si ha reconnection?
     }
-
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
+    public void onNotifyPlayerConnectionReq(Player player) {
+        if(player.getNickname().equals(this.nickname))
+            out.println("Connesso");
+        else
+            out.println("Il giocatore "+player.getNickname()+" è entrato nel gioco");
         //Risposta di accept player?
     }
 
@@ -254,6 +265,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
+        out.println("La sedia è assegnata al giocatore "+nickname);
         //Controllare dal virtual model a chi viene assegnato la chair
     }
 
@@ -285,7 +297,14 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-        //NOn serve forse perchè il controllo di carte non adiacenti si fa nel modello
+        out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
+        askCardsToTakeFromBoard();
+
+    }
+
+    @Override
+    public void onNotifyConnectionAcceptedReq() {
+        //per cosa serve?
     }
 
     @Override
@@ -295,6 +314,10 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
+        //Per me è così    LIU SILVIA
+        out.println("Il giocatore "+player.getNickname()+" ha finito");
+        out.println("ULTIMO ROUND");
+
         //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
@@ -304,8 +327,12 @@ public class Cli implements ObserverViewClient , VMObserver {
     }
 
     @Override
-    public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-        //Far vedere la risposta del Fianl_point
+    public void onShowFinalScoreBoardReq(HashMap<String, Integer> points) {
+
+        points.forEach((key,value)->System.out.println("il punteggio di "+ key + " : " + value));
+
+        out.println("Il gioco è terminato");
+
     }
 
     @Override
@@ -318,16 +345,6 @@ public class Cli implements ObserverViewClient , VMObserver {
             }
             out.println("");
         }
-
-    }
-
-    @Override
-    public void onNotifyDisconnectionReqAcceptedAns() {
-
-    }
-
-    @Override
-    public void onNotifyNewNicknameReq() {
 
     }
 }

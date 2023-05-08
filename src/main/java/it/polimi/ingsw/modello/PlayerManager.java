@@ -11,7 +11,7 @@ public class PlayerManager {
 
     public void notifyAllObservers(Player player){
 
-        for(Observer observer: player.getObservers())
+        for(ObserverCC observer: player.getObservers())
         {
             if(observer.update(player))
                 player.removeObserver(observer);
@@ -123,7 +123,7 @@ public class PlayerManager {
                 score+=3;}
             if(i==5){
                 score+=5;}
-            if(i>6){
+            if(i>=6){
                 score+=8;}
         }
         return score;
