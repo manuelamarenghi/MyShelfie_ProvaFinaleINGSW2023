@@ -2,31 +2,29 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
-import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.SocketClient;
-import it.polimi.ingsw.network.observer.Observer;
-import it.polimi.ingsw.view.ObservableViewClient;
+import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.ObserverViewClient;
+import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
 import javax.swing.text.View;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ClientController implements ObserverViewClient {
-    private View view;
+    private ViewClient view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
     //localhost
-    //16000847
-    public ClientController(View view , VirtualModel virtualModel) throws IOException {
+    //16847
+    public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
         this.view = view;
         this.virtualModel=virtualModel;
-        socketClient= new SocketClient("local host" , 16000847);
+        socketClient= new SocketClient("localhost" , 16847);
     }
 
-    public ClientController(View view , VirtualModel virtualModel , SocketClient socketClient){
+    public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
         this.view = view;
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
