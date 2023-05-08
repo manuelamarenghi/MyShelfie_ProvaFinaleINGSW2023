@@ -1,6 +1,7 @@
 package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.network.MessageHandler;
 
 public class Created_Match extends Message{
     Match match;
@@ -10,5 +11,8 @@ public class Created_Match extends Message{
     }
     public Match getMatch() {
         return match;
+    }
+    public void visit(MessageHandler controller){
+        controller.handle(this);
     }
 }
