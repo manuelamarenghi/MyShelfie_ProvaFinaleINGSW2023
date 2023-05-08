@@ -123,7 +123,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     /**
-     * The method is used to select the cards tomtake from the board , and it sends the message to controller
+     * The method is used to select the cards to take from the board , and it sends the message to controller
      */
     @Override
     public void askCardsToTakeFromBoard(){
