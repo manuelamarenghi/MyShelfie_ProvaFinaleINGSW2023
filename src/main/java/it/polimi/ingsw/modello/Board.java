@@ -294,7 +294,7 @@ public class Board {
     }
 
     /**
-     *
+     *the method checks if the cards are adjacent or not
      * @param board
      * @param visited
      * @param row
