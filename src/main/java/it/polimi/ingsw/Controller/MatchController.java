@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MatchController {
     private Match match;
@@ -23,8 +24,6 @@ public class MatchController {
     private TurnController turnController;
     private Map<Player, VirtualView> disconnectClients;
     private Map<String, VirtualView> connectClients;
-
-
     private boolean isStarted = false;
 
 
@@ -35,8 +34,6 @@ public class MatchController {
         this.disconnectClients=Collections.synchronizedMap(new HashMap<>());
         players = new ArrayList<>();
     }
-
-
     public VirtualView getVirtualView(String nickname){
             return connectClients.get(nickname);
     }

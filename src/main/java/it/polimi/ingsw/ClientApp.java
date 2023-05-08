@@ -45,7 +45,7 @@ public class ClientApp {
         sClient.sendMessage(m2);
         sClient.readMessage();*/
         Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost" , 16487);
+        SocketClient socketClient = new SocketClient("localhost" , 16847);
         VirtualModel virtualModel = new VirtualModel(match);
         MessageHandler messageHandler = new MessageHandler(virtualModel);
         socketClient.addObserver(messageHandler);

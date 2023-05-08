@@ -88,7 +88,7 @@ public abstract class Matchmanager{
     Card[] cards;
 
     {
-      try {
+      try{
         jsonPath = new String(Files.readAllBytes(Paths.get("./src/json/PersonalGoalCards.json")));
       } catch (IOException e) {
         throw new RuntimeException(e);

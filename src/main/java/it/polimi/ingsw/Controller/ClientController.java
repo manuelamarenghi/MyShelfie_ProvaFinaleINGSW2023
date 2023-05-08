@@ -22,12 +22,14 @@ public class ClientController implements ObserverViewClient {
         this.view = view;
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
+        socketClient.enablePinger(true);
     }
 
     public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
         this.view = view;
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
+        socketClient.enablePinger(true);
     }
 
 
@@ -75,7 +77,6 @@ public class ClientController implements ObserverViewClient {
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
         socketClient.sendMessage(message);
     }
-
     /**
      * the method sends a message to socket client to calculate points for the player
      */
@@ -83,12 +84,10 @@ public class ClientController implements ObserverViewClient {
         FinalPointRequest message =new FinalPointRequest(name);
         socketClient.sendMessage(message);
     }
-
     /**
      * The method tells the server to dissconect
      * @param name
      */
-
     public void handleDisconection(String name){
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);

@@ -58,7 +58,7 @@ public class VirtualView implements View{
      * updateanotherplayerconnect() update others player view when one has disconnected
      */
     public void updateanotherplayerconnect(String name,Boolean connected,Player p){
-        if(connected=false) {
+        if(!connected) {
             clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
         }
         else{ clientHandler.sendMessage(new PlayerReturned(p));}
