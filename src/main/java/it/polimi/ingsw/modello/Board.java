@@ -1,8 +1,9 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Board {
+public class Board implements Serializable {
     private int row=9 , col=9 , numOfPlayers;
     private Card[][] board = new Card[row][col];
     private Card ca;

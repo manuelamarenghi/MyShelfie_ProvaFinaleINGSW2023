@@ -4,13 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public abstract class Matchmanager{
+public abstract class Matchmanager implements Serializable {
 
   /**
    * this class manage actions in a match
@@ -28,6 +29,11 @@ public abstract class Matchmanager{
 
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
+
+    for(Player p: match.getPlayers())
+    {
+      p.getPersonalCard().showPersonalGoalCard();
+    }
 
     createBoard(match);
     match.getBoard().fill(0);
@@ -89,7 +95,7 @@ public abstract class Matchmanager{
 
     {
       try {
-        jsonPath = new String(Files.readAllBytes(Paths.get("./src/json/PersonalGoalCards.json")));
+        jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
       } catch (IOException e) {
         throw new RuntimeException(e);
       }

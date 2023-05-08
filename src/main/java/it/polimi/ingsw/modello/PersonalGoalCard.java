@@ -2,11 +2,12 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.modello.Card;
 
+import java.io.Serializable;
 import java.util.Arrays;
 /**
  * this class initialize PersonalGoalCard using json file as source
  */
-public class PersonalGoalCard {
+public class PersonalGoalCard implements Serializable {
     private static final int DIMENSION = 6;
     private Card[] personalObjective=new Card[DIMENSION];
     /**

@@ -69,7 +69,7 @@ public class MatchController {
                 match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
-            } else if (connectClients.size() < match.getPlayerNumber()) {
+            } else if (connectClients.size() < numberOfPlayers) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
                 match.setPlayers(new Player(nickname));
@@ -119,6 +119,7 @@ public class MatchController {
         }
         isStarted=true;
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
+
     }
 
     /**
@@ -216,11 +217,15 @@ public class MatchController {
      * @param numberPlayer number of player who play the game
      */
     public void handler(Numb_Player numberPlayer){
+
         match.setMatch(numberPlayer.getNumb());
         numberOfPlayers = numberPlayer.getNumb();
+
+        System.out.println("il numero di giocatori è "+numberPlayer.getNumb());
         for(VirtualView v: connectClients.values()){
             v.sendNumbPlayer(numberOfPlayers);
         }
+
     }
     /**
      * this message the server received the card chosen by the player

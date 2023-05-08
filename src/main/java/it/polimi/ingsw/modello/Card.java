@@ -1,9 +1,11 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
+
 /**
  * this class creates items for the game
  */
-public class Card {
+public class Card implements Serializable {
 
     private String colour;
     private Position coordinates;

@@ -44,7 +44,6 @@ public class SocketClient extends Client{
     public void sendMessage(Message message) {
         try {
             outputStream.writeObject(message);
-            System.out.println("mex inviato");
             outputStream.reset();
 
         }catch(IOException exception){
@@ -61,12 +60,11 @@ public class SocketClient extends Client{
                 Message message;
                 try{
                     message=(Message)inputStream.readObject();
-                    System.out.println(message.getType());
+                    //System.out.println(message.getType());
                 }catch(IOException|ClassNotFoundException exception){
                     message=new Message(nickname,"Connection lost with server.");
                 }
                 notifyObserver(message);
-              System.out.println(message.getType());
             }
         });
     }

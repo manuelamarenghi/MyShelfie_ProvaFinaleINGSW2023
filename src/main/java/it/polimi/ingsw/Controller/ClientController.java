@@ -2,48 +2,40 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.SocketClient;
-import it.polimi.ingsw.view.Cli;
+import it.polimi.ingsw.network.observer.Observer;
+import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ObserverViewClient;
-import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
 import javax.swing.text.View;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.HashMap;
 
 public class ClientController implements ObserverViewClient {
-    private ViewClient view;
+    private View view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
-    private final ExecutorService taskQueue;
     //localhost
-    //16847
-    public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
-        taskQueue = Executors.newSingleThreadExecutor();
+    //16000847
+    public ClientController(View view , VirtualModel virtualModel) throws IOException {
         this.view = view;
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
-        socketClient.enablePinger(true);
     }
 
-    public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
-        taskQueue = Executors.newSingleThreadExecutor();
+    public ClientController(View view , VirtualModel virtualModel , SocketClient socketClient){
         this.view = view;
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
-        socketClient.enablePinger(true);
     }
 
 
     public void handleEnterPlayer (String nickname){
         EnterPlayer message = new EnterPlayer(nickname);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
-
+        socketClient.sendMessage(message);
     }
 
     /**
@@ -52,16 +44,12 @@ public class ClientController implements ObserverViewClient {
 
     public void handleCreateBoard(int numeberOfPlayers , String name ){
         Numb_Player message = new Numb_Player(numeberOfPlayers , name);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     public void handleCreateMatch(Match match){
         Created_Match message = new Created_Match(match);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     /**
@@ -74,9 +62,7 @@ public class ClientController implements ObserverViewClient {
             cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
         }
         TakeCardBoard message = new TakeCardBoard(cards , name);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     /**
@@ -84,16 +70,12 @@ public class ClientController implements ObserverViewClient {
      */
     public void handlePutInLibrary (int x , String name , ArrayList<Card> cards){
         PutInLib message = new PutInLib(x , name , cards);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     public void handleColoumnRequest(int numberOfCards , String name){
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     /**
@@ -101,9 +83,7 @@ public class ClientController implements ObserverViewClient {
      */
     public void handleFinalPoint(String name){
         FinalPointRequest message =new FinalPointRequest(name);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 
     /**
@@ -113,8 +93,6 @@ public class ClientController implements ObserverViewClient {
 
     public void handleDisconection(String name){
         Disconnection message = new Disconnection(name);
-        taskQueue.execute(()->{
-            socketClient.sendMessage(message);
-        });
+        socketClient.sendMessage(message);
     }
 }

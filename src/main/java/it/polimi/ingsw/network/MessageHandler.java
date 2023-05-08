@@ -31,7 +31,8 @@ public class MessageHandler implements Observer {
      */
     public void handle(Message message){
         executor.execute(()->{
-            virtualModel.notifyObserver(obs->obs.onShowReq("Server message: "+message.getType()));}
+            if(!message.getType().equals("Pong!"))
+                virtualModel.notifyObserver(obs->obs.onShowReq("Server message: "+message.getType()));}
         );
     }
 

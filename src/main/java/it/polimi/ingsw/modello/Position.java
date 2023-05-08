@@ -1,9 +1,11 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
+
 /**
  * this class gives positions of a card. It is used for places in library and board
  */
-public class Position {
+public class Position implements Serializable {
     private int x;
     private int y;
 
