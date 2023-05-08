@@ -88,7 +88,6 @@ public class Cli implements ObserverViewClient , VMObserver {
 
         return number;
     }
-
     /**
      *The method asks to the user the nickname it wants to use
      * @return it returns the nickname typed by the user
@@ -154,8 +153,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     /**
      * The method asks the player if it wants to get dissconnected or not
      */
-
-
     @Override
     public void askForDissconection() {
         out.println("Are you sure that you want to dissconnect?");

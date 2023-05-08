@@ -25,12 +25,13 @@ public class Server {
      * addClient() when a new client connected to the game
      */
     public void addClient(String nickname,ClientHandler clientHandler) {
-        if (!clientdisconnected.equals(nickname)){
+        if (!clientdisconnected.contains(nickname)){
             synchronized(this){
                if(matchController.loginHandler(nickname, new VirtualView(clientHandler)) ){
                 clientsconnected.add(nickname);
                 clientHandlerMap.put(nickname, clientHandler);
             }}
+            System.out.println(clientsconnected);
         }
         else{
             matchController.PlayerBack(nickname);
@@ -40,7 +41,6 @@ public class Server {
             disconnettedclientMap.remove(nickname);
         }
     }
-
     /**
      * removeClient() when a client leave the game
      */
