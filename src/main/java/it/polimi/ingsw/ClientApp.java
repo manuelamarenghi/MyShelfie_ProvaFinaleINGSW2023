@@ -1,9 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.message.EnterPlayer;
-import it.polimi.ingsw.message.Message;
-import it.polimi.ingsw.message.MexInChat;
+import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
@@ -35,9 +33,23 @@ public class ClientApp {
         Message m=new EnterPlayer(s);
         sClient.sendMessage(m);
         sClient.readMessage();
-        Message m2=new MexInChat("Hi there ",s);
-        System.out.println("sono qui");
+        Message m2;
+        int x;
+        if(s.equals("giada")){
+        x= in.nextInt();
+        m2=new Numb_Player(x,s);
         sClient.sendMessage(m2);
+        sClient.readMessage();}
+        System.out.println("inserire 1 per uscire, 2 mandare mex ");
+        x= in.nextInt();
+        if(x==1){
+            m2=new Disconnection(s);
+            sClient.sendMessage(m2);
+        }
+        else{
+            m2=new MexInChat("Hi there",s);
+            sClient.sendMessage(m2);
+        }
         sClient.readMessage();
     }
 }

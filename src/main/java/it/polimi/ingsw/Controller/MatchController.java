@@ -6,11 +6,10 @@ import it.polimi.ingsw.message.Numb_Player;
 import it.polimi.ingsw.message.PutInLib;
 import it.polimi.ingsw.message.TakeCardBoard;
 import it.polimi.ingsw.modello.Card;
-import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.modello.Match;
-
+import it.polimi.ingsw.modello.EffectiveCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +59,7 @@ public class MatchController {
      *  other player, add virtualview and wait the game start
      */
     public boolean loginHandler(String nickname, VirtualView virtualView) {
-        if (players.contains(nickname)) {
+        if (players.contains(nickname) && !players.isEmpty()) {
                virtualView.askNickname();
                return false;
         } else {
@@ -113,7 +112,12 @@ public class MatchController {
                 playerInOrder.add(players.get(i));
             }
         }
-
+        for(EffectiveCard e: match.getCommonCards()){
+            for(VirtualView v: connectClients.values()){
+                e.addObserver(v);
+            }
+        }
+        isStarted=true;
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
     }
 
@@ -152,17 +156,19 @@ public class MatchController {
     public void removeClient(String nickname){
         Player p=match.getPlayerByNickname(nickname);
         disconnectClients.put(p,connectClients.get(nickname));
+        if(match.getCommonCards()!=null && p!=null){
         for(EffectiveCard e: match.getCommonCards()){
             e.removeObserver(connectClients.get(nickname));
         }
+            match.getPlayers().remove(p);
+        }
         connectClients.remove(nickname);
-        match.getPlayers().remove(p);
         for(VirtualView v: connectClients.values()){
             v.updateanotherplayerconnect(nickname,false,null);
         }
     }
     /**
-     * PlayerBack() when a player before disconnected returns back
+     * PlayerBack() when a player that have been disconnected returns
      * @param name
      */
     public void PlayerBack(String name){
@@ -172,11 +178,13 @@ public class MatchController {
             if(p.getNickname().equals(name)){  player=p;}
         }
         connectClients.put(name,disconnectClients.get(player));
+        if(match.getCommonCards()!=null && match.getPlayers()!=null){
         for(EffectiveCard e: match.getCommonCards()){
             e.addObserver(connectClients.get(name));
         }
-        disconnectClients.remove(player);
         match.getPlayers().add(player);
+        }
+        disconnectClients.remove(player);
         for(VirtualView v: connectClients.values()) {
             if (v.equals(connectClients.get(player.getNickname()))) {
                 v.CreateMatch(match);
@@ -254,6 +262,8 @@ public class MatchController {
         if(match.getPlayerByNickname(player).getLibrary().isFull())
             firstFinish(match.getPlayerByNickname(player));
         match.getPlayerByNickname(player).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(player));
+
+
         nextPlayer();
 
     }
@@ -261,8 +271,5 @@ public class MatchController {
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
-        for(EffectiveCard e: match.getCommonCards()){
-            e.addObserver(virtualView);
-        }
     }
 }
