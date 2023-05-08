@@ -266,6 +266,11 @@ public class Board {
     }
     public Card getCard(int x , int y){ return board[x][y];}
 
+    public void setCard(String color, Position position){
+        board[position.getX()][position.getY()] = new Card(color,position);
+
+    }
+
     /**
      * this method you can see the stacks of adjacent cards on the board
      * @return ArrayList integer, the number of the group of adjacent
@@ -288,7 +293,6 @@ public class Board {
 
         for(ArrayList<Card> g:groups){
             group.add(g.size());
-            System.out.println(g.size());
         }
         return  group;
     }
