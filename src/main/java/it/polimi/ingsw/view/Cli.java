@@ -204,12 +204,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     public void onShowReq(String s) {
         //Show cosa?
     }
-
-    @Override
-    public void onNicknameReq() {
-        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
-    }
-
     @Override
     public void onNumbPlayerReq() {
         //Forse uguale all' askPlayerNumber
@@ -249,6 +243,12 @@ public class Cli implements ObserverViewClient , VMObserver {
         out.println("Il giocatore "+player.getNickname()+" si è riconnesso");
         //Quando si ha reconnection?
     }
+
+    @Override
+    public void onNotifyPlayerConnectionReq(String nickname) {
+
+    }
+
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
         if(player.getNickname().equals(this.nickname))
@@ -303,11 +303,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     }
 
     @Override
-    public void onNotifyConnectionAcceptedReq() {
-        //per cosa serve?
-    }
-
-    @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
         //Forsegià fatto con askPlayerNumber
     }
@@ -345,6 +340,31 @@ public class Cli implements ObserverViewClient , VMObserver {
             }
             out.println("");
         }
+
+    }
+
+    @Override
+    public void onNotifyDisconnectionReqAcceptedAns() {
+
+    }
+
+    @Override
+    public void onNotifyNewNicknameReq() {
+
+    }
+
+    @Override
+    public void onNotifyIsYourTurnReq(Board board, Library library) {
+
+    }
+
+    @Override
+    public void onNotifyYourTurnIsEndedReq(String current_player) {
+
+    }
+
+    @Override
+    public void onNotifyWhoIsPlayingNowReq(String current_player) {
 
     }
 }

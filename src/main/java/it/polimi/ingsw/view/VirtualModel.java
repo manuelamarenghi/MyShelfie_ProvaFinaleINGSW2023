@@ -44,14 +44,8 @@ public class VirtualModel extends VMObservable {
         return players;
     }
 
-
     public void addPlayer(Player player){
         this.players.add(player);
-    }
-    public void addPlayerByName(String nickname){
-        for(Player p:players){
-
-        }
     }
     public void removePlayer(String nickname){
         this.players.removeIf(player -> player.getNickname().equals(nickname));

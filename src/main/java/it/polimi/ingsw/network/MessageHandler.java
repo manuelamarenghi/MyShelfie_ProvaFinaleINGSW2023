@@ -223,4 +223,25 @@ public class MessageHandler implements Observer {
             virtualModel.notifyObserver(obs->obs.onNotifyNewNicknameReq());}
         );
     }
+
+    /**
+     * handle Turn messages, update virtualModel.isMyTurn attribute, and notify the player's view
+     * if it's his turn, if his turn is ended or the new current player.
+     * @param message
+     */
+    public void handle(Turn message){
+        executor.execute(()->{
+            if(!message.getnickname().equals(virtualModel.getMe().getNickname())){
+                if(!virtualModel.isMyTurn()){
+                    virtualModel.updateIsMyTurn();
+                    virtualModel.notifyObserver(obs->obs.onNotifyIsYourTurnReq(virtualModel.getBoard(),virtualModel.getMe().getLibrary()));
+                }
+            }else if(virtualModel.isMyTurn()){
+                    virtualModel.updateIsMyTurn();
+                    virtualModel.notifyObserver(obs->obs.onNotifyYourTurnIsEndedReq(message.getnickname()));
+            }else{
+                virtualModel.notifyObserver(obs->obs.onNotifyWhoIsPlayingNowReq(message.getnickname()));
+            }
+        });
+    }
 }
