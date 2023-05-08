@@ -275,24 +275,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
-
-    }
-
-    /**
-     * the method notifies the player if it has been connected or not
-     * @param player
-     */
-    @Override
-    public void onNotifyPlayerConnectionReq(Player player) {
-        if(player.getNickname().equals(this.nickname)) {
+        if(nickname.equals(this.nickname)) {
             out.println("Conected");
-            nickname = player.getNickname();
+            nickname = nickname;
         }
         else {
-            out.println("The player" + player.getNickname() + " has entered in the game");
-            //Risposta di accept player?
+            out.println("The player" + nickname + " has entered in the game");
         }
     }
+
 
     /**
      *The method shows the common goal card the has been completed and it's score
