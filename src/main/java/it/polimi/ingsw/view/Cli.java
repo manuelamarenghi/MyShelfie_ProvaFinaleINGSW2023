@@ -17,13 +17,16 @@ public class Cli implements ObserverViewClient , VMObserver {
     private Thread inputThread;
     private ClientController clientController;
 
+    private VirtualModel virtualModel;
+
     /**
      * Default constructor.
      */
-    public Cli(ClientController clientController) {
+    public Cli(ClientController clientController ,  VirtualModel virtualModel) {
         this.nickname=askNickname();
         out = System.out;
         this.clientController=clientController;
+        this.virtualModel=virtualModel;
     }
 
     /**
@@ -64,7 +67,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     private int numberInput(int minValue, int maxValue, List<Integer> jumpList, String question) throws ExecutionException {
         int number = minValue - 1;
 
-        // A null jumpList will be transformed in a empty list.
         if (jumpList == null) {
             jumpList = List.of();
         }
@@ -94,7 +96,7 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public String askNickname() {
-        out.println("Type your nickanme.");
+        out.println("Type your nickname.");
         try{
             return readLine();
         }catch(ExecutionException e){
@@ -138,7 +140,7 @@ public class Cli implements ObserverViewClient , VMObserver {
             try{
                 x = numberInput(0,8 , null , questionX);
                 y= numberInput(0,8, null , questionY);
-                //cards[i]=VirtualModel.getBoard().getCardInPos(x,y);
+                cards[i]=virtualModel.getBoard().getCard(x,y);
 
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
@@ -200,47 +202,60 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onShowReq(String s) {
-
+        //Show cosa?
     }
 
     @Override
     public void onNicknameReq() {
-
+        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
     }
 
     @Override
     public void onNumbPlayerReq() {
-
+        //Forse uguale all' askPlayerNumber
     }
 
     @Override
     public void onShowNewBoardReq(Board board) {
+        Board b = virtualModel.getBoard();
+        int i , j ;
+        for(i=0 ; i<9 ; i++){
+            for(j=0 ; j<9 ; j++){
+                out.print(b.getCard(i,j).getColour());
+            }
+            out.println("");
+        }
 
     }
 
     @Override
     public void onNotifyNewLibraryReq(String nickname, Library library) {
-
+        //??
     }
 
     @Override
     public void onNotifyGameFullReq() {
-
+        //??
     }
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-
+        out.println("Il giocatore "+player.getNickname()+" si è disconnesso");
+        //Mostrare la risposta del dissconnection?
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-
+        out.println("Il giocatore "+player.getNickname()+" si è riconnesso");
+        //Quando si ha reconnection?
     }
-
     @Override
     public void onNotifyPlayerConnectionReq(Player player) {
-
+        if(player.getNickname().equals(this.nickname))
+            out.println("Connesso");
+        else
+            out.println("Il giocatore "+player.getNickname()+" è entrato nel gioco");
+        //Risposta di accept player?
     }
 
     @Override
@@ -250,46 +265,86 @@ public class Cli implements ObserverViewClient , VMObserver {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-
+        out.println("La sedia è assegnata al giocatore "+nickname);
+        //Controllare dal virtual model a chi viene assegnato la chair
     }
 
     @Override
     public void onShowPossibleColumnReq(int[] x, Library library) {
+        ArrayList<Integer> coloumns = new ArrayList<Integer>() ;//Fare get dal virtual model
+        ArrayList<Integer> excludedNumbers = new ArrayList<Integer>();
+        int selectedColumn;
+        int i;
+        //Controllare se la risposta per le carte scelte è true o no prima di procedere
+
+        for(i=0 ; i<5 ; i++){
+            if(coloumns.contains(i)){
+
+            }
+            else{
+                excludedNumbers.add(i);
+            }
+        }
+        String question = "Select the coloumn to put your cards from the shown coloumns.";
+
+        try{
+            selectedColumn = numberInput(0 , 4 , excludedNumbers , question);
+        }catch(ExecutionException e){
+            out.println("WRONG_INPUT");
+        }
 
     }
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
+        out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
+        askCardsToTakeFromBoard();
 
     }
 
     @Override
     public void onNotifyConnectionAcceptedReq() {
-
+        //per cosa serve?
     }
 
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-
+        //Forsegià fatto con askPlayerNumber
     }
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
+        //Per me è così    LIU SILVIA
+        out.println("Il giocatore "+player.getNickname()+" ha finito");
+        out.println("ULTIMO ROUND");
 
+        //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-
+        //??
     }
 
     @Override
-    public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
+    public void onShowFinalScoreBoardReq(HashMap<String, Integer> points) {
+
+        points.forEach((key,value)->System.out.println("il punteggio di "+ key + " : " + value));
+
+        out.println("Il gioco è terminato");
 
     }
 
     @Override
     public void onShowNewMyLibraryReq(Library l) {
+        Library library = virtualModel.getMe().getLibrary();
+        int i , j;
+        for(i=0 ; i<6 ; i++){
+            for(j=0 ; j<5 ; j++){
+                out.print(library.getCardinPos(j,i).getColour()+"   ");
+            }
+            out.println("");
+        }
 
     }
 }
