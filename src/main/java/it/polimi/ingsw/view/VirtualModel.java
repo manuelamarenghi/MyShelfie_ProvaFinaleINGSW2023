@@ -44,7 +44,6 @@ public class VirtualModel extends VMObservable {
         return players;
     }
 
-
     public void addPlayer(Player player){
         this.players.add(player);
     }

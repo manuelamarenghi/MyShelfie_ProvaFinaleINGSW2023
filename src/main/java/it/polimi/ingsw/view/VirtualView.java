@@ -19,7 +19,7 @@ public class VirtualView implements View{
      */
     @Override
     public void askNickname() {
-        clientHandler.sendMessage(new Message(null,"Change_nickname"));
+        clientHandler.sendMessage(new AskNewNickname());
     }
     /**
      * askNumbPlayer() for number of player
