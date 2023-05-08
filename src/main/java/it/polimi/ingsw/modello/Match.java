@@ -70,6 +70,12 @@ private Matchmanager matchmanager;
 
     public void setCommonCards(EffectiveCard[] commoncards) {
         CommonCards = commoncards;
+        for(EffectiveCard e:commoncards) {
+            for (Player p : players) {
+                p.addObserver(e);
+            }
+        }
+
     }
 
     public void setFirstFinish(Player firstFinish) {
