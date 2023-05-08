@@ -204,12 +204,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     public void onShowReq(String s) {
         //Show cosa?
     }
-
-    @Override
-    public void onNicknameReq() {
-        //Forse nickname non devo inizializzarlo nel costruttore ma devo mandare un messaggio per quello
-    }
-
     @Override
     public void onNumbPlayerReq() {
         //Forse uguale all' askPlayerNumber
@@ -249,7 +243,7 @@ public class Cli implements ObserverViewClient , VMObserver {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(Player player) {
+    public void onNotifyPlayerConnectionReq(String nickname) {
         //Risposta di accept player?
     }
 
@@ -295,11 +289,6 @@ public class Cli implements ObserverViewClient , VMObserver {
     }
 
     @Override
-    public void onNotifyConnectionAcceptedReq() {
-        //per cosa serve?
-    }
-
-    @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
         //Forsegià fatto con askPlayerNumber
     }
@@ -329,6 +318,16 @@ public class Cli implements ObserverViewClient , VMObserver {
             }
             out.println("");
         }
+
+    }
+
+    @Override
+    public void onNotifyDisconnectionReqAcceptedAns() {
+
+    }
+
+    @Override
+    public void onNotifyNewNicknameReq() {
 
     }
 }
