@@ -11,29 +11,39 @@ import it.polimi.ingsw.view.VirtualModel;
 import javax.swing.text.View;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
+    private final ExecutorService taskQueue;
     //localhost
     //16847
     public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
+        taskQueue = Executors.newSingleThreadExecutor();
         this.view = view;
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
+        socketClient.enablePinger(true);
     }
 
     public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
+        taskQueue = Executors.newSingleThreadExecutor();
         this.view = view;
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
+        socketClient.enablePinger(true);
     }
 
 
     public void handleEnterPlayer (String nickname){
         EnterPlayer message = new EnterPlayer(nickname);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
+
     }
 
     /**
@@ -42,12 +52,16 @@ public class ClientController implements ObserverViewClient {
 
     public void handleCreateBoard(int numeberOfPlayers , String name ){
         Numb_Player message = new Numb_Player(numeberOfPlayers , name);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     public void handleCreateMatch(Match match){
         Created_Match message = new Created_Match(match);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     /**
@@ -60,7 +74,9 @@ public class ClientController implements ObserverViewClient {
             cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
         }
         TakeCardBoard message = new TakeCardBoard(cards , name);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     /**
@@ -68,12 +84,16 @@ public class ClientController implements ObserverViewClient {
      */
     public void handlePutInLibrary (int x , String name , ArrayList<Card> cards){
         PutInLib message = new PutInLib(x , name , cards);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     public void handleColoumnRequest(int numberOfCards , String name){
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     /**
@@ -81,7 +101,9 @@ public class ClientController implements ObserverViewClient {
      */
     public void handleFinalPoint(String name){
         FinalPointRequest message =new FinalPointRequest(name);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 
     /**
@@ -91,6 +113,8 @@ public class ClientController implements ObserverViewClient {
 
     public void handleDisconection(String name){
         Disconnection message = new Disconnection(name);
-        socketClient.sendMessage(message);
+        taskQueue.execute(()->{
+            socketClient.sendMessage(message);
+        });
     }
 }

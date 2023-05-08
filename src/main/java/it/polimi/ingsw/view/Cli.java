@@ -104,6 +104,8 @@ public class Cli extends ObservableViewClient implements ViewClient{
         }catch(ExecutionException e){
             out.println("WRONG_INPUT");
         }
+
+
         this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(nickname));
     }
     /**
