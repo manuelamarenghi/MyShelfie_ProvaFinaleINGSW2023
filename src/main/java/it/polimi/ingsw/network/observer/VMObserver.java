@@ -22,7 +22,7 @@ public interface VMObserver {
      void onShowPossibleColumnReq(int[] x, Library library);
      void onNotifyCardsAreNotAdjacentReq();
 
-     void onNotifyNumbPlayerReq(int playerNum);
+    void onNotifyNumbPlayerReq(int playerNum);
 
      void onNotifyPlayerFinishedFirstReq(Player player);
 
