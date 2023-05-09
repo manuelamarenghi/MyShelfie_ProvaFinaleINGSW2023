@@ -11,6 +11,14 @@ public class Board implements Serializable {
     private int c , r;
     private Card emptyCard = new Card();
     private Card notUsableCard=new Card();
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW ="\u001B[33m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_WHITE ="\u001B[37m";
+    public static final String ANSI_BLUE ="\u001B[34m";
+    public static final String ANSI_PINK ="\033[35m";
+    public static final String ANSI_NAVY ="\033[44m";
+
 
     /**
      * board get initialized based on number of players
@@ -248,20 +256,49 @@ public class Board implements Serializable {
      * showBoard() let you see the board
      */
     public void showBoard(){
+
         System.out.println(" *** living room ***");
+        System.out.println("  0 1 2 3 4 5 6 7 8");
         for(int i=0;i<9;i++){
+            System.out.print(i+" ");
             for(int j=0;j<9;j++){
                 if( board[i][j]==notUsableCard){
-                    System.out.print(" [ X ] ");
+                    System.out.print("  ");
                 }
                 else{
                 if( board[i][j]!=emptyCard){
-                    System.out.print(" ["+board[i][j].getColour()+"] ");
+                    if(board[i][j].getColour().equals("G")) {
+                        System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+                    else if(board[i][j].getColour().equals("W")) {
+                        System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+                    else if(board[i][j].getColour().equals("G")) {
+                        System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+                    else if(board[i][j].getColour().equals("B")) {
+                        System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+                    else if(board[i][j].getColour().equals("N")) {
+                        System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+                    else if(board[i][j].getColour().equals("P")) {
+                        System.out.print(ANSI_PINK + "  " + ANSI_RESET);
+                        System.out.print(" ");
+                    }
+
                 }
                 else{
-                    System.out.print(" [  ] ");
+                    System.out.print("  ");
                 }
-            }}
+            }
+
+            }
             System.out.println();
         }
     }
