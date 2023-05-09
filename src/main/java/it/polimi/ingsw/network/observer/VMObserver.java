@@ -40,4 +40,6 @@ public interface VMObserver {
     void onNotifyWhoIsPlayingNowReq(String current_player);
 
     void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard);
+
+    void NotifyaskNicknameReq() throws InterruptedException;
 }

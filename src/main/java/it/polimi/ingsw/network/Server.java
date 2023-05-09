@@ -32,6 +32,7 @@ public class Server {
                 clientHandlerMap.put(nickname, clientHandler);
                 System.out.println("il giocatore "+nickname+" si è connesso");
             }}
+            System.out.println(clientsconnected);
         }
         else{
             matchController.PlayerBack(nickname);
@@ -63,11 +64,13 @@ public class Server {
                 break;
             }
         }
+        System.out.println("starting disconnection");
         clientdisconnected.add(nickname);
         clientsconnected.remove(nickname);
         disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
         matchController.removeClient(nickname);
+        System.out.println(clientsconnected);
     }
     /**
      * onMessageReceived() send the message to the controller

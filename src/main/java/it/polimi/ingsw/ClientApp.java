@@ -1,20 +1,13 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.message.EnterPlayer;
-import it.polimi.ingsw.message.Message;
-import it.polimi.ingsw.message.MexInChat;
 import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.network.Client;
-import it.polimi.ingsw.network.ClientHandler;
 import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
-import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class ClientApp {
     public static void main(String[] args) throws IOException {

@@ -1,14 +1,9 @@
 package it.polimi.ingsw.network;
 
-import it.polimi.ingsw.message.AskNumbPlayer;
-import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.*;
-import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.observer.Observer;
 import it.polimi.ingsw.view.VirtualModel;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -99,8 +94,11 @@ public class MessageHandler implements Observer {
      */
     public void handle(AnotherPlayerDisconnect message){
         executor.execute(()->{
-            virtualModel.removePlayer(message.getnickname());
-            virtualModel.notifyObserver(obs->obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));}
+                    if (virtualModel.getPlayer(message.getnickname()) != null) {
+                        virtualModel.removePlayer(message.getnickname());
+                    }
+                    virtualModel.notifyObserver(obs -> obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));
+                }
         );
     }
     /**
@@ -245,11 +243,20 @@ public class MessageHandler implements Observer {
         });
     }
 
-    public void handle(Send_PersonalCard message)
-    {
-        executor.execute(()->{
+    public void handle(Send_PersonalCard message) {
+        executor.execute(() -> {
             virtualModel.getMe().setPersonalCard(message.getPersonalGoalCard());
-            virtualModel.notifyObserver(obs->obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
+            virtualModel.notifyObserver(obs -> obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
         });
+    }
+
+    public void handle(Connected_Before_FirstPlayer message) {
+        executor.execute(() -> virtualModel.notifyObserver(obs -> {
+            try {
+                obs.NotifyaskNicknameReq();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
 }
