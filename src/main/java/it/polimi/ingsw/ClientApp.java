@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientApp {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
       /*  boolean cliParam = false; // default value
 
         for (String arg : args) {

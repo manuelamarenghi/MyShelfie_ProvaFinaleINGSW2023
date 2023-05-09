@@ -93,9 +93,10 @@ public class Cli extends ObservableViewClient implements ViewClient{
         return number;
     }
 
-    public void start(){
+    public void start() throws InterruptedException {
         out.println("Welcome to My shelfie game");
         askNickname();
+        Thread.sleep(10000);
     }
 
     /**
@@ -284,7 +285,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
     public void onNotifyPlayerConnectionReq(String nickname) {
         if(nickname.equals(this.nickname)) {
             out.println("Conected");
-            nickname = nickname;
+            this.nickname = nickname;
         }
         else {
             out.println("The player" + nickname + " has entered in the game");
@@ -449,6 +450,11 @@ public class Cli extends ObservableViewClient implements ViewClient{
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         personalGoalCard.showPersonalGoalCard();
+    }
+
+    @Override
+    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+
     }
 
 
