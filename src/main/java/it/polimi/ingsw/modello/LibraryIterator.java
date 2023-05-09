@@ -2,11 +2,12 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.modello.Card;
 
+import java.io.Serializable;
 import java.util.Iterator;
 /**
  *  this class create an iterator for libraries
  */
-public class LibraryIterator implements Iterator<Card> {
+public class LibraryIterator implements Iterator<Card> , Serializable {
     private int column=0;
     private int row=0;
     private Card[][] current;

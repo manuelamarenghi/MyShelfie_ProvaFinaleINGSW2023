@@ -38,4 +38,6 @@ public interface VMObserver {
     void onNotifyYourTurnIsEndedReq(String current_player);
 
     void onNotifyWhoIsPlayingNowReq(String current_player);
+
+    void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard);
 }

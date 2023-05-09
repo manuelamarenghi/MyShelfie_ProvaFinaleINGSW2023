@@ -5,10 +5,12 @@ import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.network.MessageHandler;
 
+import java.io.Serializable;
+
 /**
  * message from server to client when has reach common goal
  */
-public class Assigned_CC extends  Message{
+public class Assigned_CC extends  Message implements Serializable {
     private int point;
     private EffectiveCard card;
     public Assigned_CC(int x, String name, EffectiveCard card){

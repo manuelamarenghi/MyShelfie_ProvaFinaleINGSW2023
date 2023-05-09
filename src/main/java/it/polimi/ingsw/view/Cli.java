@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class Cli extends ObservableViewClient implements ViewClient{
+
     private final PrintStream out;
     private Thread inputThread;
     private ClientController clientController;
@@ -21,9 +22,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
     /**
      * Default constructor.
      */
-    public Cli(ClientController clientController ) {
+    public Cli() {
         out = System.out;
-        this.clientController=clientController;
+        //this.clientController=clientController;
+    }
+    public void init(){
+
+        out.println("Welcome to My Shelfie Game!");
+
+        askNickname();
     }
 
     /**
@@ -85,6 +92,12 @@ public class Cli extends ObservableViewClient implements ViewClient{
 
         return number;
     }
+
+    public void start(){
+        out.println("Welcome to My shelfie game");
+        askNickname();
+    }
+
     /**
      *The method asks to the user the nickname it wants to use
      * @return it returns the nickname typed by the user
@@ -98,7 +111,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
         }catch(ExecutionException e){
             out.println("WRONG_INPUT");
         }
-        clientController.handleEnterPlayer(nickname);
+        this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(nickname));
     }
     /**
      * the method asks to the first user the number of players that are going to play
@@ -109,15 +122,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
 
         try{
             int numberOfPlayers = numberInput(2 ,4 , null , question);
-            clientController.handleCreateBoard(numberOfPlayers , nickname);
+            this.notifyObserver(observerViewClient -> observerViewClient.handleCreateBoard(numberOfPlayers , nickname));
+            //clientController.handleCreateBoard(numberOfPlayers , nickname);
         }catch (ExecutionException e){
             out.println("WRONG_INPUT");
         }
-
     }
 
     /**
-     * The method is used to select the cards tomtake from the board , and it sends the message to controller
+     * The method is used to select the cards to take from the board , and it sends the message to controller
      */
     @Override
     public void askCardsToTakeFromBoard(){
@@ -141,7 +154,8 @@ public class Cli extends ObservableViewClient implements ViewClient{
             }catch(ExecutionException e ){
                 out.println("WRONG_INPUT");
             }
-            clientController.handleTakeCard(positions , nickname);
+            this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions , nickname));
+            //clientController.handleTakeCard(positions , nickname);
         }
 
 
@@ -150,13 +164,16 @@ public class Cli extends ObservableViewClient implements ViewClient{
     /**
      * The method asks the player if it wants to get dissconnected or not
      */
+
+
     @Override
     public void askForDissconection() {
         out.println("Are you sure that you want to dissconnect?");
         try{
             String answer = readLine();
             if(answer.equalsIgnoreCase("yes")){
-                clientController.handleDisconection(nickname);
+                this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection(nickname));
+                //clientController.handleDisconection(nickname);
             }
             else if(answer.equalsIgnoreCase("no")){
                 return ;
@@ -176,7 +193,8 @@ public class Cli extends ObservableViewClient implements ViewClient{
      */
     @Override
     public void createMatch(Match match) {
-        clientController.handleCreateMatch(match);
+        notifyObserver(observerViewClient -> observerViewClient.handleCreateMatch(match));
+        //clientController.handleCreateMatch(match);
     }
 
     /**
@@ -194,7 +212,8 @@ public class Cli extends ObservableViewClient implements ViewClient{
      */
     public void requestForFinalPoint(){
         out.println("The Final points for every player are the following");
-        clientController.handleFinalPoint(nickname);
+        this.notifyObserver(observerViewClient -> observerViewClient.handleFinalPoint(nickname));
+        //clientController.handleFinalPoint(nickname);
         //Fare la richiesta di show final point al virtual model
     }
 
@@ -263,24 +282,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
-
-    }
-
-    /**
-     * the method notifies the player if it has been connected or not
-     * @param player
-     */
-    @Override
-    public void onNotifyPlayerConnectionReq(Player player) {
-        if(player.getNickname().equals(this.nickname)) {
+        if(nickname.equals(this.nickname)) {
             out.println("Conected");
-            nickname = player.getNickname();
+            nickname = nickname;
         }
         else {
-            out.println("The player" + player.getNickname() + " has entered in the game");
-            //Risposta di accept player?
+            out.println("The player" + nickname + " has entered in the game");
         }
     }
+
 
     /**
      *The method shows the common goal card the has been completed and it's score
@@ -400,43 +410,46 @@ public class Cli extends ObservableViewClient implements ViewClient{
         l.showLibrary();
     }
 
+    /**
+     * the methodnotifies if the dissconnection has been done successfully
+     */
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
-
+            out.println("The dissconnection has been done successfully");
     }
 
+    /**
+     *
+     */
     @Override
     public void onNotifyNewNicknameReq() {
-
+        out.println("Choose another nickname.");
+        askNickname();
     }
 
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
-
+        out.println(nickname + "it's your turn");
+        out.println("Your library :");
+        library.showLibrary();
+        out.println("The board :");
+        board.showBoard();
     }
 
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
-
+        out.println("Your turn is over , now it is" + current_player +"'s turn");
     }
 
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-
+        out.println(current_player + "is playing right now .");
     }
 
-    /**
-     * The method shows the board
-     */
-    public void showBoard(Board board){
-        board.showBoard();
+    @Override
+    public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
+        personalGoalCard.showPersonalGoalCard();
     }
 
-    /**
-     * The methos shows the library
-     * @param l
-     */
-    public void showLibrary(Library l){
-        l.showLibrary();
-    }
+
 }

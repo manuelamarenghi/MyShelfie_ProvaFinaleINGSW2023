@@ -1,6 +1,8 @@
 package it.polimi.ingsw.message;
 
-public class Turn extends Message{
+import java.io.Serializable;
+
+public class Turn extends Message implements Serializable {
 
     private String turnPlayer;
 

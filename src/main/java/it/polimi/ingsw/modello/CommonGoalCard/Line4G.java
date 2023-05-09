@@ -3,12 +3,13 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Line4G goal needs 4 lines formed by 5 tiles of maximum 3 different types. Different lines can have different combination of types
  */
-public class Line4G implements CommonGoalCards {
+public class Line4G implements CommonGoalCards, Serializable {
     /**
      * check() returns true if the library match the goal,otherwise false
      */

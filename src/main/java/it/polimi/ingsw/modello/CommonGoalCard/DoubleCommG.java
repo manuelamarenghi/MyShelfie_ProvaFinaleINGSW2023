@@ -3,9 +3,10 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DoubleCommG implements CommonGoalCards {
+public class DoubleCommG implements CommonGoalCards, Serializable {
 
     @Override
     public boolean check(Library library) {

@@ -1,6 +1,8 @@
 package it.polimi.ingsw.message;
 
-public class ColumnRequest extends Message{
+import java.io.Serializable;
+
+public class ColumnRequest extends Message implements Serializable {
 
     private int numberOfCards ;
 

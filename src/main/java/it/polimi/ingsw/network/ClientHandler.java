@@ -9,7 +9,9 @@ import java.net.Socket;
 /**
  * this class manage connection from a client to the server and handles message's requests
  */
-public class ClientHandler implements Runnable, Serializable {
+
+public class ClientHandler implements Runnable {
+
     private  Server server;
     private  Socket client;
     private  ServerSocket serversocket;
@@ -70,7 +72,8 @@ public class ClientHandler implements Runnable, Serializable {
                     if(message.getType().equals("Ping!")){
                         sendMessage(new Message("server","Pong!"));
                     }
-                    if(message.getType().equals("enter_player")){
+
+                    else if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
                     else{
@@ -96,7 +99,7 @@ public class ClientHandler implements Runnable, Serializable {
      * sendMessage() is used to send message to the client of this specific clientHanlder
      * @param message
      */
-    public void sendMessage(Message message){
+    public synchronized void sendMessage(Message message){
         try {
                 output.writeObject(message);
                 output.reset();

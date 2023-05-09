@@ -3,7 +3,9 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.MessageHandler;
 
-public class PlayerReturned extends Message{
+import java.io.Serializable;
+
+public class PlayerReturned extends Message implements Serializable {
     Player p;
     public PlayerReturned(Player p) {
         super(p.getNickname(), "Player_returned");

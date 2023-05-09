@@ -3,12 +3,13 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
  */
-public class Same4GroupsG implements CommonGoalCards {
+public class Same4GroupsG implements CommonGoalCards , Serializable {
     /**
      * check() returns true if the library match the goal,otherwise false
      */
