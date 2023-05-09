@@ -39,27 +39,27 @@ public class Bag implements Serializable {
             }
             else{
                 if(index==0){
-                    arrayOfCards.add("Green");
+                    arrayOfCards.add("G");
                     remainingCards.set(0,remainingCards.get(0)-1);
                 }
                 else if(index==1){
-                    arrayOfCards.add("White");
+                    arrayOfCards.add("W");
                     remainingCards.set(1,remainingCards.get(1)-1);
                 }
                 else if(index==2){
-                    arrayOfCards.add("Yellow");
+                    arrayOfCards.add("Y");
                     remainingCards.set(2,remainingCards.get(2)-1);
                 }
                 else if(index==3){
-                    arrayOfCards.add("Navy");
+                    arrayOfCards.add("N");
                     remainingCards.set(3,remainingCards.get(3)-1);
                 }
                 else if(index==4){
-                    arrayOfCards.add("Blue");
+                    arrayOfCards.add("B");
                     remainingCards.set(4,remainingCards.get(4)-1);
                 }
                 else if(index==5){
-                    arrayOfCards.add("Pink");
+                    arrayOfCards.add("P");
                     remainingCards.set(5,remainingCards.get(5)-1);
                 }
                 i++;
