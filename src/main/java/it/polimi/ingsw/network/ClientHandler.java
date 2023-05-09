@@ -2,7 +2,6 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -42,10 +41,10 @@ public class ClientHandler implements Runnable {
      */
     @Override
     public void run () {
-        try{
+        try {
             System.out.println("Inizio a gestire messaggio");
             handleClientConnection();
-        }catch(IOError e){
+        } catch (Exception e) {
             disconnect();
         }
     }
