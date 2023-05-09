@@ -6,7 +6,10 @@ import it.polimi.ingsw.message.Disconnection_Answer;
 import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.view.VirtualView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Server {
     private final MatchController matchController;
@@ -55,19 +58,18 @@ public class Server {
     /**
      * HandleDisconnection() when the connection ends
      */
-    public void HandleDisconnection(){
+    public void HandleDisconnection() {
         String nickname = null;
-        Set set=clientHandlerMap.keySet();
-        for(Object o: set){
-            if(!clientHandlerMap.get(o).isConnected()){
-                nickname=(String)o;
+        for (String s : clientsconnected) {
+            if (!clientHandlerMap.get(s).isConnected()) {
+                nickname = s;
                 break;
             }
         }
         System.out.println("starting disconnection");
         clientdisconnected.add(nickname);
         clientsconnected.remove(nickname);
-        disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
+        disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
         matchController.removeClient(nickname);
         System.out.println(clientsconnected);

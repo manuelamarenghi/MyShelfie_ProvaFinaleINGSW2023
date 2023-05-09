@@ -21,6 +21,7 @@ public class VirtualModel extends VMObservable {
         this.chair = match.getChair();
         this.firstFinish = match.getFirstFinish();
         this.CommonCards = match.getCommonCards();
+        this.players = null;
     }
 
     public VirtualModel() {

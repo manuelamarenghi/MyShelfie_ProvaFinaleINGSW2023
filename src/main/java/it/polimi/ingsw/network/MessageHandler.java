@@ -81,11 +81,13 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(AnotherPlayerDisconnect message){
-                    if (virtualModel.getPlayer(message.getnickname()) != null) {
-                        virtualModel.removePlayer(message.getnickname());
-                    }
-        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));
-                }
+        if (virtualModel.getPlayers() != null) {
+            virtualModel.removePlayer(message.getnickname());
+            virtualModel.notifyObserver(obs -> obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));
+        } else {
+            virtualModel.notifyObserver(obs -> obs.onShowReq("A player has disconnected"));
+        }
+    }
 
     /**
      * handle PlayerReturned messages, update virtualModel.players and notify the player's view the returning player's object.
