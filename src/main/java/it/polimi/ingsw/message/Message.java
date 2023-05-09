@@ -16,9 +16,9 @@ public class Message implements Serializable {
     protected String nickname;
     protected String type;
 
-    public Message(String c, String m) {
-        this.nickname = c;
-        this.type =m;
+    public Message(String nickname, String type) {
+        this.nickname = nickname;
+        this.type =type;
     }
 
     public String getnickname() {

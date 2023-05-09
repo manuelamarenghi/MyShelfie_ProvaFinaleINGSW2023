@@ -3,7 +3,9 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
-public class Square2G implements CommonGoalCards {
+import java.io.Serializable;
+
+public class Square2G implements CommonGoalCards, Serializable {
     /**
      * the method checks if the the target is completed or not
      */

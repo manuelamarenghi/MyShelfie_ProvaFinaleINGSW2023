@@ -244,4 +244,12 @@ public class MessageHandler implements Observer {
             }
         });
     }
+
+    public void handle(Send_PersonalCard message)
+    {
+        executor.execute(()->{
+            virtualModel.getMe().setPersonalCard(message.getPersonalGoalCard());
+            virtualModel.notifyObserver(obs->obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
+        });
+    }
 }

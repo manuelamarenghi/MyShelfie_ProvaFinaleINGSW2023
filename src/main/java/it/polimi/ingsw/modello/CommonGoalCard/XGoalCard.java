@@ -3,7 +3,9 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
-public class XGoalCard implements CommonGoalCards {
+import java.io.Serializable;
+
+public class XGoalCard implements CommonGoalCards , Serializable {
 
     @Override
     public boolean check(Library library) {
