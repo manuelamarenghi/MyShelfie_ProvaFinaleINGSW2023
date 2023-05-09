@@ -41,6 +41,7 @@ public class ClientHandler implements Runnable{
     @Override
     public void run () {
         try{
+            System.out.println("Inizio a gestire messaggio");
             handleClientConnection();
         }catch(IOError e){
             disconnect();
