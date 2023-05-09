@@ -1,5 +1,6 @@
 package it.polimi.ingsw.modello;
 
+
 import it.polimi.ingsw.network.observer.Observable;
 
 import java.io.Serializable;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 /**
  *  this class is used to initialize the match in Main Class
  */
+
 public class Match extends Observable implements Serializable {
+
     public static final int MAX_PLAYERS = 4;
     public static final int MIN_PLAYERS = 2;
     private ArrayList<Player> players;

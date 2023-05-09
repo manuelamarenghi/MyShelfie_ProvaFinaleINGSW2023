@@ -9,7 +9,9 @@ import java.net.Socket;
 /**
  * this class manage connection from a client to the server and handles message's requests
  */
+
 public class ClientHandler implements Runnable {
+
     private  Server server;
     private  Socket client;
     private  ServerSocket serversocket;
@@ -70,6 +72,7 @@ public class ClientHandler implements Runnable {
                     if(message.getType().equals("Ping!")){
                         sendMessage(new Message("server","Pong!"));
                     }
+
                     else if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
