@@ -10,7 +10,7 @@ import it.polimi.ingsw.view.VirtualModel;
 import java.io.IOException;
 
 public class ClientApp {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
       /*  boolean cliParam = false; // default value
 
         for (String arg : args) {
