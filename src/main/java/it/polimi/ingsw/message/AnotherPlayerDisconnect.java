@@ -2,7 +2,9 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.network.MessageHandler;
 
-public class AnotherPlayerDisconnect extends Message{
+import java.io.Serializable;
+
+public class AnotherPlayerDisconnect extends Message implements Serializable {
     public AnotherPlayerDisconnect(String name){
         super(name,"player_disconnected");
     }

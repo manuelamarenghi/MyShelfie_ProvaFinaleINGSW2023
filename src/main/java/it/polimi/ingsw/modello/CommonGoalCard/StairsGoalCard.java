@@ -2,7 +2,9 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
-public class StairsGoalCard implements CommonGoalCards {
+import java.io.Serializable;
+
+public class StairsGoalCard implements CommonGoalCards, Serializable {
     @Override
     public boolean check(Library library) {
     return sxStair(library)||dxStair(library)||sxShiftedStair(library)||dxShiftedStair(library);

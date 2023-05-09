@@ -5,6 +5,7 @@ import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Position;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  * message from client to server when the player is taking cards from board
  */
 
-public class TakeCardBoard extends Message{
+public class TakeCardBoard extends Message implements Serializable {
     private ArrayList<Card> cards;
     public TakeCardBoard(Card[] cards, String name){
         super(name,"takes_cards_board");

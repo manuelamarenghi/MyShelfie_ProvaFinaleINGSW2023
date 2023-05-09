@@ -1,5 +1,6 @@
 package it.polimi.ingsw.modello;
 
+import it.polimi.ingsw.message.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -39,15 +40,13 @@ public abstract class Matchmanager implements Serializable {
     match.getBoard().fill(0);
 
     int position = (int)(Math.random() * match.getPlayerNumber());
-    System.out.println(position);
-
-    System.out.println(match.getPlayers());
 
     match.setChair(match.getPlayers().get(position));
-    for(Player p: match.getPlayers()){
-      p.getView().CreateMatch(match);
-      p.getView().assignedChair(match.getChair().getNickname());
-    }
+
+    match.notifyObserver(new UpdateBoard(match.getBoard()));
+
+
+
   }
   /**
    * results() calculates all players' scores

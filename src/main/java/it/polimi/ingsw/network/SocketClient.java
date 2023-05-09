@@ -41,7 +41,7 @@ public class SocketClient extends Client{
     }
 
     @Override
-    public void sendMessage(Message message) {
+    public synchronized void sendMessage(Message message) {
         try {
             outputStream.writeObject(message);
             outputStream.reset();
@@ -54,7 +54,7 @@ public class SocketClient extends Client{
     }
 
     @Override
-    public void readMessage() {
+    public synchronized void readMessage() {
         messageReader.execute(()->{
             while(!messageReader.isShutdown()){
                 Message message;

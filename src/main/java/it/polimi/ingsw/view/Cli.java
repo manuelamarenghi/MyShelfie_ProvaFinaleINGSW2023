@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class Cli extends ObservableViewClient implements ViewClient{
+
     private final PrintStream out;
     private Thread inputThread;
     private ClientController clientController;
@@ -444,5 +445,11 @@ public class Cli extends ObservableViewClient implements ViewClient{
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
         out.println(current_player + "is playing right now .");
     }
+
+    @Override
+    public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
+        personalGoalCard.showPersonalGoalCard();
+    }
+
 
 }

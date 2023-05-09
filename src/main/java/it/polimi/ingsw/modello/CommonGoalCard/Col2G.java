@@ -3,11 +3,12 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * Col2G goal needs two columns each formed by 6 different types of tiles
  */
-public class Col2G implements CommonGoalCards {
+public class Col2G implements CommonGoalCards, Serializable {
     /**
      * check() returns true if the library match the goal,otherwise false
      */

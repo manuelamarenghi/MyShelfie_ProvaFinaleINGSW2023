@@ -4,9 +4,10 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CornersCommG implements CommonGoalCards {
+public class CornersCommG implements CommonGoalCards, Serializable {
 
     public boolean check(Library library){
 

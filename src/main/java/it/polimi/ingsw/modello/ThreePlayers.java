@@ -2,9 +2,10 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.modello.CommonGoalCard.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ThreePlayers extends Matchmanager {
+public class ThreePlayers extends Matchmanager implements Serializable {
 
 
     public ThreePlayers(){

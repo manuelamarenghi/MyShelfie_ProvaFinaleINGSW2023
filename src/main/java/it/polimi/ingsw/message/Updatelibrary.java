@@ -3,7 +3,9 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.modello.Library;
 import it.polimi.ingsw.network.MessageHandler;
 
-public class Updatelibrary extends Message{
+import java.io.Serializable;
+
+public class Updatelibrary extends Message implements Serializable {
     Library l;
     public Updatelibrary(Library l,String name){
         super(name,"library_changed");
