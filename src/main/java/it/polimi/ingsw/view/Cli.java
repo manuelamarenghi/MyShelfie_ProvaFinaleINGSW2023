@@ -286,6 +286,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
         if(nickname.equals(this.nickname)) {
             out.println("Conected");
             this.nickname = nickname;
+            notifyObserver(obs->obs.setNickname(nickname));
         }
         else {
             out.println("The player" + nickname + " has entered in the game");

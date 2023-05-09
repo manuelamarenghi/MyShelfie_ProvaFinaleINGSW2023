@@ -44,7 +44,7 @@ public abstract class Matchmanager implements Serializable {
     match.setChair(match.getPlayers().get(position));
 
     match.notifyObserver(new UpdateBoard(match.getBoard()));
-
+    match.notifyObserver(new AllPlayer(match.getPlayers()));
 
 
   }

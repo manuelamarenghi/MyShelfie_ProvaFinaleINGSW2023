@@ -41,6 +41,10 @@ public class VirtualModel extends VMObservable {
         return firstFinish;
     }
 
+    public void setMe(String me) {
+        this.me = new Player(me);
+    }
+
     public void setFirstFinish(String firstFinish) {
         for(Player player:this.players){
             if(player.getNickname().equals(firstFinish))this.firstFinish=player;
