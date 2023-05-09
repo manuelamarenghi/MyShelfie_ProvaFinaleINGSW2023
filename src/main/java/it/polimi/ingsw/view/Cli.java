@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class Cli extends ObservableViewClient implements ViewClient{
+
     private final PrintStream out;
     private Thread inputThread;
     private ClientController clientController;
@@ -24,6 +25,12 @@ public class Cli extends ObservableViewClient implements ViewClient{
     public Cli() {
         out = System.out;
         //this.clientController=clientController;
+    }
+    public void init(){
+
+        out.println("Welcome to My Shelfie Game!");
+
+        askNickname();
     }
 
     /**
@@ -275,24 +282,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
-
-    }
-
-    /**
-     * the method notifies the player if it has been connected or not
-     * @param player
-     */
-    @Override
-    public void onNotifyPlayerConnectionReq(Player player) {
-        if(player.getNickname().equals(this.nickname)) {
+        if(nickname.equals(this.nickname)) {
             out.println("Conected");
-            nickname = player.getNickname();
+            nickname = nickname;
         }
         else {
-            out.println("The player" + player.getNickname() + " has entered in the game");
-            //Risposta di accept player?
+            out.println("The player" + nickname + " has entered in the game");
         }
     }
+
 
     /**
      *The method shows the common goal card the has been completed and it's score
@@ -447,5 +445,11 @@ public class Cli extends ObservableViewClient implements ViewClient{
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
         out.println(current_player + "is playing right now .");
     }
+
+    @Override
+    public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
+        personalGoalCard.showPersonalGoalCard();
+    }
+
 
 }

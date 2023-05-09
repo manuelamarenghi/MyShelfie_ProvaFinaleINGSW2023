@@ -31,7 +31,8 @@ public class MessageHandler implements Observer {
      */
     public void handle(Message message){
         executor.execute(()->{
-            virtualModel.notifyObserver(obs->obs.onShowReq("Server message: "+message.getType()));}
+            if(!message.getType().equals("Pong!"))
+                virtualModel.notifyObserver(obs->obs.onShowReq("Server message: "+message.getType()));}
         );
     }
 
@@ -241,6 +242,14 @@ public class MessageHandler implements Observer {
             }else{
                 virtualModel.notifyObserver(obs->obs.onNotifyWhoIsPlayingNowReq(message.getnickname()));
             }
+        });
+    }
+
+    public void handle(Send_PersonalCard message)
+    {
+        executor.execute(()->{
+            virtualModel.getMe().setPersonalCard(message.getPersonalGoalCard());
+            virtualModel.notifyObserver(obs->obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
         });
     }
 }

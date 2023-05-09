@@ -2,13 +2,14 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.view.View;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * this class is used to create instance of players without managing their logic
  */
-public class Player {
+public class Player implements Serializable {
     private String nickname;
     private int commonGoalScore ;
     private List<ObserverCC> observers;

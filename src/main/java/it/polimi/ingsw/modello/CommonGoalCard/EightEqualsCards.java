@@ -4,7 +4,9 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 
-public class EightEqualsCards implements CommonGoalCards {
+import java.io.Serializable;
+
+public class EightEqualsCards implements CommonGoalCards, Serializable {
     private final int DIMENSION=8;
     @Override
     public boolean check(Library library) {

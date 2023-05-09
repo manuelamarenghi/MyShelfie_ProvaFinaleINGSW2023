@@ -66,7 +66,7 @@ public class MatchController {
                 match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
-            } else if (connectClients.size() < match.getPlayerNumber()) {
+            } else if (connectClients.size() < numberOfPlayers) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
                 match.setPlayers(new Player(nickname));
@@ -89,13 +89,25 @@ public class MatchController {
      */
     public void startGame(){
 
+        for(VirtualView vv:connectClients.values()){
+            vv.GenericMessage("Server","Start Game");
+        }
+
         match.getMatchmanager().startGame(match);
+
+        for(Player player: match.getPlayers())
+        {
+            connectClients.get(player.getNickname()).sendPersonalCard(player.getPersonalCard());
+        }
+
+
+        //Order player accord with the chair
 
         String firstPlayer = match.getChair().getNickname();
         int indexFirst = players.indexOf(firstPlayer);
         ArrayList<String> playerInOrder = new ArrayList<>();
 
-        //Order player according with the chair
+
         if(indexFirst !=0) {
             for (int i = indexFirst; i < numberOfPlayers; i++) {
                 playerInOrder.add(players.get(i));
@@ -116,6 +128,7 @@ public class MatchController {
         }
         isStarted=true;
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
+
     }
 
     /**
@@ -198,10 +211,12 @@ public class MatchController {
      */
     public void messageHandler (Message m){
         if(isStarted == true) {
-            if (turnController.getActivePlayer().equals(m.getnickname())) {
-                m.visitServer(this);
-            } else {
-                connectClients.get(m.getnickname()).GenericMessage(null,"WrongAction");
+            if(!m.getType().equals("Ping!")) {
+                if (turnController.getActivePlayer().equals(m.getnickname())) {
+                    m.visitServer(this);
+                } else {
+                    connectClients.get(m.getnickname()).GenericMessage(null, "WrongAction");
+                }
             }
         }
         else
@@ -213,11 +228,16 @@ public class MatchController {
      * @param numberPlayer number of player who play the game
      */
     public void handler(Numb_Player numberPlayer){
+
         match.setMatch(numberPlayer.getNumb());
+
         numberOfPlayers = numberPlayer.getNumb();
+
+        System.out.println("il numero di giocatori è "+numberPlayer.getNumb());
         for(VirtualView v: connectClients.values()){
             v.sendNumbPlayer(numberOfPlayers);
         }
+
     }
     /**
      * this message the server received the card chosen by the player
@@ -268,5 +288,6 @@ public class MatchController {
     //----------------------VIRTUALVIEW METHODS----------------
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
+        match.addObserver(virtualView);
     }
 }

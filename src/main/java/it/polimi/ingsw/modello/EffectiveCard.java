@@ -5,10 +5,11 @@ import it.polimi.ingsw.message.Assigned_CC;
 import it.polimi.ingsw.network.observer.Observable;
 import it.polimi.ingsw.network.observer.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EffectiveCard extends Observable implements ObserverCC{
+public class EffectiveCard extends Observable implements ObserverCC, Serializable {
     private CommonGoalCards commonCard;
     private ArrayList<Integer> allScores;
     public EffectiveCard(CommonGoalCards commonCard ){

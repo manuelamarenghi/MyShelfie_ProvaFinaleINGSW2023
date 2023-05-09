@@ -2,7 +2,9 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.network.MessageHandler;
 
-public class NotTakeCardBoard extends Message{
+import java.io.Serializable;
+
+public class NotTakeCardBoard extends Message implements Serializable {
 
     public NotTakeCardBoard(String c) {
         super(c, "Not_Takable_Mex");

@@ -2,17 +2,16 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
 
-import java.io.IOError;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
  * this class manage connection from a client to the server and handles message's requests
  */
-public class ClientHandler implements Runnable{
+
+public class ClientHandler implements Runnable {
+
     private  Server server;
     private  Socket client;
     private  ServerSocket serversocket;
@@ -71,7 +70,11 @@ public class ClientHandler implements Runnable{
         try {
             while (!Thread.currentThread().isInterrupted()) {
                     Message message = (Message) input.readObject();
-                    if(message.getType().equals("enter_player")){
+                    if(message.getType().equals("Ping!")){
+                        sendMessage(new Message("server","Pong!"));
+                    }
+
+                    else if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
                     else{
@@ -97,7 +100,7 @@ public class ClientHandler implements Runnable{
      * sendMessage() is used to send message to the client of this specific clientHanlder
      * @param message
      */
-    public void sendMessage(Message message){
+    public synchronized void sendMessage(Message message){
         try {
                 output.writeObject(message);
                 output.reset();

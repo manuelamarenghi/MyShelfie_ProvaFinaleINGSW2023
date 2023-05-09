@@ -1,9 +1,10 @@
 package it.polimi.ingsw.modello;
+import java.io.Serializable;
 import java.lang.Math;
 import java.sql.Array;
 import java.util.ArrayList;
 
-public class Bag {
+public class Bag implements Serializable {
     private int dim=132 , i , numberOfCards , l;
     private static int cardsFor2Players=29 , cardsFor3Players=37 , cardsFor4Player=45;
     ArrayList<Integer> remainingCards = new ArrayList<Integer>(dim);

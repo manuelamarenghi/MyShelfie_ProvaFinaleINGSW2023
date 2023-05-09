@@ -4,6 +4,7 @@ package it.polimi.ingsw.message;
 import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.modello.Card;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * message from client to server to put cards in library
  */
 
-public class PutInLib extends Message{
+public class PutInLib extends Message implements Serializable {
     private int column;
     private ArrayList<Card> cardsInOrder;
     public PutInLib(int x,String name,ArrayList<Card> cards){

@@ -44,16 +44,20 @@ public class ClientApp {
         System.out.println("sono qui");
         sClient.sendMessage(m2);
         sClient.readMessage();*/
+
         Match match = new Match();
         SocketClient socketClient = new SocketClient("localhost" , 16847);
+        socketClient.readMessage();
+
         VirtualModel virtualModel = new VirtualModel(match);
         MessageHandler messageHandler = new MessageHandler(virtualModel);
         socketClient.addObserver(messageHandler);
         Cli cli = new Cli();
         virtualModel.addObserver(cli);
-        ClientController clientController = new ClientController(cli  , virtualModel);
+        ClientController clientController = new ClientController(cli, virtualModel,socketClient);
         cli.addObserver(clientController);
         cli.start();
 
     }
 }
+

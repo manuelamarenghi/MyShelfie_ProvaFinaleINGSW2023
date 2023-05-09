@@ -14,10 +14,7 @@ public interface VMObserver {
      void onNotifyPlayerDisconnectionReq(Player player);
      void onNotifyPlayerReconnectionReq(Player player);
      void onNotifyPlayerConnectionReq(String nickname);
-
- void onNotifyPlayerConnectionReq(Player player);
-
- void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
+     void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
      void onNotifyChairAssignedReq(String nickname);
      void onShowPossibleColumnReq(int[] x, Library library);
      void onNotifyCardsAreNotAdjacentReq();
@@ -41,4 +38,6 @@ public interface VMObserver {
     void onNotifyYourTurnIsEndedReq(String current_player);
 
     void onNotifyWhoIsPlayingNowReq(String current_player);
+
+    void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard);
 }

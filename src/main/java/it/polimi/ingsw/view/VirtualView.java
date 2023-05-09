@@ -58,7 +58,7 @@ public class VirtualView implements View{
      * updateanotherplayerconnect() update others player view when one has disconnected
      */
     public void updateanotherplayerconnect(String name,Boolean connected,Player p){
-        if(!connected) {
+        if(connected==false) {
             clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
         }
         else{ clientHandler.sendMessage(new PlayerReturned(p));}
@@ -119,13 +119,16 @@ public class VirtualView implements View{
      * GenericMessage() send a generic message
      */
     public void GenericMessage(String s,String c){
-        clientHandler.sendMessage(new Message(c,s));
+        clientHandler.sendMessage(new Message(s,c));
     }
     /**
      * sendNumbPlayer() send to all players the number setted from the first entered
      */
     public void sendNumbPlayer(int x){
         clientHandler.sendMessage(new Numb_Player_Answer(x));
+    }
+    public void sendPersonalCard(PersonalGoalCard personalGoalCard){
+        clientHandler.sendMessage(new Send_PersonalCard(personalGoalCard));
     }
 
     @Override

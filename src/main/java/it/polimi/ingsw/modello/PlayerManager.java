@@ -1,10 +1,11 @@
 package it.polimi.ingsw.modello;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class PlayerManager {
+public class PlayerManager implements Serializable {
     /**
      * the method notifies the observer about the state of the player
      */
