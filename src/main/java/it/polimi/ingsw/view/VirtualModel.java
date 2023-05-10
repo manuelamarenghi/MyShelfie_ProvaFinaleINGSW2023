@@ -54,8 +54,11 @@ public class VirtualModel extends VMObservable {
         }
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public void setPlayers(ArrayList<String> players) {
+        for(String p:players)
+        {
+            this.players.add(new Player(p));
+        }
     }
 
     public void setPlayerNumber(int playerNumber) {

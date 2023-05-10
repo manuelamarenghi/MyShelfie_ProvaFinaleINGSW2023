@@ -465,7 +465,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     @Override
-    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+    public void onNotifyAllPlayerReq(ArrayList<String> players) {
 
     }
 
