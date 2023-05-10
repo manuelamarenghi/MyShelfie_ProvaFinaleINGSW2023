@@ -13,26 +13,29 @@ public class VirtualModel extends VMObservable {
     private Board board;
     private Player firstFinish;
     private Player chair;
-    private EffectiveCard[] CommonCards=new EffectiveCard[2];
+    private EffectiveCard[] CommonCards = new EffectiveCard[2];
 
-    public VirtualModel(Match match){
-        this.playerNumber=match.getPlayerNumber();
-        this.board=match.getBoard();
-        this.chair=match.getChair();
-        this.firstFinish=match.getFirstFinish();
-        this.CommonCards=match.getCommonCards();
+    public VirtualModel(Match match) {
+        this.playerNumber = match.getPlayerNumber();
+        this.board = match.getBoard();
+        this.chair = match.getChair();
+        this.firstFinish = match.getFirstFinish();
+        this.CommonCards = match.getCommonCards();
+        this.players = null;
     }
-    public VirtualModel(){
-        this.players=null;
-        this.me=new Player("missing_nickname");
-        this.chair=null;
-        this.firstFinish=null;
-        this.isMyTurn=false;
-        this.playerNumber=-1;
-        this.CommonCards=null;
-        this.board=null;
+
+    public VirtualModel() {
+        this.players = null;
+        this.me = new Player("missing_nickname");
+        this.chair = null;
+        this.firstFinish = null;
+        this.isMyTurn = false;
+        this.playerNumber = -1;
+        this.CommonCards = null;
+        this.board = null;
         this.me.setLibrary(new Library());
     }
+
     public int getPlayerNumber() {
         return playerNumber;
     }
@@ -46,8 +49,8 @@ public class VirtualModel extends VMObservable {
     }
 
     public void setFirstFinish(String firstFinish) {
-        for(Player player:this.players){
-            if(player.getNickname().equals(firstFinish))this.firstFinish=player;
+        for (Player player : this.players) {
+            if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
         }
     }
 
@@ -63,31 +66,36 @@ public class VirtualModel extends VMObservable {
         return players;
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         this.players.add(player);
     }
     public void removePlayer(String nickname){
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
-    public void updateBoard(Board board){
-        this.board=board;
+
+    public void updateBoard(Board board) {
+        this.board = board;
     }
-    public void updateChair(String nickname){
-        for(Player player:this.players){
-            if(player.getNickname().equals(nickname))this.chair=player;
+
+    public void updateChair(String nickname) {
+        for (Player player : this.players) {
+            if (player.getNickname().equals(nickname)) this.chair = player;
         }
     }
+
     public Player getChair() {
         return chair;
     }
 
-    public void updatePlayerNumber(int playerNumber){
-        this.playerNumber=playerNumber;
+    public void updatePlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
     }
-    public PersonalGoalCard getPersonalGoalCard(){
+
+    public PersonalGoalCard getPersonalGoalCard() {
         return this.me.getPersonalCard();
     }
-    public EffectiveCard[] getCommonGoalCards(){
+
+    public EffectiveCard[] getCommonGoalCards() {
         return this.CommonCards;
     }
     public void updateIsMyTurn(){

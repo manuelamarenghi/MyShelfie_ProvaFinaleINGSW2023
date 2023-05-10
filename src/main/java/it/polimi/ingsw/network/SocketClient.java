@@ -45,7 +45,6 @@ public class SocketClient extends Client{
         try {
             outputStream.writeObject(message);
             outputStream.reset();
-
         }catch(IOException exception){
             System.out.println("errore nel mandare mex");
             disconnect();

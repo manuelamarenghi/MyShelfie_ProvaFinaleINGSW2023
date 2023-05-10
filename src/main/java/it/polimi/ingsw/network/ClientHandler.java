@@ -2,7 +2,9 @@ package it.polimi.ingsw.network;
 
 import it.polimi.ingsw.message.Message;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -39,9 +41,10 @@ public class ClientHandler implements Runnable {
      */
     @Override
     public void run () {
-        try{
+        try {
+            System.out.println("Inizio a gestire messaggio");
             handleClientConnection();
-        }catch(IOError e){
+        } catch (Exception e) {
             disconnect();
         }
     }
@@ -49,6 +52,7 @@ public class ClientHandler implements Runnable {
      * disconnect() handles the disconnection of a client
      */
     private void disconnect() {
+        System.out.println("client disconnesso");
         if (connected) {
             try {
                 if (!client.isClosed()) {
@@ -91,10 +95,9 @@ public class ClientHandler implements Runnable {
                         }
                     }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
-
+            disconnect();
         }
     }
-
     /**
      * sendMessage() is used to send message to the client of this specific clientHanlder
      * @param message
