@@ -41,5 +41,7 @@ public interface VMObserver {
 
     void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard);
 
+    void NotifyaskNicknameReq() throws InterruptedException;
+
     void onNotifyAllPlayerReq(ArrayList<Player> players);
 }

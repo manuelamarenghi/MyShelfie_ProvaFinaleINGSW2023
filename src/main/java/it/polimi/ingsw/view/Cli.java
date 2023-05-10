@@ -2,7 +2,6 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
-import it.polimi.ingsw.network.observer.VMObserver;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -100,16 +99,17 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     /**
-     *The method asks to the user the nickname it wants to use
+     * The method asks to the user the nickname it wants to use
+     *
      * @return it returns the nickname typed by the user
      */
 
     @Override
     public void askNickname() {
         out.println("Type your nickname.");
-        try{
+        try {
             nickname = readLine();
-        }catch(ExecutionException e){
+        } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
         this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(nickname));
@@ -416,7 +416,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
      */
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
-            out.println("The dissconnection has been done successfully");
+        out.println("The dissconnection has been done successfully");
     }
 
     /**
@@ -450,6 +450,17 @@ public class Cli extends ObservableViewClient implements ViewClient{
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         personalGoalCard.showPersonalGoalCard();
+    }
+
+    @Override
+    public void NotifyaskNicknameReq() {
+        try {
+            System.out.println("First Player is connected. Try again later");
+            Thread.sleep(5000);
+            askNickname();
+        } catch (InterruptedException e) {
+
+        }
     }
 
     @Override

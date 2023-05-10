@@ -64,13 +64,6 @@ public class VirtualView implements View{
         else{ clientHandler.sendMessage(new PlayerReturned(p));}
     }
     /**
-     * assignedCC() update the client when a common goal score is assigned
-     */
-
-    //public void assignedCC(EffectiveCard e, int x,String name) {
-    //    clientHandler.sendMessage(new Assigned_CC(x,name,e));
-   // }
-    /**
      * assignedChair() assigned chair to a random player
      */
     public void assignedChair(String name){
@@ -118,21 +111,33 @@ public class VirtualView implements View{
     /**
      * GenericMessage() send a generic message
      */
-    public void GenericMessage(String s,String c){
-        clientHandler.sendMessage(new Message(s,c));
+    public void GenericMessage(String s, String c) {
+        clientHandler.sendMessage(new Message(s, c));
     }
+
     /**
      * sendNumbPlayer() send to all players the number setted from the first entered
      */
-    public void sendNumbPlayer(int x){
+    public void sendNumbPlayer(int x) {
         clientHandler.sendMessage(new Numb_Player_Answer(x));
     }
-    public void sendPersonalCard(PersonalGoalCard personalGoalCard){
+
+    /**
+     * sendPersonalCard() send to all players their personal goal card
+     */
+    public void sendPersonalCard(PersonalGoalCard personalGoalCard) {
         clientHandler.sendMessage(new Send_PersonalCard(personalGoalCard));
     }
 
     @Override
     public void update(Message message) {
         clientHandler.sendMessage(message);
+    }
+
+    /**
+     * sendCommonCard() send to all players common cards of the game
+     */
+    public void sendCommonCard(EffectiveCard[] cards) {
+        clientHandler.sendMessage(new Send_EffectiveCard(cards));
     }
 }
