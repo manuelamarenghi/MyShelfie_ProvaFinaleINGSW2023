@@ -2,6 +2,7 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.ObserverViewClient;
@@ -16,6 +17,7 @@ public class ClientController implements ObserverViewClient {
     private ViewClient view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
+    private MessageHandler messageHandler;
     //localhost
     //16847
     public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
@@ -23,6 +25,7 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
         socketClient.enablePinger(true);
+        this.messageHandler=new MessageHandler(this.virtualModel);
     }
 
     public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
@@ -30,9 +33,12 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
         socketClient.enablePinger(true);
+        this.messageHandler=new MessageHandler(this.virtualModel);
     }
 
-
+    public void addViewObserver(ViewClient view){
+        this.virtualModel.addObserver(view);
+    }
     public void handleEnterPlayer (String nickname){
         EnterPlayer message = new EnterPlayer(nickname);
         socketClient.sendMessage(message);
