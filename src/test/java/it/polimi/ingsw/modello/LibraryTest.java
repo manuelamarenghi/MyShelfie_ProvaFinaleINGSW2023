@@ -234,7 +234,7 @@ class LibraryTest {
         library.getCardinPos(3, 1).setColour("P");
         library.getCardinPos(2, 1).setColour("B");
         library.getCardinPos(1, 1).setColour("P");
-        //library.getCardinPos(0, 1).setColour("P");
+        library.getCardinPos(0, 1).setColour("P");
 
         library.getCardinPos(5, 2).setColour("N");
         library.getCardinPos(4, 2).setColour("G");
