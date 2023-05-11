@@ -222,7 +222,6 @@ class LibraryTest {
     public void showLibraryTest(){
         Library library = new Library();
 
-        library.getCardinPos(5, 0).setColour("G");
         library.getCardinPos(4, 0).setColour("W");
         library.getCardinPos(3, 0).setColour("P");
         library.getCardinPos(2, 0).setColour("G");
