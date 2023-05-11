@@ -189,16 +189,6 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     /**
-     *The method sends a message to the server to create a match
-     * @param match
-     */
-    @Override
-    public void createMatch(Match match) {
-        notifyObserver(observerViewClient -> observerViewClient.handleCreateMatch(match));
-        //clientController.handleCreateMatch(match);
-    }
-
-    /**
      * The method sends a request to get the coloumns where it can put its cards
      */
 

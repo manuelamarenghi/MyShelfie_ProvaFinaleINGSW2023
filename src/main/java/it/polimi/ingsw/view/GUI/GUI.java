@@ -129,7 +129,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+    public void onNotifyAllPlayerReq(ArrayList<String> players) {
 
     }
 
@@ -153,8 +153,4 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     }
 
-    @Override
-    public void createMatch(Match match) {
-
-    }
 }
