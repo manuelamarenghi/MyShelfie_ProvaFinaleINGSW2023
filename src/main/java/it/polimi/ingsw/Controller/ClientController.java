@@ -2,7 +2,6 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
-import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.ObserverViewClient;
@@ -36,9 +35,7 @@ public class ClientController implements ObserverViewClient {
         this.messageHandler=new MessageHandler(this.virtualModel);
     }
 
-    public void addViewObserver(ViewClient view){
-        this.virtualModel.addObserver(view);
-    }
+
     public void handleEnterPlayer (String nickname){
         EnterPlayer message = new EnterPlayer(nickname);
         socketClient.sendMessage(message);
