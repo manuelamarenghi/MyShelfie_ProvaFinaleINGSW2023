@@ -9,5 +9,5 @@ public interface ViewClient extends VMObserver{
 
     void askCardsToTakeFromBoard();
     void askForDissconection();
-    void createMatch(Match match);
+
 }
