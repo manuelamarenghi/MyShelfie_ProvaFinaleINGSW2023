@@ -109,7 +109,7 @@ class BoardTest {
     @Test
     public void showBoardTest(){
         Board b=new Board(4);
-        b.fill(4);
+        b.fill(0);
         b.showBoard();
     }
     @Test

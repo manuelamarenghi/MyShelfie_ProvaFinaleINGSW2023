@@ -39,7 +39,6 @@ public class ClientApp {
         System.out.println("sono qui");
         sClient.sendMessage(m2);
         sClient.readMessage();*/
-
         Match match = new Match();
         SocketClient socketClient = new SocketClient("localhost" , 16847);
         socketClient.readMessage();
