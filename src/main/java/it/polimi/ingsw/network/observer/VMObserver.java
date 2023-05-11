@@ -44,4 +44,6 @@ public interface VMObserver {
     void NotifyaskNicknameReq() throws InterruptedException;
 
     void onNotifyAllPlayerReq(ArrayList<String> players);
+
+    void onNotifyCommonCards(EffectiveCard[] cards);
 }

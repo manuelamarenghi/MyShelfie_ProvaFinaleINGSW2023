@@ -1,6 +1,7 @@
 package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.modello.EffectiveCard;
+import it.polimi.ingsw.network.MessageHandler;
 
 /**
  * Message from server to client send the common goal card of the match
@@ -14,5 +15,8 @@ public class Send_EffectiveCard extends Message {
     }
     public EffectiveCard[] getCards(){
         return  this.cards;
+    }
+    public void visit(MessageHandler controller) {
+        controller.handle(this);
     }
 }
