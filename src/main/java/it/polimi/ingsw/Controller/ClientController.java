@@ -2,10 +2,9 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
-import it.polimi.ingsw.network.Client;
+import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
-import it.polimi.ingsw.network.observer.Observer;
-import it.polimi.ingsw.view.ObservableViewClient;
+import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
@@ -13,19 +12,20 @@ import it.polimi.ingsw.view.VirtualModel;
 import javax.swing.text.View;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
     private final SocketClient  socketClient;
     private VirtualModel virtualModel;
+    private MessageHandler messageHandler;
     //localhost
-    //16000847
+    //16847
     public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
         this.view = view;
         this.virtualModel=virtualModel;
         socketClient= new SocketClient("localhost" , 16847);
         socketClient.enablePinger(true);
+        this.messageHandler=new MessageHandler(this.virtualModel);
     }
 
     public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
@@ -33,6 +33,7 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel=virtualModel;
         this.socketClient=socketClient;
         socketClient.enablePinger(true);
+        this.messageHandler=new MessageHandler(this.virtualModel);
     }
 
 
@@ -80,6 +81,7 @@ public class ClientController implements ObserverViewClient {
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
         socketClient.sendMessage(message);
     }
+
     /**
      * the method sends a message to socket client to calculate points for the player
      */
@@ -87,10 +89,12 @@ public class ClientController implements ObserverViewClient {
         FinalPointRequest message =new FinalPointRequest(name);
         socketClient.sendMessage(message);
     }
+
     /**
      * The method tells the server to dissconect
      * @param name
      */
+
     public void handleDisconection(String name){
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
