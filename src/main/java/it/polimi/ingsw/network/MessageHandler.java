@@ -143,16 +143,6 @@ public class MessageHandler implements Observer {
         virtualModel.notifyObserver(obs -> obs.onNotifyPlayerConnectionReq(message.getnickname()));
     }
 
-    /**
-     * handle Created_Match messages, create the virtualModel based on the one received from the server and notify the player's view
-     * with the ArrayList of the players.
-     * @param message
-     */
-    public void handle(Created_Match message){
-
-        virtualModel=new VirtualModel(message.getMatch());
-            virtualModel.notifyObserver(obs->obs.onNotifyMatchHasStartedReq(virtualModel.getPlayers()));}
-
 
     /**
      * handle Final_Point messages and notify the player's view with the final scoreboard received from server.
@@ -218,12 +208,20 @@ public class MessageHandler implements Observer {
         }
     }
 
+    /**
+     * handle PersonalCard, notify the player's view his personal card
+     * @param message
+     */
     public void handle(Send_PersonalCard message) {
 
         virtualModel.getMe().setPersonalCard(message.getPersonalGoalCard());
         virtualModel.notifyObserver(obs -> obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
     }
 
+    /**
+     * handle AllPlayers message, notify the player his opponents
+     * @param message
+     */
     public void handle(AllPlayer message) {
         virtualModel.setPlayers(message.getPlayers());
         virtualModel.notifyObserver(obs -> obs.onNotifyAllPlayerReq(message.getPlayers()));
@@ -242,5 +240,10 @@ public class MessageHandler implements Observer {
             throw new RuntimeException(e);
         }
     }
+    public void handle(Send_EffectiveCard message){
+        virtualModel.setCommonCards(message.getCards());
     }
+    }
+
+
 

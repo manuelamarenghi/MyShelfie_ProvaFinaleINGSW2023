@@ -46,28 +46,28 @@ public class Line4G implements CommonGoalCards, Serializable {
      * getImage() let you see this goal
      */
     @Override
-    public void getImage() {
+    public void showCommonCard() {
       Library l=new Library();
-      l.getCardinPos(5,0).setColour("G");
-      l.getCardinPos(5,1).setColour("R");
-      l.getCardinPos(5,2).setColour("G");
-      l.getCardinPos(5,3).setColour("G");
-      l.getCardinPos(5,4).setColour("G");
-      l.getCardinPos(4,0).setColour("G");
-      l.getCardinPos(4,1).setColour("R");
-      l.getCardinPos(4,2).setColour("G");
-      l.getCardinPos(4,3).setColour("B");
-      l.getCardinPos(4,4).setColour("B");
-      l.getCardinPos(3,0).setColour("G");
-      l.getCardinPos(3,1).setColour("R");
-      l.getCardinPos(3,2).setColour("G");
-      l.getCardinPos(3,3).setColour("B");
-      l.getCardinPos(3,4).setColour("G");
-      l.getCardinPos(2,0).setColour("B");
-      l.getCardinPos(2,1).setColour("B");
-      l.getCardinPos(2,2).setColour("B");
-      l.getCardinPos(2,3).setColour("B");
-      l.getCardinPos(2,4).setColour("B");
+      l.getCardinPos(5,0).setColour("green");
+      l.getCardinPos(5,1).setColour("pink");
+      l.getCardinPos(5,2).setColour("green");
+      l.getCardinPos(5,3).setColour("green");
+      l.getCardinPos(5,4).setColour("green");
+      l.getCardinPos(4,0).setColour("green");
+      l.getCardinPos(4,1).setColour("pink");
+      l.getCardinPos(4,2).setColour("green");
+      l.getCardinPos(4,3).setColour("blue");
+      l.getCardinPos(4,4).setColour("blue");
+      l.getCardinPos(3,0).setColour("green");
+      l.getCardinPos(3,1).setColour("pink");
+      l.getCardinPos(3,2).setColour("green");
+      l.getCardinPos(3,3).setColour("blue");
+      l.getCardinPos(3,4).setColour("green");
+      l.getCardinPos(2,0).setColour("blue");
+      l.getCardinPos(2,1).setColour("blue");
+      l.getCardinPos(2,2).setColour("blue");
+      l.getCardinPos(2,3).setColour("blue");
+      l.getCardinPos(2,4).setColour("blue");
       System.out.println("This is an example of a library that respects this goal");
       l.showLibrary();
 
@@ -106,5 +106,11 @@ public class Line4G implements CommonGoalCards, Serializable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getDesc() {
+        return "Four lines each formed by 5 tiles of maximum three different types.\n" +
+                "One line can show the same or a different combination of another line.\n";
     }
 }

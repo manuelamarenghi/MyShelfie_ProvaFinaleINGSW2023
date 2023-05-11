@@ -454,8 +454,15 @@ public class Cli extends ObservableViewClient implements ViewClient{
         }
     }
 
+    /**
+     * The method prints the players of the match
+     * @param players
+     */
+
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
+        System.out.println("The players in the match: " +players.toString());
+
 
     }
 

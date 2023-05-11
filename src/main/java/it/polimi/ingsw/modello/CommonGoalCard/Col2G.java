@@ -43,29 +43,35 @@ public class Col2G implements CommonGoalCards, Serializable {
      * getImage() let you see this goal
      */
     @Override
-    public void getImage() {
+    public void showCommonCard() {
         Library l=new Library();
-        l.getCardinPos(0,1).setColour("G");
-        l.getCardinPos(1,1).setColour("R");
-        l.getCardinPos(2,1).setColour("G");
-        l.getCardinPos(3,1).setColour("G");
-        l.getCardinPos(4,1).setColour("G");
-        l.getCardinPos(5,1).setColour("G");
-        l.getCardinPos(0,0).setColour("G");
-        l.getCardinPos(1,0).setColour("R");
-        l.getCardinPos(2,0).setColour("W");
-        l.getCardinPos(3,0).setColour("P");
-        l.getCardinPos(4,0).setColour("B");
-        l.getCardinPos(5,0).setColour("Y");
-        l.getCardinPos(0,4).setColour("R");
-        l.getCardinPos(1,4).setColour("G");
-        l.getCardinPos(2,4).setColour("B");
-        l.getCardinPos(3,4).setColour("W");
-        l.getCardinPos(4,4).setColour("P");
-        l.getCardinPos(5,4).setColour("Y");
+        l.getCardinPos(0,1).setColour("green");
+        l.getCardinPos(1,1).setColour("pink");
+        l.getCardinPos(2,1).setColour("green");
+        l.getCardinPos(3,1).setColour("green");
+        l.getCardinPos(4,1).setColour("green");
+        l.getCardinPos(5,1).setColour("green");
+        l.getCardinPos(0,0).setColour("green");
+        l.getCardinPos(1,0).setColour("pink");
+        l.getCardinPos(2,0).setColour("white");
+        l.getCardinPos(3,0).setColour("pink");
+        l.getCardinPos(4,0).setColour("blue");
+        l.getCardinPos(5,0).setColour("yellow");
+        l.getCardinPos(0,4).setColour("pink");
+        l.getCardinPos(1,4).setColour("green");
+        l.getCardinPos(2,4).setColour("blue");
+        l.getCardinPos(3,4).setColour("white");
+        l.getCardinPos(4,4).setColour("pink");
+        l.getCardinPos(5,4).setColour("yellow");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
+
+    @Override
+    public String getDesc() {
+        return "Two columns each formed by 6 different types of tiles. \n";
+    }
+
     /**
      * expired() let you know if the player can still reach the goal or not
      */

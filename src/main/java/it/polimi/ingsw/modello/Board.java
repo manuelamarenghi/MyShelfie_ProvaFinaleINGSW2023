@@ -267,27 +267,27 @@ public class Board implements Serializable {
                 }
                 else{
                     if( board[i][j]!=emptyCard){
-                        if(board[i][j].getColour().equals("Y")) {
+                        if(board[i][j].getColour().equals("yellow")) {
                             System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("W")) {
+                        else if(board[i][j].getColour().equals("white")) {
                             System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("G")) {
+                        else if(board[i][j].getColour().equals("green")) {
                             System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("B")) {
+                        else if(board[i][j].getColour().equals("lightBlue")) {
                             System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("N")) {
+                        else if(board[i][j].getColour().equals("blue")) {
                             System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("P")) {
+                        else if(board[i][j].getColour().equals("pink")) {
                             System.out.print(ANSI_PINK + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }

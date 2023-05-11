@@ -81,7 +81,7 @@ public class MatchManagerTest {
      * only read personal card
      * check the correct assignment of personal Card
      */
-    /*@Test
+    @Test
     public void setPersonalCardTest(){
         Match match = new Match();
         match.setMatch(3);
@@ -94,7 +94,7 @@ public class MatchManagerTest {
         {
             p.getPersonalCard().showPersonalGoalCard();
         }
-    }*/
+    }
 
     @Test
     public void emptyBoardTest(){

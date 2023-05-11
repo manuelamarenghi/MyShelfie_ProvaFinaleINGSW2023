@@ -10,7 +10,7 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
     private final int DIMENSION=8;
     @Override
     public boolean check(Library library) {
-        int indexRed = 0;
+        int indexGreen = 0;
          int indexBlue=0;
          int indexWhite=0;
          int indexYellow=0;
@@ -18,7 +18,7 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
          int indexLightBLue=0;
         for(Card card:library){
             if(card.getColour().equals("blue"))indexBlue++;
-            if(card.getColour().equals("red"))indexRed++;
+            if(card.getColour().equals("green"))indexGreen++;
             if(card.getColour().equals("yellow"))indexYellow++;
             if(card.getColour().equals("lightBlue"))indexLightBLue++;
             if(card.getColour().equals("white"))indexWhite++;
@@ -28,7 +28,7 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
                 indexBlue >= DIMENSION ||
                 indexYellow >= DIMENSION ||
                 indexLightBLue >= DIMENSION ||
-                indexRed >= DIMENSION ||
+                indexGreen >= DIMENSION ||
                 indexWhite >= DIMENSION;
     }
 
@@ -40,7 +40,24 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
     }
 
     @Override
-    public void getImage() {
-    //it's better to insert here the path of the image we're going to display on the GUI
+    public String getDesc() {
+        return "Eight tiles of the same type. \n" +
+                "There’s no restriction about the position of these tiles.\n";
+    }
+
+    @Override
+    public void showCommonCard() {
+
+        Library library = new Library();
+        library.getCardinPos(5, 2).setColour("blue");
+        library.getCardinPos(4, 2).setColour("blue");
+        library.getCardinPos(3, 2).setColour("blue");
+        library.getCardinPos(2, 2).setColour("blue");
+        library.getCardinPos(1, 2).setColour("blue");
+        library.getCardinPos(5, 1).setColour("blue");
+        library.getCardinPos(3, 0).setColour("blue");
+        library.getCardinPos(4, 0).setColour("blue");
+        System.out.println("This is an example of a library that respects this goal");
+        library.showLibrary();
     }
 }

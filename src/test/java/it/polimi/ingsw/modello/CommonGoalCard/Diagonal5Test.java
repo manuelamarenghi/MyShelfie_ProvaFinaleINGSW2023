@@ -18,6 +18,7 @@ public class Diagonal5Test {
         library.getCardinPos(2, 2).setColour("blue");
         library.getCardinPos(3, 3).setColour("blue");
         library.getCardinPos(4, 4).setColour("blue");
+        library.showLibrary();
         assertTrue(diagonal.check(library));
     }
     @Test
