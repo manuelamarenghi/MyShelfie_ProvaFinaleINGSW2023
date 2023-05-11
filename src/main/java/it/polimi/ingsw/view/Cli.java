@@ -276,7 +276,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
      * The method notifies when the player has been reconnected
      * @param player
      */
-    @Override
+    //@Override
     public void onNotifyPlayerReconnectionReq(Player player) {
         out.println("Player" + player.getNickname() + "has returned to the game");
     }
