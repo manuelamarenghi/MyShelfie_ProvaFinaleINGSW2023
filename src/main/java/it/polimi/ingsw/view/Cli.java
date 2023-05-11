@@ -189,16 +189,6 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     /**
-     *The method sends a message to the server to create a match
-     * @param match
-     */
-    @Override
-    public void createMatch(Match match) {
-        notifyObserver(observerViewClient -> observerViewClient.handleCreateMatch(match));
-        //clientController.handleCreateMatch(match);
-    }
-
-    /**
      * The method sends a request to get the coloumns where it can put its cards
      */
 
@@ -286,6 +276,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
         if(nickname.equals(this.nickname)) {
             out.println("Conected");
             this.nickname = nickname;
+            notifyObserver(obs->obs.setNickname(nickname));
         }
         else {
             out.println("The player" + nickname + " has entered in the game");
@@ -464,7 +455,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     @Override
-    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+    public void onNotifyAllPlayerReq(ArrayList<String> players) {
 
     }
 

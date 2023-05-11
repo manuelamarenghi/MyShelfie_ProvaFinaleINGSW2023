@@ -95,4 +95,9 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
+
+    @Override
+    public void setNickname(String nickname) {
+        virtualModel.setMe(nickname);
+    }
 }
