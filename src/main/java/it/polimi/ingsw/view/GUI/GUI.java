@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ViewClient;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GUI extends ObservableViewClient implements ViewClient {
+    ClientController clientController;
     @Override
     public void onShowReq(String s) {
 
