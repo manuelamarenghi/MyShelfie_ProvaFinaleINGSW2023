@@ -142,7 +142,7 @@ class Col2GTest {
      */
     @Test
     void getImage() {
-        card.getImage();
+        card.showCommonCard();
     }
     /**
      * expired1() to see when the library is empty

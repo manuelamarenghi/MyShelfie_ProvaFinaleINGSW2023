@@ -43,6 +43,7 @@ public class EffectiveCard extends Observable implements ObserverCC, Serializabl
     }
 
     public void show(){
-        commonCard.getImage();
+        commonCard.showCommonCard();
     }
+    public String description(){return commonCard.getDesc();}
 }

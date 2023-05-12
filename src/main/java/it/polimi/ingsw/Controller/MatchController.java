@@ -96,7 +96,9 @@ public class MatchController {
 
         for(VirtualView vv:connectClients.values()){
             vv.GenericMessage("Server","Start Game");
+            vv.sendAllPlayers(players);
         }
+
 
         match.getMatchmanager().startGame(match);
 

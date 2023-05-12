@@ -15,8 +15,15 @@ public interface CommonGoalCards extends Serializable {
      */
     public boolean expired(Library library);
     /**
-     * getImage() let you see this goal
+     * showCommonCard() let you see this goal
      */
-    public void getImage();
+    public void showCommonCard();
+
+    /**
+     * getDesc() can read the common goal card description
+     * @return
+     */
+    public String getDesc();
+
 
 }

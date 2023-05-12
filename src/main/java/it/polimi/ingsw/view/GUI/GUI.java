@@ -134,6 +134,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
+    public void onNotifyCommonCards(EffectiveCard[] cards) {
+
+    }
+
+    @Override
     public void askNickname() {
 
     }

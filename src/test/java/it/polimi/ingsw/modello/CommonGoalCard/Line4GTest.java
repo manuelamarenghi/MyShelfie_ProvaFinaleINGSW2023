@@ -191,7 +191,7 @@ class Line4GTest {
      */
     @Test
     void getImage() {
-        card.getImage();
+        card.showCommonCard();
     }
     /**
      * expired1() tests when library's full and doesn't respect the goal

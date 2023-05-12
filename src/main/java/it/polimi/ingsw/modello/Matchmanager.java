@@ -1,5 +1,6 @@
 package it.polimi.ingsw.modello;
 
+import it.polimi.ingsw.message.AllPlayer;
 import it.polimi.ingsw.message.UpdateBoard;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,11 +36,6 @@ public abstract class Matchmanager implements Serializable {
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
 
-    for(Player p: match.getPlayers())
-    {
-      p.getPersonalCard().showPersonalGoalCard();
-    }
-
     createBoard(match);
     match.getBoard().fill(0);
 
@@ -47,7 +43,7 @@ public abstract class Matchmanager implements Serializable {
 
     match.setChair(match.getPlayers().get(position));
 
-    match.notifyObserver(new UpdateBoard(match.getBoard()));
+    match.notifyObserver(new UpdateBoard(match.getBoard()));;
   }
   /**
    * results() calculates all players' scores
@@ -170,8 +166,8 @@ public abstract class Matchmanager implements Serializable {
    */
   public void showCommGoal(Match match){
     EffectiveCard[]  cards=match.getCommonCards();
-    cards[0].getCommonCard().getImage();
-    cards[1].getCommonCard().getImage();
+    cards[0].getCommonCard().showCommonCard();
+    cards[1].getCommonCard().showCommonCard();
   }
   /**
    * createBoard() create a board with different allowed position according to number of players

@@ -11,7 +11,7 @@ class Same4GroupsGTest {
      */
     @Test
     void getImage() {
-        card.getImage();
+        card.showCommonCard();
     }
     /**
      * check1() to see if it works when the library doesn't reach the goal
