@@ -17,7 +17,8 @@ class XGoalCardTest {
                 library.getCardinPos(j-1,i+1).setColour("blue");
                 library.getCardinPos(j-2,i+2).setColour("blue");
                 library.getCardinPos(j,i+2).setColour("blue");
-                library.getCardinPos(j-2,i).setColour("blue");
+                library.getCardinPos(j - 2, i).setColour("blue");
+                library.showLibrary();
                 if(!xcard.check(library)) fail();
             }
         }

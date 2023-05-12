@@ -27,22 +27,17 @@ public class Square2G implements CommonGoalCards, Serializable {
                 if(library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r, c + 1).getColour()) &&
                         library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c).getColour()) &&
                         library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c + 1).getColour())){
-                    if(library.getCardinPos(r, c).getColour().equals("Green")){
+                    if (library.getCardinPos(r, c).getColour().equals("green")) {
                         numOfSquares[0]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("White")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("white")) {
                         numOfSquares[1]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("Yellow")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("yellow")) {
                         numOfSquares[2]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("Navy")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("blue")) {
                         numOfSquares[3]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("Blue")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("lightBlue")) {
                         numOfSquares[4]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("Pink")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("pink")) {
                         numOfSquares[5]++;
                     }
                     indexToSkip1=c;
@@ -65,22 +60,28 @@ public class Square2G implements CommonGoalCards, Serializable {
         return false;
     }
 
+    @Override
+    public String getDesc() {
+        return "Two groups each containing 4 tiles of the same type in a 2x2 square. \n" +
+                "The tiles of one square can be different from those of the other square.\n";
+    }
+
     /**
      * The method shows an example of the target
      */
 
     @Override
-    public void getImage() {
-        Library l  =new Library();
-        l.getCardinPos(0,0).setColour("Green");
-        l.getCardinPos(0,1).setColour("Green");
-        l.getCardinPos(1,0).setColour("Green");
-        l.getCardinPos(1,1).setColour("Green");
+    public void showCommonCard() {
+        Library l = new Library();
+        l.getCardinPos(0, 0).setColour("green");
+        l.getCardinPos(0, 1).setColour("green");
+        l.getCardinPos(1, 0).setColour("green");
+        l.getCardinPos(1, 1).setColour("green");
 
-        l.getCardinPos(2,0).setColour("Green");
-        l.getCardinPos(2,1).setColour("Green");
-        l.getCardinPos(3,0).setColour("Green");
-        l.getCardinPos(3,1).setColour("Green");
+        l.getCardinPos(2, 0).setColour("green");
+        l.getCardinPos(2, 1).setColour("green");
+        l.getCardinPos(3, 0).setColour("green");
+        l.getCardinPos(3, 1).setColour("green");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }

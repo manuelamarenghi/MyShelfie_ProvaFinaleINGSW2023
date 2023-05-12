@@ -189,16 +189,6 @@ public class Cli extends ObservableViewClient implements ViewClient{
     }
 
     /**
-     *The method sends a message to the server to create a match
-     * @param match
-     */
-    @Override
-    public void createMatch(Match match) {
-        notifyObserver(observerViewClient -> observerViewClient.handleCreateMatch(match));
-        //clientController.handleCreateMatch(match);
-    }
-
-    /**
      * The method sends a request to get the coloumns where it can put its cards
      */
 
@@ -276,7 +266,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
      * The method notifies when the player has been reconnected
      * @param player
      */
-    @Override
+    //@Override
     public void onNotifyPlayerReconnectionReq(Player player) {
         out.println("Player" + player.getNickname() + "has returned to the game");
     }
@@ -286,6 +276,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
         if(nickname.equals(this.nickname)) {
             out.println("Conected");
             this.nickname = nickname;
+            notifyObserver(obs -> obs.setNickname(nickname));
         }
         else {
             out.println("The player" + nickname + " has entered in the game");
@@ -463,9 +454,26 @@ public class Cli extends ObservableViewClient implements ViewClient{
         }
     }
 
-    @Override
-    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+    /**
+     * The method prints the players of the match
+     *
+     * @param players
+     */
 
+    @Override
+    public void onNotifyAllPlayerReq(ArrayList<String> players) {
+        System.out.println("The players in the match: " + players.toString());
+
+
+    }
+
+    @Override
+    public void onNotifyCommonCards(EffectiveCard[] cards) {
+        for (EffectiveCard effectiveCard : cards) {
+            effectiveCard.show();
+
+            System.out.println("DESCRIPTION : " + effectiveCard.description());
+        }
     }
 
 

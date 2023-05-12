@@ -1,8 +1,8 @@
 package it.polimi.ingsw.modello;
 
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * this class is about personal library
@@ -11,16 +11,26 @@ public class Library implements Iterable<Card>, Serializable {
     /**
      * library is a matrix of cards that are insert from library's player
      */
-    private Card[][] library=new Card[6][5];
+    private Card[][] library = new Card[6][5];
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW = "\u001B[48;5;227m";
+    public static final String ANSI_GREEN = "\u001B[48;5;40m";
+    public static final String ANSI_WHITE = "\u001B[107m";
+    public static final String ANSI_BLUE = "\033[0;106m";
+    public static final String ANSI_PINK = "\u001B[48;5;205m";
+    public static final String ANSI_NAVY = "\u001B[48;5;18m";//
+
     /**
      * the constructor initialize 6x5 matrix
      */
     public Library() {
-        for (int i=0;i<6;i++)
-        { for(int j=0;j<5;j++){
-            library[i][j]=new Card();}
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 5; j++) {
+                library[i][j] = new Card();
+            }
         }
     }
+
     /**
      * getCardinPos() returns the card in the position you asked for
      */
@@ -56,7 +66,7 @@ public class Library implements Iterable<Card>, Serializable {
      * showLibrary() let you see your library
      */
     public void showLibrary(){
-        System.out.println(" *** Your library ***");
+        /*System.out.println(" *** Your library ***");
         for(int i=0;i<6;i++){
             for(int j=0;j<5;j++){
                 if( library[i][j]!=null){
@@ -66,7 +76,44 @@ public class Library implements Iterable<Card>, Serializable {
                 }
             }
             System.out.println();
-        }}
+        }*/
+
+        System.out.println(" *** Your Library ***");
+        System.out.println("   0   1   2   3   4");
+        for (int i = 0; i < 6; i++) {
+            System.out.print(i + " ");
+            for (int j = 0; j < 5; j++) {
+                if (library[i][j].getColour() == "") {
+                    System.out.print("    ");
+                } else if (library[i][j] != null) {
+                    if (library[i][j].getColour().equals("yellow")) {
+                        System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    } else if (library[i][j].getColour().equals("white")) {
+                        System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    } else if (library[i][j].getColour().equals("green")) {
+                        System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    } else if (library[i][j].getColour().equals("lightBlue")) {
+                        System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    } else if (library[i][j].getColour().equals("blue")) {
+                        System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    } else if (library[i][j].getColour().equals("pink")) {
+                        System.out.print(ANSI_PINK + "  " + ANSI_RESET);
+                        System.out.print("  ");
+                    }
+
+                }
+            }
+            System.out.println();
+            System.out.println();
+        }
+
+
+    }
     /**
      * setColumn() puts n cards in a chosen column
      */

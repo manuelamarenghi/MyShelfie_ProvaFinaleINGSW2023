@@ -60,6 +60,7 @@ public class MatchController {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
+                virtualView.AcceptNewPlayer(nickname);
                 match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
@@ -94,8 +95,10 @@ public class MatchController {
     public void startGame(){
 
         for(VirtualView vv:connectClients.values()){
-            vv.GenericMessage("Server","Start Game");
+            vv.GenericMessage("Server", "Start Game");
+            vv.sendAllPlayers(players);
         }
+
 
         match.getMatchmanager().startGame(match);
 

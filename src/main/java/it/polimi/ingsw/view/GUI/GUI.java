@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ViewClient;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GUI extends ObservableViewClient implements ViewClient {
-    ClientController clientController;
     @Override
     public void onShowReq(String s) {
 
@@ -131,7 +129,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyAllPlayerReq(ArrayList<Player> players) {
+    public void onNotifyAllPlayerReq(ArrayList<String> players) {
+
+    }
+
+    @Override
+    public void onNotifyCommonCards(EffectiveCard[] cards) {
 
     }
 
@@ -152,11 +155,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askForDissconection() {
-
-    }
-
-    @Override
-    public void createMatch(Match match) {
 
     }
 }

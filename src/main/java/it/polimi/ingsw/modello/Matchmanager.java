@@ -4,10 +4,12 @@ import it.polimi.ingsw.message.UpdateBoard;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,19 +32,15 @@ public abstract class Matchmanager implements Serializable {
     setPersonalGoal(match.getPlayers());
     setEffectiveCards(match);
 
-    for(Player p: match.getPlayers())
-    {
-      p.getPersonalCard().showPersonalGoalCard();
-    }
-
     createBoard(match);
     match.getBoard().fill(0);
 
-    int position = (int)(Math.random() * match.getPlayerNumber());
+    int position = (int) (Math.random() * match.getPlayerNumber());
 
     match.setChair(match.getPlayers().get(position));
 
     match.notifyObserver(new UpdateBoard(match.getBoard()));
+    ;
   }
   /**
    * results() calculates all players' scores
@@ -90,8 +88,11 @@ public abstract class Matchmanager implements Serializable {
 
     {
       try {
-        jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
-      } catch (IOException e) {
+        URL resource = getClass().getClassLoader().getResource("json/PersonalGoalCards.json");
+        File file = new File(resource.toURI());
+        //jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
+        jsonPath = new String(Files.readAllBytes(file.toPath()));
+      } catch (URISyntaxException | IOException e) {
         throw new RuntimeException(e);
       }
       JSONArray jsonArray=new JSONArray(jsonPath);
@@ -160,10 +161,10 @@ public abstract class Matchmanager implements Serializable {
   /**
    * showCommGoal() let you see CommonCards in a given match
    */
-  public void showCommGoal(Match match){
-    EffectiveCard[]  cards=match.getCommonCards();
-    cards[0].getCommonCard().getImage();
-    cards[1].getCommonCard().getImage();
+  public void showCommGoal(Match match) {
+    EffectiveCard[] cards = match.getCommonCards();
+    cards[0].getCommonCard().showCommonCard();
+    cards[1].getCommonCard().showCommonCard();
   }
   /**
    * createBoard() create a board with different allowed position according to number of players

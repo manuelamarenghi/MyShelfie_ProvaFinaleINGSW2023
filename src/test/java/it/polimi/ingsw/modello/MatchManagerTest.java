@@ -2,7 +2,6 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.modello.CommonGoalCard.CornersCommG;
 import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
-import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributeUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +80,7 @@ public class MatchManagerTest {
      * only read personal card
      * check the correct assignment of personal Card
      */
-    /*@Test
+    @Test
     public void setPersonalCardTest(){
         Match match = new Match();
         match.setMatch(3);
@@ -94,7 +93,7 @@ public class MatchManagerTest {
         {
             p.getPersonalCard().showPersonalGoalCard();
         }
-    }*/
+    }
 
     @Test
     public void emptyBoardTest(){

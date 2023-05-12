@@ -1,7 +1,5 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.modello.Card;
-import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,15 +18,15 @@ class LibraryTest {
         expected[2] = 4;
         expected[3] = 5;
         int[] actual;
-        library.getCardinPos(5, 2).setColour("V");
-        library.getCardinPos(4, 2).setColour("V");
-        library.getCardinPos(3, 2).setColour("R");
-        library.getCardinPos(2, 2).setColour("V");
-        library.getCardinPos(1, 2).setColour("R");
-        library.getCardinPos(5, 1).setColour("V");
-        library.getCardinPos(3, 0).setColour("V");
-        library.getCardinPos(4, 0).setColour("V");
-        library.getCardinPos(5, 0).setColour("V");
+        library.getCardinPos(5, 2).setColour("green");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(3, 2).setColour("pink");
+        library.getCardinPos(2, 2).setColour("green");
+        library.getCardinPos(1, 2).setColour("pink");
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(3, 0).setColour("green");
+        library.getCardinPos(4, 0).setColour("green");
+        library.getCardinPos(5, 0).setColour("green");
         actual = library.showColumn(2);
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -39,24 +37,24 @@ class LibraryTest {
     void showColumn2() {
         Library library = new Library();
         int[] actual;
-        library.getCardinPos(5, 2).setColour("V");
-        library.getCardinPos(4, 2).setColour("V");
-        library.getCardinPos(3, 2).setColour("R");
-        library.getCardinPos(2, 2).setColour("V");
-        library.getCardinPos(1, 2).setColour("R");
-        library.getCardinPos(5, 1).setColour("V");
-        library.getCardinPos(3, 0).setColour("V");
-        library.getCardinPos(4, 0).setColour("V");
-        library.getCardinPos(5, 0).setColour("V");
-        library.getCardinPos(2, 0).setColour("V");
-        library.getCardinPos(2, 1).setColour("V");
-        library.getCardinPos(2, 3).setColour("V");
-        library.getCardinPos(2, 4).setColour("V");
-        library.getCardinPos(3, 1).setColour("V");
-        library.getCardinPos(3, 4).setColour("V");
+        library.getCardinPos(5, 2).setColour("green");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(3, 2).setColour("pink");
+        library.getCardinPos(2, 2).setColour("green");
+        library.getCardinPos(1, 2).setColour("pink");
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(3, 0).setColour("green");
+        library.getCardinPos(4, 0).setColour("green");
+        library.getCardinPos(5, 0).setColour("green");
+        library.getCardinPos(2, 0).setColour("green");
+        library.getCardinPos(2, 1).setColour("green");
+        library.getCardinPos(2, 3).setColour("green");
+        library.getCardinPos(2, 4).setColour("green");
+        library.getCardinPos(3, 1).setColour("green");
+        library.getCardinPos(3, 4).setColour("green");
         library.showLibrary();
         actual = library.showColumn(3);
-        Assertions.assertTrue(actual.length==0);
+        Assertions.assertTrue(actual.length == 0);
     }
     /**
      * showColumn3() tests where you can put 3 cards when library's empty
@@ -169,19 +167,19 @@ class LibraryTest {
      * getGroup1() tests if it works
      */
     @Test
-    void getGroup1(){
+    void getGroup1() {
         Library library = new Library();
-        library.getCardinPos(5,0).setColour("V");
-        library.getCardinPos(4,0).setColour("G");
-        library.getCardinPos(3,0).setColour("G");
-        library.getCardinPos(5,1).setColour("V");
-        library.getCardinPos(4,1).setColour("B");
-        library.getCardinPos(3,1).setColour("V");
-        library.getCardinPos(5,2).setColour("V");
-        library.getCardinPos(4,2).setColour("V");
-        library.getCardinPos(5,3).setColour("G");
-        library.getCardinPos(4,3).setColour("V");
-        library.getCardinPos(3,3).setColour("V");
+        library.getCardinPos(5, 0).setColour("green");
+        library.getCardinPos(4, 0).setColour("yellow");
+        library.getCardinPos(3, 0).setColour("yellow");
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(4, 1).setColour("blue");
+        library.getCardinPos(3, 1).setColour("green");
+        library.getCardinPos(5, 2).setColour("green");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(5, 3).setColour("yellow");
+        library.getCardinPos(4, 3).setColour("green");
+        library.getCardinPos(3, 3).setColour("green");
         library.showLibrary();
         library.getgroup();
     }
@@ -207,14 +205,55 @@ class LibraryTest {
         Assertions.assertFalse(library.isFull());
 
     }
+
     @Test
-    void isFullFalse2Test(){
+    void isFullFalse2Test() {
         Library library = new Library();
-        library.getCardinPos(0,0).setColour("G");
-        library.getCardinPos(0,1).setColour("G");
-        library.getCardinPos(0,3).setColour("G");
-        library.getCardinPos(0,4).setColour("G");
+        library.getCardinPos(0, 0).setColour("G");
+        library.getCardinPos(0, 1).setColour("G");
+        library.getCardinPos(0, 3).setColour("G");
+        library.getCardinPos(0, 4).setColour("G");
         Assertions.assertFalse(library.isFull());
 
+    }
+
+    @Test
+    public void showLibraryTest() {
+        Library library = new Library();
+
+        library.getCardinPos(4, 0).setColour("green");
+        library.getCardinPos(3, 0).setColour("pink");
+        library.getCardinPos(2, 0).setColour("green");
+        library.getCardinPos(1, 0).setColour("blue");
+        library.getCardinPos(0, 0).setColour("lightBlue");
+
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(4, 1).setColour("green");
+        library.getCardinPos(3, 1).setColour("pink");
+        library.getCardinPos(2, 1).setColour("blue");
+        library.getCardinPos(1, 1).setColour("pink");
+        library.getCardinPos(0, 1).setColour("pink");
+
+        library.getCardinPos(5, 2).setColour("lightBlue");
+        library.getCardinPos(4, 2).setColour("green");
+
+        library.getCardinPos(2, 2).setColour("lightBlue");
+        library.getCardinPos(1, 2).setColour("pink");
+        library.getCardinPos(0, 2).setColour("lightBlue");
+
+        library.getCardinPos(5, 3).setColour("white");
+
+        library.getCardinPos(3, 3).setColour("pink");
+        library.getCardinPos(2, 3).setColour("lightBlue");
+        library.getCardinPos(1, 3).setColour("pink");
+        library.getCardinPos(0, 3).setColour("yellow");
+
+        library.getCardinPos(5, 4).setColour("green");
+        library.getCardinPos(4, 4).setColour("green");
+
+        library.getCardinPos(2, 4).setColour("white");
+
+
+        library.showLibrary();
     }
 }

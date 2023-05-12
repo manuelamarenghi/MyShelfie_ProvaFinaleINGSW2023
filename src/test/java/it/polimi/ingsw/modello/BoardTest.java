@@ -1,15 +1,13 @@
 
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.modello.Board;
-import it.polimi.ingsw.modello.Card;
-import it.polimi.ingsw.modello.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class BoardTest {
     @Test
@@ -109,7 +107,7 @@ class BoardTest {
     @Test
     public void showBoardTest(){
         Board b=new Board(4);
-        b.fill(4);
+        b.fill(0);
         b.showBoard();
     }
     @Test

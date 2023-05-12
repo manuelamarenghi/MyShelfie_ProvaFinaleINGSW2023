@@ -10,13 +10,23 @@ public interface CommonGoalCards extends Serializable {
      * check() returns true if the library match the goal,otherwise false
      */
     public boolean check(Library library);
+
     /**
      * expired() let you know if the player can still reach the goal or not
      */
     public boolean expired(Library library);
+
     /**
-     * getImage() let you see this goal
+     * showCommonCard() let you see this goal
      */
-    public void getImage();
+    public void showCommonCard();
+
+    /**
+     * getDesc() can read the common goal card description
+     *
+     * @return
+     */
+    public String getDesc();
+
 
 }

@@ -4,22 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Board implements Serializable {
-    private int row=9 , col=9 , numOfPlayers;
+    private int row = 9, col = 9, numOfPlayers;
     private Card[][] board = new Card[row][col];
     private Card ca;
     private Bag bag;
-    private int c , r;
+    private int c, r;
     private Card emptyCard = new Card();
-    private Card notUsableCard=new Card();
+    private Card notUsableCard = new Card();
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_YELLOW = "\u001B[48;5;227m";
+    public static final String ANSI_GREEN = "\u001B[48;5;40m";
+    public static final String ANSI_WHITE = "\u001B[107m";
+    public static final String ANSI_BLUE = "\033[0;106m";
+    public static final String ANSI_PINK = "\u001B[48;5;205m";
+    public static final String ANSI_NAVY = "\u001B[48;5;18m";
+
 
     /**
      * board get initialized based on number of players
      */
 
-    public Board(int numOfPlayers){
+    public Board(int numOfPlayers) {
         bag = new Bag();
-        this.numOfPlayers=numOfPlayers;
-        for(c=0 ; c<9 ; c++){//To put Null the first line
+        this.numOfPlayers = numOfPlayers;
+        for (c = 0; c < 9; c++) {//To put Null the first line
             if(c==4 || c==3){
                 board[0][c]=emptyCard;
             }
@@ -249,19 +257,42 @@ public class Board implements Serializable {
      */
     public void showBoard(){
         System.out.println(" *** living room ***");
+        System.out.println("   0   1   2   3   4   5   6   7   8");
         for(int i=0;i<9;i++){
+            System.out.print(i + " ");
             for(int j=0;j<9;j++){
                 if( board[i][j]==notUsableCard){
-                    System.out.print(" [ X ] ");
+                    System.out.print("    ");
                 }
-                else{
-                if( board[i][j]!=emptyCard){
-                    System.out.print(" ["+board[i][j].getColour()+"] ");
+                else {
+                    if (board[i][j] != emptyCard) {
+                        if (board[i][j].getColour().equals("yellow")) {
+                            System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        } else if (board[i][j].getColour().equals("white")) {
+                            System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        } else if (board[i][j].getColour().equals("green")) {
+                            System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        } else if (board[i][j].getColour().equals("lightBlue")) {
+                            System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        } else if (board[i][j].getColour().equals("blue")) {
+                            System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        } else if (board[i][j].getColour().equals("pink")) {
+                            System.out.print(ANSI_PINK + "  " + ANSI_RESET);
+                            System.out.print("  ");
+                        }
+
+                    } else {
+                        System.out.print("   ");
+                    }
                 }
-                else{
-                    System.out.print(" [  ] ");
-                }
-            }}
+
+            }
+            System.out.println();
             System.out.println();
         }
     }
