@@ -1,14 +1,12 @@
-package it.polimi.ingsw.view.GUI.Scenes;
+package it.polimi.ingsw.view.Gui.Scenes;
 
+import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import java.awt.*;
-
-public class MainSceneController implements Controller{
+public class LoginSceneController extends ObservableViewClient implements GenericSceneController{
     public TextField name_txb;
     public TextField ip_txb;
 
