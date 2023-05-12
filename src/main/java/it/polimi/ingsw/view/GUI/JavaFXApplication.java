@@ -17,6 +17,7 @@ public class JavaFXApplication extends Application {
         Scene scene=new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
     public static void main(String[] args) {
         launch(args);
