@@ -31,6 +31,7 @@ public class MainSceneController implements Controller{
         if(keyEvent.getCode()==KeyCode.ENTER)onClick(null);
     }
     private static boolean validate(final String ip) {
+        if(ip.equals("localhost"))return true;
         String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
         return ip.matches(PATTERN);
     }
