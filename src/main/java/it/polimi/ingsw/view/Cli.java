@@ -471,6 +471,7 @@ public class Cli extends ObservableViewClient implements ViewClient{
         for(EffectiveCard effectiveCard:cards)
         {
             effectiveCard.show();
+
             System.out.println("DESCRIPTION : "+effectiveCard.description());
         }
     }
