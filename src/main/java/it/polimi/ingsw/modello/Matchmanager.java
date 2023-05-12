@@ -4,12 +4,17 @@ import it.polimi.ingsw.message.UpdateBoard;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class Matchmanager implements Serializable {
 
@@ -90,8 +95,11 @@ public abstract class Matchmanager implements Serializable {
 
     {
       try {
-        jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
-      } catch (IOException e) {
+        URL resource = getClass().getClassLoader().getResource("json/PersonalGoalCards.json");
+         File file=new File(resource.toURI());
+        //jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
+        jsonPath = new String(Files.readAllBytes(file.toPath()));
+      } catch (URISyntaxException |IOException e) {
         throw new RuntimeException(e);
       }
       JSONArray jsonArray=new JSONArray(jsonPath);

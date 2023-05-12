@@ -152,5 +152,4 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void askForDissconection() {
 
     }
-
 }
