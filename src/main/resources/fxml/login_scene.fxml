@@ -8,14 +8,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-
-<StackPane prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.Gui.Scenes.LoginSceneController">
+<StackPane prefHeight="427.0" prefWidth="617.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.Gui.Scenes.LoginSceneController">
    <children>
-      <AnchorPane prefHeight="233.0" prefWidth="600.0">
+      <AnchorPane prefHeight="1028.0" prefWidth="619.0">
          <children>
-            <ImageView fitHeight="269.0" fitWidth="617.0" nodeOrientation="INHERIT" preserveRatio="true">
+            <ImageView fitHeight="427.0" fitWidth="617.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/scenes/login_background.png" />
+                  <Image url="@../images/scenes/login_background.jpg" />
                </image>
             </ImageView>
             <TextField fx:id="name_txb" alignment="CENTER" layoutX="200.0" layoutY="73.0" onKeyPressed="#onEnterNick" prefHeight="25.0" prefWidth="230.0" />

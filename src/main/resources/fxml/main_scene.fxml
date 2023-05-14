@@ -9,9 +9,9 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="401.0" fitWidth="600.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="346.0" fitWidth="600.0" layoutX="2.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/scenes/login_background.png" />
+                  <Image url="@../images/scenes/main_background.jpg" />
                </image>
             </ImageView>
          </children></AnchorPane>
