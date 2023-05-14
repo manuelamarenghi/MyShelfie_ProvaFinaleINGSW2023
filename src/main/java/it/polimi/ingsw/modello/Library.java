@@ -31,14 +31,20 @@ public class Library implements Iterable<Card>, Serializable {
         }
     }
 
+    public Card[][] getLibrary() {
+        return library;
+    }
+
     /**
      * getCardinPos() returns the card in the position you asked for
      */
-    public Card getCardinPos(int x, int y){
-        if(library[x][y]!=null)
-        {return library[x][y];}
+    public Card getCardinPos(int x, int y) {
+        if (library[x][y] != null) {
+            return library[x][y];
+        }
         return null;
     }
+
     /**
      * showColumn() returns where you can put n cards ( chosen from the player)
      */
