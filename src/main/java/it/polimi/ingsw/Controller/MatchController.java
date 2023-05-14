@@ -136,6 +136,9 @@ public class MatchController {
         }
         isStarted=true;
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
+        for(VirtualView vv:connectClients.values()){
+            vv.YourTurn(turnController.getActivePlayer());
+        }
 
     }
 

@@ -225,16 +225,16 @@ public class MessageHandler implements Observer {
      */
     public void handle(Turn message) {
 
-        if (!message.getnickname().equals(virtualModel.getMe().getNickname())) {
+        if (!message.getTurnPlayer().equals(virtualModel.getMe().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
         } else if (virtualModel.isMyTurn()) {
             virtualModel.updateIsMyTurn();
-            virtualModel.notifyObserver(obs -> obs.onNotifyYourTurnIsEndedReq(message.getnickname()));
+            virtualModel.notifyObserver(obs -> obs.onNotifyYourTurnIsEndedReq(message.getTurnPlayer()));
         } else {
-            virtualModel.notifyObserver(obs -> obs.onNotifyWhoIsPlayingNowReq(message.getnickname()));
+            virtualModel.notifyObserver(obs -> obs.onNotifyWhoIsPlayingNowReq(message.getTurnPlayer()));
         }
     }
 

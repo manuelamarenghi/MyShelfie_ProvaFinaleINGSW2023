@@ -88,7 +88,7 @@ public class VirtualView implements View{
      * YourTurn() to notify when is your turn
      */
     public void YourTurn(String player){
-        clientHandler.sendMessage(new Turn("Server",player));
+        clientHandler.sendMessage(new Turn(player));
     }
     /**
      * CreateMatch() create the game
