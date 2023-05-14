@@ -96,7 +96,9 @@ public class MatchController {
 
         for(VirtualView vv:connectClients.values()){
             vv.GenericMessage("Server","Start Game");
+            vv.sendAllPlayers(players);
         }
+
 
         match.getMatchmanager().startGame(match);
 
@@ -134,6 +136,9 @@ public class MatchController {
         }
         isStarted=true;
         this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
+        for(VirtualView vv:connectClients.values()){
+            vv.YourTurn(turnController.getActivePlayer());
+        }
 
     }
 

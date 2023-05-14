@@ -23,14 +23,14 @@ class EightEqualsCardsTest {
     @Test
     void checkIfClassWorksProperlyRed(){
         Library library = new Library();
-        library.getCardinPos(5, 2).setColour("red");
-        library.getCardinPos(4, 2).setColour("red");
-        library.getCardinPos(3, 2).setColour("red");
-        library.getCardinPos(2, 2).setColour("red");
-        library.getCardinPos(1, 2).setColour("red");
-        library.getCardinPos(5, 1).setColour("red");
-        library.getCardinPos(3, 0).setColour("red");
-        library.getCardinPos(4, 0).setColour("red");
+        library.getCardinPos(5, 2).setColour("green");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(3, 2).setColour("green");
+        library.getCardinPos(2, 2).setColour("green");
+        library.getCardinPos(1, 2).setColour("green");
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(3, 0).setColour("green");
+        library.getCardinPos(4, 0).setColour("green");
         Assertions.assertTrue(eightEC.check(library));
     }
     @Test

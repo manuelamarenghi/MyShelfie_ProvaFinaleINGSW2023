@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class TakeCardBoard extends Message implements Serializable {
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cards = new ArrayList<>();
     public TakeCardBoard(Card[] cards, String name){
         super(name,"takes_cards_board");
         for(Card c:cards){

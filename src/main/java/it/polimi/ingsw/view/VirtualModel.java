@@ -13,27 +13,23 @@ public class VirtualModel extends VMObservable {
     private Board board;
     private Player firstFinish;
     private Player chair;
-    private EffectiveCard[] CommonCards = new EffectiveCard[2];
+    private EffectiveCard[] CommonCards ;
 
-    public VirtualModel(Match match) {
-        this.playerNumber = match.getPlayerNumber();
-        this.board = match.getBoard();
-        this.chair = match.getChair();
-        this.firstFinish = match.getFirstFinish();
-        this.CommonCards = match.getCommonCards();
-        this.players = null;
-    }
 
     public VirtualModel() {
-        this.players = null;
+        this.players = new ArrayList<>();
         this.me = new Player("missing_nickname");
         this.chair = null;
         this.firstFinish = null;
         this.isMyTurn = false;
         this.playerNumber = -1;
-        this.CommonCards = null;
+        this.CommonCards = new EffectiveCard[2];
         this.board = null;
         this.me.setLibrary(new Library());
+    }
+
+    public void setCommonCards(EffectiveCard[] commonCards) {
+        CommonCards = commonCards;
     }
 
     public int getPlayerNumber() {

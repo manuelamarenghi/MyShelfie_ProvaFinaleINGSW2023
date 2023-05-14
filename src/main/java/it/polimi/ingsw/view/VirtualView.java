@@ -4,6 +4,7 @@ import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.ClientHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -87,7 +88,7 @@ public class VirtualView implements View{
      * YourTurn() to notify when is your turn
      */
     public void YourTurn(String player){
-        clientHandler.sendMessage(new Turn("Server",player));
+        clientHandler.sendMessage(new Turn(player));
     }
     /**
      * CreateMatch() create the game
@@ -139,5 +140,13 @@ public class VirtualView implements View{
      */
     public void sendCommonCard(EffectiveCard[] cards) {
         clientHandler.sendMessage(new Send_EffectiveCard(cards));
+    }
+
+    /**
+     * send list of players in the match
+     * @param players
+     */
+    public void sendAllPlayers(ArrayList<String> players){
+        clientHandler.sendMessage(new AllPlayer(players));
     }
 }
