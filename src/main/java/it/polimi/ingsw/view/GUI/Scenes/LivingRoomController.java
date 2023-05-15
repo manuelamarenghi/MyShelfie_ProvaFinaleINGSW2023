@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
@@ -21,13 +22,15 @@ import java.util.Map;
  */
 public class LivingRoomController implements Controller {
     @FXML
-    private static StackPane stackPane;
+    private StackPane stackPane;
     @FXML
-    private static StackPane stackPanelibrary;
+    private StackPane stackPanelibrary;
     private static Scene activeScene;
     private static Controller activeController;
     private static Image image;
     private static Map<String, Image[]> tiles;
+    @FXML
+    private AnchorPane ancor;
     @FXML
     private ImageView background;
     @FXML
@@ -81,19 +84,32 @@ public class LivingRoomController implements Controller {
         tiles.put("blue", imageB);
     }
 
+    public void setAdaptable() {
+        ancor.setLeftAnchor(stackPane, 14.0);
+        ancor.setBottomAnchor(stackPane, 49.0);
+        ancor.setRightAnchor(stackPane, 378.0);
+
+    }
+
     public void initialize() {
+        ancor = new AnchorPane();
         setTiles();
         stackPanelibrary = new StackPane();
-        //  backgroundlibrary.toBack();
+        backgroundlibrary.toBack();
         stackPane = new StackPane();
         background.toBack();
-        //   Library l=new Library();
+        Library l = new Library();
+        l.getCardinPos(4, 4).setColour("green");
+        l.getCardinPos(5, 4).setColour("green");
+        l.getCardinPos(5, 2).setColour("blue");
+        l.getCardinPos(5, 1).setColour("pink");
         Board board = new Board(2);
         board.fill(0);
         setTiles();
         createBoard(board);
-        //  createLibrary(l);
+        createLibrary(l);
         gameBoard.toFront();
+        setAdaptable();
     }
 
     public void createBoard(Board b) {
@@ -105,9 +121,9 @@ public class LivingRoomController implements Controller {
                     if (color != "") {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView(this.tiles.get(color)[x]);
-                        image.setFitWidth(35);
-                        image.setFitHeight(39);
-                        gameBoard.add(image, i, j);
+                        image.setFitWidth(32);
+                        image.setFitHeight(33);
+                        gameBoard.add(image, j, i);
                         image.setOnMouseClicked(event -> {
                             gameBoard.getChildren().remove(image);
                         });
@@ -119,19 +135,23 @@ public class LivingRoomController implements Controller {
 
     public void createLibrary(Library l) {
         Card[][] cards = l.getLibrary();
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (cards[i][j] != null) {
-                    String color = cards[i][j].getColour();
+        int r = 0, c = 0;
+        for (int i = 1; i < 12; i += 2) {
+            for (int j = 1; j < 10; j += 2) {
+                if (cards[r][c] != null) {
+                    String color = cards[r][c].getColour();
                     if (color != "") {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView(this.tiles.get(color)[x]);
-                        image.setFitWidth(35);
-                        image.setFitHeight(39);
-                        gameBoardlibrary.add(image, i, j);
+                        image.setFitWidth(21);
+                        image.setFitHeight(22);
+                        gameBoardlibrary.add(image, j, i);
                     }
                 }
+                c++;
             }
+            c = 0;
+            r++;
         }
     }
 }
