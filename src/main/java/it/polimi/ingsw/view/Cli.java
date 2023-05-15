@@ -297,10 +297,13 @@ public class Cli extends ObservableViewClient implements ViewClient {
      * @param score
      */
     @Override
-    public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
-        out.println("You have completed the following goal");
+    public void onNotifyReachedCommonGoalCardReq(String nickname,EffectiveCard completedEffectiveCard, int score) {
+        if(nickname.equals(this.nickname))
+            out.println("You have completed the following goal");
+        else
+            out.println("The player "+nickname+" completed the following goal");
         completedEffectiveCard.show();
-        out.println("And your score is " + score);
+        out.println("And score is " + score);
     }
 
     /**
@@ -392,7 +395,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-        out.println("The number of players is" + playerNum);
+        out.println("The number of players is " + playerNum);
     }
 
     /**
@@ -404,8 +407,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void onNotifyPlayerFinishedFirstReq(Player player) {
         out.println("The player " + player.getNickname() + " has finished");
         out.println("LAST ROUND");
-
-        //Serve per mandare un messaggio per notificare chi ha finito prima o per stampare il n nickname di chi ha finito?
     }
 
     /**
@@ -475,12 +476,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
-        out.println("Your turn is over , now it is" + current_player + "'s turn");
+        out.println("Your turn is over , now it is " + current_player + "'s turn");
     }
 
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-        out.println(current_player + "is playing right now .");
+        out.println(current_player + " is playing right now .");
     }
 
     @Override
