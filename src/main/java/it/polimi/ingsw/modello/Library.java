@@ -110,7 +110,6 @@ public class Library implements Iterable<Card>, Serializable {
                     System.out.print("    ");
                 }
 
-
             }
             System.out.println();
             System.out.println();

@@ -62,6 +62,7 @@ public class MessageHandler implements Observer {
             virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL()));
         } else {
             virtualModel.getPlayer(message.getnickname()).setLibrary(message.getL());
+
             //virtualModel.notifyObserver(obs -> obs.onNotifyNewLibraryReq(message.getnickname(), message.getL()));
         }
     }
@@ -121,6 +122,7 @@ public class MessageHandler implements Observer {
 
         virtualModel.updateCommonScore(message.getnickname(), message.getPoint());
         virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getnickname(),message.getCard(), message.getPoint()));
+
     }
 
 

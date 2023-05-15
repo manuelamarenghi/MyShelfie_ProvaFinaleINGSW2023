@@ -124,6 +124,7 @@ public class Col3G implements CommonGoalCards , Serializable {
     public void showCommonCard() {
         Library l=new Library();
         l.getCardinPos(0,0).setColour("green");
+
         l.getCardinPos(1,0).setColour("yellow");
         l.getCardinPos(2,0).setColour("blue");
         l.getCardinPos(3,0).setColour("green");
