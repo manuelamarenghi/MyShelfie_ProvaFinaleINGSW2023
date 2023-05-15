@@ -16,7 +16,7 @@ public interface VMObserver {
      void onNotifyPlayerConnectionReq(String nickname);
      void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
      void onNotifyChairAssignedReq(String nickname);
-     void onShowPossibleColumnReq(int[] x, Library library);
+     void onShowPossibleColumnReq(int[] x,ArrayList<Card> cards, Library library);
      void onNotifyCardsAreNotAdjacentReq();
 
     void onNotifyNumbPlayerReq(int playerNum);

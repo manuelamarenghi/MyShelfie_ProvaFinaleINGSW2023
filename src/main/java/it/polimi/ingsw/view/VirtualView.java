@@ -46,8 +46,8 @@ public class VirtualView implements View{
     /**
      * showPossibleColumn() columns where the player can put items
      */
-    public void showPossibleColumn(String s,int[] x){
-          clientHandler.sendMessage(new ShowColumn(s,x));
+    public void showPossibleColumn(String s,int[] x,ArrayList<Card> cards){
+          clientHandler.sendMessage(new ShowColumn(s,x,cards));
     }
     /**
      * Gamefull() notify the player that there are enough players

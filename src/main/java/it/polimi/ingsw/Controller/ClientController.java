@@ -95,6 +95,7 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);

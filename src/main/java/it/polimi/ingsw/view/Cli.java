@@ -320,28 +320,58 @@ public class Cli extends ObservableViewClient implements ViewClient {
      * @param library
      */
     @Override
-    public void onShowPossibleColumnReq(int[] x, Library library) {
-        int[] excludedNumbers = {};
-        int i, indexExcludedNumbers = 0, selectedColumn;
+    public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
+        System.out.println("You can choose these columns");
+
+        ArrayList<Integer> excludedNumbers = new ArrayList<>();
+        int i, selectedColumn=0;
         ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
         for (i = 0; i < 5; i++) {
             if (x[i] == i) {
-
+                System.out.print(x[i] + ",");
             } else {
-                excludedNumbers[indexExcludedNumbers] = i;
-                indexExcludedNumbers++;
+                excludedNumbers.add(i);
             }
         }
+        out.println();
         String question = "Select the coloumn to put your cards from the shown coloumns.";
-        for (i = 0; i < excludedNumbers.length; i++) {
-            excludedNumbersArrayList.add(excludedNumbers[i]);
+        for (i = 0; i < excludedNumbers.size(); i++) {
+            excludedNumbersArrayList.add(excludedNumbers.get(i));
         }
-
         try {
             selectedColumn = numberInput(0, 4, excludedNumbersArrayList, question);
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
+
+
+        ArrayList<String> colourCard = new ArrayList<>();
+        System.out.println("Choose the order of card");
+        for (Card card : cards) {
+            out.print(card.getColour()+",");
+            colourCard.add(card.getColour());
+        }
+        out.println();
+
+        ArrayList<Card> orderCard = new ArrayList<>();
+
+        for (i = 0; i < cards.size(); i++) {
+            String colour = "";
+            out.print("The "+i+" card : ");
+            do {
+                try {
+                    colour = readLine();
+                } catch (ExecutionException e) {
+                    out.println("WRONG_INPUT");
+                }
+
+                if(!colourCard.contains(colour))
+                    out.println("Colour error, write again");
+            } while (!colourCard.contains(colour));
+            orderCard.add(new Card(colour));
+        }
+        int finalSelectedColumn = selectedColumn;
+        this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
 
     }
 

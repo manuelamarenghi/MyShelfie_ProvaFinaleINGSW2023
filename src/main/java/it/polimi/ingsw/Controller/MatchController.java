@@ -148,7 +148,11 @@ public class MatchController {
      */
     private void nextPlayer(){
         if(turnController.nextPlayer() == true)
-            connectClients.get(turnController.getActivePlayer()).YourTurn(turnController.getActivePlayer());
+        {
+            for(VirtualView vv:connectClients.values()){
+                vv.YourTurn(turnController.getActivePlayer());
+            }
+        }
         else{
             endGame();
         }
@@ -271,7 +275,7 @@ public class MatchController {
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
-            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum);
+            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum,cardSelect);
         }
         else{
             connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
