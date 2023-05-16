@@ -14,6 +14,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
         if(name_txb.getText().trim().equals(""))System.out.println("Inserire un nome");
         else if(!validate(ip_txb.getText().trim()))System.out.println("Inserire un ip valido");
         else System.out.println("Fatto");
+        name_txb.getStylesheets().add("text-red");
     }
 
     public void onEnter(KeyEvent keyEvent) {
