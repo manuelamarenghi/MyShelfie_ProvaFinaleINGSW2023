@@ -43,15 +43,14 @@ public class ClientApp {
         SocketClient socketClient = new SocketClient("localhost" , 16847);
         socketClient.readMessage();
 
-        VirtualModel virtualModel = new VirtualModel(match);
-        MessageHandler messageHandler = new MessageHandler(virtualModel);
-        socketClient.addObserver(messageHandler);
+
         Cli cli = new Cli();
-        virtualModel.addObserver(cli);
-        ClientController clientController = new ClientController(cli, virtualModel,socketClient);
+
+        ClientController clientController = new ClientController(cli,socketClient);
+        clientController.addViewObserver(cli);
         cli.addObserver(clientController);
         cli.start();
-        Application.launch(JavaFXApplication.class);
+        //Application.launch(JavaFXApplication.class);
     }
 }
 

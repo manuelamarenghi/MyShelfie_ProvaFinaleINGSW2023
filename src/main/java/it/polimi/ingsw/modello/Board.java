@@ -168,11 +168,15 @@ public class Board implements Serializable {
 
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
-            if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
-                cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()-1 ||
-                cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()-1 ||
-                cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1 ){
-                //ok crads are adicent
+            if(((cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX())&&(
+              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1 ||
+              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()-1
+                    )) ||
+                ((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()) && (
+             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
+             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()-1 )
+                )){
+                //ok crads are adjcent
             }
             else{
                 return false;
@@ -188,6 +192,15 @@ public class Board implements Serializable {
             ){
                 //ok Cards are adicent
             }
+            else if(((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)) ||
+                    ((cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
+                    ((cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
+                    ((cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
+                    ((cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
+                    ((cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)))
+            {
+
+            }
             else{
                 return false;
             }
@@ -199,13 +212,14 @@ public class Board implements Serializable {
 
         for(Card ca : cards){
             if(board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==null ||
                 board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==null ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==null ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==null){
+                    board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==emptyCard ||
+                    board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==emptyCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==emptyCard||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==emptyCard
+            ){
 
 
             }
@@ -267,34 +281,34 @@ public class Board implements Serializable {
                 }
                 else{
                     if( board[i][j]!=emptyCard){
-                        if(board[i][j].getColour().equals("Y")) {
+                        if(board[i][j].getColour().equals("yellow")) {
                             System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("W")) {
+                        else if(board[i][j].getColour().equals("white")) {
                             System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("G")) {
+                        else if(board[i][j].getColour().equals("green")) {
                             System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("B")) {
+                        else if(board[i][j].getColour().equals("lightBlue")) {
                             System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("N")) {
+                        else if(board[i][j].getColour().equals("blue")) {
                             System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
-                        else if(board[i][j].getColour().equals("P")) {
+                        else if(board[i][j].getColour().equals("pink")) {
                             System.out.print(ANSI_PINK + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
 
                     }
                     else{
-                        System.out.print("   ");
+                        System.out.print("    ");
                     }
                 }
 

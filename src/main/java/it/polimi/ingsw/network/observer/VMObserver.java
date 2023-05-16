@@ -14,9 +14,9 @@ public interface VMObserver {
      void onNotifyPlayerDisconnectionReq(Player player);
      void onNotifyPlayerReconnectionReq(Player player);
      void onNotifyPlayerConnectionReq(String nickname);
-     void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score);
+     void onNotifyReachedCommonGoalCardReq(String nickname,EffectiveCard completedEffectiveCard, int score);
      void onNotifyChairAssignedReq(String nickname);
-     void onShowPossibleColumnReq(int[] x, Library library);
+     void onShowPossibleColumnReq(int[] x,ArrayList<Card> cards, Library library);
      void onNotifyCardsAreNotAdjacentReq();
 
     void onNotifyNumbPlayerReq(int playerNum);
@@ -44,4 +44,6 @@ public interface VMObserver {
     void NotifyaskNicknameReq() throws InterruptedException;
 
     void onNotifyAllPlayerReq(ArrayList<String> players);
+
+    void onNotifyCommonCards(EffectiveCard[] cards);
 }

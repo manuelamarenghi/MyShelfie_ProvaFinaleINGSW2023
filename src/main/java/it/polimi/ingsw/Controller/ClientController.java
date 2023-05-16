@@ -20,20 +20,15 @@ public class ClientController implements ObserverViewClient {
     private MessageHandler messageHandler;
     //localhost
     //16847
-    public ClientController(ViewClient view , VirtualModel virtualModel) throws IOException {
-        this.view = view;
-        this.virtualModel=virtualModel;
-        socketClient= new SocketClient("localhost" , 16847);
-        socketClient.enablePinger(true);
-        this.messageHandler=new MessageHandler(this.virtualModel);
-    }
 
-    public ClientController(ViewClient view , VirtualModel virtualModel , SocketClient socketClient){
+    public ClientController(ViewClient view , SocketClient socketClient){
         this.view = view;
-        this.virtualModel=virtualModel;
+        this.virtualModel=new VirtualModel();
         this.socketClient=socketClient;
         socketClient.enablePinger(true);
         this.messageHandler=new MessageHandler(this.virtualModel);
+        this.socketClient.addObserver(this.messageHandler);
+
     }
 
 
@@ -61,9 +56,14 @@ public class ClientController implements ObserverViewClient {
      */
     public void handleTakeCard(Position[] positions , String name ){
         int i ;
-        Card cards[]={};
+        Card[] cards = new Card[positions.length];
         for(i=0 ; i< positions.length ; i++){
-            cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
+            if( virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY()).getCoordinates() == null){
+                view.onNotifyCardsAreNotAdjacentReq();
+            }
+            else {
+                cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
+            }
         }
         TakeCardBoard message = new TakeCardBoard(cards , name);
         socketClient.sendMessage(message);
@@ -100,8 +100,13 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);
+    }
+    public void addViewObserver(ViewClient view){
+        this.virtualModel.addObserver(view);
+
     }
 }

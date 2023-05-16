@@ -76,7 +76,6 @@ public class ClientHandler implements Runnable {
                     if(message.getType().equals("Ping!")){
                         sendMessage(new Message("server","Pong!"));
                     }
-
                     else if(message.getType().equals("enter_player")){
                         server.addClient(message.getnickname(),this);
                     }
