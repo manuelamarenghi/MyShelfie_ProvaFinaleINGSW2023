@@ -125,7 +125,7 @@ public class Library implements Iterable<Card>, Serializable {
         int i = 5;
         int l = 0;
 
-        while (i > 0 && l != cards.size()) {
+        while (i >= 0 && l != cards.size()) {
             if (library[i][n].getColour().isEmpty()) {
                 library[i][n] = new Card(cards.get(l).getColour(), new Position(i, n));
                 l++;

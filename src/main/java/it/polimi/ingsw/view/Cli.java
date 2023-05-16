@@ -375,6 +375,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
                     out.println("Colour error, write again");
             } while (!colourCard.contains(colour));
             orderCard.add(new Card(colour));
+            colourCard.remove(colour);
         }
         int finalSelectedColumn = selectedColumn;
         this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
