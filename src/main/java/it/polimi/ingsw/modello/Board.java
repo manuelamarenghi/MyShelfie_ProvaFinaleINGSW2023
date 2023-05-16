@@ -212,13 +212,14 @@ public class Board implements Serializable {
 
         for(Card ca : cards){
             if(board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==null ||
                 board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==null ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==null ||
                 board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==null){
+                    board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==emptyCard ||
+                    board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==emptyCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==emptyCard||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==emptyCard
+            ){
 
 
             }
@@ -307,7 +308,7 @@ public class Board implements Serializable {
 
                     }
                     else{
-                        System.out.print("   ");
+                        System.out.print("    ");
                     }
                 }
 

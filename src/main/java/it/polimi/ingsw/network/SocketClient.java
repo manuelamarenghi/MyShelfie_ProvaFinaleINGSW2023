@@ -47,7 +47,6 @@ public class SocketClient extends Client{
             outputStream.reset();
         }catch(IOException exception){
             System.out.println("errore nel mandare mex");
-            disconnect();
             notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
         }
     }

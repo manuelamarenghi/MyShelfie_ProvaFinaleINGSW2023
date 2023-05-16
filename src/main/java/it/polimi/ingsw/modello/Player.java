@@ -53,7 +53,7 @@ public class Player implements Serializable {
     }
 
     public void setCommonGoalScore(int score){
-        this.commonGoalScore=score;
+        this.commonGoalScore+=score;
 
     }
 
