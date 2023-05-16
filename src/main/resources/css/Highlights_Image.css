@@ -1,0 +1,4 @@
+.image {
+    -fx-border-color: #FF0000; /* Set the desired border color here */
+    -fx-border-width: 20px; /* Set the desired border width here */
+}

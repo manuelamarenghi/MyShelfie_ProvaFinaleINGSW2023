@@ -24,6 +24,7 @@ public class JavaFXApplication extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/background_livingroom.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/Highlights_Image.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

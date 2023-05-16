@@ -1,13 +1,18 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.view.GUI.Scenes.LivingRoomController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ViewClient;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GUI extends ObservableViewClient implements ViewClient {
+    private ClientController clientController;
+
     @Override
     public void onShowReq(String s) {
 
@@ -105,7 +110,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
-
+        boolean yourTurn = true;
+        Platform.runLater(() -> LivingRoomController.setYourTurn(yourTurn));
     }
 
     @Override

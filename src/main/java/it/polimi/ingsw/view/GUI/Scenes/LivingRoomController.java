@@ -5,7 +5,6 @@ import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +24,6 @@ public class LivingRoomController implements Controller {
     private StackPane stackPane;
     @FXML
     private StackPane stackPanelibrary;
-    private static Scene activeScene;
-    private static Controller activeController;
-    private static Image image;
     private static Map<String, Image[]> tiles;
     @FXML
     private AnchorPane ancor;
@@ -40,12 +36,10 @@ public class LivingRoomController implements Controller {
     @FXML
     private GridPane gameBoardlibrary;
 
-    public static Scene getActiveScene() {
-        return activeScene;
-    }
+    private static boolean yourTurn;
 
-    public static Controller getActiveController() {
-        return activeController;
+    public static void setYourTurn(boolean x) {
+        yourTurn = x;
     }
 
     public void setTiles() {
@@ -92,6 +86,7 @@ public class LivingRoomController implements Controller {
     }
 
     public void initialize() {
+        yourTurn = true;
         ancor = new AnchorPane();
         setTiles();
         stackPanelibrary = new StackPane();
@@ -125,7 +120,10 @@ public class LivingRoomController implements Controller {
                         image.setFitHeight(33);
                         gameBoard.add(image, j, i);
                         image.setOnMouseClicked(event -> {
-                            gameBoard.getChildren().remove(image);
+                            if (yourTurn) {
+                                image.getStyleClass().add("image");
+
+                            }
                         });
                     }
                 }
