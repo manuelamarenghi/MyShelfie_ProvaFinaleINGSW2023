@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.Gui.Scenes;
+package it.polimi.ingsw.view.GUI.Scenes;
 
 
 public interface GenericSceneController {

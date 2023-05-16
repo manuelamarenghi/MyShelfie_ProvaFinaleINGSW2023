@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.Gui;
+package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.view.Gui.Scenes.GenericSceneController;
+import it.polimi.ingsw.view.GUI.Scenes.GenericSceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ObserverViewClient;
 import javafx.event.ActionEvent;
