@@ -13,10 +13,10 @@ class LibraryTest {
     void showColumn1() {
         Library library = new Library();
         int[] expected = new int[4];
-        expected[0] = 1;
-        expected[1] = 2;
-        expected[2] = 4;
-        expected[3] = 5;
+        expected[0] = 0;
+        expected[1] = 1;
+        expected[2] = 3;
+        expected[3] = 4;
         int[] actual;
         library.getCardinPos(5, 2).setColour("green");
         library.getCardinPos(4, 2).setColour("green");
@@ -56,18 +56,19 @@ class LibraryTest {
         actual = library.showColumn(3);
         Assertions.assertTrue(actual.length == 0);
     }
+
     /**
      * showColumn3() tests where you can put 3 cards when library's empty
      */
     @Test
-    void showColumn3(){
+    void showColumn3() {
         Library library = new Library();
         int[] expected = new int[5];
-        expected[0] = 1;
-        expected[1] = 2;
-        expected[2] = 3;
-        expected[3] = 4;
-        expected[4] = 5;
+        expected[0] = 0;
+        expected[1] = 1;
+        expected[2] = 2;
+        expected[3] = 3;
+        expected[4] = 4;
         int[] actual;
         actual = library.showColumn(2);
         Assertions.assertArrayEquals(expected, actual);

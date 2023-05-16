@@ -62,7 +62,8 @@ public class MessageHandler implements Observer {
             virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL()));
         } else {
             virtualModel.getPlayer(message.getnickname()).setLibrary(message.getL());
-            virtualModel.notifyObserver(obs -> obs.onNotifyNewLibraryReq(message.getnickname(), message.getL()));
+
+            //virtualModel.notifyObserver(obs -> obs.onNotifyNewLibraryReq(message.getnickname(), message.getL()));
         }
     }
 
@@ -73,7 +74,7 @@ public class MessageHandler implements Observer {
      */
     public void handle(ShowColumn message) {
 
-        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), virtualModel.getMe().getLibrary()));
+        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), message.getCards(), virtualModel.getMe().getLibrary()));
     }
 
     /**
@@ -120,7 +121,8 @@ public class MessageHandler implements Observer {
     public void handle(Assigned_CC message) {
 
         virtualModel.updateCommonScore(message.getnickname(), message.getPoint());
-        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getCard(), message.getPoint()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getnickname(), message.getCard(), message.getPoint()));
+
     }
 
 
@@ -227,16 +229,16 @@ public class MessageHandler implements Observer {
      */
     public void handle(Turn message) {
 
-        if (!message.getnickname().equals(virtualModel.getMe().getNickname())) {
+        if (message.getTurnPlayer().equals(virtualModel.getMe().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
         } else if (virtualModel.isMyTurn()) {
             virtualModel.updateIsMyTurn();
-            virtualModel.notifyObserver(obs -> obs.onNotifyYourTurnIsEndedReq(message.getnickname()));
+            virtualModel.notifyObserver(obs -> obs.onNotifyYourTurnIsEndedReq(message.getTurnPlayer()));
         } else {
-            virtualModel.notifyObserver(obs -> obs.onNotifyWhoIsPlayingNowReq(message.getnickname()));
+            virtualModel.notifyObserver(obs -> obs.onNotifyWhoIsPlayingNowReq(message.getTurnPlayer()));
         }
     }
 

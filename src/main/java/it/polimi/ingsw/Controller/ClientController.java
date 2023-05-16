@@ -54,12 +54,16 @@ public class ClientController implements ObserverViewClient {
      * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard(Position[] positions , String name ){
-        int i ;
-        Card cards[]={};
-        for(i=0 ; i< positions.length ; i++){
-            cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
+        int i;
+        Card[] cards = new Card[positions.length];
+        for (i = 0; i < positions.length; i++) {
+            if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
+                view.onNotifyCardsAreNotAdjacentReq();
+            } else {
+                cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
+            }
         }
-        TakeCardBoard message = new TakeCardBoard(cards , name);
+        TakeCardBoard message = new TakeCardBoard(cards, name);
         socketClient.sendMessage(message);
     }
 
@@ -92,6 +96,7 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
+
 
     @Override
     public void setNickname(String nickname) {

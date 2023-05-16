@@ -59,7 +59,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyReachedCommonGoalCardReq(EffectiveCard completedEffectiveCard, int score) {
+    public void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score) {
 
     }
 
@@ -69,7 +69,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onShowPossibleColumnReq(int[] x, Library library) {
+    public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
 
     }
 
