@@ -1,6 +1,6 @@
-package it.polimi.ingsw.view.GUI.Scenes;
+package it.polimi.ingsw.view.Gui.Scenes;
 
-import it.polimi.ingsw.view.GUI.SceneController;
+import it.polimi.ingsw.view.Gui.SceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;

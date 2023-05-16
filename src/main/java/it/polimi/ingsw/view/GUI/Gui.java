@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.GUI;
+package it.polimi.ingsw.view.Gui;
 
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.view.ObservableViewClient;
