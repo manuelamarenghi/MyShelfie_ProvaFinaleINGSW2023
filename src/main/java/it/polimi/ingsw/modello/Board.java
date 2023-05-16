@@ -226,10 +226,9 @@ public class Board implements Serializable {
             else{
                 return false;
             }
-            return true;
         }
 
-        return null;
+        return true;
     }
 
     /**
