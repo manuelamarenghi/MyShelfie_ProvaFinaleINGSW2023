@@ -168,11 +168,15 @@ public class Board implements Serializable {
 
     public Boolean allow(ArrayList<Card> cards ){
         if(cards.size()==2){
-            if(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
-                cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()-1 ||
-                cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()-1 ||
-                cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1 ){
-                //ok crads are adicent
+            if(((cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX())&&(
+              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1 ||
+              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()-1
+                    )) ||
+                ((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()) && (
+             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
+             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()-1 )
+                )){
+                //ok crads are adjcent
             }
             else{
                 return false;
@@ -187,6 +191,15 @@ public class Board implements Serializable {
                 ((cards.get(1).getCoordinates().getX()==cards.get(2).getCoordinates().getX()+1)&&(cards.get(0).getCoordinates().getX()==cards.get(1).getCoordinates().getX()+1))
             ){
                 //ok Cards are adicent
+            }
+            else if(((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)) ||
+                    ((cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
+                    ((cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
+                    ((cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
+                    ((cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
+                    ((cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)))
+            {
+
             }
             else{
                 return false;
