@@ -1,5 +1,5 @@
 package it.polimi.ingsw.modello;
-import org.json.*;
+//import org.json.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
        //Test of json file reading
     String jsonPath;
         ArrayList<PersonalGoalCard> test=new ArrayList<>(12);
@@ -43,5 +43,5 @@ public class Main {
 
             }
     }
-    }
+    }*/
 }

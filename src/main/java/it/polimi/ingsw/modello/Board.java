@@ -219,6 +219,10 @@ public class Board implements Serializable {
                     board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==emptyCard ||
                     board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==emptyCard||
                     board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==emptyCard
+                    /*getCard(ca.getCoordinates().getX()-1 , ca.getCoordinates().getY()).getColour().equals("") ||
+                    getCard(ca.getCoordinates().getX()+1 , ca.getCoordinates().getY()).getColour().equals("") ||
+                    getCard(ca.getCoordinates().getX(),ca.getCoordinates().getY()-1).getColour().equals("") ||
+                    getCard(ca.getCoordinates().getX() , ca.getCoordinates().getY()+1).getColour().equals("")*/
             ){
 
 
@@ -226,10 +230,9 @@ public class Board implements Serializable {
             else{
                 return false;
             }
-            return true;
         }
 
-        return null;
+        return true;
     }
 
     /**

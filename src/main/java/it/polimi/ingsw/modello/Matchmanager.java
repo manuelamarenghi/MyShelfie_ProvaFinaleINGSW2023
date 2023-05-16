@@ -2,8 +2,8 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.message.AllPlayer;
 import it.polimi.ingsw.message.UpdateBoard;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,7 +85,7 @@ public abstract class Matchmanager implements Serializable {
     }
   }
   private ArrayList<PersonalGoalCard> generateArrayFromJSON(){
-    String jsonPath;
+    /*String jsonPath;
     ArrayList<PersonalGoalCard> arrayList=new ArrayList<>(12);
     Card[] cards;
 
@@ -111,7 +111,8 @@ public abstract class Matchmanager implements Serializable {
         arrayList.add(new PersonalGoalCard(cards));
       }
       return arrayList;
-    }
+    }*/
+    return null;
   }
 
   /**

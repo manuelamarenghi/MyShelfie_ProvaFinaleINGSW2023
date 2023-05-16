@@ -1,6 +1,7 @@
 package it.polimi.ingsw.modello;
 
 
+import it.polimi.ingsw.modello.Matchmanager;
 import it.polimi.ingsw.network.observer.Observable;
 
 import java.io.Serializable;

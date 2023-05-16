@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class SocketApp {
     static Scanner in=new Scanner(System.in);
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         Client client = new SocketClient("localhost",16847);
         client.readMessage();
 
@@ -29,6 +29,6 @@ public class SocketApp {
 
         
 
-    }
+    }*/
 
 }
