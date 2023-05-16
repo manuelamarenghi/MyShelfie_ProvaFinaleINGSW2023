@@ -17,4 +17,6 @@ public interface ObserverViewClient {
      void handleDisconection(String name);
 
     void setNickname(String nickname);
+
+     void SeeSomeoneLibrary(String nickname);
 }

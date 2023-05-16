@@ -15,6 +15,7 @@ public class PersonalGoalCard implements Serializable {
     public static final String ANSI_BLUE = "\033[0;106m";
     public static final String ANSI_PINK = "\u001B[48;5;205m";
     public static final String ANSI_NAVY = "\u001B[48;5;18m";
+    private int numb_png;
 
     /**
      * the constructor takes an array of cards with their position and colour based on goals in json's file
@@ -77,5 +78,13 @@ public class PersonalGoalCard implements Serializable {
             System.out.println();
             System.out.println();
         }
+    }
+
+    public void setNumb_png(int x) {
+        this.numb_png = x;
+    }
+
+    public int getNumn_png() {
+        return numb_png;
     }
 }

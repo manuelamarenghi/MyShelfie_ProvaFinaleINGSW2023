@@ -1,4 +1,3 @@
 .image {
-    -fx-border-color: #FF0000; /* Set the desired border color here */
-    -fx-border-width: 20px; /* Set the desired border width here */
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 0, 0.8), 10, 0, 0, 0);
 }

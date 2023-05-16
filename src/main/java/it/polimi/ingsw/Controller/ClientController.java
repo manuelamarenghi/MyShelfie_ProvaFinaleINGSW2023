@@ -102,4 +102,8 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel.addObserver(view);
 
     }
+
+    public void SeeSomeoneLibrary(String nickname) {
+        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
+    }
 }

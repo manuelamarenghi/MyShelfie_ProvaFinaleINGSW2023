@@ -4,22 +4,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="426.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/19"
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="443.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/19"
             fx:controller="it.polimi.ingsw.view.GUI.Scenes.LivingRoomController">
     <children>
-        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0"
-                text="libraries"/>
-        <Button layoutX="135.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0"
-                text="C.C. 1"/>
-        <Button layoutX="245.0" layoutY="15.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0"
-                text="C.C. 2"/>
-        <Button layoutX="607.0" layoutY="15.0" mnemonicParsing="false" text="Exit"/>
-        <Button layoutX="352.0" layoutY="16.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Chat"/>
-        <ImageView fitHeight="151.0" fitWidth="114.0" layoutX="474.0" layoutY="16.0" pickOnBounds="true"
-                   preserveRatio="true">
-            <image>
-                <Image url="@../images/personal_goal_cards/Personal_Goals1.png"/>
-            </image>
+        <Button fx:id="libraries" layoutX="14.0" layoutY="14.0" mnemonicParsing="false"
+                onMouseClicked="#pressedLibraries" prefHeight="26.0" prefWidth="104.0" text="libraries"/>
+        <Button fx:id="Common1" layoutX="135.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#pressedCommon2"
+                prefHeight="26.0" prefWidth="94.0" text="C.C. 1"/>
+        <Button fx:id="Common2" layoutX="245.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#pressedCommon1"
+                prefHeight="26.0" prefWidth="94.0" text="C.C. 2"/>
+        <Button fx:id="Exit" layoutX="691.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#pressedExit"
+                text="Exit"/>
+        <Button layoutX="352.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#pressedChat" prefHeight="26.0"
+                prefWidth="94.0" text="Chat"/>
+        <ImageView fx:id="PersonalCard" fitHeight="122.0" fitWidth="94.0" layoutX="411.0" layoutY="49.0"
+                   pickOnBounds="true" preserveRatio="true">
         </ImageView>
         <StackPane fx:id="stackPane" layoutX="14.0" layoutY="49.0" prefHeight="364.0" prefWidth="364.0">
             <children>
@@ -141,5 +141,16 @@
                 </GridPane>
             </children>
         </StackPane>
+        <TextArea fx:id="messageServer" layoutX="520.0" layoutY="49.0" prefHeight="46.0" prefWidth="200.0"/>
+        <TextField fx:id="inputUser" layoutX="520.0" layoutY="110.0" prefHeight="26.0" prefWidth="200.0"/>
+        <TextArea fx:id="Score" layoutX="665.0" layoutY="148.0" prefHeight="46.0" prefWidth="51.0"/>
+        <Text layoutX="623.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Score"
+              wrappingWidth="35.200000000000045"/>
+        <ImageView fx:id="Chair" fitHeight="95.0" fitWidth="94.0" layoutX="648.0" layoutY="326.0" pickOnBounds="true"
+                   preserveRatio="true"/>
+        <ImageView fx:id="TokenCommon1" fitHeight="46.0" fitWidth="44.0" layoutX="683.0" layoutY="208.0"
+                   pickOnBounds="true" preserveRatio="true"/>
+        <ImageView fx:id="TokenCommon2" fitHeight="46.0" fitWidth="44.0" layoutX="683.0" layoutY="262.0"
+                   pickOnBounds="true" preserveRatio="true"/>
     </children>
 </AnchorPane>

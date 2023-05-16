@@ -4,9 +4,17 @@ package it.polimi.ingsw.view.GUI.Scenes;
 import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
+import it.polimi.ingsw.modello.Position;
+import it.polimi.ingsw.view.ObservableViewClient;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -19,12 +27,22 @@ import java.util.Map;
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
  */
-public class LivingRoomController implements Controller {
+public class LivingRoomController extends ObservableViewClient implements Controller {
+    @FXML
+    private Button libraries;
+    @FXML
+    private Button Common1;
+    @FXML
+    private Button Common2;
+    @FXML
+    private Button Exit;
+    @FXML
+    private ImageView PersonalCard;
     @FXML
     private StackPane stackPane;
     @FXML
     private StackPane stackPanelibrary;
-    private static Map<String, Image[]> tiles;
+    private Map<String, Image[]> tiles;
     @FXML
     private AnchorPane ancor;
     @FXML
@@ -35,11 +53,27 @@ public class LivingRoomController implements Controller {
     private ImageView backgroundlibrary;
     @FXML
     private GridPane gameBoardlibrary;
+    @FXML
+    private TextArea messageServer;
+    @FXML
+    private TextField inputUser;
+    @FXML
+    private ImageView Chair;
+    private boolean yourTurn;
+    private int cardtaken;
+    private int index;
+    private Position[] positions = new Position[3];
 
-    private static boolean yourTurn;
+    public void setTextArea(String s) {
+        messageServer.appendText(s);
+    }
 
-    public static void setYourTurn(boolean x) {
+    public void setYourTurn(boolean x) {
         yourTurn = x;
+    }
+
+    public void setCardtaken(int x) {
+        cardtaken = x;
     }
 
     public void setTiles() {
@@ -77,15 +111,9 @@ public class LivingRoomController implements Controller {
         imageB[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/blue/blue3.png"));
         tiles.put("blue", imageB);
     }
-
-    public void setAdaptable() {
-        ancor.setLeftAnchor(stackPane, 14.0);
-        ancor.setBottomAnchor(stackPane, 49.0);
-        ancor.setRightAnchor(stackPane, 378.0);
-
-    }
-
     public void initialize() {
+        index = 0;
+        cardtaken = 3;
         yourTurn = true;
         ancor = new AnchorPane();
         setTiles();
@@ -104,7 +132,6 @@ public class LivingRoomController implements Controller {
         createBoard(board);
         createLibrary(l);
         gameBoard.toFront();
-        setAdaptable();
     }
 
     public void createBoard(Board b) {
@@ -120,9 +147,17 @@ public class LivingRoomController implements Controller {
                         image.setFitHeight(33);
                         gameBoard.add(image, j, i);
                         image.setOnMouseClicked(event -> {
-                            if (yourTurn) {
+                            Node clickedNode = (Node) event.getTarget();
+                            Integer columnIndex = GridPane.getColumnIndex(clickedNode);
+                            Integer rowIndex = GridPane.getRowIndex(clickedNode);
+                            if (yourTurn && index < cardtaken) {
                                 image.getStyleClass().add("image");
-
+                                positions[index] = new Position(columnIndex, rowIndex);
+                                index++;
+                            } else {
+                                this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions, "lalal"));
+                                removeHighlights();
+                                int index = 0;
                             }
                         });
                     }
@@ -151,5 +186,72 @@ public class LivingRoomController implements Controller {
             c = 0;
             r++;
         }
+    }
+
+    public void TakeCards() {
+        Integer n;
+        do {
+            messageServer.setText("Insert the number of items you want to take");
+            String x = inputUser.getText();
+            messageServer.clear();
+            n = Integer.parseInt(x);
+        } while (n < 0 && n > 3);
+        setCardtaken(n);
+        inputUser.clear();
+        messageServer.setText("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
+        index = 0;
+    }
+
+    public void removeHighlights() {
+        ObservableList<Node> children = gameBoard.getChildren();
+        for (Node n : children) {
+            ImageView v = (ImageView) n;
+            v.getStyleClass().remove("image");
+        }
+    }
+
+    public void setPP(int x) {
+        String c = String.valueOf(x);
+        String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(is);
+        PersonalCard = new ImageView(image);
+    }
+
+    public void pressedCommon1(MouseEvent mouseEvent) {
+        //passa a scena con la prima carta
+    }
+
+    public void pressedCommon2(MouseEvent mouseEvent) {
+        //passa a scena con seconda carta
+    }
+
+    public void pressedExit(MouseEvent mouseEvent) {
+        this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection("lalala"));
+    }
+
+    public void pressedLibraries(MouseEvent mouseEvent) {
+        //passa a scena libreria
+    }
+
+    public void pressedChat(MouseEvent mouseEvent) {
+        //passa a chat
+    }
+
+    public void setTokenCommon(int x) {
+        String c = String.valueOf(x);
+        String name = "/images/misc/scoring_" + c + ".png";
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(is);
+    }
+
+    public void setChair() {
+        String name = "/images/misc/firstplayertoken.png";
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(is);
+        Chair = new ImageView(image);
     }
 }

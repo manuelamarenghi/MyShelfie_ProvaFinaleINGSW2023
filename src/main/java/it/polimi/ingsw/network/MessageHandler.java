@@ -136,10 +136,12 @@ public class MessageHandler implements Observer {
         if (virtualModel.getMe().getNickname().equals(virtualModel.getChair().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
+                virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
+        } else {
+            virtualModel.notifyObserver(obs -> obs.onShowReq("Chair assigned to" + message.getnickname()));
         }
-        virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
     }
 
     /**

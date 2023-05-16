@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.view.GUI.Scenes.LibrariesController;
 import it.polimi.ingsw.view.GUI.Scenes.LivingRoomController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ViewClient;
@@ -12,10 +13,15 @@ import java.util.HashMap;
 
 public class GUI extends ObservableViewClient implements ViewClient {
     private ClientController clientController;
+    private LivingRoomController livingController;
+
+    public GUI(LivingRoomController livingController) {
+        this.livingController = livingController;
+    }
 
     @Override
     public void onShowReq(String s) {
-
+        Platform.runLater(() -> livingController.setTextArea(s));
     }
 
     @Override
@@ -35,7 +41,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyGameFullReq() {
-
     }
 
     @Override
@@ -60,7 +65,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
-
+        Platform.runLater(() -> livingController.setChair());
     }
 
     @Override
@@ -70,7 +75,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-
+        Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid"));
+        askCardsToTakeFromBoard();
     }
 
     @Override
@@ -95,28 +101,30 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewMyLibraryReq(Library l) {
-
+        LibrariesController contr = new LibrariesController();
+        Platform.runLater(() -> contr.createLibrary(l));
     }
 
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
+        Platform.runLater(() -> livingController.setTextArea("Disconnection accepted.Bye"));
 
     }
 
     @Override
     public void onNotifyNewNicknameReq() {
-
     }
 
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
-        Platform.runLater(() -> LivingRoomController.setYourTurn(yourTurn));
+        Platform.runLater(() -> livingController.setYourTurn(yourTurn));
+        askCardsToTakeFromBoard();
     }
 
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
-
+        Platform.runLater(() -> livingController.setTextArea("Now is" + current_player + "turn"));
     }
 
     @Override
@@ -126,7 +134,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
-
+        Platform.runLater(() -> livingController.setPP(personalGoalCard.getNumn_png()));
     }
 
     @Override
@@ -156,7 +164,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askCardsToTakeFromBoard() {
-
+        Platform.runLater(() -> livingController.TakeCards());
     }
 
     @Override
