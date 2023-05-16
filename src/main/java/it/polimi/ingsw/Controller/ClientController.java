@@ -56,7 +56,7 @@ public class ClientController implements ObserverViewClient {
      */
     public void handleTakeCard(Position[] positions , String name ){
         int i ;
-        Card cards[]={};
+        Card[] cards = new Card[positions.length];
         for(i=0 ; i< positions.length ; i++){
             cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
         }
@@ -94,6 +94,7 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
+
 
     @Override
     public void setNickname(String nickname) {
