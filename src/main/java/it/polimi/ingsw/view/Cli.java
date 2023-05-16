@@ -329,12 +329,16 @@ public class Cli extends ObservableViewClient implements ViewClient {
         ArrayList<Integer> excludedNumbers = new ArrayList<>();
         int i, selectedColumn=0;
         ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
-        for (i = 0; i < 5; i++) {
-            if (x[i] == i) {
-                System.out.print(x[i] + ",");
-            } else {
-                excludedNumbers.add(i);
+
+        int j=0;
+        for(i=0;i<5;i++)
+        {
+            if(x[j] == i && j<x.length){
+                System.out.print(x[j] + ",");
+                j++;
             }
+            else
+                excludedNumbers.add(i);
         }
         out.println();
         String question = "Select the coloumn to put your cards from the shown coloumns.";
@@ -346,7 +350,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
-
 
         ArrayList<String> colourCard = new ArrayList<>();
         System.out.println("Choose the order of card");
