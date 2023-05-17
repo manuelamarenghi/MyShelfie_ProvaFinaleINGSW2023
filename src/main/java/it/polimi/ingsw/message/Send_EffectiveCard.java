@@ -13,9 +13,11 @@ public class Send_EffectiveCard extends Message {
         super("Server", "commongoal_cards");
         this.cards = cards;
     }
-    public EffectiveCard[] getCards(){
-        return  this.cards;
+
+    public EffectiveCard[] getCards() {
+        return this.cards;
     }
+
     public void visit(MessageHandler controller) {
         controller.handle(this);
     }

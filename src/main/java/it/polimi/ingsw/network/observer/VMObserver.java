@@ -7,27 +7,38 @@ import java.util.HashMap;
 
 public interface VMObserver {
     void onShowReq(String s);
-     void onNumbPlayerReq();
-     void onShowNewBoardReq(Board board);
-     void onNotifyNewLibraryReq(String nickname, Library library);
-     void onNotifyGameFullReq();
-     void onNotifyPlayerDisconnectionReq(Player player);
-     void onNotifyPlayerReconnectionReq(Player player);
-     void onNotifyPlayerConnectionReq(String nickname);
-     void onNotifyReachedCommonGoalCardReq(String nickname,EffectiveCard completedEffectiveCard, int score);
-     void onNotifyChairAssignedReq(String nickname);
-     void onShowPossibleColumnReq(int[] x,ArrayList<Card> cards, Library library);
-     void onNotifyCardsAreNotAdjacentReq();
+
+    void onNumbPlayerReq();
+
+    void onShowNewBoardReq(Board board);
+
+    void onNotifyNewLibraryReq(String nickname, Library library);
+
+    void onNotifyGameFullReq();
+
+    void onNotifyPlayerDisconnectionReq(Player player);
+
+    void onNotifyPlayerReconnectionReq(Player player);
+
+    void onNotifyPlayerConnectionReq(String nickname);
+
+    void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score);
+
+    void onNotifyChairAssignedReq(String nickname);
+
+    void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library);
+
+    void onNotifyCardsAreNotAdjacentReq();
 
     void onNotifyNumbPlayerReq(int playerNum);
 
-     void onNotifyPlayerFinishedFirstReq(Player player);
+    void onNotifyPlayerFinishedFirstReq(Player player);
 
-     void onNotifyMatchHasStartedReq(ArrayList<Player> players);
+    void onNotifyMatchHasStartedReq(ArrayList<Player> players);
 
-     void onShowFinalScoreBoardReq(HashMap<String, Integer> point);
+    void onShowFinalScoreBoardReq(HashMap<String, Integer> point);
 
-     void onShowNewMyLibraryReq(Library l);
+    void onShowNewMyLibraryReq(Library l);
 
     void onNotifyDisconnectionReqAcceptedAns();
 

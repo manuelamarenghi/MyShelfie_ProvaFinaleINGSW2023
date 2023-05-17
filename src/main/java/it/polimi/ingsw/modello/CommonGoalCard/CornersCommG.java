@@ -55,7 +55,7 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
     @Override
     public void showCommonCard() {
-        Library library= new Library();
+        Library library = new Library();
         library.getCardinPos(0, 0).setColour("blue");
         library.getCardinPos(0, 4).setColour("blue");
         library.getCardinPos(5, 0).setColour("blue");

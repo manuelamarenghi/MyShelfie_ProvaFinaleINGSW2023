@@ -2,7 +2,6 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.modello.CommonGoalCard.CornersCommG;
 import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
-import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributeUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

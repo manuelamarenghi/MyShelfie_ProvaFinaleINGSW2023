@@ -95,7 +95,7 @@ public class MatchController {
     public void startGame(){
 
         for(VirtualView vv:connectClients.values()){
-            vv.GenericMessage("Server","Start Game");
+            vv.GenericMessage("Server", "Start Game");
             vv.sendAllPlayers(players);
         }
 
@@ -116,27 +116,26 @@ public class MatchController {
         ArrayList<String> playerInOrder = new ArrayList<>();
 
 
-        if(indexFirst !=0) {
+        if (indexFirst != 0) {
             for (int i = indexFirst; i < numberOfPlayers; i++) {
                 playerInOrder.add(players.get(i));
             }
-            for(int i = 0;i<indexFirst;i++){
+            for (int i = 0; i < indexFirst; i++) {
+                playerInOrder.add(players.get(i));
+            }
+        } else {
+            for (int i = 0; i < numberOfPlayers; i++) {
                 playerInOrder.add(players.get(i));
             }
         }
-        else {
-            for(int i = 0;i<numberOfPlayers;i++){
-                playerInOrder.add(players.get(i));
-            }
-        }
-        for(EffectiveCard e: match.getCommonCards()){
-            for(VirtualView v: connectClients.values()){
+        for (EffectiveCard e : match.getCommonCards()) {
+            for (VirtualView v : connectClients.values()) {
                 e.addObserver(v);
             }
         }
-        isStarted=true;
-        this.turnController = new TurnController(playerInOrder,match.getChair().getNickname(),match);
-        for(VirtualView vv:connectClients.values()){
+        isStarted = true;
+        this.turnController = new TurnController(playerInOrder, match.getChair().getNickname(), match);
+        for (VirtualView vv : connectClients.values()) {
             vv.YourTurn(turnController.getActivePlayer());
         }
 
@@ -146,24 +145,23 @@ public class MatchController {
      * next player
      * call endgame when don't have a next player
      */
-    private void nextPlayer(){
-        if(turnController.nextPlayer() == true)
-        {
-            for(VirtualView vv:connectClients.values()){
+    private void nextPlayer() {
+        if (turnController.nextPlayer() == true) {
+            for (VirtualView vv : connectClients.values()) {
                 vv.YourTurn(turnController.getActivePlayer());
             }
-        }
-        else{
+        } else {
             endGame();
         }
     }
+
     /**
      * END GAME
      * Send the score to the player
      */
-    public void endGame(){
-        HashMap<String,Integer> results = match.getMatchmanager().results(match);
-        for(VirtualView v: connectClients.values()){
+    public void endGame() {
+        HashMap<String, Integer> results = match.getMatchmanager().results(match);
+        for (VirtualView v : connectClients.values()) {
          v.EndGame(results);
         }
     }
@@ -275,7 +273,7 @@ public class MatchController {
             Player player = match.getPlayerByNickname(m.getnickname());
 
             int[] coloum = match.getPlayerByNickname(m.getnickname()).getLibrary().showColumn(cardSelect.size());
-            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(),coloum,cardSelect);
+            connectClients.get(player.getNickname()).showPossibleColumn(player.getNickname(), coloum, cardSelect);
         }
         else{
             connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());

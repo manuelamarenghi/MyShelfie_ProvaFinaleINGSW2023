@@ -18,4 +18,6 @@ public interface ObserverViewClient {
 
 
     void setNickname(String nickname);
+
+     void SeeSomeoneLibrary(String nickname);
 }
