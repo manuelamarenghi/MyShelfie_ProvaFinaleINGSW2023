@@ -20,37 +20,39 @@ public class Same4GroupsG implements CommonGoalCards , Serializable {
 
         for(Integer i : adjacent){
             if(i>=4)
-                count ++;
+                count++;
         }
-        if(count >=4)
+        if (count >= 4)
             return true;
         else return false;
     }
+
     /**
      * getImage() let you see this goal
      */
     @Override
     public void showCommonCard() {
-        Library l=new Library();
-        l.getCardinPos(4,1).setColour("pink");
-        l.getCardinPos(3,1).setColour("pink");
-        l.getCardinPos(3,2).setColour("pink");
-        l.getCardinPos(5,1).setColour("pink");
-        l.getCardinPos(4,2).setColour("green");
-        l.getCardinPos(5,2).setColour("green");
-        l.getCardinPos(4,3).setColour("green");
-        l.getCardinPos(5,3).setColour("green");
-        l.getCardinPos(2,0).setColour("white");
-        l.getCardinPos(3,0).setColour("white");
-        l.getCardinPos(4,0).setColour("white");
-        l.getCardinPos(5,0).setColour("white");
-        l.getCardinPos(2,4).setColour("blue");
-        l.getCardinPos(3,4).setColour("blue");
-        l.getCardinPos(4,4).setColour("blue");
-        l.getCardinPos(5,4).setColour("blue");
+        Library l = new Library();
+        l.getCardinPos(4, 1).setColour("pink");
+        l.getCardinPos(3, 1).setColour("pink");
+        l.getCardinPos(3, 2).setColour("pink");
+        l.getCardinPos(5, 1).setColour("pink");
+        l.getCardinPos(4, 2).setColour("green");
+        l.getCardinPos(5, 2).setColour("green");
+        l.getCardinPos(4, 3).setColour("green");
+        l.getCardinPos(5, 3).setColour("green");
+        l.getCardinPos(2, 0).setColour("white");
+        l.getCardinPos(3, 0).setColour("white");
+        l.getCardinPos(4, 0).setColour("white");
+        l.getCardinPos(5, 0).setColour("white");
+        l.getCardinPos(2, 4).setColour("blue");
+        l.getCardinPos(3, 4).setColour("blue");
+        l.getCardinPos(4, 4).setColour("blue");
+        l.getCardinPos(5, 4).setColour("blue");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
+
     /**
      * expired() returns false and doesn't control if the goal couldn't be reached
      */

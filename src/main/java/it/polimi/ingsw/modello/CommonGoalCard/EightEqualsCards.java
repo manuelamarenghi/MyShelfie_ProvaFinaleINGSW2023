@@ -11,15 +11,15 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
     @Override
     public boolean check(Library library) {
         int indexGreen = 0;
-         int indexBlue=0;
+        int indexBlue = 0;
          int indexWhite=0;
          int indexYellow=0;
          int indexPink=0;
          int indexLightBLue=0;
         for(Card card:library){
-            if(card.getColour().equals("blue"))indexBlue++;
-            if(card.getColour().equals("green"))indexGreen++;
-            if(card.getColour().equals("yellow"))indexYellow++;
+            if (card.getColour().equals("blue")) indexBlue++;
+            if (card.getColour().equals("green")) indexGreen++;
+            if (card.getColour().equals("yellow")) indexYellow++;
             if(card.getColour().equals("lightBlue"))indexLightBLue++;
             if(card.getColour().equals("white"))indexWhite++;
             if(card.getColour().equals("pink"))indexPink++;

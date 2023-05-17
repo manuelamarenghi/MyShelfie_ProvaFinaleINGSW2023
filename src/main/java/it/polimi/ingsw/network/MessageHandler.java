@@ -62,7 +62,8 @@ public class MessageHandler implements Observer {
             virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL()));
         } else {
             virtualModel.getPlayer(message.getnickname()).setLibrary(message.getL());
-            virtualModel.notifyObserver(obs -> obs.onNotifyNewLibraryReq(message.getnickname(), message.getL()));
+
+            //virtualModel.notifyObserver(obs -> obs.onNotifyNewLibraryReq(message.getnickname(), message.getL()));
         }
     }
 
@@ -73,7 +74,7 @@ public class MessageHandler implements Observer {
      */
     public void handle(ShowColumn message) {
 
-        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), virtualModel.getMe().getLibrary()));
+        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), message.getCards(), virtualModel.getMe().getLibrary()));
     }
 
     /**
@@ -120,7 +121,8 @@ public class MessageHandler implements Observer {
     public void handle(Assigned_CC message) {
 
         virtualModel.updateCommonScore(message.getnickname(), message.getPoint());
-        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getCard(), message.getPoint()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getnickname(), message.getCard(), message.getPoint()));
+
     }
 
 
@@ -136,10 +138,12 @@ public class MessageHandler implements Observer {
         if (virtualModel.getMe().getNickname().equals(virtualModel.getChair().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
+                virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
+        } else {
+            virtualModel.notifyObserver(obs -> obs.onShowReq("Chair assigned to" + message.getnickname()));
         }
-        virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
     }
 
     /**
@@ -275,7 +279,7 @@ public class MessageHandler implements Observer {
 
     public void handle(Send_EffectiveCard message) {
         virtualModel.setCommonCards(message.getCards());
-        virtualModel.notifyObserver(obs->obs.onNotifyCommonCards(message.getCards()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyCommonCards(message.getCards()));
 
     }
 }

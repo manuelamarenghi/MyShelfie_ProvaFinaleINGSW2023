@@ -1,16 +1,15 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.message.*;
-import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.modello.Card;
+import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.modello.Position;
 import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
-import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
-import javax.swing.text.View;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientController implements ObserverViewClient {
@@ -21,12 +20,12 @@ public class ClientController implements ObserverViewClient {
     //localhost
     //16847
 
-    public ClientController(ViewClient view , SocketClient socketClient){
+    public ClientController(ViewClient view, SocketClient socketClient) {
         this.view = view;
-        this.virtualModel=new VirtualModel();
-        this.socketClient=socketClient;
+        this.virtualModel = new VirtualModel();
+        this.socketClient = socketClient;
         socketClient.enablePinger(true);
-        this.messageHandler=new MessageHandler(this.virtualModel);
+        this.messageHandler = new MessageHandler(this.virtualModel);
         this.socketClient.addObserver(this.messageHandler);
 
     }
@@ -55,12 +54,16 @@ public class ClientController implements ObserverViewClient {
      * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard(Position[] positions , String name ){
-        int i ;
+        int i;
         Card[] cards = new Card[positions.length];
-        for(i=0 ; i< positions.length ; i++){
-            cards[i] = virtualModel.getBoard().getCard(positions[i].getX(),positions[i].getY());
+        for (i = 0; i < positions.length; i++) {
+            if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
+                view.onNotifyCardsAreNotAdjacentReq();
+            } else {
+                cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
+            }
         }
-        TakeCardBoard message = new TakeCardBoard(cards , name);
+        TakeCardBoard message = new TakeCardBoard(cards, name);
         socketClient.sendMessage(message);
     }
 
@@ -76,7 +79,6 @@ public class ClientController implements ObserverViewClient {
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
         socketClient.sendMessage(message);
     }
-
     /**
      * the method sends a message to socket client to calculate points for the player
      */
@@ -87,20 +89,26 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * The method tells the server to dissconect
+     *
      * @param name
      */
-
-    public void handleDisconection(String name){
+    public void handleDisconection(String name) {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
+
 
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);
     }
-    public void addViewObserver(ViewClient view){
+
+    public void addViewObserver(ViewClient view) {
         this.virtualModel.addObserver(view);
 
+    }
+
+    public void SeeSomeoneLibrary(String nickname) {
+        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
     }
 }
