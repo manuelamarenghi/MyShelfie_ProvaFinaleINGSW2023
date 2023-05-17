@@ -11,19 +11,23 @@ import java.util.ArrayList;
  */
 public class ShowColumn extends Message implements Serializable {
     int[] x;
-    ArrayList<Card> cards= new ArrayList<>();
-    public ShowColumn(String name,int[] x,ArrayList<Card> cards){
-        super(name,"selectable_column");
-        this.x=x;
-        this.cards=cards;
+    ArrayList<Card> cards = new ArrayList<>();
+
+    public ShowColumn(String name, int[] x, ArrayList<Card> cards) {
+        super(name, "selectable_column");
+        this.x = x;
+        this.cards = cards;
     }
+
     public int[] getX() {
         return x;
     }
-    public ArrayList<Card> getCards(){
+
+    public ArrayList<Card> getCards() {
         return cards;
     }
-    public void visit(MessageHandler controller){
+
+    public void visit(MessageHandler controller) {
         controller.handle(this);
     }
 }

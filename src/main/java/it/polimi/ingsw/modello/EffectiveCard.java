@@ -3,7 +3,6 @@ package it.polimi.ingsw.modello;
 
 import it.polimi.ingsw.message.Assigned_CC;
 import it.polimi.ingsw.network.observer.Observable;
-import it.polimi.ingsw.network.observer.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,8 +41,11 @@ public class EffectiveCard extends Observable implements ObserverCC, Serializabl
 
     }
 
-    public void show(){
+    public void show() {
         commonCard.showCommonCard();
     }
-    public String description(){return commonCard.getDesc();}
+
+    public String description() {
+        return commonCard.getDesc();
+    }
 }

@@ -1,0 +1,3 @@
+.image {
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 0, 0.8), 10, 0, 0, 0);
+}

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.modello;
 
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * this class is about personal library
@@ -31,6 +31,10 @@ public class Library implements Iterable<Card>, Serializable {
         }
     }
 
+    public Card[][] getLibrary() {
+        return library;
+    }
+
     /**
      * getCardinPos() returns the card in the position you asked for
      */
@@ -39,6 +43,26 @@ public class Library implements Iterable<Card>, Serializable {
             return library[x][y];
         }
         return null;
+    }
+
+    /**
+     * Adjacent() add(if not present) to an arraylist of Position items that are adjacent starting from a card
+     */
+    private static void Adjacent(Card[][] library, boolean[][] visited, int row, int col, String color, ArrayList<Card> groupCard) {
+        if (row < 0 || row >= library.length || col < 0 || col >= library[0].length || library[row][col].getColour() == "")
+            return;
+        if (visited[row][col] || !library[row][col].getColour().equals(color))
+            return;
+
+
+        visited[row][col] = true;
+        Position position = new Position(row, col);
+        groupCard.add(new Card(color, position));
+
+        Adjacent(library, visited, row - 1, col, color, groupCard);
+        Adjacent(library, visited, row + 1, col, color, groupCard);
+        Adjacent(library, visited, row, col - 1, color, groupCard);
+        Adjacent(library, visited, row, col + 1, color, groupCard);
     }
 
     /**
@@ -111,12 +135,22 @@ public class Library implements Iterable<Card>, Serializable {
                 }
 
             }
-            System.out.println();
-            System.out.println();
         }
-
-
+        System.out.println();
+        System.out.println();
     }
+    /**
+     * takeAction() puts n cards in n-1 column
+     */
+    /*public void takeAction(Card[] cards,int n) throws NotUsableException {
+        List<Integer> list=Arrays.stream(showColumn(cards.length)).boxed().collect(Collectors.toList());
+        if(!list.contains(n)){
+            throw new NotUsableException();
+        }
+        else{
+            setColumn(cards,n-1);
+        }
+    }*/
 
     /**
      * setColumn() puts n cards in a chosen column
@@ -134,18 +168,6 @@ public class Library implements Iterable<Card>, Serializable {
         }
 
     }
-    /**
-     * takeAction() puts n cards in n-1 column
-     */
-    /*public void takeAction(Card[] cards,int n) throws NotUsableException {
-        List<Integer> list=Arrays.stream(showColumn(cards.length)).boxed().collect(Collectors.toList());
-        if(!list.contains(n)){
-            throw new NotUsableException();
-        }
-        else{
-            setColumn(cards,n-1);
-        }
-    }*/
 
     /**
      * getgroup() returns adjacent items in a given library
@@ -173,26 +195,6 @@ public class Library implements Iterable<Card>, Serializable {
             }
         }
         return Adjacent;
-    }
-
-    /**
-     * Adjacent() add(if not present) to an arraylist of Position items that are adjacent starting from a card
-     */
-    private static void Adjacent(Card[][] library, boolean[][] visited, int row, int col, String color, ArrayList<Card> groupCard) {
-        if (row < 0 || row >= library.length || col < 0 || col >= library[0].length || library[row][col].getColour() == "")
-            return;
-        if (visited[row][col] || !library[row][col].getColour().equals(color))
-            return;
-
-
-        visited[row][col] = true;
-        Position position = new Position(row, col);
-        groupCard.add(new Card(color, position));
-
-        Adjacent(library, visited, row - 1, col, color, groupCard);
-        Adjacent(library, visited, row + 1, col, color, groupCard);
-        Adjacent(library, visited, row, col - 1, color, groupCard);
-        Adjacent(library, visited, row, col + 1, color, groupCard);
     }
 
     /**

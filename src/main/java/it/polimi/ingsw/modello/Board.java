@@ -2,60 +2,56 @@ package it.polimi.ingsw.modello;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.io.*;
 
 public class Board implements Serializable {
-    private int row=9 , col=9 , numOfPlayers;
+    private int row = 9, col = 9, numOfPlayers;
+    public static final String ANSI_YELLOW = "\u001B[48;5;227m";
+    public static final String ANSI_RESET = "\u001B[0m";
     private Card[][] board = new Card[row][col];
     private Card ca;
     private Bag bag;
-    private int c , r;
-    private Card emptyCard = new Card();
-    private Card notUsableCard=new Card();
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_YELLOW ="\u001B[48;5;227m";
+    public static final String ANSI_WHITE = "\u001B[107m";
     public static final String ANSI_GREEN = "\u001B[48;5;40m";
-    public static final String ANSI_WHITE ="\u001B[107m";
-    public static final String ANSI_BLUE ="\033[0;106m";
-    public static final String ANSI_PINK ="\u001B[48;5;205m";
-    public static final String ANSI_NAVY ="\u001B[48;5;18m";
+    public static final String ANSI_BLUE = "\033[0;106m";
+    public static final String ANSI_PINK = "\u001B[48;5;205m";
+    private Card emptyCard = new Card();
+    public static final String ANSI_NAVY = "\u001B[48;5;18m";
+    private int c, r;
+    private Card notUsableCard = new Card();
 
 
     /**
      * board get initialized based on number of players
      */
 
-    public Board(int numOfPlayers){
+    public Board(int numOfPlayers) {
         bag = new Bag();
-        this.numOfPlayers=numOfPlayers;
-        for(c=0 ; c<9 ; c++){//To put Null the first line
-            if(c==4 || c==3){
-                board[0][c]=emptyCard;
-            }
-            else{
-                board[0][c]=notUsableCard;
-            }
-        }
-        for(c=0 ; c<9 ; c++){//To put Null the second line
-            if(c==3 || c==4 || c==5){
-                board[1][c]=emptyCard;
-            }
-            else {
-                board[1][c]=notUsableCard;
+        this.numOfPlayers = numOfPlayers;
+        for (c = 0; c < 9; c++) {//To put Null the first line
+            if (c == 4 || c == 3) {
+                board[0][c] = emptyCard;
+            } else {
+                board[0][c] = notUsableCard;
             }
         }
-        for(c=0 ; c<9 ; c++){//To put Null the third line
-            if(c==2 || c==3 || c==4 || c==5 || c==6){
-                board[2][c]=emptyCard;
+        for (c = 0; c < 9; c++) {//To put Null the second line
+            if (c == 3 || c == 4 || c == 5) {
+                board[1][c] = emptyCard;
+            } else {
+                board[1][c] = notUsableCard;
+            }
+        }
+        for (c = 0; c < 9; c++) {//To put Null the third line
+            if (c == 2 || c == 3 || c == 4 || c == 5 || c == 6) {
+                board[2][c] = emptyCard;
 
-            }
-            else {
-                board[2][c]=notUsableCard;
+            } else {
+                board[2][c] = notUsableCard;
             }
         }
-        for(c=0 ; c<9 ; c++){
-            if(c==0){
-                board[3][0]=notUsableCard;//To put Null the Fourth line
+        for (c = 0; c < 9; c++) {
+            if (c == 0) {
+                board[3][0] = notUsableCard;//To put Null the Fourth line
             }
             else{
                 board[3][c]=emptyCard;
@@ -166,64 +162,59 @@ public class Board implements Serializable {
      * The method return true/false if the cards can be taken or not
      */
 
-    public Boolean allow(ArrayList<Card> cards ){
-        if(cards.size()==2){
-            if(((cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX())&&(
-              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1 ||
-              cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()-1
-                    )) ||
-                ((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()) && (
-             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1 ||
-             cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()-1 )
-                )){
+    public Boolean allow(ArrayList<Card> cards) {
+        if (cards.size() == 2) {
+            if (((cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX()) && (
+                    cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1 ||
+                            cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() - 1
+            )) ||
+                    ((cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY()) && (
+                            cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1 ||
+                                    cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() - 1)
+                    )) {
                 //ok crads are adjcent
-            }
-            else{
+            } else {
                 return false;
             }
         }
-        if(cards.size()==3){
-            if(((cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1)&&(cards.get(2).getCoordinates().getX()==cards.get(1).getCoordinates().getX()+1)) ||
-                ((cards.get(2).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1)&&(cards.get(1).getCoordinates().getX()==cards.get(2).getCoordinates().getX()+1))||
-                ((cards.get(0).getCoordinates().getX()==cards.get(1).getCoordinates().getX()+1)&&(cards.get(2).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1))||
-                ((cards.get(2).getCoordinates().getX()==cards.get(1).getCoordinates().getX()+1)&&(cards.get(0).getCoordinates().getX()==cards.get(2).getCoordinates().getX()+1))||
-                ((cards.get(0).getCoordinates().getX()==cards.get(2).getCoordinates().getX()+1)&&(cards.get(1).getCoordinates().getX()==cards.get(0).getCoordinates().getX()+1))||
-                ((cards.get(1).getCoordinates().getX()==cards.get(2).getCoordinates().getX()+1)&&(cards.get(0).getCoordinates().getX()==cards.get(1).getCoordinates().getX()+1))
-            ){
+        if (cards.size() == 3) {
+            if (((cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1) && (cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1)) ||
+                    ((cards.get(2).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1) && (cards.get(1).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1)) ||
+                    ((cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1) && (cards.get(2).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1)) ||
+                    ((cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1) && (cards.get(0).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1)) ||
+                    ((cards.get(0).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1) && (cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1)) ||
+                    ((cards.get(1).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1) && (cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1))
+            ) {
                 //ok Cards are adicent
-            }
-            else if(((cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)) ||
-                    ((cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
-                    ((cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(2).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
-                    ((cards.get(2).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1))||
-                    ((cards.get(0).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(1).getCoordinates().getY()==cards.get(0).getCoordinates().getY()+1))||
-                    ((cards.get(1).getCoordinates().getY()==cards.get(2).getCoordinates().getY()+1)&&(cards.get(0).getCoordinates().getY()==cards.get(1).getCoordinates().getY()+1)))
-            {
+            } else if (((cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1) && (cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1)) ||
+                    ((cards.get(2).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1) && (cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1)) ||
+                    ((cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1) && (cards.get(2).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1)) ||
+                    ((cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1)) ||
+                    ((cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1)) ||
+                    ((cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1))) {
 
-            }
-            else{
+            } else {
                 return false;
             }
         }
 
-        if(cards.size()>3){//You cant extract more than 3 cards
-           return false;
+        if (cards.size() > 3) {//You cant extract more than 3 cards
+            return false;
         }
 
-        for(Card ca : cards){
-            if(board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==notUsableCard ||
-                board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==notUsableCard ||
-                    board[ca.getCoordinates().getX()+1][ca.getCoordinates().getY()]==emptyCard ||
-                    board[ca.getCoordinates().getX()-1][ca.getCoordinates().getY()]==emptyCard ||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()+1]==emptyCard||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY()-1]==emptyCard
-            ){
+        for (Card ca : cards) {
+            if (board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == notUsableCard ||
+                    board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == notUsableCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == notUsableCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == notUsableCard ||
+                    board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == emptyCard ||
+                    board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == emptyCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == emptyCard ||
+                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == emptyCard
+            ) {
 
 
-            }
-            else{
+            } else {
                 return false;
             }
             return true;
@@ -274,40 +265,33 @@ public class Board implements Serializable {
         System.out.println(" *** living room ***");
         System.out.println("   0   1   2   3   4   5   6   7   8");
         for(int i=0;i<9;i++){
-            System.out.print(i+" ");
+            System.out.print(i + " ");
             for(int j=0;j<9;j++){
-                if( board[i][j]==notUsableCard){
+                if (board[i][j] == notUsableCard) {
                     System.out.print("    ");
-                }
-                else{
-                    if( board[i][j]!=emptyCard){
-                        if(board[i][j].getColour().equals("yellow")) {
+                } else {
+                    if (board[i][j] != emptyCard) {
+                        if (board[i][j].getColour().equals("yellow")) {
                             System.out.print(ANSI_YELLOW + "  " + ANSI_RESET);
                             System.out.print("  ");
-                        }
-                        else if(board[i][j].getColour().equals("white")) {
+                        } else if (board[i][j].getColour().equals("white")) {
                             System.out.print(ANSI_WHITE + "  " + ANSI_RESET);
                             System.out.print("  ");
-                        }
-                        else if(board[i][j].getColour().equals("green")) {
+                        } else if (board[i][j].getColour().equals("green")) {
                             System.out.print(ANSI_GREEN + "  " + ANSI_RESET);
                             System.out.print("  ");
-                        }
-                        else if(board[i][j].getColour().equals("lightBlue")) {
+                        } else if (board[i][j].getColour().equals("lightBlue")) {
                             System.out.print(ANSI_BLUE + "  " + ANSI_RESET);
                             System.out.print("  ");
-                        }
-                        else if(board[i][j].getColour().equals("blue")) {
+                        } else if (board[i][j].getColour().equals("blue")) {
                             System.out.print(ANSI_NAVY + "  " + ANSI_RESET);
                             System.out.print("  ");
-                        }
-                        else if(board[i][j].getColour().equals("pink")) {
+                        } else if (board[i][j].getColour().equals("pink")) {
                             System.out.print(ANSI_PINK + "  " + ANSI_RESET);
                             System.out.print("  ");
                         }
 
-                    }
-                    else{
+                    } else {
                         System.out.print("    ");
                     }
                 }

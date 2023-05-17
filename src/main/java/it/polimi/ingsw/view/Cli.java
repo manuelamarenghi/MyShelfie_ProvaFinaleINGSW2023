@@ -297,11 +297,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
      * @param score
      */
     @Override
-    public void onNotifyReachedCommonGoalCardReq(String nickname,EffectiveCard completedEffectiveCard, int score) {
-        if(nickname.equals(this.nickname))
+    public void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score) {
+        if (nickname.equals(this.nickname))
             out.println("You have completed the following goal");
         else
-            out.println("The player "+nickname+" completed the following goal");
+            out.println("The player " + nickname + " completed the following goal");
         completedEffectiveCard.show();
         out.println("And score is " + score);
     }
@@ -327,17 +327,15 @@ public class Cli extends ObservableViewClient implements ViewClient {
         System.out.println("You can choose these columns");
 
         ArrayList<Integer> excludedNumbers = new ArrayList<>();
-        int i, selectedColumn=0;
+        int i, selectedColumn = 0;
         ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
 
-        int j=0;
-        for(i=0;i<5;i++)
-        {
-            if(x[j] == i && j<x.length){
+        int j = 0;
+        for (i = 0; i < 5; i++) {
+            if (x[j] == i && j < x.length) {
                 System.out.print(x[j] + ",");
                 j++;
-            }
-            else
+            } else
                 excludedNumbers.add(i);
         }
         out.println();
@@ -354,7 +352,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         ArrayList<String> colourCard = new ArrayList<>();
         System.out.println("Choose the order of card");
         for (Card card : cards) {
-            out.print(card.getColour()+",");
+            out.print(card.getColour() + ",");
             colourCard.add(card.getColour());
         }
         out.println();
@@ -363,7 +361,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
         for (i = 0; i < cards.size(); i++) {
             String colour = "";
-            out.print("The "+i+" card : ");
+            out.print("The " + i + " card : ");
             do {
                 try {
                     colour = readLine();
@@ -371,7 +369,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
                     out.println("WRONG_INPUT");
                 }
 
-                if(!colourCard.contains(colour))
+                if (!colourCard.contains(colour))
                     out.println("Colour error, write again");
             } while (!colourCard.contains(colour));
             orderCard.add(new Card(colour));
@@ -522,8 +520,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
             System.out.println("DESCRIPTION : " + effectiveCard.description());
         }
     }
-
- 
 
 
 }

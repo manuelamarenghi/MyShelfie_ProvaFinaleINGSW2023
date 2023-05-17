@@ -4,7 +4,8 @@ import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Col2GTest {
     private static Col2G card = new Col2G();

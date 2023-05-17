@@ -22,27 +22,22 @@ public class Col3G implements CommonGoalCards , Serializable {
                 differentColours[i]=0;
             }
             for(r=0 ;r<6 ; r++){
-                if(library.getCardinPos(r,c).getColour()=="green"){
+                if (library.getCardinPos(r, c).getColour() == "green") {
                     differentColours[0]++;
                     numberOfCards++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="white"){
+                } else if (library.getCardinPos(r, c).getColour() == "white") {
                     differentColours[1]++;
                     numberOfCards++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="yellow"){
+                } else if (library.getCardinPos(r, c).getColour() == "yellow") {
                     differentColours[2]++;
                     numberOfCards++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="blue"){
+                } else if (library.getCardinPos(r, c).getColour() == "blue") {
                     differentColours[3]++;
                     numberOfCards++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="lightBlue"){
+                } else if (library.getCardinPos(r, c).getColour() == "lightBlue") {
                     differentColours[4]++;
                     numberOfCards++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="pink"){
+                } else if (library.getCardinPos(r, c).getColour() == "pink") {
                     differentColours[5]++;
                     numberOfCards++;
                 }
@@ -80,22 +75,17 @@ public class Col3G implements CommonGoalCards , Serializable {
                 differentTypes[i]=0;
             }
             for(r=0 ;r<6 ; r++){
-                if(library.getCardinPos(r,c).getColour()=="green"){
+                if (library.getCardinPos(r, c).getColour() == "green") {
                     differentTypes[0]++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="white"){
+                } else if (library.getCardinPos(r, c).getColour() == "white") {
                     differentTypes[1]++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="yellow"){
+                } else if (library.getCardinPos(r, c).getColour() == "yellow") {
                     differentTypes[2]++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="blue"){
+                } else if (library.getCardinPos(r, c).getColour() == "blue") {
                     differentTypes[3]++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="lightBlue"){
+                } else if (library.getCardinPos(r, c).getColour() == "lightBlue") {
                     differentTypes[4]++;
-                }
-                else if(library.getCardinPos(r,c).getColour()=="pink"){
+                } else if (library.getCardinPos(r, c).getColour() == "pink") {
                     differentTypes[5]++;
                 }
             }
@@ -122,28 +112,28 @@ public class Col3G implements CommonGoalCards , Serializable {
 
     @Override
     public void showCommonCard() {
-        Library l=new Library();
-        l.getCardinPos(0,0).setColour("green");
+        Library l = new Library();
+        l.getCardinPos(0, 0).setColour("green");
 
-        l.getCardinPos(1,0).setColour("yellow");
-        l.getCardinPos(2,0).setColour("blue");
-        l.getCardinPos(3,0).setColour("green");
-        l.getCardinPos(4,0).setColour("blue");
-        l.getCardinPos(5,0).setColour("green");
+        l.getCardinPos(1, 0).setColour("yellow");
+        l.getCardinPos(2, 0).setColour("blue");
+        l.getCardinPos(3, 0).setColour("green");
+        l.getCardinPos(4, 0).setColour("blue");
+        l.getCardinPos(5, 0).setColour("green");
 
-        l.getCardinPos(0,2).setColour("green");
-        l.getCardinPos(1,2).setColour("white");
-        l.getCardinPos(2,2).setColour("white");
-        l.getCardinPos(3,2).setColour("white");
-        l.getCardinPos(4,2).setColour("green");
-        l.getCardinPos(5,2).setColour("green");
+        l.getCardinPos(0, 2).setColour("green");
+        l.getCardinPos(1, 2).setColour("white");
+        l.getCardinPos(2, 2).setColour("white");
+        l.getCardinPos(3, 2).setColour("white");
+        l.getCardinPos(4, 2).setColour("green");
+        l.getCardinPos(5, 2).setColour("green");
 
-        l.getCardinPos(0,4).setColour("green");
-        l.getCardinPos(1,4).setColour("blue");
-        l.getCardinPos(2,4).setColour("lightBlue");
-        l.getCardinPos(3,4).setColour("lightBlue");
-        l.getCardinPos(4,4).setColour("lightBlue");
-        l.getCardinPos(5,4).setColour("green");
+        l.getCardinPos(0, 4).setColour("green");
+        l.getCardinPos(1, 4).setColour("blue");
+        l.getCardinPos(2, 4).setColour("lightBlue");
+        l.getCardinPos(3, 4).setColour("lightBlue");
+        l.getCardinPos(4, 4).setColour("lightBlue");
+        l.getCardinPos(5, 4).setColour("green");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
