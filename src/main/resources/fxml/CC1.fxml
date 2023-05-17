@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+
 <AnchorPane prefHeight="839.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scenes.CC1Controller">
    <children>
       <ImageView fitHeight="740.0" fitWidth="1146.0" pickOnBounds="true" preserveRatio="true">
