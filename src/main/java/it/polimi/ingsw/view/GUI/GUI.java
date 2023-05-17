@@ -33,12 +33,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onShowNewBoardReq(Board board) {
 
     }
-
-    @Override
-    public void onNotifyNewLibraryReq(String nickname, Library library) {
-
-    }
-
     @Override
     public void onNotifyGameFullReq() {
     }
@@ -106,6 +100,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
+    public void errorNickname(ArrayList<Player> players) {
+
+    }
+
+    @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
         Platform.runLater(() -> livingController.setTextArea("Disconnection accepted.Bye"));
 
@@ -169,6 +168,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askForDissconection() {
+
+    }
+    /**
+     * The method is used to show the actions that the player can do and lets the player choose
+     * for example : see common goal card
+     */
+    @Override
+    public void actionByPlayer() {
 
     }
 }

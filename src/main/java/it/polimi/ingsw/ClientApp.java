@@ -39,7 +39,7 @@ public class ClientApp {
         sClient.sendMessage(m2);
         sClient.readMessage();*/
         Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost", 16847);
+        SocketClient socketClient = new SocketClient("192.168.43.13", 16847);
         socketClient.readMessage();
 
 

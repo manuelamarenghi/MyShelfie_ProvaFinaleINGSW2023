@@ -167,6 +167,60 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
+     * The method is used to show the actions that the player can do and lets the player choose
+     */
+    public void actionByPlayer() {
+        System.out.println("You can do these actions: \n" +
+                "1-See the board \n" +
+                "2-See your personal card \n" +
+                "3-See the common goal card\n" +
+                "4-See the library of other players\n");
+        String question = "Write the number of action";
+        try {
+            int actionNumber = numberInput(1, 4, null, question);
+            switch (actionNumber) {
+                case 1:
+                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
+                case 2:
+                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
+                case 3:
+                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
+                case 4:
+                    seeOtherLibrary();
+            }
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+    }
+
+    /**
+     * request to see library of other players
+     */
+    public void seeOtherLibrary() {
+        try {
+            System.out.println("Which player's library you want to see?");
+            String playerName = readLine();
+            this.notifyObserver(observerViewClient -> observerViewClient.SeeSomeoneLibrary(playerName));
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+    }
+    /**
+     * Don't have player with this nickname.
+     */
+    public void errorNickname(ArrayList<Player> players){
+        System.out.println("Not exist the player with this nickname." +
+                "Choose other nickname");
+        System.out.println("The nickname of the players in the game");
+        for(Player player:players){
+            System.out.print(player.getNickname() + " , ");
+        }
+
+        seeOtherLibrary();
+    }
+    /**
      * The method asks the player if it wants to get dissconnected or not
      */
 
@@ -190,15 +244,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         }
     }
 
-    /**
-     * The method sends a request to get the coloumns where it can put its cards
-     */
-
-    public void requestForColumns() {
-        int numberOfCards;
-        //Accedere al metodo nella virtual model per vedere se le carte richieste sono valide e avere il loro numero
-        //clientController.handleColoumnRequest(numberOfCards , nickname);
-    }
 
     /**
      * The method sends a request to get the final points
@@ -238,17 +283,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         board.showBoard();
     }
 
-    /**
-     * The method prints the updated library of the player
-     *
-     * @param nickname
-     * @param library
-     */
-    @Override
-    public void onNotifyNewLibraryReq(String nickname, Library library) {
-        out.println(nickname + " your library is this :");
-        library.showLibrary();
-    }
 
     /**
      * The method prints the message when the game is over
@@ -324,60 +358,71 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
-        System.out.println("You can choose these columns");
-
-        ArrayList<Integer> excludedNumbers = new ArrayList<>();
-        int i, selectedColumn = 0;
-        ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
-
-        int j = 0;
-        for (i = 0; i < 5; i++) {
-            if (x[j] == i && j < x.length) {
-                System.out.print(x[j] + ",");
-                j++;
-            } else
-                excludedNumbers.add(i);
-        }
-        out.println();
-        String question = "Select the coloumn to put your cards from the shown coloumns.";
-        for (i = 0; i < excludedNumbers.size(); i++) {
-            excludedNumbersArrayList.add(excludedNumbers.get(i));
-        }
+        String question1 ="Write 1 if you want to choose stocks. Write 2 if uou want choose columns";
+        int action = -1;
         try {
-            selectedColumn = numberInput(0, 4, excludedNumbersArrayList, question);
-        } catch (ExecutionException e) {
+            action = numberInput(1, 2, null, question1);
+        }catch (ExecutionException e){
             out.println("WRONG_INPUT");
+
         }
+        if(action == 1)
+            actionByPlayer();
+        if(action==2){
+            System.out.println("You can choose these columns");
 
-        ArrayList<String> colourCard = new ArrayList<>();
-        System.out.println("Choose the order of card");
-        for (Card card : cards) {
-            out.print(card.getColour() + ",");
-            colourCard.add(card.getColour());
+            ArrayList<Integer> excludedNumbers = new ArrayList<>();
+            int i, selectedColumn = 0;
+            ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
+
+            int j = 0;
+            for (i = 0; i < 5; i++) {
+                if (x[j] == i && j < x.length) {
+                    System.out.print(x[j] + ",");
+                    j++;
+                } else
+                    excludedNumbers.add(i);
+            }
+            out.println();
+            String question = "Select the coloumn to put your cards from the shown coloumns.";
+            for (i = 0; i < excludedNumbers.size(); i++) {
+                excludedNumbersArrayList.add(excludedNumbers.get(i));
+            }
+            try {
+                selectedColumn = numberInput(0, 4, excludedNumbersArrayList, question);
+            } catch (ExecutionException e) {
+                out.println("WRONG_INPUT");
+            }
+
+            ArrayList<String> colourCard = new ArrayList<>();
+            System.out.println("Choose the order of card");
+            for (Card card : cards) {
+                out.print(card.getColour() + ",");
+                colourCard.add(card.getColour());
+            }
+            out.println();
+
+            ArrayList<Card> orderCard = new ArrayList<>();
+
+            for (i = 0; i < cards.size(); i++) {
+                String colour = "";
+                out.print("The " + i + " card : ");
+                do {
+                    try {
+                        colour = readLine();
+                    } catch (ExecutionException e) {
+                        out.println("WRONG_INPUT");
+                    }
+
+                    if (!colourCard.contains(colour))
+                        out.println("Colour error, write again");
+                } while (!colourCard.contains(colour));
+                orderCard.add(new Card(colour));
+                colourCard.remove(colour);
+            }
+            int finalSelectedColumn = selectedColumn;
+            this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
         }
-        out.println();
-
-        ArrayList<Card> orderCard = new ArrayList<>();
-
-        for (i = 0; i < cards.size(); i++) {
-            String colour = "";
-            out.print("The " + i + " card : ");
-            do {
-                try {
-                    colour = readLine();
-                } catch (ExecutionException e) {
-                    out.println("WRONG_INPUT");
-                }
-
-                if (!colourCard.contains(colour))
-                    out.println("Colour error, write again");
-            } while (!colourCard.contains(colour));
-            orderCard.add(new Card(colour));
-            colourCard.remove(colour);
-        }
-        int finalSelectedColumn = selectedColumn;
-        this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
-
     }
 
     /**
@@ -504,6 +549,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * The method prints the players of the match
+     *
      * @param players
      */
 
