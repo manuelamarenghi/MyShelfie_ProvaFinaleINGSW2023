@@ -135,9 +135,10 @@ public class Library implements Iterable<Card>, Serializable {
                 }
 
             }
+            System.out.println();
+            System.out.println();
         }
-        System.out.println();
-        System.out.println();
+
     }
     /**
      * takeAction() puts n cards in n-1 column
