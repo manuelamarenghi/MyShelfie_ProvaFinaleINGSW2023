@@ -36,13 +36,13 @@ public class ClientApp {
         sClient.sendMessage(m2);
         sClient.readMessage();*/
         Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost" , 16847);
+        SocketClient socketClient = new SocketClient("localhost", 16847);
         socketClient.readMessage();
 
 
         Cli cli = new Cli();
 
-        ClientController clientController = new ClientController(cli,socketClient);
+        ClientController clientController = new ClientController(cli, socketClient);
         clientController.addViewObserver(cli);
         cli.addObserver(clientController);
         cli.start();

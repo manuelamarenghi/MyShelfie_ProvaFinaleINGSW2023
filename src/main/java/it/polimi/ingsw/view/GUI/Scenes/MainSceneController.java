@@ -1,5 +1,4 @@
 package it.polimi.ingsw.view.GUI.Scenes;
-
 import it.polimi.ingsw.view.GUI.SceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.event.ActionEvent;
@@ -16,5 +15,6 @@ public class MainSceneController extends ObservableViewClient implements Generic
     public void onClickExit(ActionEvent action){
         Stage stage = (Stage) btn_exit.getScene().getWindow();
         stage.close();
+
     }
 }

@@ -35,11 +35,11 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         return "Five tiles of the same type forming a diagonal.\n ";
     }
 
-    private boolean sxDiagonal(Library library){
+    private boolean sxDiagonal(Library library) {
         String color;
 
-        if(!library.getCardinPos(0,0).getColour().equals(""))
-            color=library.getCardinPos(0,0).getColour();
+        if (!library.getCardinPos(0, 0).getColour().equals(""))
+            color = library.getCardinPos(0, 0).getColour();
         else
             return false;
 

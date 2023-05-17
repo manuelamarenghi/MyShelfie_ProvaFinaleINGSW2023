@@ -1,6 +1,5 @@
 package it.polimi.ingsw.message;
 
-import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.MessageHandler;
 
 import java.util.ArrayList;

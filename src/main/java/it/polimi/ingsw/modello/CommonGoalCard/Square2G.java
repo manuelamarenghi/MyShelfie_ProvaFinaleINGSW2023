@@ -27,22 +27,17 @@ public class Square2G implements CommonGoalCards, Serializable {
                 if(library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r, c + 1).getColour()) &&
                         library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c).getColour()) &&
                         library.getCardinPos(r, c).getColour().equals(library.getCardinPos(r + 1, c + 1).getColour())){
-                    if(library.getCardinPos(r, c).getColour().equals("green")){
+                    if (library.getCardinPos(r, c).getColour().equals("green")) {
                         numOfSquares[0]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("white")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("white")) {
                         numOfSquares[1]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("yellow")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("yellow")) {
                         numOfSquares[2]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("blue")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("blue")) {
                         numOfSquares[3]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("lightBlue")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("lightBlue")) {
                         numOfSquares[4]++;
-                    }
-                    else if(library.getCardinPos(r, c).getColour().equals("pink")){
+                    } else if (library.getCardinPos(r, c).getColour().equals("pink")) {
                         numOfSquares[5]++;
                     }
                     indexToSkip1=c;
@@ -77,16 +72,16 @@ public class Square2G implements CommonGoalCards, Serializable {
 
     @Override
     public void showCommonCard() {
-        Library l  =new Library();
-        l.getCardinPos(0,0).setColour("green");
-        l.getCardinPos(0,1).setColour("green");
-        l.getCardinPos(1,0).setColour("green");
-        l.getCardinPos(1,1).setColour("green");
+        Library l = new Library();
+        l.getCardinPos(0, 0).setColour("green");
+        l.getCardinPos(0, 1).setColour("green");
+        l.getCardinPos(1, 0).setColour("green");
+        l.getCardinPos(1, 1).setColour("green");
 
-        l.getCardinPos(2,0).setColour("green");
-        l.getCardinPos(2,1).setColour("green");
-        l.getCardinPos(3,0).setColour("green");
-        l.getCardinPos(3,1).setColour("green");
+        l.getCardinPos(2, 0).setColour("green");
+        l.getCardinPos(2, 1).setColour("green");
+        l.getCardinPos(3, 0).setColour("green");
+        l.getCardinPos(3, 1).setColour("green");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }

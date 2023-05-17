@@ -1,7 +1,6 @@
 package it.polimi.ingsw.modello;
+
 import java.io.Serializable;
-import java.lang.Math;
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Bag implements Serializable {
@@ -40,27 +39,27 @@ public class Bag implements Serializable {
             else{
                 if(index==0){
                     arrayOfCards.add("green");
-                    remainingCards.set(0,remainingCards.get(0)-1);
+                    remainingCards.set(0, remainingCards.get(0) - 1);
                 }
                 else if(index==1){
                     arrayOfCards.add("white");
-                    remainingCards.set(1,remainingCards.get(1)-1);
+                    remainingCards.set(1, remainingCards.get(1) - 1);
                 }
                 else if(index==2){
                     arrayOfCards.add("yellow");
-                    remainingCards.set(2,remainingCards.get(2)-1);
+                    remainingCards.set(2, remainingCards.get(2) - 1);
                 }
                 else if(index==3){
                     arrayOfCards.add("blue");
-                    remainingCards.set(3,remainingCards.get(3)-1);
+                    remainingCards.set(3, remainingCards.get(3) - 1);
                 }
                 else if(index==4){
                     arrayOfCards.add("lightBlue");
-                    remainingCards.set(4,remainingCards.get(4)-1);
+                    remainingCards.set(4, remainingCards.get(4) - 1);
                 }
                 else if(index==5){
                     arrayOfCards.add("pink");
-                    remainingCards.set(5,remainingCards.get(5)-1);
+                    remainingCards.set(5, remainingCards.get(5) - 1);
                 }
                 i++;
 

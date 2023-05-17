@@ -13,7 +13,7 @@ public class VirtualModel extends VMObservable {
     private Board board;
     private Player firstFinish;
     private Player chair;
-    private EffectiveCard[] CommonCards ;
+    private EffectiveCard[] CommonCards;
 
 
     public VirtualModel() {
@@ -51,8 +51,7 @@ public class VirtualModel extends VMObservable {
     }
 
     public void setPlayers(ArrayList<String> players) {
-        for(String p:players)
-        {
+        for (String p : players) {
             this.players.add(new Player(p));
         }
     }

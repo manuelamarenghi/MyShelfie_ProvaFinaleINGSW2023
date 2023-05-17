@@ -34,40 +34,46 @@ public class VirtualView implements View{
      */
     @Override
     public void updateboard(Board b) {
-         clientHandler.sendMessage(new UpdateBoard(b));
+        clientHandler.sendMessage(new UpdateBoard(b));
     }
+
     /**
-     *  updatelibrary() when a player put there cards
+     * updatelibrary() when a player put there cards
      */
     @Override
-    public void updatelibrary(Library l,String nickname) {
-         clientHandler.sendMessage(new Updatelibrary(l,nickname));
+    public void updatelibrary(Library l, String nickname) {
+        clientHandler.sendMessage(new Updatelibrary(l, nickname));
     }
+
     /**
      * showPossibleColumn() columns where the player can put items
      */
-    public void showPossibleColumn(String s,int[] x){
-          clientHandler.sendMessage(new ShowColumn(s,x));
+    public void showPossibleColumn(String s, int[] x, ArrayList<Card> cards) {
+        clientHandler.sendMessage(new ShowColumn(s, x, cards));
     }
+
     /**
      * Gamefull() notify the player that there are enough players
      */
-    public void Gamefull(){
+    public void Gamefull() {
         clientHandler.sendMessage(new WaitList("Server"));
     }
+
     /**
      * updateanotherplayerconnect() update others player view when one has disconnected
      */
-    public void updateanotherplayerconnect(String name,Boolean connected,Player p){
-        if(connected==false) {
+    public void updateanotherplayerconnect(String name, Boolean connected, Player p) {
+        if (connected == false) {
             clientHandler.sendMessage(new AnotherPlayerDisconnect(name));
+        } else {
+            clientHandler.sendMessage(new PlayerReturned(p));
         }
-        else{ clientHandler.sendMessage(new PlayerReturned(p));}
     }
+
     /**
      * assignedChair() assigned chair to a random player
      */
-    public void assignedChair(String name){
+    public void assignedChair(String name) {
         clientHandler.sendMessage(new ChairAssigned(name));
     }
 
@@ -144,9 +150,10 @@ public class VirtualView implements View{
 
     /**
      * send list of players in the match
+     *
      * @param players
      */
-    public void sendAllPlayers(ArrayList<String> players){
+    public void sendAllPlayers(ArrayList<String> players) {
         clientHandler.sendMessage(new AllPlayer(players));
     }
 }
