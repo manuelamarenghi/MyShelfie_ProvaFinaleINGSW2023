@@ -14,12 +14,12 @@ public class JavaFXApplication extends Application {
  @Override
     public void start(Stage primaryStage) throws IOException {
 
-     GUI gui=new GUI();
+     /*GUI gui=new GUI();
      Parent root=FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/login_scene.fxml")));
      Scene scene=new Scene(root);
      primaryStage.setScene(scene);
      primaryStage.show();
-     primaryStage.setMaximized(true);
+     primaryStage.setMaximized(true);*/
     }
     public static void main(String[] args) {
         launch(args);
