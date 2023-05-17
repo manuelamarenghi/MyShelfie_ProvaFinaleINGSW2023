@@ -14,7 +14,7 @@ public class JavaFXApplication extends Application {
  @Override
     public void start(Stage primaryStage) throws IOException {
 
-     Gui gui=new Gui();
+     GUI gui=new GUI();
      Parent root=FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/login_scene.fxml")));
      Scene scene=new Scene(root);
      primaryStage.setScene(scene);
