@@ -7,13 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="695.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.CC1Controller">
+<AnchorPane prefHeight="839.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scenes.CC1Controller">
    <children>
-      <ImageView fitHeight="746.0" fitWidth="1055.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="740.0" fitWidth="1146.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CommonGoalCards/1.jpg" />
          </image>
       </ImageView>
       <Button fx:id="CC1DescriptionButton" layoutX="370.0" layoutY="603.0" mnemonicParsing="false" text="See description of the card" />
+      <Label fx:id="CC1Label" alignment="CENTER" layoutX="-2.0" layoutY="742.0" prefHeight="97.0" prefWidth="1123.0" text="Label" />
    </children>
 </AnchorPane>
