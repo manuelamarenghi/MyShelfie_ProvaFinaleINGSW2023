@@ -14,7 +14,7 @@
             <Image url="@../images/CommonGoalCards/1.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="CC1DescriptionButton" layoutX="370.0" layoutY="603.0" mnemonicParsing="false" text="See description of the card" />
-      <Label fx:id="CC1Label" alignment="CENTER" layoutX="-2.0" layoutY="742.0" prefHeight="97.0" prefWidth="1123.0" text="Label" />
+      <Button fx:id="theButton" layoutX="370.0" layoutY="603.0" mnemonicParsing="false" text="See description of the card" />
+      <Label fx:id="theLabel" alignment="CENTER" layoutX="-2.0" layoutY="742.0" prefHeight="97.0" prefWidth="1123.0" text="Label" />
    </children>
 </AnchorPane>

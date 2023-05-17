@@ -7,13 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scenes.CC2Controller">
+<AnchorPane prefHeight="839.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scenes.CC2Controller">
    <children>
-      <ImageView fitHeight="659.0" fitWidth="877.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="740.0" fitWidth="1146.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CommonGoalCards/2.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="178.0" layoutY="478.0" mnemonicParsing="false" onAction="#getDescription" prefHeight="51.0" prefWidth="517.0" text="See the description of the common goal card" />
+      <Button  fx:id="myButton" layoutX="370.0" layoutY="603.0" mnemonicParsing="false" text="See description of the card" />
+      <Label fx:id="myLabel" alignment="CENTER" layoutX="-2.0" layoutY="742.0" prefHeight="97.0" prefWidth="1123.0" text="Label" />
    </children>
 </AnchorPane>
