@@ -9,6 +9,7 @@ public class CC1Controller implements Controller{
         private Square2G commonGoalCard;
         private Label CC1Label;
         private String textToShow;
+        //
         public void getDescription(ActionEvent event) {
                 textToShow=commonGoalCard.getDesc();
                 CC1Label.setText(textToShow);
