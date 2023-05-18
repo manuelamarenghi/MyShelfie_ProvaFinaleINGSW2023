@@ -393,22 +393,28 @@ public class Cli extends ObservableViewClient implements ViewClient {
         out.println();
 
         ArrayList<Card> orderCard = new ArrayList<>();
-
-        for (i = 0; i < cards.size(); i++) {
-            String colour = "";
+        int size=cards.size();
+        for (i = 0; i < size; i++) {
+            //String colour = "";
+            int colour=-1;
             out.print("The " + i + " card : ");
             do {
                 try {
-                    colour = readLine();
+                    colour = Integer.parseInt(readLine());
                 } catch (ExecutionException e) {
                     out.println("WRONG_INPUT");
                 }
+                if (cards.size()<=colour) out.println("Colour error, write again");
+            }while(cards.size()<=colour);
 
-                if (!colourCard.contains(colour))
+            orderCard.add(cards.get(colour));
+            colourCard.remove(cards.get(colour).getColour());
+            cards.remove(cards.get(colour));
+                /*if (!colourCard.contains(colour))
                     out.println("Colour error, write again");
             } while (!colourCard.contains(colour));
             orderCard.add(new Card(colour));
-            colourCard.remove(colour);
+            colourCard.remove(colour);*/
         }
         int finalSelectedColumn = selectedColumn;
         this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
