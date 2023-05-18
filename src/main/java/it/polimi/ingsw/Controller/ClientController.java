@@ -10,9 +10,11 @@ import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
+import java.util.ArrayList;
+
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
-    private final SocketClient  socketClient;
+    private final SocketClient socketClient;
     private VirtualModel virtualModel;
     private MessageHandler messageHandler;
     //localhost
@@ -95,6 +97,10 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+    @Override
+    public void handleMexChat(ArrayList<String> dest, String mex) {
+        MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
+    }
 
     @Override
     public void setNickname(String nickname) {
@@ -108,4 +114,5 @@ public class ClientController implements ObserverViewClient {
     public void SeeSomeoneLibrary(String nickname) {
         view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
     }
+
 }
