@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.view.GUI.Scenes.GenericSceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ObserverViewClient;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,12 +16,14 @@ public class SceneController extends ObservableViewClient {
     private static Scene activeScene;
     private static GenericSceneController activeController;
 
-    public static Scene getActiveScene(){
+    public static Scene getActiveScene() {
         return activeScene;
     }
-    public static GenericSceneController getActiveController(){
+
+    public static GenericSceneController getActiveController() {
         return activeController;
     }
+
     public static <T> T setRootPane(ArrayList<ObserverViewClient> observerList, Scene scene, String fxml) {
         T controller = null;
 

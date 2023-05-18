@@ -101,4 +101,8 @@ public class LibrariesController extends ObservableViewClient implements Control
         }
     }
 
+    public void pressedBack(MouseEvent mouseEvent) {
+        //torna a livingroom
+    }
+
 }
