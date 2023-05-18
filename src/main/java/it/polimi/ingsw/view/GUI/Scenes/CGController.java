@@ -25,7 +25,7 @@ public class CGController implements Controller{
         private StairsGoalCard commonGoalCard12;
 
         private String textToShow;
-        //
+
 
         public void setImageAndText(int numberImage){
                 switch(numberImage){
