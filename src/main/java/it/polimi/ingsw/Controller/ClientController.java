@@ -59,6 +59,7 @@ public class ClientController implements ObserverViewClient {
         for (i = 0; i < positions.length; i++) {
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
+                return;
             } else {
                 cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
             }

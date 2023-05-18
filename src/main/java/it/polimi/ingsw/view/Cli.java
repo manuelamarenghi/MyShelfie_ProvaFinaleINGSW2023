@@ -366,12 +366,19 @@ public class Cli extends ObservableViewClient implements ViewClient {
         ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
 
         int j = 0;
+        if(x.length==0){
+            System.out.println("you don't have enough space");
+            askCardsToTakeFromBoard();
+            return;
+        }
         for (i = 0; i < 5; i++) {
-            if (x[j] == i && j < x.length) {
-                System.out.print(x[j] + ",");
-                j++;
-            } else
-                excludedNumbers.add(i);
+            if(j<x.length) {
+                if (x[j] == i ) {
+                    System.out.print(x[j] + ",");
+                    j++;
+                } else
+                    excludedNumbers.add(i);
+            }
         }
         out.println();
         String question = "Select the coloumn to put your cards from the shown coloumns.";
