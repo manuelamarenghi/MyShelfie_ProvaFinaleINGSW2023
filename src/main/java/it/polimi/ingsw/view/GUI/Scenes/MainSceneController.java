@@ -4,11 +4,15 @@ import it.polimi.ingsw.view.GUI.SceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainSceneController extends ObservableViewClient implements GenericSceneController{
     public Button btn_play;
     public Button btn_exit;
+
+    public Image img;
+
 
     public void onClickPlay(ActionEvent action){
         SceneController.setRootPane(observers,action,"login-scene.fxml");

@@ -28,96 +28,96 @@ public class VirtualModel extends VMObservable {
         this.me.setLibrary(new Library());
     }
 
-    public void setCommonCards(EffectiveCard[] commonCards) {
+    synchronized public void setCommonCards(EffectiveCard[] commonCards) {
         CommonCards = commonCards;
     }
 
-    public int getPlayerNumber() {
+    synchronized public int getPlayerNumber() {
         return playerNumber;
     }
 
-    public Player getFirstFinish() {
+    synchronized public Player getFirstFinish() {
         return firstFinish;
     }
 
-    public void setMe(String me) {
+    synchronized public void setMe(String me) {
         this.me = new Player(me);
     }
 
-    public void setFirstFinish(String firstFinish) {
+    synchronized public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
         }
     }
 
-    public void setPlayers(ArrayList<String> players) {
+    synchronized public void setPlayers(ArrayList<String> players) {
         for (String p : players) {
             this.players.add(new Player(p));
         }
     }
 
-    public void setPlayerNumber(int playerNumber) {
+    synchronized public void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public ArrayList<Player> getPlayers() {
+    synchronized public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public void addPlayer(Player player) {
+    synchronized public void addPlayer(Player player) {
         this.players.add(player);
     }
     public void removePlayer(String nickname){
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
 
-    public void updateBoard(Board board) {
+    synchronized public void updateBoard(Board board) {
         this.board = board;
     }
 
-    public void updateChair(String nickname) {
+    synchronized public void updateChair(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) this.chair = player;
         }
     }
 
-    public Player getChair() {
+    synchronized public Player getChair() {
         return chair;
     }
 
-    public void updatePlayerNumber(int playerNumber) {
+    synchronized public void updatePlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public PersonalGoalCard getPersonalGoalCard() {
+    synchronized public PersonalGoalCard getPersonalGoalCard() {
         return this.me.getPersonalCard();
     }
 
-    public EffectiveCard[] getCommonGoalCards() {
+    synchronized public EffectiveCard[] getCommonGoalCards() {
         return this.CommonCards;
     }
-    public void updateIsMyTurn(){
+    synchronized public void updateIsMyTurn(){
         this.isMyTurn=!this.isMyTurn;
     }
-    public boolean isMyTurn(){
+    synchronized public boolean isMyTurn(){
         return this.isMyTurn;
     }
-    public Player getMe(){
+    synchronized public Player getMe(){
         return this.me;
     }
-    public void updateCommonScore(String nickname,int score){
+    synchronized public void updateCommonScore(String nickname,int score){
         for(Player player:this.players){
             if(player.getNickname().equals(nickname))player.setCommonGoalScore(score);
         }
     }
-    public Player getPlayer(String nickname) {
+    synchronized public Player getPlayer(String nickname) {
         for(Player player:this.players){
             if(player.getNickname().equals(nickname))return player;
         }
         return new Player(null);
     }
 
-    public Board getBoard(){
+    synchronized public Board getBoard(){
         return board;
     }
 }
