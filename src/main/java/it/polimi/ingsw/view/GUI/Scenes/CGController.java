@@ -26,7 +26,7 @@ public class CGController implements Controller{
 
         private String textToShow;
 
-
+        //
         public void setImageAndText(int numberImage){
                 switch(numberImage){
                         case 1 :
