@@ -78,19 +78,21 @@ public class Server {
      * onMessageReceived() send the message to the controller
      * @param message
      */
-    public void onMessageReceived(Message message){
+    public void onMessageReceived(Message message) {
         matchController.messageHandler(message);
     }
+
     /**
      * broadcastMessage() shares message in chat to other clientHandler
+     *
      * @param clientHandler
      * @param message
      */
-    public void broadcastMessage(ClientHandler clientHandler,Message message) {
-         for(String o: clientsconnected){
-             if(!o.equals(message.getnickname())){
-                message.MextoClientHandler(clientHandlerMap.get(o));
-             }
-         }
+    public void broadcastMessage(ClientHandler clientHandler, Message message) {
+        for (String o : clientsconnected) {
+            if (!o.equals(message.getnickname())) {
+                message.MextoClientHandler(clientHandlerMap.get(o), o);
+            }
+        }
     }
 }

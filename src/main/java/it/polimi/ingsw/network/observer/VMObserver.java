@@ -5,16 +5,12 @@ import it.polimi.ingsw.modello.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * MessageHandle notify view
- */
 public interface VMObserver {
     void onShowReq(String s);
 
     void onNumbPlayerReq();
 
     void onShowNewBoardReq(Board board);
-
 
     void onNotifyGameFullReq();
 
@@ -42,7 +38,6 @@ public interface VMObserver {
 
     void onShowNewMyLibraryReq(Library l);
 
-
     void onNotifyDisconnectionReqAcceptedAns();
 
     void onNotifyNewNicknameReq();
@@ -60,4 +55,6 @@ public interface VMObserver {
     void onNotifyAllPlayerReq(ArrayList<String> players);
 
     void onNotifyCommonCards(EffectiveCard[] cards);
+
+    void onNotifyMexInChat(String getnickname, String mex, String dest);
 }

@@ -125,7 +125,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
         try {
             int numberOfPlayers = numberInput(2, 4, null, question);
-            this.notifyObserver(observerViewClient -> observerViewClient.handleCreateBoard(numberOfPlayers, nickname));
+            this.notifyObserver(observerViewClient -> observerViewClient.handleCreateBoard(numberOfPlayers));
             //clientController.handleCreateBoard(numberOfPlayers , nickname);
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
@@ -160,66 +160,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
             }
 
         }
-        this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions, nickname));
+        this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions));
         //clientController.handleTakeCard(positions , nickname);
 
 
     }
 
-    /**
-     * The method is used to show the actions that the player can do and lets the player choose
-     */
-    public void actionByPlayer() {
-        System.out.println("You can do these actions: \n" +
-                "1-See the board \n" +
-                "2-See your personal card \n" +
-                "3-See the common goal card\n" +
-                "4-See the library of other players\n");
-        String question = "Write the number of action";
-        try {
-            int actionNumber = numberInput(1, 4, null, question);
-            switch (actionNumber) {
-                case 1:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
-                case 2:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
-                case 3:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
-                case 4:
-                    seeOtherLibrary();
-            }
-        } catch (ExecutionException e) {
-            out.println("WRONG_INPUT");
-        }
-
-    }
-
-    /**
-     * request to see library of other players
-     */
-    public void seeOtherLibrary() {
-        try {
-            System.out.println("Which player's library you want to see?");
-            String playerName = readLine();
-            this.notifyObserver(observerViewClient -> observerViewClient.SeeSomeoneLibrary(playerName));
-        } catch (ExecutionException e) {
-            out.println("WRONG_INPUT");
-        }
-
-    }
-    /**
-     * Don't have player with this nickname.
-     */
-    public void errorNickname(ArrayList<Player> players){
-        System.out.println("Not exist the player with this nickname." +
-                "Choose other nickname");
-        System.out.println("The nickname of the players in the game");
-        for(Player player:players){
-            System.out.print(player.getNickname() + " , ");
-        }
-
-        seeOtherLibrary();
-    }
     /**
      * The method asks the player if it wants to get dissconnected or not
      */
@@ -244,6 +190,15 @@ public class Cli extends ObservableViewClient implements ViewClient {
         }
     }
 
+    /**
+     * The method sends a request to get the coloumns where it can put its cards
+     */
+
+    public void requestForColumns() {
+        int numberOfCards;
+        //Accedere al metodo nella virtual model per vedere se le carte richieste sono valide e avere il loro numero
+        //clientController.handleColoumnRequest(numberOfCards , nickname);
+    }
 
     /**
      * The method sends a request to get the final points
@@ -282,7 +237,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void onShowNewBoardReq(Board board) {
         board.showBoard();
     }
-
 
     /**
      * The method prints the message when the game is over
@@ -358,7 +312,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
-
         System.out.println("You can choose these columns");
 
         ArrayList<Integer> excludedNumbers = new ArrayList<>();
@@ -366,19 +319,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
         ArrayList<Integer> excludedNumbersArrayList = new ArrayList<Integer>();
 
         int j = 0;
-        if(x.length==0){
-            System.out.println("you don't have enough space");
-            askCardsToTakeFromBoard();
-            return;
-        }
         for (i = 0; i < 5; i++) {
-            if(j<x.length) {
-                if (x[j] == i ) {
-                    System.out.print(x[j] + ",");
-                    j++;
-                } else
-                    excludedNumbers.add(i);
-            }
+            if (x[j] == i && j < x.length) {
+                System.out.print(x[j] + ",");
+                j++;
+            } else
+                excludedNumbers.add(i);
         }
         out.println();
         String question = "Select the coloumn to put your cards from the shown coloumns.";
@@ -418,7 +364,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             colourCard.remove(colour);
         }
         int finalSelectedColumn = selectedColumn;
-        this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
+        // this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
 
     }
 
@@ -546,7 +492,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * The method prints the players of the match
-     *
      * @param players
      */
 
@@ -562,6 +507,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
             System.out.println("DESCRIPTION : " + effectiveCard.description());
         }
+    }
+
+    @Override
+    public void onNotifyMexInChat(String getnickname, String mex, String dest) {
+
     }
 
 
