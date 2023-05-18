@@ -57,6 +57,7 @@ public class ClientController implements ObserverViewClient {
         for (i = 0; i < positions.length; i++) {
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
+                return;
             } else {
                 cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
             }
@@ -76,6 +77,20 @@ public class ClientController implements ObserverViewClient {
     public void handleColoumnRequest(int numberOfCards , String name){
         ColumnRequest message = new ColumnRequest(numberOfCards , name);
         socketClient.sendMessage(message);
+    }
+    @Override
+    public void handleSeeBoard() {
+        view.onShowNewBoardReq(virtualModel.getBoard());
+    }
+
+    @Override
+    public void handleSeePersonalCard() {
+        view.onNotifyPersonalCardReq(virtualModel.getMe().getPersonalCard());
+    }
+
+    @Override
+    public void handleSeeCommonCard() {
+        view.onNotifyCommonCards(virtualModel.getCommonGoalCards());
     }
     /**
      * the method sends a message to socket client to calculate points for the player
