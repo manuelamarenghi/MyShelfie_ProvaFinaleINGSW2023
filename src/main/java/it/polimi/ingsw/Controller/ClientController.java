@@ -3,16 +3,20 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Match;
+import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.modello.Position;
 import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
+import it.polimi.ingsw.view.VirtualView;
+
+import java.util.ArrayList;
 
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
-    private final SocketClient  socketClient;
+    private final SocketClient socketClient;
     private VirtualModel virtualModel;
     private MessageHandler messageHandler;
     //localhost
@@ -29,7 +33,7 @@ public class ClientController implements ObserverViewClient {
     }
 
 
-    public void handleEnterPlayer (String nickname){
+    public void handleEnterPlayer(String nickname) {
         EnterPlayer message = new EnterPlayer(nickname);
         socketClient.sendMessage(message);
     }
@@ -53,35 +57,59 @@ public class ClientController implements ObserverViewClient {
      */
     public void handleTakeCard(Position[] positions) {
         int i;
-        Card[] cards = new Card[positions.length];
+        ArrayList<Card> cards = new ArrayList<>();
         for (i = 0; i < positions.length; i++) {
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
+                return;
             } else {
-                cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
+                cards.add(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()));
             }
         }
-        TakeCardBoard message = new TakeCardBoard(cards, virtualModel.getMe().getNickname());
-        socketClient.sendMessage(message);
+
+        if(virtualModel.getBoard().allow(cards)){
+            virtualModel.setCardSelect(cards);
+            int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
+            view.onShowPossibleColumnReq(coloum,cards,virtualModel.getMe().getLibrary());
+        }
+        else
+            view.onNotifyCardsAreNotAdjacentReq();
     }
 
     /**
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
-        PutInLib message = new PutInLib(x, virtualModel.getMe().getNickname());
+        System.out.println("Ciao");
+        PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(),virtualModel.getCardSelect(),x);
         socketClient.sendMessage(message);
     }
 
-    public void handleColoumnRequest(int numberOfCards , String name){
-        ColumnRequest message = new ColumnRequest(numberOfCards , name);
+    public void handleColoumnRequest(int numberOfCards, String name) {
+        ColumnRequest message = new ColumnRequest(numberOfCards, name);
         socketClient.sendMessage(message);
     }
+
+    @Override
+    public void handleSeeBoard() {
+        view.onShowNewBoardReq(virtualModel.getBoard());
+    }
+
+    @Override
+    public void handleSeePersonalCard() {
+        view.onNotifyPersonalCardReq(virtualModel.getMe().getPersonalCard());
+    }
+
+    @Override
+    public void handleSeeCommonCard() {
+        view.onNotifyCommonCards(virtualModel.getCommonGoalCards());
+    }
+
     /**
      * the method sends a message to socket client to calculate points for the player
      */
-    public void handleFinalPoint(String name){
-        FinalPointRequest message =new FinalPointRequest(name);
+    public void handleFinalPoint(String name) {
+        FinalPointRequest message = new FinalPointRequest(name);
         socketClient.sendMessage(message);
     }
 
@@ -105,6 +133,7 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel.addObserver(view);
 
     }
+
     public void SeeSomeoneLibrary(String nickname) {
         view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
     }

@@ -256,6 +256,37 @@ public class MatchController {
         }
 
     }
+    public void handler(PlayerAction m){
+        cardSelect=m.getCards();
+        int column=m.getColumn();
+        String nickname = m.getnickname();
+
+        if(match.getBoard().allow(cardSelect)){
+            for(Card card : cardSelect){
+                match.getBoard().takeCard(card.getCoordinates());
+            }
+            match.getMatchmanager().IsEmptyBoard(match);
+            for(VirtualView v: connectClients.values()){
+                v.updateboard(match.getBoard());
+            }
+
+            match.getPlayerByNickname(nickname).getLibrary().setColumn(cardSelect,column);
+
+            for(VirtualView v: connectClients.values()){
+                v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(),m.getnickname());
+            }
+            if(match.getPlayerByNickname(nickname).getLibrary().isFull())
+                firstFinish(match.getPlayerByNickname(nickname));
+
+            match.getPlayerByNickname(nickname).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(nickname));
+            nextPlayer();
+
+        }
+        else{
+            connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
+        }
+
+    }
     /**
      * this message the server received the card chosen by the player
      * @param m ArrayList of Card choose by the player
