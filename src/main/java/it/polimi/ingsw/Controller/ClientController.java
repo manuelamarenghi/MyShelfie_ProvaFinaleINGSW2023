@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
-    private final SocketClient  socketClient;
+    private final SocketClient socketClient;
     private VirtualModel virtualModel;
     private MessageHandler messageHandler;
     //localhost
@@ -31,7 +31,7 @@ public class ClientController implements ObserverViewClient {
     }
 
 
-    public void handleEnterPlayer (String nickname){
+    public void handleEnterPlayer(String nickname) {
         EnterPlayer message = new EnterPlayer(nickname);
         socketClient.sendMessage(message);
     }
@@ -40,12 +40,12 @@ public class ClientController implements ObserverViewClient {
      * The method creates board depending on number of players
      */
 
-    public void handleCreateBoard(int numeberOfPlayers , String name ){
-        Numb_Player message = new Numb_Player(numeberOfPlayers , name);
+    public void handleCreateBoard(int numeberOfPlayers, String name) {
+        Numb_Player message = new Numb_Player(numeberOfPlayers, name);
         socketClient.sendMessage(message);
     }
 
-    public void handleCreateMatch(Match match){
+    public void handleCreateMatch(Match match) {
         Created_Match message = new Created_Match(match);
         socketClient.sendMessage(message);
     }
@@ -53,7 +53,7 @@ public class ClientController implements ObserverViewClient {
     /**
      * the sends a message to socket client in case it decides to pick a card from board
      */
-    public void handleTakeCard(Position[] positions , String name ){
+    public void handleTakeCard(Position[] positions, String name) {
         int i;
         Card[] cards = new Card[positions.length];
         for (i = 0; i < positions.length; i++) {
@@ -70,20 +70,35 @@ public class ClientController implements ObserverViewClient {
     /**
      * The method sends a message to socket client to put a card in the library
      */
-    public void handlePutInLibrary (int x , String name , ArrayList<Card> cards){
-        PutInLib message = new PutInLib(x , name , cards);
+    public void handlePutInLibrary(int x, String name, ArrayList<Card> cards) {
+        PutInLib message = new PutInLib(x, name, cards);
         socketClient.sendMessage(message);
     }
 
-    public void handleColoumnRequest(int numberOfCards , String name){
-        ColumnRequest message = new ColumnRequest(numberOfCards , name);
+    public void handleColoumnRequest(int numberOfCards, String name) {
+        ColumnRequest message = new ColumnRequest(numberOfCards, name);
         socketClient.sendMessage(message);
     }
+
+    public void handleSeeBoard() {
+        view.onShowNewBoardReq(virtualModel.getBoard());
+    }
+
+    @Override
+    public void handleSeePersonalCard() {
+        view.onNotifyPersonalCardReq(virtualModel.getMe().getPersonalCard());
+    }
+
+    @Override
+    public void handleSeeCommonCard() {
+        view.onNotifyCommonCards(virtualModel.getCommonGoalCards());
+    }
+
     /**
      * the method sends a message to socket client to calculate points for the player
      */
-    public void handleFinalPoint(String name){
-        FinalPointRequest message =new FinalPointRequest(name);
+    public void handleFinalPoint(String name) {
+        FinalPointRequest message = new FinalPointRequest(name);
         socketClient.sendMessage(message);
     }
 
@@ -109,6 +124,9 @@ public class ClientController implements ObserverViewClient {
     }
 
     public void SeeSomeoneLibrary(String nickname) {
-        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
+        if (virtualModel.getPlayer(nickname).getNickname() == null) {
+            view.errorNickname(virtualModel.getPlayers());
+        } else
+            view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
     }
 }
