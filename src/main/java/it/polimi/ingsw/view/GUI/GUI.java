@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class GUI extends ObservableViewClient implements ViewClient {
     private ClientController clientController;
     private LivingRoomController livingController;
-
+    private String nickname;
     public GUI(LivingRoomController livingController) {
         this.livingController = livingController;
     }
@@ -31,12 +31,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
-
-    }
-
-    @Override
-    public void onNotifyNewLibraryReq(String nickname, Library library) {
-
+        Platform.runLater(() -> livingController.createBoard(board));
     }
 
     @Override
@@ -45,12 +40,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-
+        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game"));
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-
+        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "is back in the game"));
     }
 
     @Override
@@ -60,7 +55,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score) {
-
+        if (this.nickname.equals(nickname)) {
+            Platform.runLater(() -> livingController.setTokenCommon(score));
+        } else {
+            onShowReq(nickname + " has reached a common goal taking " + score + " score");
+        }
     }
 
     @Override
@@ -70,7 +69,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
-
+        Platform.runLater(() -> livingController.ShowColumn(x));
     }
 
     @Override
@@ -86,7 +85,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
-
+        Platform.runLater(() -> livingController.setFirstFinished());
     }
 
     @Override
@@ -96,7 +95,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-
+        //interfaccia fine gioco
     }
 
     @Override
@@ -113,6 +112,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyNewNicknameReq() {
+
     }
 
     @Override
@@ -149,6 +149,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
+
+    }
+
+    @Override
+    public void onNotifyMexInChat(String getnickname, String mex, String dest) {
 
     }
 

@@ -4,9 +4,6 @@ import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
-import it.polimi.ingsw.view.GUI.JavaFXApplication;
-import it.polimi.ingsw.view.VirtualModel;
-import javafx.application.Application;
 
 import java.io.IOException;
 
@@ -39,7 +36,7 @@ public class ClientApp {
         sClient.sendMessage(m2);
         sClient.readMessage();*/
         Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost", 16847);
+        SocketClient socketClient = new SocketClient("192.168.43.13", 16847);
         socketClient.readMessage();
 
 

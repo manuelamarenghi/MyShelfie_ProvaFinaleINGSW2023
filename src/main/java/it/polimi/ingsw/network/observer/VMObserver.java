@@ -12,8 +12,6 @@ public interface VMObserver {
 
     void onShowNewBoardReq(Board board);
 
-    void onNotifyNewLibraryReq(String nickname, Library library);
-
     void onNotifyGameFullReq();
 
     void onNotifyPlayerDisconnectionReq(Player player);
@@ -57,4 +55,6 @@ public interface VMObserver {
     void onNotifyAllPlayerReq(ArrayList<String> players);
 
     void onNotifyCommonCards(EffectiveCard[] cards);
+
+    void onNotifyMexInChat(String getnickname, String mex, String dest);
 }

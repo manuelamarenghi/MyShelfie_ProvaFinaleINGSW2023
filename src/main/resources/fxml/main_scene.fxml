@@ -11,7 +11,7 @@
     <children>
         <ImageView fitHeight="361.0" fitWidth="622.0" layoutX="-22.0" layoutY="-1.0" preserveRatio="true">
             <image>
-                <Image url="@../images/Publisher material/Publisher.png"/>
+                <Image url="@../images/Publisher_material/Publisher.png"/>
             </image>
         </ImageView>
         <TextField fx:id="name_txb" layoutX="200.0" layoutY="73.0" onKeyPressed="#onEnterNick" prefHeight="25.0"

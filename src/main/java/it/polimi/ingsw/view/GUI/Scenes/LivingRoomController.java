@@ -35,7 +35,7 @@ public class LivingRoomController extends ObservableViewClient implements Contro
     @FXML
     private Button Common2;
     @FXML
-    private Button Exit;
+    private Button Exit, Send;
     @FXML
     private ImageView PersonalCard;
     @FXML
@@ -58,13 +58,22 @@ public class LivingRoomController extends ObservableViewClient implements Contro
     @FXML
     private TextField inputUser;
     @FXML
-    private ImageView Chair;
-    private boolean yourTurn;
+    private ImageView Chair, TokenCommon1, TokenCommon2, FirstFinished;
+    @FXML
+    private ImageView Col0, Col1, Col2, Col3, Col4;
+    private boolean yourTurn, SendbuttonAble, Token1set;
     private int cardtaken;
     private int index;
     private Position[] positions = new Position[3];
+    private int[] columnforthisturn;
+
+    public String getUserInput() {
+        inputUser.clear();
+        return inputUser.getText();
+    }
 
     public void setTextArea(String s) {
+        messageServer.clear();
         messageServer.appendText(s);
     }
 
@@ -112,6 +121,9 @@ public class LivingRoomController extends ObservableViewClient implements Contro
         tiles.put("blue", imageB);
     }
     public void initialize() {
+        Token1set = false;
+        SendbuttonAble = false;
+        messageServer.setEditable(false);
         index = 0;
         cardtaken = 3;
         yourTurn = true;
@@ -121,16 +133,6 @@ public class LivingRoomController extends ObservableViewClient implements Contro
         backgroundlibrary.toBack();
         stackPane = new StackPane();
         background.toBack();
-        Library l = new Library();
-        l.getCardinPos(4, 4).setColour("green");
-        l.getCardinPos(5, 4).setColour("green");
-        l.getCardinPos(5, 2).setColour("blue");
-        l.getCardinPos(5, 1).setColour("pink");
-        Board board = new Board(2);
-        board.fill(0);
-        setTiles();
-        createBoard(board);
-        createLibrary(l);
         gameBoard.toFront();
     }
 
@@ -155,7 +157,7 @@ public class LivingRoomController extends ObservableViewClient implements Contro
                                 positions[index] = new Position(columnIndex, rowIndex);
                                 index++;
                             } else {
-                                this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions, "lalal"));
+                                this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions));
                                 removeHighlights();
                                 int index = 0;
                             }
@@ -228,7 +230,7 @@ public class LivingRoomController extends ObservableViewClient implements Contro
     }
 
     public void pressedExit(MouseEvent mouseEvent) {
-        this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection("lalala"));
+        this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection(null));
     }
 
     public void pressedLibraries(MouseEvent mouseEvent) {
@@ -239,12 +241,36 @@ public class LivingRoomController extends ObservableViewClient implements Contro
         //passa a chat
     }
 
+    public void pressedSend(MouseEvent mouseEvent) {
+        int n;
+        if (SendbuttonAble) {
+            do {
+                setTextArea("Insert a valid column you want to choose");
+                String s = getUserInput();
+                n = Integer.parseInt(s);
+            } while (ValidColumn(columnforthisturn, n));
+            int finalN = n;
+            this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
+            SendbuttonAble = true;
+            Col0.setImage(null);
+            Col1.setImage(null);
+            Col2.setImage(null);
+            Col3.setImage(null);
+            Col4.setImage(null);
+        }
+    }
+
     public void setTokenCommon(int x) {
-        String c = String.valueOf(x);
-        String name = "/images/misc/scoring_" + c + ".png";
+        String name = "/images/scoring_tokens/scoring_" + x + ".png";
         InputStream is;
         is = this.getClass().getResourceAsStream(name);
         Image image = new Image(is);
+        if (Token1set == false) {
+            TokenCommon1.setImage(image);
+            Token1set = true;
+        } else {
+            TokenCommon2.setImage(image);
+        }
     }
 
     public void setChair() {
@@ -252,6 +278,40 @@ public class LivingRoomController extends ObservableViewClient implements Contro
         InputStream is;
         is = this.getClass().getResourceAsStream(name);
         Image image = new Image(is);
-        Chair = new ImageView(image);
+        Chair.setImage(image);
+    }
+
+    public void setFirstFinished() {
+        String name = "/images/scoring_tokens/end_game.png";
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(is);
+        FirstFinished.setImage(image);
+    }
+
+    public void ShowColumn(int[] x) {
+        Integer n;
+        ImageView[] ViewScatola = {Col0, Col1, Col2, Col3, Col4};
+        InputStream is;
+        String name = "/images/Publisher_material/arrow.png";
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(is);
+        for (int i : x) {
+            ViewScatola[i].setImage(image);
+            ViewScatola[i].setFitWidth(16);
+            ViewScatola[i].setFitHeight(16);
+        }
+        setTextArea("Insert a valid column you want to choose");
+        SendbuttonAble = true;
+        columnforthisturn = x;
+    }
+
+    public boolean ValidColumn(int[] x, int y) {
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] == y) {
+                return true;
+            }
+        }
+        return false;
     }
 }

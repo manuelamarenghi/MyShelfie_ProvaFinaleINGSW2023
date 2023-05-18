@@ -28,6 +28,7 @@ public class JavaFXApplication extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/background_livingroom.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("/css/Highlights_Image.css").toExternalForm());
+        primaryStage.setResizable(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
