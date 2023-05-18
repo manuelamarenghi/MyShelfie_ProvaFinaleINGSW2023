@@ -5,6 +5,9 @@ import it.polimi.ingsw.modello.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * MessageHandle notify view
+ */
 public interface VMObserver {
     void onShowReq(String s);
 
@@ -12,7 +15,6 @@ public interface VMObserver {
 
     void onShowNewBoardReq(Board board);
 
-    void onNotifyNewLibraryReq(String nickname, Library library);
 
     void onNotifyGameFullReq();
 
@@ -39,6 +41,7 @@ public interface VMObserver {
     void onShowFinalScoreBoardReq(HashMap<String, Integer> point);
 
     void onShowNewMyLibraryReq(Library l);
+
 
     void onNotifyDisconnectionReqAcceptedAns();
 
