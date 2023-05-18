@@ -22,7 +22,7 @@ public class ClientApp {
             Cli view = new Cli();
             ClientController clientcontroller = new ClientController(null,null);
         } else {
-            //Application.launch(JavaFXGui.class);
+            //Application.launch(JavaFXApplication.class);
         }*/
         /*Scanner in=new Scanner(System.in);
         SocketClient sClient=new SocketClient("localhost",16847);
