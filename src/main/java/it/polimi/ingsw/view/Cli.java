@@ -125,7 +125,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
         try {
             int numberOfPlayers = numberInput(2, 4, null, question);
-            this.notifyObserver(observerViewClient -> observerViewClient.handleCreateBoard(numberOfPlayers, nickname));
+            this.notifyObserver(observerViewClient -> observerViewClient.handleCreateBoard(numberOfPlayers));
             //clientController.handleCreateBoard(numberOfPlayers , nickname);
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
@@ -160,7 +160,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             }
 
         }
-        this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions, nickname));
+        this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions));
         //clientController.handleTakeCard(positions , nickname);
 
 
@@ -236,18 +236,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
     @Override
     public void onShowNewBoardReq(Board board) {
         board.showBoard();
-    }
-
-    /**
-     * The method prints the updated library of the player
-     *
-     * @param nickname
-     * @param library
-     */
-    @Override
-    public void onNotifyNewLibraryReq(String nickname, Library library) {
-        out.println(nickname + " your library is this :");
-        library.showLibrary();
     }
 
     /**
@@ -376,7 +364,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             colourCard.remove(colour);
         }
         int finalSelectedColumn = selectedColumn;
-        this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
+        // this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn, nickname, orderCard));
 
     }
 
@@ -519,6 +507,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
             System.out.println("DESCRIPTION : " + effectiveCard.description());
         }
+    }
+
+    @Override
+    public void onNotifyMexInChat(String getnickname, String mex, String dest) {
+
     }
 
 

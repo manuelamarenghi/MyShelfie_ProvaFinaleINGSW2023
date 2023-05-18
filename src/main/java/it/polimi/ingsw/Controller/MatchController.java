@@ -21,7 +21,7 @@ public class MatchController {
     private Map<Player, VirtualView> disconnectClients;
     private Map<String, VirtualView> connectClients;
     private boolean isStarted = false;
-
+    ArrayList<Card> cardSelect;
 
 
 
@@ -261,7 +261,7 @@ public class MatchController {
      * @param m ArrayList of Card choose by the player
      */
     public void handler(TakeCardBoard m){
-        ArrayList<Card> cardSelect = m.getCards();
+        cardSelect = m.getCards();
         if(match.getBoard().allow(cardSelect)){
             for(Card card : cardSelect){
                 match.getBoard().takeCard(card.getCoordinates());
@@ -287,9 +287,8 @@ public class MatchController {
     public void handler(PutInLib m){
         int coloum = m.getColumn();
         String player = m.getnickname();
-        ArrayList<Card> cards = m.getCardsInOrder();
 
-        match.getPlayerByNickname(player).getLibrary().setColumn(cards,coloum);
+        match.getPlayerByNickname(player).getLibrary().setColumn(cardSelect, coloum);
         for(VirtualView v: connectClients.values()){
             v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(),m.getnickname());
         }
