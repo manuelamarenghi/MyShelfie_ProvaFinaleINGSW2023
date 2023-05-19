@@ -31,15 +31,15 @@ public class  VirtualModel extends VMObservable {
         this.cardSelect = new ArrayList<>();
     }
 
-    public synchronized void setCardSelect(ArrayList<Card> cards) {
+    public  void setCardSelect(ArrayList<Card> cards) {
         this.cardSelect = cards;
     }
 
-    public synchronized ArrayList<Card> getCardSelect() {
+    public  ArrayList<Card> getCardSelect() {
         return cardSelect;
     }
 
-    public synchronized void setCommonCards(EffectiveCard[] commonCards) {
+    public  void setCommonCards(EffectiveCard[] commonCards) {
         CommonCards = commonCards;
     }
 
@@ -47,94 +47,94 @@ public class  VirtualModel extends VMObservable {
         return playerNumber;
     }
 
-    public synchronized Player getFirstFinish() {
+    public  Player getFirstFinish() {
         return firstFinish;
     }
 
-    public synchronized void setMe(String me) {
+    public  void setMe(String me) {
         this.me = new Player(me);
     }
 
-    public synchronized void setFirstFinish(String firstFinish) {
+    public  void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
         }
     }
 
-    public synchronized void setPlayers(ArrayList<String> players) {
+    public  void setPlayers(ArrayList<String> players) {
         for (String p : players) {
             this.players.add(new Player(p));
         }
     }
 
-    public synchronized void setPlayerNumber(int playerNumber) {
+    public  void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public synchronized ArrayList<Player> getPlayers() {
+    public  ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public synchronized void addPlayer(Player player) {
+    public  void addPlayer(Player player) {
         this.players.add(player);
     }
 
-    public  synchronized void removePlayer(String nickname) {
+    public   void removePlayer(String nickname) {
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
 
-    public synchronized void updateBoard(Board board) {
+    public  void updateBoard(Board board) {
         this.board = board;
     }
 
-    public synchronized void updateChair(String nickname) {
+    public  void updateChair(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) this.chair = player;
         }
     }
 
-    public synchronized Player getChair() {
+    public  Player getChair() {
         return chair;
     }
 
-    public synchronized void updatePlayerNumber(int playerNumber) {
+    public  void updatePlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public synchronized PersonalGoalCard getPersonalGoalCard() {
+    public  PersonalGoalCard getPersonalGoalCard() {
         return this.me.getPersonalCard();
     }
 
-    public synchronized EffectiveCard[] getCommonGoalCards() {
+    public  EffectiveCard[] getCommonGoalCards() {
         return this.CommonCards;
     }
 
-    public synchronized void updateIsMyTurn() {
+    public  void updateIsMyTurn() {
         this.isMyTurn = !this.isMyTurn;
     }
 
-    public synchronized boolean isMyTurn() {
+    public  boolean isMyTurn() {
         return this.isMyTurn;
     }
 
-    public synchronized Player getMe() {
+    public  Player getMe() {
         return this.me;
     }
 
-    public synchronized void updateCommonScore(String nickname, int score) {
+    public  void updateCommonScore(String nickname, int score) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) player.setCommonGoalScore(score);
         }
     }
 
-    public synchronized Player getPlayer(String nickname) {
+    public  Player getPlayer(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) return player;
         }
         return new Player(null);
     }
 
-    public synchronized Board getBoard() {
+    public  Board getBoard() {
         return board;
     }
 }
