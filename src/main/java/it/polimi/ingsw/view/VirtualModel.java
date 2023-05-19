@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.observer.VMObservable;
 
 import java.util.ArrayList;
 
-public class  VirtualModel extends VMObservable {
+public class VirtualModel extends VMObservable {
     private ArrayList<Player> players;
     private Player me;
     private boolean isMyTurn;
@@ -31,15 +31,15 @@ public class  VirtualModel extends VMObservable {
         this.cardSelect = new ArrayList<>();
     }
 
-    public  void setCardSelect(ArrayList<Card> cards) {
-        this.cardSelect = cards;
-    }
-
-    public  ArrayList<Card> getCardSelect() {
+    public ArrayList<Card> getCardSelect() {
         return cardSelect;
     }
 
-    public  void setCommonCards(EffectiveCard[] commonCards) {
+    public void setCardSelect(ArrayList<Card> cards) {
+        this.cardSelect = cards;
+    }
+
+    public void setCommonCards(EffectiveCard[] commonCards) {
         CommonCards = commonCards;
     }
 
@@ -47,94 +47,94 @@ public class  VirtualModel extends VMObservable {
         return playerNumber;
     }
 
-    public  Player getFirstFinish() {
+    public Player getFirstFinish() {
         return firstFinish;
     }
 
-    public  void setMe(String me) {
-        this.me = new Player(me);
-    }
-
-    public  void setFirstFinish(String firstFinish) {
+    public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
         }
     }
 
-    public  void setPlayers(ArrayList<String> players) {
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<String> players) {
         for (String p : players) {
             this.players.add(new Player(p));
         }
     }
 
-    public  void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
-    }
-
-    public  ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    public  void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         this.players.add(player);
     }
 
-    public   void removePlayer(String nickname) {
+    public void removePlayer(String nickname) {
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
 
-    public  void updateBoard(Board board) {
+    public void updateBoard(Board board) {
         this.board = board;
     }
 
-    public  void updateChair(String nickname) {
+    public void updateChair(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) this.chair = player;
         }
     }
 
-    public  Player getChair() {
+    public Player getChair() {
         return chair;
     }
 
-    public  void updatePlayerNumber(int playerNumber) {
+    public void updatePlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    public  PersonalGoalCard getPersonalGoalCard() {
+    public PersonalGoalCard getPersonalGoalCard() {
         return this.me.getPersonalCard();
     }
 
-    public  EffectiveCard[] getCommonGoalCards() {
+    public EffectiveCard[] getCommonGoalCards() {
         return this.CommonCards;
     }
 
-    public  void updateIsMyTurn() {
+    public void updateIsMyTurn() {
         this.isMyTurn = !this.isMyTurn;
     }
 
-    public  boolean isMyTurn() {
+    public boolean isMyTurn() {
         return this.isMyTurn;
     }
 
-    public  Player getMe() {
+    public Player getMe() {
         return this.me;
     }
 
-    public  void updateCommonScore(String nickname, int score) {
+    public void setMe(String me) {
+        this.me = new Player(me);
+    }
+
+    public void updateCommonScore(String nickname, int score) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) player.setCommonGoalScore(score);
         }
     }
 
-    public  Player getPlayer(String nickname) {
+    public Player getPlayer(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) return player;
         }
         return new Player(null);
     }
 
-    public  Board getBoard() {
+    public Board getBoard() {
         return board;
     }
 }

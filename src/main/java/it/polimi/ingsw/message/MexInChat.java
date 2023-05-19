@@ -32,7 +32,7 @@ public class MexInChat extends Message implements Serializable {
     public void MextoClientHandler(ClientHandler c, String s) {
         String destinatario;
         if (this.dest.size() > 1) {
-            destinatario = "all";
+            destinatario = "Group Chat";
         } else {
             destinatario = "you";
         }

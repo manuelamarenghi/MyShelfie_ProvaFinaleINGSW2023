@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.view.GUI.Scenes.ChatController;
 import it.polimi.ingsw.view.GUI.Scenes.LibrariesController;
 import it.polimi.ingsw.view.GUI.Scenes.LivingRoomController;
 import it.polimi.ingsw.view.ObservableViewClient;
@@ -14,9 +15,12 @@ import java.util.HashMap;
 public class GUI extends ObservableViewClient implements ViewClient {
     private ClientController clientController;
     private LivingRoomController livingController;
+    private ChatController chatController;
     private String nickname;
-    public GUI(LivingRoomController livingController) {
+
+    public GUI(LivingRoomController livingController, ChatController chatController) {
         this.livingController = livingController;
+        this.chatController = chatController;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
+        Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
         Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game"));
     }
 
@@ -144,7 +149,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
-
+        Platform.runLater(() -> chatController.setChats(players));
     }
 
     @Override
@@ -154,7 +159,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMexInChat(String getnickname, String mex, String dest) {
-
+        Platform.runLater(() -> chatController.arrivedMex(getnickname, mex, dest));
     }
 
     @Override

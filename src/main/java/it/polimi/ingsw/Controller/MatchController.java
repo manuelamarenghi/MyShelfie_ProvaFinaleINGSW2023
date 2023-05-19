@@ -250,33 +250,34 @@ public class MatchController {
 
         numberOfPlayers = numberPlayer.getNumb();
 
-        System.out.println("il numero di giocatori è "+numberPlayer.getNumb());
-        for(VirtualView v: connectClients.values()){
+        System.out.println("il numero di giocatori è " + numberPlayer.getNumb());
+        for (VirtualView v : connectClients.values()) {
             v.sendNumbPlayer(numberOfPlayers);
         }
 
     }
-    public void handler(PlayerAction m){
-        cardSelect=m.getCards();
-        int column=m.getColumn();
+
+    public void handler(PlayerAction m) {
+        cardSelect = m.getCards();
+        int column = m.getColumn();
         String nickname = m.getnickname();
 
-        if(match.getBoard().allow(cardSelect)){
-            for(Card card : cardSelect){
+        if (match.getBoard().allow(cardSelect)) {
+            for (Card card : cardSelect) {
                 match.getBoard().takeCard(card.getCoordinates());
             }
             match.getMatchmanager().IsEmptyBoard(match);
-            for(VirtualView v: connectClients.values()){
+            for (VirtualView v : connectClients.values()) {
                 v.updateboard(match.getBoard());
             }
             System.out.println("update board");
-            match.getPlayerByNickname(nickname).getLibrary().setColumn(cardSelect,column);
+            match.getPlayerByNickname(nickname).getLibrary().setColumn(cardSelect, column);
 
-            for(VirtualView v: connectClients.values()){
-                v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(),m.getnickname());
+            for (VirtualView v : connectClients.values()) {
+                v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(), m.getnickname());
             }
             System.out.println("update library");
-            if(match.getPlayerByNickname(nickname).getLibrary().isFull())
+            if (match.getPlayerByNickname(nickname).getLibrary().isFull())
                 firstFinish(match.getPlayerByNickname(nickname));
 
             System.out.println("Finish control library full");
@@ -285,8 +286,7 @@ public class MatchController {
             nextPlayer();
             System.out.println("next player");
 
-        }
-        else{
+        } else {
             connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
         }
 

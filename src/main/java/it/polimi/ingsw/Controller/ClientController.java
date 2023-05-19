@@ -3,14 +3,12 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.message.*;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.modello.Position;
 import it.polimi.ingsw.network.MessageHandler;
 import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
-import it.polimi.ingsw.view.VirtualView;
 
 import java.util.ArrayList;
 
@@ -67,16 +65,15 @@ public class ClientController implements ObserverViewClient {
             }
         }
 
-        if(virtualModel.getBoard().allow(cards)){
-            for(Card card : cards){
+        if (virtualModel.getBoard().allow(cards)) {
+            for (Card card : cards) {
                 virtualModel.getBoard().takeCard(card.getCoordinates());
             }
             view.onShowNewBoardReq(virtualModel.getBoard());
             virtualModel.setCardSelect(cards);
             int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
-            view.onShowPossibleColumnReq(coloum,cards,virtualModel.getMe().getLibrary());
-        }
-        else
+            view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
+        } else
             view.onNotifyCardsAreNotAdjacentReq();
     }
 
@@ -84,7 +81,7 @@ public class ClientController implements ObserverViewClient {
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
-        PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(),virtualModel.getCardSelect(),x);
+        PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(), virtualModel.getCardSelect(), x);
         socketClient.sendMessage(message);
     }
 
@@ -125,8 +122,10 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
-
-
+    @Override
+    public void handleMexChat(ArrayList<String> dest, String mex) {
+        MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
+    }
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);

@@ -3,6 +3,8 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.modello.Position;
 
+import java.util.ArrayList;
+
 public interface ObserverViewClient {
     void handleEnterPlayer(String nickname);
 
@@ -23,8 +25,16 @@ public interface ObserverViewClient {
     void handleSeePersonalCard();
     void handleSeeCommonCard();
 
+    void handleSeeBoard();
+
+    void handleSeePersonalCard();
+
+    void handleSeeCommonCard();
+
 
     void setNickname(String nickname);
 
     void SeeSomeoneLibrary(String nickname);
+
+    void handleMexChat(ArrayList<String> dest, String message);
 }
