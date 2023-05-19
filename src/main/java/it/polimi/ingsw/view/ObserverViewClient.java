@@ -19,6 +19,9 @@ public interface ObserverViewClient {
     void handleFinalPoint(String name);
 
     void handleDisconection(String name);
+    void handleSeeBoard();
+    void handleSeePersonalCard();
+    void handleSeeCommonCard();
 
 
     void setNickname(String nickname);
