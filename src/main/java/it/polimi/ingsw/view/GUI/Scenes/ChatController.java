@@ -38,7 +38,7 @@ public class ChatController extends ObservableViewClient implements Controller {
         names.add("giada");
         names.add("rita");
         setChats(names);
-        arrivedMex("giada", "ciaoo", "you");
+        arrivedMex("carlo", "ciaoo", "you");
     }
 
     public void setYourNickname(String nick) {
@@ -65,8 +65,8 @@ public class ChatController extends ObservableViewClient implements Controller {
             } else {
                 dest.add(selectedItem);
             }
-            if (StoredChat.get(dest) != null) {
-                for (String x : StoredChat.get(dest)) {
+            if (!StoredChat.get(selectedItem).isEmpty()) {
+                for (String x : StoredChat.get(selectedItem)) {
                     Chat.appendText(x + "\n");
                 }
             }
@@ -103,6 +103,9 @@ public class ChatController extends ObservableViewClient implements Controller {
             StoredChat.get(getnickname).add(getnickname + ": " + mex + "\n");
         } else {
             StoredChat.get("Group Chat").add(getnickname + ": " + mex + "\n");
+        }
+        if (selectedItem.equals(dest)) {
+            Chat.appendText(getnickname + ": " + mex + "\n");
         }
         if (selectedItem.equals(getnickname)) {
             Chat.appendText(getnickname + ": " + mex + "\n");
