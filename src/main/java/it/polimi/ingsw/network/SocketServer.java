@@ -33,7 +33,7 @@ public class SocketServer implements Runnable{
                 Thread thread = new Thread(clientHandler, "ss_handler" + client.getInetAddress());
                 thread.start();
             } catch (Exception e) {
-
+                System.out.println(e);
             }
         }
     }
