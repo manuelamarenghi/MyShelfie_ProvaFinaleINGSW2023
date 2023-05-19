@@ -22,10 +22,16 @@ public interface ObserverViewClient {
 
     void handleDisconection(String name);
 
+    void handleSeeBoard();
+
+    void handleSeePersonalCard();
+
+    void handleSeeCommonCard();
+
 
     void setNickname(String nickname);
 
     void SeeSomeoneLibrary(String nickname);
 
-    void handleMexChat(ArrayList<String> dest, String mex);
+    void handleMexChat(ArrayList<String> dest, String message);
 }
