@@ -182,7 +182,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         int j = 0;
         for (i = 0; i < 5; i++) {
             if (j < x.length) {
-                if (x[j] == i ) {
+                if (x[j] == i) {
                     System.out.print(x[j] + ",");
                     j++;
                 } else

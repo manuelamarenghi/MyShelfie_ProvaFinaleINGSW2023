@@ -193,14 +193,14 @@ public class LivingRoomController extends ObservableViewClient implements Contro
     public void TakeCards() {
         Integer n;
         do {
-            messageServer.setText("Insert the number of items you want to take");
+            setTextArea("Insert the number of items you want to take");
             String x = inputUser.getText();
             messageServer.clear();
             n = Integer.parseInt(x);
         } while (n < 0 && n > 3);
         setCardtaken(n);
         inputUser.clear();
-        messageServer.setText("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
+        setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
         index = 0;
     }
 
