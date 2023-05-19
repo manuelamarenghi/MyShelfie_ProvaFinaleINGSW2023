@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LibrariesController extends ObservableViewClient implements Controller {
+public class LibrariesController extends ObservableViewClient implements GenericSceneController {
     private Map<String, Image[]> tiles;
     @FXML
     private StackPane Stackpane;
@@ -102,7 +102,7 @@ public class LibrariesController extends ObservableViewClient implements Control
     }
 
     public void pressedBack(MouseEvent mouseEvent) {
-        //torna a livingroom
+        //devo passare per gui
     }
 
 }

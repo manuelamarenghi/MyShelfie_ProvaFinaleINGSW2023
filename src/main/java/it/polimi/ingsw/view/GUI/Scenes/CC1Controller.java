@@ -6,16 +6,16 @@ import javafx.scene.control.Label;
 
 import java.awt.event.ActionEvent;
 
-public class CC1Controller implements Controller {
-        public Button theButton;
-        public Label theLabel;
-        private Square2G commonGoalCard;
-        private String textToShow;
+public class CC1Controller implements GenericSceneController {
+    public Button theButton;
+    public Label theLabel;
+    private Square2G commonGoalCard;
+    private String textToShow;
 
-        //
-        public void getDescription(ActionEvent event) {
-                textToShow = commonGoalCard.getDesc();
-                theLabel.setText(textToShow);
+    //
+    public void getDescription(ActionEvent event) {
+        textToShow = commonGoalCard.getDesc();
+        theLabel.setText(textToShow);
 
         }
 }

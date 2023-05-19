@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatController extends ObservableViewClient implements Controller {
+public class ChatController extends ObservableViewClient implements GenericSceneController {
     @FXML
     private ListView ChatsAvaiable;
     @FXML

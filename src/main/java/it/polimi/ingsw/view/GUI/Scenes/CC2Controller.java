@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 
 import java.awt.event.ActionEvent;
 
-public class CC2Controller {
+public class CC2Controller implements GenericSceneController {
     public Col2G commonGoalCard;
     @FXML
     private Label myLabel;
