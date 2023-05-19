@@ -148,6 +148,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             out.println("WRONG_INPUT");
             return;
         }
+        System.out.println("Choose card in order");
         Position[] positions = new Position[numberOfCards];
         for (i = 0; i < numberOfCards; i++) {
             try {
@@ -161,10 +162,9 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
         }
         this.notifyObserver(observerViewClient -> observerViewClient.handleTakeCard(positions));
-        //clientController.handleTakeCard(positions , nickname);
-
 
     }
+
     /**
      * The method returns the coloumns in which the card can be put
      *
@@ -181,11 +181,13 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
         int j = 0;
         for (i = 0; i < 5; i++) {
-            if (x[j] == i && j < x.length) {
-                System.out.print(x[j] + ",");
-                j++;
-            } else
-                excludedNumbers.add(i);
+            if (j < x.length) {
+                if (x[j] == i ) {
+                    System.out.print(x[j] + ",");
+                    j++;
+                } else
+                    excludedNumbers.add(i);
+            }
         }
         out.println();
         String question = "Select the coloumn to put your cards from the shown coloumns.";
@@ -198,32 +200,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
             out.println("WRONG_INPUT");
         }
 
-        ArrayList<String> colourCard = new ArrayList<>();
-        System.out.println("Choose the order of card");
-        for (Card card : cards) {
-            out.print(card.getColour() + ",");
-            colourCard.add(card.getColour());
-        }
-        out.println();
-
-        ArrayList<Card> orderCard = new ArrayList<>();
-
-        for (i = 0; i < cards.size(); i++) {
-            String colour = "";
-            out.print("The " + i + " card : ");
-            do {
-                try {
-                    colour = readLine();
-                } catch (ExecutionException e) {
-                    out.println("WRONG_INPUT");
-                }
-
-                if (!colourCard.contains(colour))
-                    out.println("Colour error, write again");
-            } while (!colourCard.contains(colour));
-            orderCard.add(new Card(colour));
-            colourCard.remove(colour);
-        }
         int finalSelectedColumn = selectedColumn;
         this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalSelectedColumn));
 
@@ -270,19 +246,21 @@ public class Cli extends ObservableViewClient implements ViewClient {
         }
 
     }
+
     /**
      * Don't have player with this nickname.
      */
-    public void errorNickname(ArrayList<Player> players){
+    public void errorNickname(ArrayList<Player> players) {
         System.out.println("Not exist the player with this nickname." +
                 "Choose other nickname");
         System.out.println("The nickname of the players in the game");
-        for(Player player:players){
+        for (Player player : players) {
             System.out.print(player.getNickname() + " , ");
         }
 
         seeOtherLibrary();
     }
+
     /**
      * The method asks the player if it wants to get dissconnected or not
      */
@@ -422,7 +400,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
 
-
     /**
      * The method tells the player that the cards selected are not adjacent so it needs to select other cards
      */
@@ -547,6 +524,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * The method prints the players of the match
+     *
      * @param players
      */
 

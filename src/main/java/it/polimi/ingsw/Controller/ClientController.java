@@ -68,6 +68,10 @@ public class ClientController implements ObserverViewClient {
         }
 
         if(virtualModel.getBoard().allow(cards)){
+            for(Card card : cards){
+                virtualModel.getBoard().takeCard(card.getCoordinates());
+            }
+            view.onShowNewBoardReq(virtualModel.getBoard());
             virtualModel.setCardSelect(cards);
             int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
             view.onShowPossibleColumnReq(coloum,cards,virtualModel.getMe().getLibrary());
@@ -80,7 +84,6 @@ public class ClientController implements ObserverViewClient {
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
-        System.out.println("Ciao");
         PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(),virtualModel.getCardSelect(),x);
         socketClient.sendMessage(message);
     }

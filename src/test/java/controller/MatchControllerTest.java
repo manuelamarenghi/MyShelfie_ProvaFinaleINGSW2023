@@ -1,18 +1,11 @@
 package controller;
 
 
-import it.polimi.ingsw.message.Message;
 import it.polimi.ingsw.message.Numb_Player;
-import it.polimi.ingsw.message.TakeCardBoard;
-import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.Controller.MatchController;
-import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.ClientHandler;
-import it.polimi.ingsw.network.Server;
-import it.polimi.ingsw.view.VirtualView;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
