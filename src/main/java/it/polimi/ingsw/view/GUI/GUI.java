@@ -30,7 +30,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNumbPlayerReq() {
-
+        LoginSceneController login = new LoginSceneController();
+        Platform.runLater(() -> login.NumbPlayer());
     }
 
     @Override
@@ -40,6 +41,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyGameFullReq() {
+        LoginSceneController login = new LoginSceneController();
+        Platform.runLater(() -> login.GameFull());
     }
 
     @Override
@@ -55,7 +58,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
-
+        Platform.runLater(() -> waitcontr.setPlayer(nickname));
     }
 
     @Override
@@ -95,7 +98,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-
+        Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
     }
 
     @Override
@@ -148,7 +151,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void NotifyaskNicknameReq() throws InterruptedException {
-
+        LoginSceneController login = new LoginSceneController();
+        Platform.runLater(() -> login.Connect_before_first());
     }
 
     @Override
@@ -180,6 +184,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
             case "chat":
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
+            case "wait":
+                Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
         }
     }
 
