@@ -81,7 +81,6 @@ public class SceneController extends ObservableViewClient {
     public static void setRootPane(GenericSceneController controller, Scene scene, String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
-
             // Setting the controller BEFORE the load() method.
             loader.setController(controller);
             activeController = controller;
@@ -89,6 +88,7 @@ public class SceneController extends ObservableViewClient {
             activeScene = scene;
             activeScene.setRoot(root);
             SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
+            SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
         } catch (IOException e) {
         }
     }

@@ -126,6 +126,7 @@ public class ClientController implements ObserverViewClient {
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
     }
+
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);
@@ -137,6 +138,10 @@ public class ClientController implements ObserverViewClient {
     }
 
     public void SeeSomeoneLibrary(String nickname) {
-        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
+        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
+    }
+
+    public void ChangeRoot(String scene) {
+        view.onPressedButtonChange(scene);
     }
 }

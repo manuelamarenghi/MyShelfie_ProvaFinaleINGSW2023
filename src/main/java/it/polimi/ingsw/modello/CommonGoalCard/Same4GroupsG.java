@@ -9,17 +9,23 @@ import java.util.ArrayList;
 /**
  * Same4GroupsG Four groups each containing at least 4 tiles of the same type.The tiles of one group can be different from those of another group.
  */
-public class Same4GroupsG implements CommonGoalCards , Serializable {
+public class Same4GroupsG implements CommonGoalCards, Serializable {
+    int numberCard = 3;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
     public boolean check(Library library) {
         ArrayList<Integer> adjacent = library.getgroup();
-        int count=0;
+        int count = 0;
 
-        for(Integer i : adjacent){
-            if(i>=4)
+        for (Integer i : adjacent) {
+            if (i >= 4)
                 count++;
         }
         if (count >= 4)

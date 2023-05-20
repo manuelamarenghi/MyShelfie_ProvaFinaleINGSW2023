@@ -10,6 +10,12 @@ import java.util.ArrayList;
  * Line4G goal needs 4 lines formed by 5 tiles of maximum 3 different types. Different lines can have different combination of types
  */
 public class Line4G implements CommonGoalCards, Serializable {
+    int numberCard = 7;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * check() returns true if the library match the goal,otherwise false
      */

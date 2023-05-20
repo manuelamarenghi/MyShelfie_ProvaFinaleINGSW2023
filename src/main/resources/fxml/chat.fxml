@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -41,6 +38,8 @@
                         <Image url="@../images/Publisher_material/Cats.png"/>
                      </image>
                   </ImageView>
+                  <Button fx:id="Back" layoutX="803.0" layoutY="18.0" mnemonicParsing="false"
+                          onMouseClicked="#pressedBack" text="Back"/>
                </children>
             </AnchorPane>
          </children>

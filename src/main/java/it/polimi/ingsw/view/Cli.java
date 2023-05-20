@@ -464,7 +464,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      * @param l
      */
     @Override
-    public void onShowNewMyLibraryReq(Library l) {
+    public void onShowNewMyLibraryReq(Library l, String name) {
         l.showLibrary();
     }
 
@@ -547,5 +547,8 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     }
 
+    @Override
+    public void onPressedButtonChange(String scene) {
 
+    }
 }

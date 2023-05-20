@@ -7,16 +7,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class DoubleCommG implements CommonGoalCards, Serializable {
+    int numberCard = 4;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
 
     @Override
     public boolean check(Library library) {
 
         ArrayList<Integer> adjacent = library.getgroup();
-        int count=0;
+        int count = 0;
 
-        for(Integer i : adjacent){
-            if(i>=2)
-                count ++;
+        for (Integer i : adjacent) {
+            if (i >= 2)
+                count++;
         }
         if(count >=6)
             return true;

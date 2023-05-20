@@ -5,6 +5,12 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class StairsGoalCard implements CommonGoalCards, Serializable {
+    int numberCard = 12;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     @Override
     public boolean check(Library library) {
         return sxStair(library) || dxStair(library) || sxShiftedStair(library) || dxShiftedStair(library);

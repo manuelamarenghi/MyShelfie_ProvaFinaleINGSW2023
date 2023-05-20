@@ -102,7 +102,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
     }
 
     public void pressedBack(MouseEvent mouseEvent) {
-        //devo passare per gui
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }
 
 }

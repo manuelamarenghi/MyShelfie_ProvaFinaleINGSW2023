@@ -129,7 +129,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         index = 0;
         cardtaken = 3;
         yourTurn = true;
-        ancor = new AnchorPane();
         setTiles();
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
@@ -224,11 +223,11 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void pressedCommon1(MouseEvent mouseEvent) {
-        //passa a scena con la prima carta
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common1"));
     }
 
     public void pressedCommon2(MouseEvent mouseEvent) {
-        //passa a scena con seconda carta
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common2"));
     }
 
     public void pressedExit(MouseEvent mouseEvent) {
@@ -242,7 +241,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void pressedChat(MouseEvent mouseEvent) {
-        //passa a chat fa Gui
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
     public void pressedSend(MouseEvent mouseEvent) {
