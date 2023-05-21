@@ -163,6 +163,10 @@ public class Board implements Serializable {
      */
 
     public Boolean allow(ArrayList<Card> cards) {
+        for (Card c : cards) {
+            if (c.getCoordinates() == null)
+                return false;
+        }
         if (cards.size() == 2) {
             if (((cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX()) && (
                     cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1 ||

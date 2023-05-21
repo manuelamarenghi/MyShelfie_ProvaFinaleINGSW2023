@@ -6,11 +6,16 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class Diagonal5CardG implements CommonGoalCards, Serializable {
+    int numberCard = 11;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
 
     @Override
     public boolean check(Library library) {
 
-        return sxDiagonal(library)||sxDiagonalShift(library)||dxDiagonal(library)||dxDiagonalShift(library);
+        return sxDiagonal(library) || sxDiagonalShift(library) || dxDiagonal(library) || dxDiagonalShift(library);
     }
 
     @Override
