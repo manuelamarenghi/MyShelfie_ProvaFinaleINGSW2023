@@ -6,6 +6,11 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class XGoalCard implements CommonGoalCards, Serializable {
+    int numberCard = 10;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
 
     @Override
     public boolean check(Library library) {

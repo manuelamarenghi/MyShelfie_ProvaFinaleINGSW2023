@@ -14,7 +14,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatController extends ObservableViewClient implements Controller {
+public class ChatController extends ObservableViewClient implements GenericSceneController {
+    @FXML
+    private Button Back;
     @FXML
     private ListView ChatsAvaiable;
     @FXML
@@ -34,11 +36,6 @@ public class ChatController extends ObservableViewClient implements Controller {
         dest = new ArrayList<>();
         Chat.setEditable(false);
         ArrayList<String> names = new ArrayList<>();
-        names.add("carlo");
-        names.add("giada");
-        names.add("rita");
-        setChats(names);
-        arrivedMex("carlo", "ciaoo", "you");
     }
 
     public void setYourNickname(String nick) {
@@ -110,5 +107,9 @@ public class ChatController extends ObservableViewClient implements Controller {
         if (selectedItem.equals(getnickname)) {
             Chat.appendText(getnickname + ": " + mex + "\n");
         }
+    }
+
+    public void pressedBack(MouseEvent mouseEvent) {
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }
 }

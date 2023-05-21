@@ -20,6 +20,10 @@ public class SceneController extends ObservableViewClient {
         return activeScene;
     }
 
+    public static void setActiveScene(Scene scene) {
+        activeScene = scene;
+    }
+
     public static GenericSceneController getActiveController() {
         return activeController;
     }
@@ -72,20 +76,19 @@ public class SceneController extends ObservableViewClient {
      * Offers the possibility to set a custom controller to the FXMLLoader.
      *
      * @param controller the custom controller that will be set into the FXMLLoader.
-     * @param scene      the scene whose change the root panel. This will become the active scene.
      * @param fxml       the new scene fxml name. It must include the extension ".fxml" (i.e. next_scene.fxml).
      */
     public static void setRootPane(GenericSceneController controller, Scene scene, String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
-
             // Setting the controller BEFORE the load() method.
             loader.setController(controller);
             activeController = controller;
             Parent root = loader.load();
-
             activeScene = scene;
             activeScene.setRoot(root);
+            SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
+            SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
         } catch (IOException e) {
         }
     }

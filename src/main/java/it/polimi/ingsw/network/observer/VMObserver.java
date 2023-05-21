@@ -36,7 +36,7 @@ public interface VMObserver {
 
     void onShowFinalScoreBoardReq(HashMap<String, Integer> point);
 
-    void onShowNewMyLibraryReq(Library l);
+    void onShowNewMyLibraryReq(Library l, String name);
 
     void onNotifyDisconnectionReqAcceptedAns();
 
@@ -57,4 +57,6 @@ public interface VMObserver {
     void onNotifyCommonCards(EffectiveCard[] cards);
 
     void onNotifyMexInChat(String getnickname, String mex, String dest);
+
+    void onPressedButtonChange(String scene);
 }
