@@ -25,12 +25,6 @@ public interface ObserverViewClient {
     void handleSeePersonalCard();
     void handleSeeCommonCard();
 
-    void handleSeeBoard();
-
-    void handleSeePersonalCard();
-
-    void handleSeeCommonCard();
-
 
     void setNickname(String nickname);
 

@@ -208,4 +208,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void askForDissconection() {
 
     }
+
+    @Override
+    public void errorNickname(ArrayList<String> players) {
+
+    }
 }

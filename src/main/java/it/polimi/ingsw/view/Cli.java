@@ -17,7 +17,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
     private ClientController clientController;
     private String nickname;
 
-
     /**
      * Default constructor.
      */
@@ -217,19 +216,18 @@ public class Cli extends ObservableViewClient implements ViewClient {
         String question = "Write the number of action";
         try {
             int actionNumber = numberInput(1, 4, null, question);
-            switch (actionNumber) {
-                case 1:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
-                case 2:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
-                case 3:
-                    this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
-                case 4:
-                    seeOtherLibrary();
-            }
+            if(actionNumber ==1)
+                this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
+            else  if(actionNumber ==2)
+                this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
+            else if(actionNumber ==3)
+                this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
+            else if(actionNumber ==4)
+                seeOtherLibrary();
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
+
 
     }
 
@@ -250,12 +248,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
     /**
      * Don't have player with this nickname.
      */
-    public void errorNickname(ArrayList<Player> players) {
+    public void errorNickname(ArrayList<String> players) {
         System.out.println("Not exist the player with this nickname." +
                 "Choose other nickname");
         System.out.println("The nickname of the players in the game");
-        for (Player player : players) {
-            System.out.print(player.getNickname() + " , ");
+        for (String player : players) {
+            System.out.print(player + " , ");
         }
 
         seeOtherLibrary();
