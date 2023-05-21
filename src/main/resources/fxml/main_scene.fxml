@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19"
-           fx:controller="it.polimi.ingsw.view.GUI.Scenes.MainSceneController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="Stack" maxHeight="-Infinity" maxWidth="-Infinity"
+           minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="892.0"
+           xmlns="http://javafx.com/javafx/19" fx:controller="it.polimi.ingsw.view.GUI.Scenes.MainSceneController">
     <children>
-        <AnchorPane prefHeight="261.0" prefWidth="602.0">
+        <Group>
             <children>
-                <ImageView fitHeight="332.0" fitWidth="600.0" layoutX="2.0" layoutY="-1.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <image>
-                        <Image url="@../images/scenes/main_background.jpg"/>
-                    </image>
-                </ImageView>
-                <Button fx:id="btn_play" layoutX="127.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClickPlay"
-                        prefHeight="43.0" prefWidth="76.0" text="Gioca!"/>
-                <Button fx:id="btn_exit" layoutX="356.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClickExit"
-                        prefHeight="43.0" prefWidth="59.0" text="Esci"/>
+                <AnchorPane layoutY="1.0" prefHeight="592.0" prefWidth="891.0">
+                    <children>
+                        <Button fx:id="btn_play" layoutX="240.0" layoutY="413.0" mnemonicParsing="false"
+                                onAction="#onClickPlay" prefHeight="54.0" prefWidth="76.0" text="Gioca!"/>
+                        <Button fx:id="btn_exit" layoutX="613.0" layoutY="414.0" mnemonicParsing="false"
+                                onAction="#onClickExit" prefHeight="53.0" prefWidth="76.0" text="Esci"/>
+                        <ImageView fitHeight="230.0" fitWidth="545.0" layoutX="185.0" layoutY="131.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Publisher_material/Title%202000x618px.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
             </children>
-        </AnchorPane>
+        </Group>
     </children>
 </StackPane>

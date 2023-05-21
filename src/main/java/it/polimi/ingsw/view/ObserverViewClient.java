@@ -34,4 +34,6 @@ public interface ObserverViewClient {
     void SeeSomeoneLibrary(String nickname);
 
     void handleMexChat(ArrayList<String> dest, String message);
+
+    void ChangeRoot(String scene);
 }

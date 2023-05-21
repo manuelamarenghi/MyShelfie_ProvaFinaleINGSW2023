@@ -6,16 +6,22 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class Square2G implements CommonGoalCards, Serializable {
+    int numberCard = 1;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * the method checks if the the target is completed or not
      */
 
     @Override
     public boolean check(Library library) {
-        int r , c , i , indexToSkip1=-1 , indexToSkip2=-1;
-        int [] numOfSquares = {0,0,0,0,0,0};
-        for(r=0 ; r<5 ; r++){
-            for(c=0 ; c<4 ;c++){
+        int r, c, i, indexToSkip1 = -1, indexToSkip2 = -1;
+        int[] numOfSquares = {0, 0, 0, 0, 0, 0};
+        for (r = 0; r < 5; r++) {
+            for (c = 0; c < 4; c++) {
                 if(c==indexToSkip1){
                     indexToSkip1=-1;
                     continue;

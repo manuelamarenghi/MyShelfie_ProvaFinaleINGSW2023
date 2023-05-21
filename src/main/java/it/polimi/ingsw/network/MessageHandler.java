@@ -59,7 +59,7 @@ public class MessageHandler implements Observer {
 
         if (virtualModel.getMe().getNickname().equals(message.getnickname())) {
             virtualModel.getMe().setLibrary(message.getL());
-            virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL()));
+            virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL(), message.getnickname()));
         } else {
             virtualModel.getPlayer(message.getnickname()).setLibrary(message.getL());
 

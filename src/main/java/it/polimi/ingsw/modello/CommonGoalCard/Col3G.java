@@ -5,17 +5,23 @@ import it.polimi.ingsw.modello.Library;
 
 import java.io.Serializable;
 
-public class Col3G implements CommonGoalCards , Serializable {
+public class Col3G implements CommonGoalCards, Serializable {
+    int numberCard = 5;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * the method checks if the target has been completed or not
      */
 
     @Override
     public boolean check(Library library) {
-        int r , c , i;
-        int [] differentColours = {0,0,0,0,0,0};
-        int differentCols=0 ,totalTypes , numberOfCards=0;
-        for(c=0 ;c<5 ; c++){
+        int r, c, i;
+        int[] differentColours = {0, 0, 0, 0, 0, 0};
+        int differentCols = 0, totalTypes, numberOfCards = 0;
+        for (c = 0; c < 5; c++) {
             numberOfCards=0;
             totalTypes=0;
             for(i=0 ; i<6 ; i++){

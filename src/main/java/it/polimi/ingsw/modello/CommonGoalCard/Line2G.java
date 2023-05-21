@@ -6,16 +6,22 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class Line2G implements CommonGoalCards, Serializable {
+    int numberCard = 6;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * The method checks if the target has been completed or not
      */
 
     @Override
     public boolean check(Library library) {
-        int r , c , i;
-        int []differentCard = {0,0,0,0,0,0};
-        int differentLines=0 , total;
-        for(r=0 ; r<6 ; r++){
+        int r, c, i;
+        int[] differentCard = {0, 0, 0, 0, 0, 0};
+        int differentLines = 0, total;
+        for (r = 0; r < 6; r++) {
             total=0;
             for(i=0 ; i<6 ; i++){
                 differentCard[i]=0;
