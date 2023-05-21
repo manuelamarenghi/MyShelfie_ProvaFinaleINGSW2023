@@ -9,16 +9,22 @@ import java.util.ArrayList;
  * Col2G goal needs two columns each formed by 6 different types of tiles
  */
 public class Col2G implements CommonGoalCards, Serializable {
+    int numberCard = 2;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
     public boolean check(Library library) {
         ArrayList<String> n = new ArrayList<String>();
-        int temp=0;
-        int x=0;
-        int j=0;
-        for(int i=0;i<5;i++){
+        int temp = 0;
+        int x = 0;
+        int j = 0;
+        for (int i = 0; i < 5; i++) {
             while(j<6){
                 if(!library.getCardinPos(j, i).getColour().isEmpty()){
                     if(!n.contains(library.getCardinPos(j, i).getColour())) {

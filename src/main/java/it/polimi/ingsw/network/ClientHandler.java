@@ -109,8 +109,8 @@ public class ClientHandler implements Runnable {
                 output.reset();
 
         } catch (IOException e) {
-            //disconnect();
             System.out.println(e);
+            //disconnect();
         }
     }
     public boolean isConnected() {

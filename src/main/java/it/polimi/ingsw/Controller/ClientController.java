@@ -40,8 +40,8 @@ public class ClientController implements ObserverViewClient {
      * The method creates board depending on number of players
      */
 
-    public void handleCreateBoard(int numeberOfPlayers, String name) {
-        Numb_Player message = new Numb_Player(numeberOfPlayers, name);
+    public void handleCreateBoard(int numeberOfPlayers) {
+        Numb_Player message = new Numb_Player(numeberOfPlayers, virtualModel.getMe().getNickname());
         socketClient.sendMessage(message);
     }
 
@@ -53,25 +53,35 @@ public class ClientController implements ObserverViewClient {
     /**
      * the sends a message to socket client in case it decides to pick a card from board
      */
-    public void handleTakeCard(Position[] positions, String name) {
+    public void handleTakeCard(Position[] positions) {
         int i;
-        Card[] cards = new Card[positions.length];
+        ArrayList<Card> cards = new ArrayList<>();
         for (i = 0; i < positions.length; i++) {
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
+                return;
             } else {
-                cards[i] = virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY());
+                cards.add(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()));
             }
         }
-        TakeCardBoard message = new TakeCardBoard(cards, name);
-        socketClient.sendMessage(message);
+
+        if (virtualModel.getBoard().allow(cards)) {
+            for (Card card : cards) {
+                virtualModel.getBoard().takeCard(card.getCoordinates());
+            }
+            view.onShowNewBoardReq(virtualModel.getBoard());
+            virtualModel.setCardSelect(cards);
+            int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
+            view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
+        } else
+            view.onNotifyCardsAreNotAdjacentReq();
     }
 
     /**
      * The method sends a message to socket client to put a card in the library
      */
-    public void handlePutInLibrary(int x, String name, ArrayList<Card> cards) {
-        PutInLib message = new PutInLib(x, name, cards);
+    public void handlePutInLibrary(int x) {
+        PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(), virtualModel.getCardSelect(), x);
         socketClient.sendMessage(message);
     }
 
@@ -80,6 +90,7 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+    @Override
     public void handleSeeBoard() {
         view.onShowNewBoardReq(virtualModel.getBoard());
     }
@@ -111,7 +122,10 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
-
+    @Override
+    public void handleMexChat(ArrayList<String> dest, String mex) {
+        MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
+    }
 
     @Override
     public void setNickname(String nickname) {
@@ -124,9 +138,10 @@ public class ClientController implements ObserverViewClient {
     }
 
     public void SeeSomeoneLibrary(String nickname) {
-        if (virtualModel.getPlayer(nickname).getNickname() == null) {
-            view.errorNickname(virtualModel.getPlayers());
-        } else
-            view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
+        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
+    }
+
+    public void ChangeRoot(String scene) {
+        view.onPressedButtonChange(scene);
     }
 }

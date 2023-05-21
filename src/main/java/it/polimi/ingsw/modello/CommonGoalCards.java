@@ -6,6 +6,8 @@ import java.io.Serializable;
  *  this interface is used to override check(),expired(),getImage() for each CommonGoal card
  */
 public interface CommonGoalCards extends Serializable {
+    public int getNumberCard();
+
     /**
      * check() returns true if the library match the goal,otherwise false
      */

@@ -15,6 +15,8 @@ public class VirtualModel extends VMObservable {
     private Player chair;
     private EffectiveCard[] CommonCards;
 
+    private ArrayList<Card> cardSelect;
+
 
     public VirtualModel() {
         this.players = new ArrayList<>();
@@ -26,98 +28,113 @@ public class VirtualModel extends VMObservable {
         this.CommonCards = new EffectiveCard[2];
         this.board = null;
         this.me.setLibrary(new Library());
+        this.cardSelect = new ArrayList<>();
     }
 
-    synchronized public void setCommonCards(EffectiveCard[] commonCards) {
+    public ArrayList<Card> getCardSelect() {
+        return cardSelect;
+    }
+
+    public void setCardSelect(ArrayList<Card> cards) {
+        this.cardSelect = cards;
+    }
+
+    public void setCommonCards(EffectiveCard[] commonCards) {
         CommonCards = commonCards;
     }
 
-    synchronized public int getPlayerNumber() {
+    public int getPlayerNumber() {
         return playerNumber;
     }
 
-    synchronized public Player getFirstFinish() {
+    public Player getFirstFinish() {
         return firstFinish;
     }
 
-    synchronized public void setMe(String me) {
-        this.me = new Player(me);
-    }
-
-    synchronized public void setFirstFinish(String firstFinish) {
+    public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
         }
     }
 
-    synchronized public void setPlayers(ArrayList<String> players) {
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<String> players) {
         for (String p : players) {
             this.players.add(new Player(p));
         }
     }
 
-    synchronized public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
-    }
-
-    synchronized public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    synchronized public void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         this.players.add(player);
     }
-    public void removePlayer(String nickname){
+
+    public void removePlayer(String nickname) {
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
 
-    synchronized public void updateBoard(Board board) {
+    public void updateBoard(Board board) {
         this.board = board;
     }
 
-    synchronized public void updateChair(String nickname) {
+    public void updateChair(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) this.chair = player;
         }
     }
 
-    synchronized public Player getChair() {
+    public Player getChair() {
         return chair;
     }
 
-    synchronized public void updatePlayerNumber(int playerNumber) {
+    public void updatePlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
 
-    synchronized public PersonalGoalCard getPersonalGoalCard() {
+    public PersonalGoalCard getPersonalGoalCard() {
         return this.me.getPersonalCard();
     }
 
-    synchronized public EffectiveCard[] getCommonGoalCards() {
+    public EffectiveCard[] getCommonGoalCards() {
         return this.CommonCards;
     }
-    synchronized public void updateIsMyTurn(){
-        this.isMyTurn=!this.isMyTurn;
+
+    public void updateIsMyTurn() {
+        this.isMyTurn = !this.isMyTurn;
     }
-    synchronized public boolean isMyTurn(){
+
+    public boolean isMyTurn() {
         return this.isMyTurn;
     }
-    synchronized public Player getMe(){
+
+    public Player getMe() {
         return this.me;
     }
-    synchronized public void updateCommonScore(String nickname,int score){
-        for(Player player:this.players){
-            if(player.getNickname().equals(nickname))player.setCommonGoalScore(score);
+
+    public void setMe(String me) {
+        this.me = new Player(me);
+    }
+
+    public void updateCommonScore(String nickname, int score) {
+        for (Player player : this.players) {
+            if (player.getNickname().equals(nickname)) player.setCommonGoalScore(score);
         }
     }
-    synchronized public Player getPlayer(String nickname) {
-        for(Player player:this.players){
-            if(player.getNickname().equals(nickname))return player;
+
+    public Player getPlayer(String nickname) {
+        for (Player player : this.players) {
+            if (player.getNickname().equals(nickname)) return player;
         }
         return new Player(null);
     }
 
-    synchronized public Board getBoard(){
+    public Board getBoard() {
         return board;
     }
 }
