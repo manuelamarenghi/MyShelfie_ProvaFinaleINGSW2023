@@ -191,7 +191,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askNickname() {
-
+        Platform.runLater(() -> SceneController.setRootPane(new LoginSceneController(),"login_scene.fxml"));
     }
 
     @Override
@@ -206,6 +206,16 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askForDissconection() {
+
+    }
+
+    @Override
+    public void actionByPlayer() {
+
+    }
+
+    @Override
+    public void errorNickname(ArrayList<Player> players) {
 
     }
 }

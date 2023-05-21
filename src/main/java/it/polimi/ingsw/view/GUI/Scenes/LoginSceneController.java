@@ -18,7 +18,6 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     @FXML
     private StackPane Stack;
     public TextField name_txb;
-    public TextField ip_txb;
 
     public void initialize() {
         Area.setEditable(false);
@@ -29,19 +28,13 @@ public class LoginSceneController extends ObservableViewClient implements Generi
         Stack.getChildren().add(image);
     }
 
-    private static boolean validate(final String ip) {
-        if (ip.equals("localhost")) return true;
-        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
-        return ip.matches(PATTERN);
-    }
+
 
     public void onClick(ActionEvent actionEvent) {
         if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
-        else if (!validate(ip_txb.getText().trim())) System.out.println("Inserire un ip valido");
         else this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(name_txb.getText()));
         // name_txb.getStylesheets().add("text-red");
         name_txb.clear();
-        ip_txb.clear();
     }
 
     public void onEnter(KeyEvent keyEvent) {
@@ -53,9 +46,6 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
     }
 
-    public void onEnterIp(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER) onClick(null);
-    }
 
     public void Connect_before_first() {
         Area.setVisible(true);
@@ -63,14 +53,15 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     }
 
     public void NumbPlayer() {
-        ip_txb.setVisible(false);
-        ip_txb.setEditable(false);
+        //ip_txb.setVisible(false);
+        //ip_txb.setEditable(false);
         Area.setVisible(true);
         Area.appendText("Insert number of player between 2,3,4:");
         String numb = name_txb.getText();
-        while (numb != "2" || numb != "3" || numb != "4") {
+        while (Integer.parseInt(numb) != 2 && Integer.parseInt(numb)  != 3 && Integer.parseInt(numb)  != 4) {
             Area.clear();
             Area.appendText("Insert a valid number");
+
         }
         this.notifyObserver(observers -> observers.handleCreateBoard(Integer.parseInt(numb)));
         this.notifyObserver(observers -> observers.ChangeRoot("wait"));

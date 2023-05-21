@@ -137,7 +137,8 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void askCardsToTakeFromBoard() {
-        int numberOfCards, i, x, y;
+        int i, x, y;
+        int numberOfCards=-1;
 
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
@@ -145,8 +146,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         try {
             numberOfCards = numberInput(1, 3, null, question);
         } catch (ExecutionException e) {
-            out.println("WRONG_INPUT");
-            return;
+            out.println(e);
         }
         System.out.println("Choose card in order");
         Position[] positions = new Position[numberOfCards];
@@ -157,7 +157,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
                 positions[i] = new Position(x, y);
 
             } catch (ExecutionException e) {
-                out.println("WRONG_INPUT");
+                out.println(e);
             }
 
         }
