@@ -114,7 +114,20 @@ public class SceneController extends ObservableViewClient {
      * @param fxml       the new scene fxml name. It must include the extension ".fxml" (i.e. next_scene.fxml).
      */
     public static void setRootPane(GenericSceneController controller, String fxml) {
-        setRootPane(controller, activeScene, fxml);
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
+            // Setting the controller BEFORE the load() method.
+            loader.setController(controller);
+            activeController = controller;
+            Parent root = loader.load();
+            System.out.println(root.toString());
+            //activeScene = scene;
+            activeScene.setRoot(root);
+            SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
+            SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
     }
 
 }
