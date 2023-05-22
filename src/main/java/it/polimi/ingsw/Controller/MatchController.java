@@ -60,7 +60,7 @@ public class MatchController {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
-                virtualView.AcceptNewPlayer(nickname);
+                virtualView.AcceptNewPlayer(nickname, false);
                 match.setPlayers(new Player(nickname));
                 match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
@@ -71,8 +71,10 @@ public class MatchController {
                     match.setPlayers(new Player(nickname));
                     match.getPlayerByNickname(nickname).setView(virtualView);
                     for (VirtualView v : connectClients.values()) {
-                        if (!connectClients.equals(connectClients.get(nickname))) {
-                            v.AcceptNewPlayer(nickname);
+                        if (!v.equals(connectClients.get(nickname))) {
+                            v.AcceptNewPlayer(nickname, false);
+                        } else {
+                            v.AcceptNewPlayer(nickname, true);
                         }
                     }
                     if (connectClients.size() == match.getPlayerNumber()) {

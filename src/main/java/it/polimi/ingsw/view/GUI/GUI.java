@@ -21,6 +21,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
         this.livingController = livingController;
         this.chatController = chatController;
         this.waitcontr = wait;
+        livingController.addAllObservers(observers);
+        chatController.addAllObservers(observers);
+        waitcontr.addAllObservers(observers);
     }
 
     @Override
@@ -30,8 +33,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNumbPlayerReq() {
-        LoginSceneController login = new LoginSceneController();
+        LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
         Platform.runLater(() -> login.NumbPlayer());
+
     }
 
     @Override
@@ -57,8 +61,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
-        Platform.runLater(() -> waitcontr.setPlayer(nickname));
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
+        if (you) {
+            this.nickname = nickname;
+            onPressedButtonChange("wait");
+        } else {
+            Platform.runLater(() -> waitcontr.setPlayer(nickname));
+        }
     }
 
     @Override
@@ -177,7 +186,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onPressedButtonChange(String scene) {
         switch (scene) {
             case "common1":
-                Platform.runLater(() -> SceneController.setRootPane(common1, "CG.fxml"));
+                Platform.runLater(() ->{
+                    SceneController.setRootPane(common1, "CG.fxml");
+                });
             case "common2":
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
             case "living":
@@ -191,7 +202,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askNickname() {
-
+        Platform.runLater(() -> SceneController.setRootPane(observers,"login_scene.fxml"));
     }
 
     @Override
@@ -206,6 +217,16 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askForDissconection() {
+
+    }
+
+    @Override
+    public void actionByPlayer() {
+
+    }
+
+    @Override
+    public void errorNickname(ArrayList<Player> players) {
 
     }
 }
