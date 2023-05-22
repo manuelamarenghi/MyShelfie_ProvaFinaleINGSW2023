@@ -19,17 +19,8 @@
                <children>
                   <TextField fx:id="name_txb" alignment="CENTER" layoutX="341.0" layoutY="214.0"
                              onKeyPressed="#onEnterNick" prefHeight="25.0" prefWidth="230.0"/>
-                  <TextField fx:id="ip_txb" alignment="CENTER" layoutX="342.0" layoutY="278.0"
-                             maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                             onKeyPressed="#onEnterIp" prefHeight="25.0" prefWidth="230.0"/>
-                  <Text fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  <Text fx:id="name_txt" fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
                         text="Inserire un nickname:">
-                     <font>
-                        <Font size="18.0"/>
-                     </font>
-                  </Text>
-                  <Text fill="WHITE" layoutX="153.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                        text="Inserire IP del server:">
                      <font>
                         <Font size="18.0"/>
                      </font>
