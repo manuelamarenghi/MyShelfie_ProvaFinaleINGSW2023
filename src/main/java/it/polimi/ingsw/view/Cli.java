@@ -4,6 +4,7 @@ import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
 
 import java.io.PrintStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -138,6 +139,26 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void askCardsToTakeFromBoard() {
         int numberOfCards, i, x, y;
 
+        String action = "";
+        System.out.println("Write 'action' if you don't take card\n" +
+                "Write other if you take card");
+        try {
+            action = readLine();
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+        while (action.equals("action")) {
+            actionByPlayer();
+            System.out.println("Write 'action' if you don't tak card\n" +
+                    "Write other if you take card");
+            try {
+                action = readLine();
+            } catch (ExecutionException e) {
+                out.println("WRONG_INPUT");
+            }
+        }
+
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
         String questionY = "Type the y value of the card to take";
@@ -189,6 +210,26 @@ public class Cli extends ObservableViewClient implements ViewClient {
             }
         }
         out.println();
+        String action = "";
+        System.out.println("Write 'action' if you don't choose the column\n" +
+                "Write other if you take card");
+        try {
+            action = readLine();
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+        while (action.equals("action")) {
+            actionByPlayer();
+            System.out.println("Write 'action' if you don't tak card\n" +
+                    "Write other if you take card");
+            try {
+                action = readLine();
+            } catch (ExecutionException e) {
+                out.println("WRONG_INPUT");
+            }
+        }
+
         String question = "Select the coloumn to put your cards from the shown coloumns.";
         for (i = 0; i < excludedNumbers.size(); i++) {
             excludedNumbersArrayList.add(excludedNumbers.get(i));
@@ -216,13 +257,13 @@ public class Cli extends ObservableViewClient implements ViewClient {
         String question = "Write the number of action";
         try {
             int actionNumber = numberInput(1, 4, null, question);
-            if(actionNumber ==1)
+            if (actionNumber == 1)
                 this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
-            else  if(actionNumber ==2)
+            else if (actionNumber == 2)
                 this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
-            else if(actionNumber ==3)
+            else if (actionNumber == 3)
                 this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
-            else if(actionNumber ==4)
+            else if (actionNumber == 4)
                 seeOtherLibrary();
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
