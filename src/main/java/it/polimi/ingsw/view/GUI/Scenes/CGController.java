@@ -16,9 +16,9 @@ public class CGController extends ObservableViewClient implements GenericSceneCo
     @FXML
     public VBox box;
     @FXML
-    public Label theLabel;
+    public Label theLabel=new Label();
     @FXML
-    public ImageView imageView;
+    public ImageView imageView=new ImageView();
 
     public void initialize() {
         box.getStyleClass().add("card");

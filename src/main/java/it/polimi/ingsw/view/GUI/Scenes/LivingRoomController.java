@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -44,19 +45,19 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private StackPane stackPane;
     @FXML
     private StackPane stackPanelibrary;
-    private Map<String, Image[]> tiles;
+    private Map<String, Image[]> tiles=Collections.synchronizedMap(new HashMap<>());
     @FXML
     private AnchorPane ancor;
     @FXML
-    private ImageView background;
+    private ImageView background=new ImageView();
     @FXML
-    private GridPane gameBoard;
+    private GridPane gameBoard=new GridPane();
     @FXML
-    private ImageView backgroundlibrary;
+    private ImageView backgroundlibrary=new ImageView();
     @FXML
-    private GridPane gameBoardlibrary;
+    private GridPane gameBoardlibrary=new GridPane();
     @FXML
-    private TextArea messageServer;
+    private TextArea messageServer=new TextArea();
     @FXML
     private TextField inputUser;
     @FXML
@@ -68,6 +69,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private int index;
     private Position[] positions = new Position[3];
     private int[] columnforthisturn;
+
+    private Image[] imageB,imageY,imageP,imageW,imageG,imageL;
 
     public String getUserInput() {
         inputUser.clear();
@@ -88,41 +91,41 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void setTiles() {
-        InputStream is;
-        tiles = Collections.synchronizedMap(new HashMap<>());
-        Image[] imageY = new Image[3];
-        is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
-        imageY[0] = new Image(is);
-        imageY[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/yellow/yellow2.png"));
-        imageY[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/yellow/yellow3.png"));
+        //InputStream is;
+        //tiles=Collections.synchronizedMap(new HashMap<>())
+        imageY = new Image[3];
+        //is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
+        imageY[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow1.png")).toString());
+        imageY[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow2.png")).toString());
+        imageY[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow3.png")).toString());
         tiles.put("yellow", imageY);
-        Image[] imageP = new Image[3];
-        imageP[0] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/pink/pink1.png"));
-        imageP[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/pink/pink2.png"));
-        imageP[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/pink/pink3.png"));
+        imageP = new Image[3];
+        imageP[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink1.png")).toString());
+        imageP[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink2.png")).toString());
+        imageP[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink3.png")).toString());
         tiles.put("pink", imageP);
-        Image[] imageW = new Image[3];
-        imageW[0] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/white/white1.png"));
-        imageW[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/white/white2.png"));
-        imageW[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/white/white3.png"));
+        imageW = new Image[3];
+        imageW[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white1.png")).toString());
+        imageW[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white2.png")).toString());
+        imageW[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white3.png")).toString());
         tiles.put("white", imageW);
-        Image[] imageG = new Image[3];
-        imageG[0] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/green/green1.png"));
-        imageG[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/green/green2.png"));
-        imageG[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/green/green3.png"));
+        imageG = new Image[3];
+        imageG[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green1.png")).toString());
+        imageG[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green2.png")).toString());
+        imageG[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green3.png")).toString());
         tiles.put("green", imageG);
-        Image[] imageL = new Image[3];
-        imageL[0] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue1.png"));
-        imageL[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue2.png"));
-        imageL[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue3.png"));
+        imageL = new Image[3];
+        imageL[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue1.png")).toString());
+        imageL[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue2.png")).toString());
+        imageL[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue3.png")).toString());
         tiles.put("lightBlue", imageL);
-        Image[] imageB = new Image[3];
-        imageB[0] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/blue/blue1.png"));
-        imageB[1] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/blue/blue2.png"));
-        imageB[2] = new Image((InputStream) LivingRoomController.class.getResourceAsStream("/images/item_tiles/blue/blue3.png"));
+        imageB = new Image[3];
+        imageB[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue1.png")).toString());
+        imageB[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue2.png")).toString());
+        imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
-    public void initialize() {
+    public void start() {
         Token1set = false;
         SendbuttonAble = false;
         messageServer.setEditable(false);
@@ -138,14 +141,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void createBoard(Board b) {
+
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (cards[i][j] != null) {
                     String color = cards[i][j].getColour();
-                    if (color != "") {
+                    System.out.println(color);
+                    if (color!=null && !color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
-                        ImageView image = new ImageView(this.tiles.get(color)[x]);
+                        ImageView image = new ImageView((this.tiles.get(color))[x]);
                         image.setFitWidth(32);
                         image.setFitHeight(33);
                         gameBoard.add(image, j, i);
@@ -215,10 +220,12 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void setPP(int x) {
         String c = String.valueOf(x);
-        String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
-        InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        String name = "/images/personal_goal_cards/Personal_Goals"+c + ".png";
+        System.out.println(name);
+        System.out.println(c);
+        //InputStream is;
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         PersonalCard = new ImageView(image);
     }
 

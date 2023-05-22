@@ -18,7 +18,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
     @FXML
     private Button Back;
     @FXML
-    private ListView ChatsAvaiable;
+    private ListView ChatsAvaiable=new ListView<>();
     @FXML
     private Button Send;
     @FXML
@@ -43,6 +43,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
     }
 
     public void setChats(ArrayList<String> players) {
+
         all = new ArrayList<>();
         StoredChat = Collections.synchronizedMap(new HashMap<>());
         for (String name : players) {

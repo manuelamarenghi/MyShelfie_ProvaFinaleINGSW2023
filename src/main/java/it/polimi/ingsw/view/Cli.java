@@ -117,7 +117,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     * the method asks to the first user the number of players that are going to play
+     * the method asks the first user the number of players that are going to play
      */
     @Override
     public void askNumberPlayer() {
