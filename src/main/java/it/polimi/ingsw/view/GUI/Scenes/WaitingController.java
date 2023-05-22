@@ -6,14 +6,11 @@ import javafx.scene.control.ListView;
 
 public class WaitingController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private ListView ListPlayer;
-
-    public void initialize() {
-
-    }
+    public ListView<String> listPlayer;
 
     public void setPlayer(String name) {
-        ListPlayer.getItems().add(name);
+        //listPlayer=new ListView<>();
+        listPlayer.getItems().add(name);
     }
 
 

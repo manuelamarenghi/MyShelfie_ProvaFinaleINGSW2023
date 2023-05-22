@@ -10,8 +10,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 public class LoginSceneController extends ObservableViewClient implements GenericSceneController {
+    public Text name_txt;
+    private boolean askNumb=false;
     @FXML
     public TextArea Area;
     public Button okButton;
@@ -31,8 +34,18 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
 
     public void onClick(ActionEvent actionEvent) {
-        if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
-        else this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(name_txb.getText()));
+        if(!askNumb) {
+            if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
+            else this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(name_txb.getText()));
+        }else{
+            String numb = name_txb.getText();
+            if(Integer.parseInt(numb) != 2 && Integer.parseInt(numb)  != 3 && Integer.parseInt(numb)  != 4) {
+                name_txt.setText("Insert a valid number");
+            }
+            this.notifyObserver(observers -> observers.ChangeRoot("wait"));
+            this.notifyObserver(observers -> observers.handleCreateBoard(Integer.parseInt(numb)));
+        }
+
         // name_txb.getStylesheets().add("text-red");
         name_txb.clear();
     }
@@ -53,18 +66,21 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     }
 
     public void NumbPlayer() {
+        askNumb =true;
+        name_txt.setText("Insert number of player between 2,3,4:");
         //ip_txb.setVisible(false);
         //ip_txb.setEditable(false);
-        Area.setVisible(true);
-        Area.appendText("Insert number of player between 2,3,4:");
-        String numb = name_txb.getText();
+        //Area.setVisible(true);
+        //Area.appendText("Insert number of player between 2,3,4:");
+        /*String numb = name_txb.getText();
         while (Integer.parseInt(numb) != 2 && Integer.parseInt(numb)  != 3 && Integer.parseInt(numb)  != 4) {
             Area.clear();
             Area.appendText("Insert a valid number");
 
         }
+        new Thread(()->notifyObserver(observers -> observers.ChangeRoot("wait")));
         this.notifyObserver(observers -> observers.handleCreateBoard(Integer.parseInt(numb)));
-        this.notifyObserver(observers -> observers.ChangeRoot("wait"));
+*/
     }
 
     public void GameFull() {

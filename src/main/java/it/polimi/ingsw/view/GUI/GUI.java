@@ -21,6 +21,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
         this.livingController = livingController;
         this.chatController = chatController;
         this.waitcontr = wait;
+        livingController.addAllObservers(observers);
+        chatController.addAllObservers(observers);
+        waitcontr.addAllObservers(observers);
     }
 
     @Override
@@ -30,8 +33,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNumbPlayerReq() {
-        LoginSceneController login = new LoginSceneController();
+        LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
         Platform.runLater(() -> login.NumbPlayer());
+
     }
 
     @Override
@@ -177,7 +181,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onPressedButtonChange(String scene) {
         switch (scene) {
             case "common1":
-                Platform.runLater(() -> SceneController.setRootPane(common1, "CG.fxml"));
+                Platform.runLater(() ->{
+                    SceneController.setRootPane(common1, "CG.fxml");
+                });
             case "common2":
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
             case "living":
@@ -191,7 +197,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askNickname() {
-        Platform.runLater(() -> SceneController.setRootPane(new LoginSceneController(),"login_scene.fxml"));
+        Platform.runLater(() -> SceneController.setRootPane(observers,"login_scene.fxml"));
     }
 
     @Override

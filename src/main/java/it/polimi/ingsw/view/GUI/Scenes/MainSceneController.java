@@ -26,6 +26,7 @@ public class MainSceneController extends ObservableViewClient implements Generic
 
     public void onClickPlay(ActionEvent action) {
         SceneController.setRootPane(observers, "connect_scene.fxml");
+
     }
 
     public void onClickExit(ActionEvent action) {

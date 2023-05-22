@@ -28,6 +28,7 @@ public class ClientController implements ObserverViewClient {
         socketClient.enablePinger(true);
         this.messageHandler = new MessageHandler(this.virtualModel);
         this.socketClient.addObserver(this.messageHandler);
+        this.virtualModel.addObserver(this.view);
 
     }
     public ClientController(ViewClient view) {
@@ -48,8 +49,10 @@ public class ClientController implements ObserverViewClient {
         socketClient.readMessage();
         socketClient.enablePinger(true);
         this.messageHandler = new MessageHandler(this.virtualModel);
+        this.virtualModel.addObserver(this.view);
         this.socketClient.addObserver(this.messageHandler);
         this.view.askNickname();
+
     }
 
     public void handleEnterPlayer(String nickname) {
@@ -153,10 +156,10 @@ public class ClientController implements ObserverViewClient {
         virtualModel.setMe(nickname);
     }
 
-    public void addViewObserver(ViewClient view) {
+    /*public void addViewObserver(ViewClient view) {
         this.virtualModel.addObserver(view);
 
-    }
+    }*/
 
     public void SeeSomeoneLibrary(String nickname) {
         view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);

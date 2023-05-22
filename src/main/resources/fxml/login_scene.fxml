@@ -19,7 +19,7 @@
                <children>
                   <TextField fx:id="name_txb" alignment="CENTER" layoutX="341.0" layoutY="214.0"
                              onKeyPressed="#onEnterNick" prefHeight="25.0" prefWidth="230.0"/>
-                  <Text fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  <Text fx:id="name_txt" fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
                         text="Inserire un nickname:">
                      <font>
                         <Font size="18.0"/>

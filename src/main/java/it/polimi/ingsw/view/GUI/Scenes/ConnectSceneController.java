@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI.Scenes;
 
+import it.polimi.ingsw.view.GUI.SceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+
+import java.util.Arrays;
 
 public class ConnectSceneController extends ObservableViewClient implements GenericSceneController{
 
@@ -24,8 +27,11 @@ public class ConnectSceneController extends ObservableViewClient implements Gene
         Stack.getChildren().add(image);
     }
     public void onClick(ActionEvent actionEvent) {
-        if (!validate(ip_txb.getText().trim())) ip_txt.setText("Inserire un ip valido");
-        else this.notifyObserver(observerViewClient -> observerViewClient.setServerInfo(ip_txb.getText()));
+        if (!validate(ip_txb.getText().trim())) ip_txt.setText("Inserire un ip valido:");
+        else {
+            new Thread(() ->this.notifyObserver(obs -> obs.setServerInfo(ip_txb.getText()))).start();
+
+        }
         ip_txb.clear();
     }
     public void onEnterIp(KeyEvent keyEvent) {
