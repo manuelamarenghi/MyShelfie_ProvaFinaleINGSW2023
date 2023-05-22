@@ -154,6 +154,7 @@ public class ClientController implements ObserverViewClient {
 
     @Override
     public void setNickname(String nickname) {
+
         virtualModel.setMe(nickname);
     }
 

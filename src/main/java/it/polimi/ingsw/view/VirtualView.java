@@ -79,21 +79,24 @@ public class VirtualView implements View{
 
     /**
      * NotallowedCard() when a player choose card not adjacent
+     *
      * @param name
      */
-    public void NotallowedCard(String name){
+    public void NotallowedCard(String name) {
         clientHandler.sendMessage(new NotTakeCardBoard(name));
     }
+
     /**
      * AcceptNewPlayer() when a player join the game
      */
-    public void AcceptNewPlayer(String name){
-        clientHandler.sendMessage(new AcceptPlayer(name));
+    public void AcceptNewPlayer(String name, Boolean you) {
+        clientHandler.sendMessage(new AcceptPlayer(name, you));
     }
+
     /**
      * YourTurn() to notify when is your turn
      */
-    public void YourTurn(String player){
+    public void YourTurn(String player) {
         clientHandler.sendMessage(new Turn(player));
     }
     /**

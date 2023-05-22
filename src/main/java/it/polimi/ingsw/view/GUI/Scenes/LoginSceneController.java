@@ -36,7 +36,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     public void onClick(ActionEvent actionEvent) {
         if (!askNumb) {
             if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
-            else this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(name_txb.getText()));
+            else this.notifyObserver(observers -> observers.handleEnterPlayer(name_txb.getText()));
         } else {
             String numb = name_txb.getText();
             if (Integer.parseInt(numb) != 2 && Integer.parseInt(numb) != 3 && Integer.parseInt(numb) != 4) {
@@ -45,7 +45,6 @@ public class LoginSceneController extends ObservableViewClient implements Generi
             this.notifyObserver(observers -> observers.ChangeRoot("wait"));
             this.notifyObserver(observers -> observers.handleCreateBoard(Integer.parseInt(numb)));
         }
-
         // name_txb.getStylesheets().add("text-red");
         name_txb.clear();
     }

@@ -61,8 +61,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
-        Platform.runLater(() -> waitcontr.setPlayer(nickname));
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
+        if (you) {
+            this.nickname = nickname;
+            onPressedButtonChange("wait");
+        } else {
+            Platform.runLater(() -> waitcontr.setPlayer(nickname));
+        }
     }
 
     @Override

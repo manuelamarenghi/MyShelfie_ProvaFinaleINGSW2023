@@ -46,19 +46,19 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private StackPane stackPanelibrary;
     private Map<String, Image[]> tiles;
     @FXML
-    private AnchorPane ancor;
+    private AnchorPane ancor = new AnchorPane();
     @FXML
-    private ImageView background;
+    private ImageView background = new ImageView();
     @FXML
-    private GridPane gameBoard;
+    private GridPane gameBoard = new GridPane();
     @FXML
-    private ImageView backgroundlibrary;
+    private ImageView backgroundlibrary = new ImageView();
     @FXML
-    private GridPane gameBoardlibrary;
+    private GridPane gameBoardlibrary = new GridPane();
     @FXML
-    private TextArea messageServer;
+    private TextArea messageServer = new TextArea();
     @FXML
-    private TextField inputUser;
+    private TextField inputUser = new TextField();
     @FXML
     private ImageView Chair, TokenCommon1, TokenCommon2, FirstFinished;
     @FXML

@@ -18,7 +18,7 @@ public interface VMObserver {
 
     void onNotifyPlayerReconnectionReq(Player player);
 
-    void onNotifyPlayerConnectionReq(String nickname);
+    void onNotifyPlayerConnectionReq(String nickname, boolean you);
 
     void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score);
 
