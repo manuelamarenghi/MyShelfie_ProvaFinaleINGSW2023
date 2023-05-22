@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -47,7 +46,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private StackPane stackPanelibrary;
     private Map<String, Image[]> tiles=Collections.synchronizedMap(new HashMap<>());
     @FXML
-    private AnchorPane ancor;
+    private AnchorPane ancor = new AnchorPane();
     @FXML
     private ImageView background=new ImageView();
     @FXML
@@ -59,7 +58,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     @FXML
     private TextArea messageServer=new TextArea();
     @FXML
-    private TextField inputUser;
+    private TextField inputUser = new TextField();
     @FXML
     private ImageView Chair, TokenCommon1, TokenCommon2, FirstFinished;
     @FXML
@@ -141,7 +140,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void createBoard(Board b) {
-
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {

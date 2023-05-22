@@ -31,6 +31,7 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel.addObserver(this.view);
 
     }
+
     public ClientController(ViewClient view) {
         this.view = view;
         this.virtualModel = new VirtualModel();
@@ -42,7 +43,7 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void setServerInfo(String ipAddress) {
         try {
-            this.socketClient=new SocketClient(ipAddress,16847);
+            this.socketClient = new SocketClient(ipAddress, 16847);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -153,6 +154,7 @@ public class ClientController implements ObserverViewClient {
 
     @Override
     public void setNickname(String nickname) {
+
         virtualModel.setMe(nickname);
     }
 

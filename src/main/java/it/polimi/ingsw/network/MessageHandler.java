@@ -151,14 +151,13 @@ public class MessageHandler implements Observer {
         virtualModel.notifyObserver(obs -> obs.onNotifyCardsAreNotAdjacentReq());
 
     }
-
     /**
      * handle AcceptPlayer messages and notify the player's view if him or another player have been accepted.
      *
      * @param message
      */
     public void handle(AcceptPlayer message) {
-        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerConnectionReq(message.getnickname()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerConnectionReq(message.getnickname(), message.isYou()));
     }
 
 

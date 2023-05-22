@@ -28,10 +28,10 @@ public class JavaFXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IllegalArgumentException, IOException {
-        LivingRoomController living=new LivingRoomController();
-        ChatController chat=new ChatController();
-        WaitingController waitingController=new WaitingController();
-        GUI gui=new GUI(living,chat,waitingController);
+        LivingRoomController living = new LivingRoomController();
+        ChatController chat = new ChatController();
+        WaitingController waitingController = new WaitingController();
+        GUI gui = new GUI(living, chat, waitingController);
         ClientController clientController = new ClientController(gui);
         //clientController.addViewObserver(gui);
         //clientController.addViewObserver();
@@ -45,7 +45,7 @@ public class JavaFXApplication extends Application {
             System.exit(1);
         }
         //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/main_scene.fxml")));
-        MainSceneController menu=loader.getController();
+        MainSceneController menu = loader.getController();
         menu.addObserver(clientController);
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/background_livingroom.css").toExternalForm());

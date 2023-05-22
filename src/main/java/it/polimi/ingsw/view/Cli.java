@@ -117,7 +117,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     * the method asks the first user the number of players that are going to play
+     * the method asks to the first user the number of players that are going to play
      */
     @Override
     public void askNumberPlayer() {
@@ -138,7 +138,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     @Override
     public void askCardsToTakeFromBoard() {
         int i, x, y;
-        int numberOfCards=-1;
+        int numberOfCards = -1;
 
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
@@ -362,7 +362,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (nickname.equals(this.nickname)) {
             out.println("Connected");
             this.nickname = nickname;

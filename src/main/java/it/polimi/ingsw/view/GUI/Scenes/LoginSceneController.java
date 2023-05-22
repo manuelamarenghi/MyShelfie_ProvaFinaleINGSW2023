@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 
 public class LoginSceneController extends ObservableViewClient implements GenericSceneController {
     public Text name_txt;
-    private boolean askNumb=false;
+    private boolean askNumb = false;
     @FXML
     public TextArea Area;
     public Button okButton;
@@ -34,18 +34,17 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
 
     public void onClick(ActionEvent actionEvent) {
-        if(!askNumb) {
+        if (!askNumb) {
             if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
-            else this.notifyObserver(observerViewClient -> observerViewClient.handleEnterPlayer(name_txb.getText()));
-        }else{
+            else this.notifyObserver(observers -> observers.handleEnterPlayer(name_txb.getText()));
+        } else {
             String numb = name_txb.getText();
-            if(Integer.parseInt(numb) != 2 && Integer.parseInt(numb)  != 3 && Integer.parseInt(numb)  != 4) {
+            if (Integer.parseInt(numb) != 2 && Integer.parseInt(numb) != 3 && Integer.parseInt(numb) != 4) {
                 name_txt.setText("Insert a valid number");
             }
             this.notifyObserver(observers -> observers.ChangeRoot("wait"));
             this.notifyObserver(observers -> observers.handleCreateBoard(Integer.parseInt(numb)));
         }
-
         // name_txb.getStylesheets().add("text-red");
         name_txb.clear();
     }
@@ -66,7 +65,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     }
 
     public void NumbPlayer() {
-        askNumb =true;
+        askNumb = true;
         name_txt.setText("Insert number of player between 2,3,4:");
         //ip_txb.setVisible(false);
         //ip_txb.setEditable(false);

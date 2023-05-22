@@ -19,11 +19,12 @@
                <children>
                   <TextField fx:id="name_txb" alignment="CENTER" layoutX="341.0" layoutY="214.0"
                              onKeyPressed="#onEnterNick" prefHeight="25.0" prefWidth="230.0"/>
-                  <Text fx:id="name_txt" fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  <Text fx:id="name_txt" fill="WHITE" layoutX="151.0" layoutY="234.0" strokeType="OUTSIDE"
+                        strokeWidth="0.0"
                         text="Inserire un nickname:">
-                     <font>
-                        <Font size="18.0"/>
-                     </font>
+                      <font>
+                          <Font size="18.0"/>
+                      </font>
                   </Text>
                   <Button fx:id="okButton" alignment="CENTER" layoutX="409.0" layoutY="352.0" mnemonicParsing="false"
                           onAction="#onClick" onKeyPressed="#onEnter" prefHeight="33.0" prefWidth="95.0" text="Fatto"/>
