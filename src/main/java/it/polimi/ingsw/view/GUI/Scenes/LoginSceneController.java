@@ -36,7 +36,9 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     public void onClick(ActionEvent actionEvent) {
         if (!askNumb) {
             if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
-            else this.notifyObserver(observers -> observers.handleEnterPlayer(name_txb.getText()));
+            else
+                this.notifyObserver(observers -> observers.handleEnterPlayer(name_txb.getText()));
+            this.notifyObserver(observers -> observers.setNickname(name_txb.getText()));
         } else {
             String numb = name_txb.getText();
             if (Integer.parseInt(numb) != 2 && Integer.parseInt(numb) != 3 && Integer.parseInt(numb) != 4) {
@@ -60,8 +62,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
 
     public void Connect_before_first() {
-        Area.setVisible(true);
-        Area.appendText("First player is deciding number of players.Please try again\n");
+        name_txt.setText("First player is deciding number of players.Please try again");
     }
 
     public void NumbPlayer() {
@@ -84,5 +85,9 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
     public void GameFull() {
         Area.appendText("I'm sorry.The game is already full of players\n");
+    }
+
+    public void TryAgainNick() {
+        name_txt.setText("Nickname already taken.Try again");
     }
 }

@@ -31,20 +31,20 @@ import java.util.Map;
  */
 public class LivingRoomController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private Button libraries;
+    private Button libraries = new Button();
     @FXML
-    private Button Common1;
+    private Button Common1 = new Button();
     @FXML
-    private Button Common2;
+    private Button Common2 = new Button();
     @FXML
-    private Button Exit, Send;
+    private Button Exit = new Button(), Send = new Button();
     @FXML
-    private ImageView PersonalCard;
+    private ImageView PersonalCard = new ImageView();
     @FXML
-    private StackPane stackPane;
+    private StackPane stackPane = new StackPane();
     @FXML
-    private StackPane stackPanelibrary;
-    private Map<String, Image[]> tiles;
+    private StackPane stackPanelibrary = new StackPane();
+    private Map<String, Image[]> tiles = Collections.synchronizedMap(new HashMap<>());
     @FXML
     private AnchorPane ancor = new AnchorPane();
     @FXML
@@ -60,9 +60,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     @FXML
     private TextField inputUser = new TextField();
     @FXML
-    private ImageView Chair, TokenCommon1, TokenCommon2, FirstFinished;
+    private ImageView Chair = new ImageView(), TokenCommon1 = new ImageView(), TokenCommon2 = new ImageView(), FirstFinished = new ImageView();
     @FXML
-    private ImageView Col0, Col1, Col2, Col3, Col4;
+    private ImageView Col0 = new ImageView(), Col1 = new ImageView(), Col2 = new ImageView(), Col3 = new ImageView(), Col4 = new ImageView();
     private boolean yourTurn, SendbuttonAble, Token1set;
     private int cardtaken;
     private int index;
@@ -89,7 +89,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void setTiles() {
         InputStream is;
-        tiles = Collections.synchronizedMap(new HashMap<>());
         Image[] imageY = new Image[3];
         is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
         imageY[0] = new Image(is);

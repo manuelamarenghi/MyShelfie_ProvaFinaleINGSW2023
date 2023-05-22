@@ -22,13 +22,13 @@ public class LibrariesController extends ObservableViewClient implements Generic
     @FXML
     private StackPane Stackpane;
     @FXML
-    private GridPane GridLibrary;
+    private GridPane GridLibrary = new GridPane();
     @FXML
-    private ImageView Backgroundlibrary;
+    private ImageView Backgroundlibrary = new ImageView();
     @FXML
-    private Button ButtonBack;
+    private Button ButtonBack = new Button();
     @FXML
-    private TextField TextFieldd;
+    private TextField TextFieldd = new TextField();
 
     public void initialize() {
         Stackpane = new StackPane();

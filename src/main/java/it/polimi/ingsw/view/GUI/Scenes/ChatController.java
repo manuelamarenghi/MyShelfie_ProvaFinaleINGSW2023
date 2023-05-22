@@ -16,15 +16,15 @@ import java.util.Map;
 
 public class ChatController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private Button Back;
+    private Button Back = new Button();
     @FXML
-    private ListView ChatsAvaiable;
+    private ListView ChatsAvaiable = new ListView();
     @FXML
-    private Button Send;
+    private Button Send = new Button();
     @FXML
-    private TextArea Chat;
+    private TextArea Chat = new TextArea();
     @FXML
-    private TextField WriteArea;
+    private TextField WriteArea = new TextField();
     private Map<String, ArrayList<String>> StoredChat;
     private ArrayList<String> dest;
     private ArrayList<String> all;

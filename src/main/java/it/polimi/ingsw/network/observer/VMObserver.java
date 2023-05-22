@@ -59,4 +59,6 @@ public interface VMObserver {
     void onNotifyMexInChat(String getnickname, String mex, String dest);
 
     void onPressedButtonChange(String scene);
+
+    void setNickname(String nickname);
 }

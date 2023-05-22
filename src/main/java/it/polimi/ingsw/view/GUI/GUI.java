@@ -28,7 +28,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowReq(String s) {
-        Platform.runLater(() -> livingController.setTextArea(s));
+        if (s.equals("Start Game")) {
+            System.out.println("arrivo di start game");
+            //  Platform.runLater(() -> livingController.initialize());
+            onPressedButtonChange("living");
+        } else {
+            Platform.runLater(() -> livingController.setTextArea(s));
+        }
     }
 
     @Override
@@ -40,6 +46,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
+        livingController.initialize();
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -63,7 +70,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (you) {
-            this.nickname = nickname;
+            notifyObserver(obs -> obs.setNickname(nickname));
             onPressedButtonChange("wait");
         } else {
             Platform.runLater(() -> waitcontr.setPlayer(nickname));
@@ -97,7 +104,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
-
+        // vuoto
     }
 
     @Override
@@ -107,7 +114,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-        Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
+
     }
 
     @Override
@@ -133,7 +140,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyNewNicknameReq() {
-
+        LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
+        Platform.runLater(() -> login.TryAgainNick());
     }
 
     @Override
@@ -145,7 +153,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
-        Platform.runLater(() -> livingController.setTextArea("Now is" + current_player + "turn"));
+        boolean yourTurn = false;
+        Platform.runLater(() -> livingController.setYourTurn(yourTurn));
+        Platform.runLater(() -> livingController.setTextArea("Your turn is over"));
     }
 
     @Override
@@ -166,6 +176,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
+        Platform.runLater(() -> chatController.initialize());
         Platform.runLater(() -> chatController.setChats(players));
     }
 
@@ -201,8 +212,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        chatController.setYourNickname(nickname);
+    }
+
+    @Override
     public void askNickname() {
-        Platform.runLater(() -> SceneController.setRootPane(observers,"login_scene.fxml"));
+        Platform.runLater(() -> SceneController.setRootPane(observers, "login_scene.fxml"));
     }
 
     @Override
