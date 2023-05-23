@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="150.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/19"
-           fx:controller="it.polimi.ingsw.view.GUI.Scenes.LivingRoomController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="stack" prefHeight="150.0" prefWidth="521.0"
+           xmlns="http://javafx.com/javafx/19">
     <children>
         <Group>
             <children>
                 <AnchorPane layoutX="203.0" layoutY="73.0" prefHeight="608.0" prefWidth="892.0">
                     <children>
                         <Button fx:id="libraries" layoutX="47.0" layoutY="23.0" mnemonicParsing="false"
-                                onMouseClicked="#pressedLibraries" prefHeight="37.0" prefWidth="113.0"
-                                text="libraries"/>
-                        <Button fx:id="Common1" layoutX="241.0" layoutY="82.0" mnemonicParsing="false"
-                                onMouseClicked="#pressedCommon2" prefHeight="38.0" prefWidth="114.0" text="C.C. 1"/>
-                        <Button fx:id="Common2" layoutX="241.0" layoutY="22.0" mnemonicParsing="false"
-                                onMouseClicked="#pressedCommon1" prefHeight="38.0" prefWidth="114.0" text="C.C. 2"/>
-                        <Button fx:id="Exit" layoutX="831.0" layoutY="16.0" mnemonicParsing="false"
-                                onMouseClicked="#pressedExit" text="Exit"/>
-                        <Button layoutX="46.0" layoutY="82.0" mnemonicParsing="false" onMouseClicked="#pressedChat"
-                                prefHeight="38.0" prefWidth="114.0" text="Chat"/>
+                                prefHeight="37.0" prefWidth="113.0" text="libraries"/>
+                        <Button fx:id="Common1" layoutX="241.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
+                                prefWidth="114.0" text="C.C. 1"/>
+                        <Button fx:id="Common2" layoutX="241.0" layoutY="22.0" mnemonicParsing="false" prefHeight="38.0"
+                                prefWidth="114.0" text="C.C. 2"/>
+                        <Button fx:id="Exit" layoutX="831.0" layoutY="16.0" mnemonicParsing="false" text="Exit"/>
+                        <Button layoutX="46.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
+                                prefWidth="114.0" text="Chat"/>
                         <ImageView fx:id="PersonalCard" fitHeight="169.0" fitWidth="120.0" layoutX="502.0"
                                    layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                         </ImageView>
@@ -173,8 +170,7 @@
                                    pickOnBounds="true" preserveRatio="true"/>
                         <ImageView fx:id="FirstFinished" fitHeight="53.0" fitWidth="54.0" layoutX="796.0"
                                    layoutY="259.0" pickOnBounds="true" preserveRatio="true"/>
-                        <Button fx:id="Send" layoutX="828.0" layoutY="123.0" mnemonicParsing="false"
-                                onMouseClicked="#pressedSend" text="send"/>
+                        <Button fx:id="Send" layoutX="828.0" layoutY="123.0" mnemonicParsing="false" text="send"/>
                     </children>
                 </AnchorPane>
             </children>

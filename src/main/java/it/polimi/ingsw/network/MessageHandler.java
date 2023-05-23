@@ -23,7 +23,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Message message) {
-
         if (!message.getType().equals("Pong!"))
             virtualModel.notifyObserver(obs -> obs.onShowReq("Server message: " + message.getType()));
     }

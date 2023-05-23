@@ -32,43 +32,46 @@ import java.util.Objects;
  */
 public class LivingRoomController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private Button libraries;
+    private Button libraries = new Button();
     @FXML
-    private Button Common1;
+    private Button Common1 = new Button();
     @FXML
-    private Button Common2;
+    private Button Common2 = new Button();
     @FXML
-    private Button Exit, Send;
+    private Button Exit = new Button(), Send = new Button();
     @FXML
-    private ImageView PersonalCard;
+    private ImageView PersonalCard = new ImageView();
     @FXML
-    private StackPane stackPane;
+    private StackPane stackPane = new StackPane();
     @FXML
-    private StackPane stackPanelibrary;
-    private Map<String, Image[]> tiles=Collections.synchronizedMap(new HashMap<>());
+    private StackPane stackPanelibrary = new StackPane();
+    private Map<String, Image[]> tiles = Collections.synchronizedMap(new HashMap<>());
     @FXML
     private AnchorPane ancor = new AnchorPane();
     @FXML
-    private ImageView background=new ImageView();
+    private ImageView background = new ImageView();
     @FXML
-    private GridPane gameBoard=new GridPane();
+    private GridPane gameBoard = new GridPane();
     @FXML
-    private ImageView backgroundlibrary=new ImageView();
+    private ImageView backgroundlibrary = new ImageView();
     @FXML
-    private GridPane gameBoardlibrary=new GridPane();
+    private GridPane gameBoardlibrary = new GridPane();
     @FXML
-    private TextArea messageServer=new TextArea();
+    private TextArea messageServer = new TextArea();
     @FXML
     private TextField inputUser = new TextField();
     @FXML
-    private ImageView Chair, TokenCommon1, TokenCommon2, FirstFinished;
+    private ImageView Chair = new ImageView(), TokenCommon1 = new ImageView(), TokenCommon2 = new ImageView(), FirstFinished = new ImageView();
     @FXML
-    private ImageView Col0, Col1, Col2, Col3, Col4;
+    private ImageView Col0 = new ImageView(), Col1 = new ImageView(), Col2 = new ImageView(), Col3 = new ImageView(), Col4 = new ImageView();
     private boolean yourTurn, SendbuttonAble, Token1set;
     private int cardtaken;
     private int index;
     private Position[] positions = new Position[3];
     private int[] columnforthisturn;
+    private int ableSend;
+    private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
+
 
     private Image[] imageB,imageY,imageP,imageW,imageG,imageL;
 
@@ -125,7 +128,19 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
-    public void start() {
+    public void initialize() {
+        libraries.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            try {
+                pressedLibraries(mouseEvent);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
+        Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
+        Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
         Token1set = false;
         SendbuttonAble = false;
         messageServer.setEditable(false);
@@ -197,16 +212,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void TakeCards() {
         Integer n;
-        do {
-            setTextArea("Insert the number of items you want to take");
-            String x = inputUser.getText();
-            messageServer.clear();
-            n = Integer.parseInt(x);
-        } while (n < 0 && n > 3);
-        setCardtaken(n);
-        inputUser.clear();
-        setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
-        index = 0;
+        setTextArea("Insert the number of items you want to take");
+        ableSend = 2;
     }
 
     public void removeHighlights() {
@@ -254,7 +261,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         int n;
         if (SendbuttonAble) {
             do {
-                setTextArea("Insert a valid column you want to choose");
+                setTextArea("Insert a valid column you want to choose\n");
                 String s = getUserInput();
                 n = Integer.parseInt(s);
             } while (ValidColumn(columnforthisturn, n));
@@ -266,6 +273,21 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             Col2.setImage(null);
             Col3.setImage(null);
             Col4.setImage(null);
+        } else {
+            if (ableSend == 2) {
+                setTextArea("Please insert a valid number less or equal 3\n");
+                String s = getUserInput();
+                n = Integer.parseInt(s);
+                inputUser.clear();
+                if (n < 0 || n > 3) {
+                    setTextArea("Please insert a valid number less or equal 3\n");
+                } else {
+                    ableSend = 1;
+                    setCardtaken(n);
+                    setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
+                    index = 0;
+                }
+            }
         }
     }
 

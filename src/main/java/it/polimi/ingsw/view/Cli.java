@@ -551,4 +551,9 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void onPressedButtonChange(String scene) {
 
     }
+
+    @Override
+    public void setNickname(String nickname) {
+
+    }
 }

@@ -16,15 +16,15 @@ import java.util.Map;
 
 public class ChatController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private Button Back;
+    private Button Back = new Button();
     @FXML
-    private ListView ChatsAvaiable=new ListView<>();
+    private ListView ChatsAvaiable = new ListView();
     @FXML
-    private Button Send;
+    private Button Send = new Button();
     @FXML
-    private TextArea Chat;
+    private TextArea Chat = new TextArea();
     @FXML
-    private TextField WriteArea;
+    private TextField WriteArea = new TextField();
     private Map<String, ArrayList<String>> StoredChat;
     private ArrayList<String> dest;
     private ArrayList<String> all;
@@ -36,6 +36,8 @@ public class ChatController extends ObservableViewClient implements GenericScene
         dest = new ArrayList<>();
         Chat.setEditable(false);
         ArrayList<String> names = new ArrayList<>();
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
+        Back.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
     }
 
     public void setYourNickname(String nick) {
@@ -43,7 +45,6 @@ public class ChatController extends ObservableViewClient implements GenericScene
     }
 
     public void setChats(ArrayList<String> players) {
-
         all = new ArrayList<>();
         StoredChat = Collections.synchronizedMap(new HashMap<>());
         for (String name : players) {

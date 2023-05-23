@@ -12,13 +12,13 @@ import javafx.scene.layout.VBox;
 import java.io.InputStream;
 
 public class CGController extends ObservableViewClient implements GenericSceneController {
-    public Button theButton;
+    public Button theButton = new Button();
     @FXML
-    public VBox box;
+    public VBox box = new VBox();
     @FXML
-    public Label theLabel=new Label();
+    public Label theLabel = new Label();
     @FXML
-    public ImageView imageView=new ImageView();
+    public ImageView imageView = new ImageView();
 
     public void initialize() {
         box.getStyleClass().add("card");
