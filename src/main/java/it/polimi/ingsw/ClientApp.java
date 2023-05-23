@@ -18,8 +18,7 @@ public class ClientApp {
 
         Cli cli = new Cli();
 
-           ClientController clientController = new ClientController(cli, socketClient);
-          clientController.addViewObserver(cli);
+        ClientController clientController = new ClientController(cli, socketClient);
          cli.addObserver(clientController);
          cli.start();
         //Application.launch(JavaFXApplication.class);

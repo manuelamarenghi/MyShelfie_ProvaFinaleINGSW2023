@@ -221,7 +221,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void errorNickname(ArrayList<Player> players) {
+    public void errorNickname(ArrayList<String> players) {
 
     }
 }
