@@ -55,4 +55,9 @@ public class CornersCommTest {
         library.getCardinPos(5, 4).setColour("red");
         assertFalse(corners.expired(library));
     }
+    @Test
+    public void checkShow(){
+        corners.showCommonCard();
+        System.out.println(corners.getDesc());
+    }
 }
