@@ -28,9 +28,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowReq(String s) {
-        if (s.equals("Start Game")) {
-            System.out.println("arrivo di start game");
-            //  Platform.runLater(() -> livingController.initialize());
+        System.out.println(s);
+        if (s.equals("Server message: Start Game")) {
             onPressedButtonChange("living");
         } else {
             Platform.runLater(() -> livingController.setTextArea(s));
@@ -46,7 +45,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
-        livingController.initialize();
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -147,6 +145,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
+        Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
         askCardsToTakeFromBoard();
     }

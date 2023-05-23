@@ -36,6 +36,8 @@ public class ChatController extends ObservableViewClient implements GenericScene
         dest = new ArrayList<>();
         Chat.setEditable(false);
         ArrayList<String> names = new ArrayList<>();
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
+        Back.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
     }
 
     public void setYourNickname(String nick) {
