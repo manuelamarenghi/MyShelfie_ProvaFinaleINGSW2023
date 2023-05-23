@@ -23,7 +23,7 @@ class EffectiveCardTest {
     al=effectiveCard.getAllScores();
     al.add(1);
     assertNotSame(effectiveCard.getAllScores(), al);
-  }
+  }//
     @Test
     public void checkShow(){
         CommonGoalCards commonGoalCard = new Col2G();
