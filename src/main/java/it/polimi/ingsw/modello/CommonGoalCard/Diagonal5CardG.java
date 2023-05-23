@@ -6,11 +6,16 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class Diagonal5CardG implements CommonGoalCards, Serializable {
+    int numberCard = 11;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
 
     @Override
     public boolean check(Library library) {
 
-        return sxDiagonal(library)||sxDiagonalShift(library)||dxDiagonal(library)||dxDiagonalShift(library);
+        return sxDiagonal(library) || sxDiagonalShift(library) || dxDiagonal(library) || dxDiagonalShift(library);
     }
 
     @Override
@@ -35,11 +40,11 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         return "Five tiles of the same type forming a diagonal.\n ";
     }
 
-    private boolean sxDiagonal(Library library){
+    private boolean sxDiagonal(Library library) {
         String color;
 
-        if(!library.getCardinPos(0,0).getColour().equals(""))
-            color=library.getCardinPos(0,0).getColour();
+        if (!library.getCardinPos(0, 0).getColour().equals(""))
+            color = library.getCardinPos(0, 0).getColour();
         else
             return false;
 

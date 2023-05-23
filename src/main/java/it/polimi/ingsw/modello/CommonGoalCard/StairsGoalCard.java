@@ -5,9 +5,15 @@ import it.polimi.ingsw.modello.Library;
 import java.io.Serializable;
 
 public class StairsGoalCard implements CommonGoalCards, Serializable {
+    int numberCard = 12;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     @Override
     public boolean check(Library library) {
-    return sxStair(library)||dxStair(library)||sxShiftedStair(library)||dxShiftedStair(library);
+        return sxStair(library) || dxStair(library) || sxShiftedStair(library) || dxShiftedStair(library);
     }
 
     @Override
@@ -17,8 +23,8 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
 
     @Override
     public String getDesc() {
-        return "Five columns of increasing or decreasing height.\n"+
-                "Starting from the first column on the left or on the right,\n"+
+        return "Five columns of increasing or decreasing height.\n" +
+                "Starting from the first column on the left or on the right,\n" +
                 "each next column must be made of exactly one more tile. \n" +
                 "Tiles can be of any type.\n";
     }
@@ -51,14 +57,17 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
         library.showLibrary();
 
     }
-    private static boolean sxStair(Library library){
-        for(int i=0;i<5;i++){
-            if(!(library.getFilledColumnNumber(i)==5-i&& library.getFilledRowNumber(5-i)==5-i))return false;
+
+    private static boolean sxStair(Library library) {
+        for (int i = 0; i < 5; i++) {
+            if (!(library.getFilledColumnNumber(i) == 5 - i && library.getFilledRowNumber(5 - i) == 5 - i))
+                return false;
         }
         return true;
     }
-    private static boolean dxStair(Library library){
-        for(int i=5;i>0;i--){
+
+    private static boolean dxStair(Library library) {
+        for (int i = 5; i > 0; i--) {
             if(!(library.getFilledColumnNumber(i-1)==i&& library.getFilledRowNumber(i)==i))return false;
         }
         return true;

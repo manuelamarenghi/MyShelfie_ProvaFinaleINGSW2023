@@ -1,7 +1,5 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.modello.Card;
-import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -56,13 +54,14 @@ class LibraryTest {
         library.getCardinPos(3, 4).setColour("green");
         library.showLibrary();
         actual = library.showColumn(3);
-        Assertions.assertTrue(actual.length==0);
+        Assertions.assertTrue(actual.length == 0);
     }
+
     /**
      * showColumn3() tests where you can put 3 cards when library's empty
      */
     @Test
-    void showColumn3(){
+    void showColumn3() {
         Library library = new Library();
         int[] expected = new int[5];
         expected[0] = 0;
@@ -169,19 +168,19 @@ class LibraryTest {
      * getGroup1() tests if it works
      */
     @Test
-    void getGroup1(){
+    void getGroup1() {
         Library library = new Library();
-        library.getCardinPos(5,0).setColour("green");
-        library.getCardinPos(4,0).setColour("yellow");
-        library.getCardinPos(3,0).setColour("yellow");
-        library.getCardinPos(5,1).setColour("green");
-        library.getCardinPos(4,1).setColour("blue");
-        library.getCardinPos(3,1).setColour("green");
-        library.getCardinPos(5,2).setColour("green");
-        library.getCardinPos(4,2).setColour("green");
-        library.getCardinPos(5,3).setColour("yellow");
-        library.getCardinPos(4,3).setColour("green");
-        library.getCardinPos(3,3).setColour("green");
+        library.getCardinPos(5, 0).setColour("green");
+        library.getCardinPos(4, 0).setColour("yellow");
+        library.getCardinPos(3, 0).setColour("yellow");
+        library.getCardinPos(5, 1).setColour("green");
+        library.getCardinPos(4, 1).setColour("blue");
+        library.getCardinPos(3, 1).setColour("green");
+        library.getCardinPos(5, 2).setColour("green");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(5, 3).setColour("yellow");
+        library.getCardinPos(4, 3).setColour("green");
+        library.getCardinPos(3, 3).setColour("green");
         library.showLibrary();
         library.getgroup();
     }
@@ -207,19 +206,20 @@ class LibraryTest {
         Assertions.assertFalse(library.isFull());
 
     }
+
     @Test
-    void isFullFalse2Test(){
+    void isFullFalse2Test() {
         Library library = new Library();
-        library.getCardinPos(0,0).setColour("G");
-        library.getCardinPos(0,1).setColour("G");
-        library.getCardinPos(0,3).setColour("G");
-        library.getCardinPos(0,4).setColour("G");
+        library.getCardinPos(0, 0).setColour("G");
+        library.getCardinPos(0, 1).setColour("G");
+        library.getCardinPos(0, 3).setColour("G");
+        library.getCardinPos(0, 4).setColour("G");
         Assertions.assertFalse(library.isFull());
 
     }
 
     @Test
-    public void showLibraryTest(){
+    public void showLibraryTest() {
         Library library = new Library();
 
         library.getCardinPos(4, 0).setColour("green");

@@ -59,7 +59,7 @@ public class MessageHandler implements Observer {
 
         if (virtualModel.getMe().getNickname().equals(message.getnickname())) {
             virtualModel.getMe().setLibrary(message.getL());
-            virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL()));
+            virtualModel.notifyObserver(obs -> obs.onShowNewMyLibraryReq(message.getL(), message.getnickname()));
         } else {
             virtualModel.getPlayer(message.getnickname()).setLibrary(message.getL());
 
@@ -74,7 +74,7 @@ public class MessageHandler implements Observer {
      */
     public void handle(ShowColumn message) {
 
-        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(),message.getCards(), virtualModel.getMe().getLibrary()));
+        virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), message.getCards(), virtualModel.getMe().getLibrary()));
     }
 
     /**
@@ -94,13 +94,12 @@ public class MessageHandler implements Observer {
      */
     public void handle(AnotherPlayerDisconnect message) {
         if (virtualModel.getPlayers() != null) {
-            virtualModel.removePlayer(message.getnickname());
             virtualModel.notifyObserver(obs -> obs.onNotifyPlayerDisconnectionReq(virtualModel.getPlayer(message.getnickname())));
+            virtualModel.removePlayer(message.getnickname());
         } else {
             virtualModel.notifyObserver(obs -> obs.onShowReq("A player has disconnected"));
         }
     }
-
     /**
      * handle PlayerReturned messages, update virtualModel.players and notify the player's view the returning player's object.
      *
@@ -119,10 +118,8 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Assigned_CC message) {
-
         virtualModel.updateCommonScore(message.getnickname(), message.getPoint());
-        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getnickname(),message.getCard(), message.getPoint()));
-
+        virtualModel.notifyObserver(obs -> obs.onNotifyReachedCommonGoalCardReq(message.getnickname(), message.getCard(), message.getPoint()));
     }
 
 
@@ -132,16 +129,17 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(ChairAssigned message) {
-
         //if(message.getnickname().equals(virtualModel.getMe().getNickname()))
         virtualModel.updateChair(message.getnickname());
         if (virtualModel.getMe().getNickname().equals(virtualModel.getChair().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
+                virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
+        } else {
+            virtualModel.notifyObserver(obs -> obs.onShowReq("Chair assigned to" + message.getnickname()));
         }
-        virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
     }
 
     /**
@@ -170,7 +168,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Final_point message) {
-
         virtualModel.notifyObserver(obs -> obs.onShowFinalScoreBoardReq(message.getPoint()));
     }
 
@@ -180,11 +177,13 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(First_finish message) {
-
         virtualModel.setFirstFinish(message.getnickname());
-        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerFinishedFirstReq(virtualModel.getPlayer(message.getnickname())));
+        if (virtualModel.getMe().getNickname().equals(message.getnickname())) {
+            virtualModel.notifyObserver(obs -> obs.onNotifyPlayerFinishedFirstReq(virtualModel.getPlayer(message.getnickname())));
+        } else {
+            virtualModel.notifyObserver(obs -> obs.onShowReq(message.getnickname() + " has finished his library.This is the last round"));
+        }
     }
-
     /**
      * handle Numb_Player_Answer messages, update virtualModel.playerNumber and notify the player's view of the player number chosen by
      * the first player.
@@ -192,7 +191,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Numb_Player_Answer message) {
-
         virtualModel.setPlayerNumber(message.getX());
         virtualModel.notifyObserver(obs -> obs.onNotifyNumbPlayerReq(message.getX()));
     }
@@ -215,7 +213,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(AskNewNickname message) {
-
         virtualModel.notifyObserver(obs -> obs.onNotifyNewNicknameReq());
     }
 
@@ -226,7 +223,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Turn message) {
-
         if (message.getTurnPlayer().equals(virtualModel.getMe().getNickname())) {
             if (!virtualModel.isMyTurn()) {
                 virtualModel.updateIsMyTurn();
@@ -246,7 +242,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Send_PersonalCard message) {
-
         virtualModel.getMe().setPersonalCard(message.getPersonalGoalCard());
         virtualModel.notifyObserver(obs -> obs.onNotifyPersonalCardReq(message.getPersonalGoalCard()));
     }
@@ -263,6 +258,7 @@ public class MessageHandler implements Observer {
 
     public void handle(Connected_Before_FirstPlayer message) {
         try {
+            virtualModel.notifyObserver(obs -> obs.onShowReq(message.getType()));
             virtualModel.notifyObserver(obs -> {
                 try {
                     obs.NotifyaskNicknameReq();
@@ -277,8 +273,12 @@ public class MessageHandler implements Observer {
 
     public void handle(Send_EffectiveCard message) {
         virtualModel.setCommonCards(message.getCards());
-        virtualModel.notifyObserver(obs->obs.onNotifyCommonCards(message.getCards()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyCommonCards(message.getCards()));
 
+    }
+
+    public void handle(Receiving_Mex message) {
+        virtualModel.notifyObserver(obs -> obs.onNotifyMexInChat(message.getnickname(), message.getMex(), message.getDest()));
     }
 }
 

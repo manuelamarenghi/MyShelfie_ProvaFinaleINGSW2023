@@ -45,7 +45,8 @@ public class ClientHandler implements Runnable {
             System.out.println("Inizio a gestire messaggio");
             handleClientConnection();
         } catch (Exception e) {
-            disconnect();
+            //disconnect();
+            System.out.println(e);
         }
     }
     /**
@@ -72,7 +73,7 @@ public class ClientHandler implements Runnable {
     private void handleClientConnection() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                    Message message = (Message) input.readObject();
+                   Message message = (Message) input.readObject();
                     if(message.getType().equals("Ping!")){
                         sendMessage(new Message("server","Pong!"));
                     }
@@ -94,7 +95,8 @@ public class ClientHandler implements Runnable {
                         }
                     }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
-            disconnect();
+            //disconnect();
+            System.out.println(e);
         }
     }
     /**
@@ -107,7 +109,8 @@ public class ClientHandler implements Runnable {
                 output.reset();
 
         } catch (IOException e) {
-            disconnect();
+            System.out.println(e);
+            //disconnect();
         }
     }
     public boolean isConnected() {

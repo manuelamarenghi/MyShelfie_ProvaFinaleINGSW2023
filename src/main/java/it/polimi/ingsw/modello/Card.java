@@ -35,18 +35,18 @@ public class Card implements Serializable {
         return colour;
     }
 
+    public void setColour(String colour) {
+        this.colour = colour;
+        if (colour == null) return;
+
+    }
+
     public Position getCoordinates() {
         return coordinates;
     }
 
     public void setCoordinates(Position coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-        if (colour == null) return;
-
     }
 
 }

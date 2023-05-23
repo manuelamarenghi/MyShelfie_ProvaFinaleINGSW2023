@@ -8,15 +8,17 @@ public class Turn extends Message implements Serializable {
 
     private String turnPlayer;
 
-    public Turn(String nickname){
-        super("Server","player_turn");
-        turnPlayer=nickname;
+    public Turn(String nickname) {
+        super("Server", "player_turn");
+        turnPlayer = nickname;
 
 
     }
-    public String getTurnPlayer(){
+
+    public String getTurnPlayer() {
         return turnPlayer;
     }
+
     public void visit(MessageHandler controller) {
         controller.handle(this);
     }

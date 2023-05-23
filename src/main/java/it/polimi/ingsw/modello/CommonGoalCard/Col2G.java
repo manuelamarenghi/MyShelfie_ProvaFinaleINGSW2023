@@ -9,16 +9,22 @@ import java.util.ArrayList;
  * Col2G goal needs two columns each formed by 6 different types of tiles
  */
 public class Col2G implements CommonGoalCards, Serializable {
+    int numberCard = 2;
+
+    public int getNumberCard() {
+        return numberCard;
+    }
+
     /**
      * check() returns true if the library match the goal,otherwise false
      */
     @Override
     public boolean check(Library library) {
         ArrayList<String> n = new ArrayList<String>();
-        int temp=0;
-        int x=0;
-        int j=0;
-        for(int i=0;i<5;i++){
+        int temp = 0;
+        int x = 0;
+        int j = 0;
+        for (int i = 0; i < 5; i++) {
             while(j<6){
                 if(!library.getCardinPos(j, i).getColour().isEmpty()){
                     if(!n.contains(library.getCardinPos(j, i).getColour())) {
@@ -35,34 +41,36 @@ public class Col2G implements CommonGoalCards, Serializable {
             temp=0;
             n.clear();
         }
-        if(x>=2){
-        return true;}
+        if (x >= 2) {
+            return true;
+        }
         return false;
     }
+
     /**
      * getImage() let you see this goal
      */
     @Override
     public void showCommonCard() {
-        Library l=new Library();
-        l.getCardinPos(0,1).setColour("green");
-        l.getCardinPos(1,1).setColour("pink");
-        l.getCardinPos(2,1).setColour("green");
-        l.getCardinPos(3,1).setColour("green");
-        l.getCardinPos(4,1).setColour("green");
-        l.getCardinPos(5,1).setColour("green");
-        l.getCardinPos(0,0).setColour("green");
-        l.getCardinPos(1,0).setColour("pink");
-        l.getCardinPos(2,0).setColour("white");
-        l.getCardinPos(3,0).setColour("pink");
-        l.getCardinPos(4,0).setColour("blue");
-        l.getCardinPos(5,0).setColour("yellow");
-        l.getCardinPos(0,4).setColour("pink");
-        l.getCardinPos(1,4).setColour("green");
-        l.getCardinPos(2,4).setColour("blue");
-        l.getCardinPos(3,4).setColour("white");
-        l.getCardinPos(4,4).setColour("pink");
-        l.getCardinPos(5,4).setColour("yellow");
+        Library l = new Library();
+        l.getCardinPos(0, 1).setColour("green");
+        l.getCardinPos(1, 1).setColour("pink");
+        l.getCardinPos(2, 1).setColour("green");
+        l.getCardinPos(3, 1).setColour("green");
+        l.getCardinPos(4, 1).setColour("green");
+        l.getCardinPos(5, 1).setColour("green");
+        l.getCardinPos(0, 0).setColour("green");
+        l.getCardinPos(1, 0).setColour("pink");
+        l.getCardinPos(2, 0).setColour("white");
+        l.getCardinPos(3, 0).setColour("pink");
+        l.getCardinPos(4, 0).setColour("blue");
+        l.getCardinPos(5, 0).setColour("yellow");
+        l.getCardinPos(0, 4).setColour("pink");
+        l.getCardinPos(1, 4).setColour("green");
+        l.getCardinPos(2, 4).setColour("blue");
+        l.getCardinPos(3, 4).setColour("white");
+        l.getCardinPos(4, 4).setColour("pink");
+        l.getCardinPos(5, 4).setColour("yellow");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
@@ -78,8 +86,8 @@ public class Col2G implements CommonGoalCards, Serializable {
     @Override
     public boolean expired(Library library) {
         ArrayList<String> n = new ArrayList<String>();
-        int temp=0;
-        int j=6;
+        int temp = 0;
+        int j = 6;
         /* x is the number of invalid columns*/
         int x=0;
         for(int i=0;i<5;i++){
