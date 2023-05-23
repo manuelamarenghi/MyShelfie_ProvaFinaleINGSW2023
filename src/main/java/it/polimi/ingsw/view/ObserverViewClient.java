@@ -5,7 +5,11 @@ import it.polimi.ingsw.modello.Position;
 
 import java.util.ArrayList;
 
+/**
+ * methods implemented by clientController notified by view
+ */
 public interface ObserverViewClient {
+    void setServerInfo(String ipAddress);
     void handleEnterPlayer(String nickname);
 
     void handleCreateBoard(int numeberOfPlayers);
@@ -21,10 +25,11 @@ public interface ObserverViewClient {
     void handleFinalPoint(String name);
 
     void handleDisconection(String name);
-    void handleSeeBoard();
-    void handleSeePersonalCard();
-    void handleSeeCommonCard();
 
+     void handleSeeBoard();
+
+     void handleSeePersonalCard();
+     void handleSeeCommonCard();
 
     void setNickname(String nickname);
 

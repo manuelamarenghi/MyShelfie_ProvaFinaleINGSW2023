@@ -73,7 +73,7 @@ public class ClientHandler implements Runnable {
     private void handleClientConnection() {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                    Message message = (Message) input.readObject();
+                   Message message = (Message) input.readObject();
                     if(message.getType().equals("Ping!")){
                         sendMessage(new Message("server","Pong!"));
                     }
