@@ -1,10 +1,7 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.modello.*;
-import it.polimi.ingsw.view.GUI.Scenes.ChatController;
-import it.polimi.ingsw.view.GUI.Scenes.LibrariesController;
-import it.polimi.ingsw.view.GUI.Scenes.LivingRoomController;
+import it.polimi.ingsw.view.GUI.Scenes.*;
 import it.polimi.ingsw.view.ObservableViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import javafx.application.Platform;
@@ -13,14 +10,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GUI extends ObservableViewClient implements ViewClient {
-    private ClientController clientController;
     private LivingRoomController livingController;
     private ChatController chatController;
+    private CGController common1;
+    private CGController common2;
     private String nickname;
+    private WaitingController waitcontr;
 
-    public GUI(LivingRoomController livingController, ChatController chatController) {
+    public GUI(LivingRoomController livingController, ChatController chatController, WaitingController wait) {
         this.livingController = livingController;
         this.chatController = chatController;
+        this.waitcontr = wait;
+        livingController.addAllObservers(observers);
+        chatController.addAllObservers(observers);
+        waitcontr.addAllObservers(observers);
     }
 
     @Override
@@ -30,6 +33,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNumbPlayerReq() {
+        LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
+        Platform.runLater(() -> login.NumbPlayer());
 
     }
 
@@ -40,6 +45,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyGameFullReq() {
+        LoginSceneController login = new LoginSceneController();
+        Platform.runLater(() -> login.GameFull());
     }
 
     @Override
@@ -55,7 +62,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
-
+        Platform.runLater(() -> waitcontr.setPlayer(nickname));
     }
 
     @Override
@@ -95,7 +102,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-
+        Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
     }
 
     @Override
@@ -104,9 +111,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onShowNewMyLibraryReq(Library l) {
-        LibrariesController contr = new LibrariesController();
-        Platform.runLater(() -> contr.createLibrary(l));
+    public void onShowNewMyLibraryReq(Library l, String name) {
+        if (name.equals(nickname)) {
+            Platform.runLater(() -> livingController.createLibrary(l));
+        } else {
+            LibrariesController contr = new LibrariesController();
+            Platform.runLater(() -> contr.createLibrary(l));
+        }
     }
 
     @Override
@@ -134,7 +145,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-
+        Platform.runLater(() -> livingController.setTextArea(current_player + "is playing"));
     }
 
     @Override
@@ -144,7 +155,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void NotifyaskNicknameReq() throws InterruptedException {
-
+        LoginSceneController login = new LoginSceneController();
+        Platform.runLater(() -> login.Connect_before_first());
     }
 
     @Override
@@ -154,7 +166,10 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
-
+        common1 = new CGController();
+        common2 = new CGController();
+        Platform.runLater(() -> common1.setImageAndText(cards[0].getCommonCard().getNumberCard(), cards[0].getCommonCard().getDesc()));
+        Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
 
     @Override
@@ -163,8 +178,26 @@ public class GUI extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void askNickname() {
+    public void onPressedButtonChange(String scene) {
+        switch (scene) {
+            case "common1":
+                Platform.runLater(() ->{
+                    SceneController.setRootPane(common1, "CG.fxml");
+                });
+            case "common2":
+                Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
+            case "living":
+                Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
+            case "chat":
+                Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
+            case "wait":
+                Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
+        }
+    }
 
+    @Override
+    public void askNickname() {
+        Platform.runLater(() -> SceneController.setRootPane(observers,"login_scene.fxml"));
     }
 
     @Override
@@ -179,6 +212,16 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void askForDissconection() {
+
+    }
+
+    @Override
+    public void actionByPlayer() {
+
+    }
+
+    @Override
+    public void errorNickname(ArrayList<Player> players) {
 
     }
 }

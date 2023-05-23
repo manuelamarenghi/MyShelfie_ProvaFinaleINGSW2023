@@ -10,11 +10,12 @@ import it.polimi.ingsw.view.ObserverViewClient;
 import it.polimi.ingsw.view.ViewClient;
 import it.polimi.ingsw.view.VirtualModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientController implements ObserverViewClient {
     private ViewClient view;
-    private final SocketClient socketClient;
+    private SocketClient socketClient;
     private VirtualModel virtualModel;
     private MessageHandler messageHandler;
     //localhost
@@ -27,9 +28,32 @@ public class ClientController implements ObserverViewClient {
         socketClient.enablePinger(true);
         this.messageHandler = new MessageHandler(this.virtualModel);
         this.socketClient.addObserver(this.messageHandler);
+        this.virtualModel.addObserver(this.view);
+
+    }
+    public ClientController(ViewClient view) {
+        this.view = view;
+        this.virtualModel = new VirtualModel();
+
 
     }
 
+
+    @Override
+    public void setServerInfo(String ipAddress) {
+        try {
+            this.socketClient=new SocketClient(ipAddress,16847);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        socketClient.readMessage();
+        socketClient.enablePinger(true);
+        this.messageHandler = new MessageHandler(this.virtualModel);
+        this.virtualModel.addObserver(this.view);
+        this.socketClient.addObserver(this.messageHandler);
+        this.view.askNickname();
+
+    }
 
     public void handleEnterPlayer(String nickname) {
         EnterPlayer message = new EnterPlayer(nickname);
@@ -126,17 +150,22 @@ public class ClientController implements ObserverViewClient {
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
     }
+
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);
     }
 
-    public void addViewObserver(ViewClient view) {
+    /*public void addViewObserver(ViewClient view) {
         this.virtualModel.addObserver(view);
 
-    }
+    }*/
 
     public void SeeSomeoneLibrary(String nickname) {
-        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary());
+        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
+    }
+
+    public void ChangeRoot(String scene) {
+        view.onPressedButtonChange(scene);
     }
 }

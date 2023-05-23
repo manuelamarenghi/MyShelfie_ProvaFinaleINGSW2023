@@ -8,16 +8,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CornersCommG implements CommonGoalCards, Serializable {
+    int numberCard = 8;
 
-    public boolean check(Library library){
+    public int getNumberCard() {
+        return numberCard;
+    }
 
-        Card card00 = new Card(library.getCardinPos(0,0).getColour(),library.getCardinPos(0,0).getCoordinates());
-        Card card04 = new Card(library.getCardinPos(0,4).getColour(),library.getCardinPos(0,4).getCoordinates());
-        Card card50 = new Card(library.getCardinPos(5,0).getColour(),library.getCardinPos(5,0).getCoordinates());
-        Card card54 = new Card(library.getCardinPos(5,4).getColour(),library.getCardinPos(5,4).getCoordinates());
+    public boolean check(Library library) {
+
+        Card card00 = new Card(library.getCardinPos(0, 0).getColour(), library.getCardinPos(0, 0).getCoordinates());
+        Card card04 = new Card(library.getCardinPos(0, 4).getColour(), library.getCardinPos(0, 4).getCoordinates());
+        Card card50 = new Card(library.getCardinPos(5, 0).getColour(), library.getCardinPos(5, 0).getCoordinates());
+        Card card54 = new Card(library.getCardinPos(5, 4).getColour(), library.getCardinPos(5, 4).getCoordinates());
 
 
-        if(card00.getColour() != "" && card04.getColour() != "" && card50.getColour() != "" && card54.getColour() != ""){
+        if (card00.getColour() != "" && card04.getColour() != "" && card50.getColour() != "" && card54.getColour() != "") {
             if(card00.getColour() == card04.getColour() && card04.getColour() == card50.getColour()
                     && card50.getColour() == card54.getColour())
                 return true;

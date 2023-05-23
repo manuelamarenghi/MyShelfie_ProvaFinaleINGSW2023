@@ -5,6 +5,7 @@ import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
 import it.polimi.ingsw.modello.Position;
+import it.polimi.ingsw.view.GUI.SceneController;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,7 +29,7 @@ import java.util.Map;
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
  */
-public class LivingRoomController extends ObservableViewClient implements Controller {
+public class LivingRoomController extends ObservableViewClient implements GenericSceneController {
     @FXML
     private Button libraries;
     @FXML
@@ -127,7 +129,6 @@ public class LivingRoomController extends ObservableViewClient implements Contro
         index = 0;
         cardtaken = 3;
         yourTurn = true;
-        ancor = new AnchorPane();
         setTiles();
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
@@ -222,23 +223,25 @@ public class LivingRoomController extends ObservableViewClient implements Contro
     }
 
     public void pressedCommon1(MouseEvent mouseEvent) {
-        //passa a scena con la prima carta
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common1"));
     }
 
     public void pressedCommon2(MouseEvent mouseEvent) {
-        //passa a scena con seconda carta
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common2"));
     }
 
     public void pressedExit(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection(null));
     }
 
-    public void pressedLibraries(MouseEvent mouseEvent) {
-        //passa a scena libreria
+    public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
+        LibrariesController lcontr = new LibrariesController();
+        String f = "libraries.fxml";
+        SceneController.setRootPane(observers, f);
     }
 
     public void pressedChat(MouseEvent mouseEvent) {
-        //passa a chat
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
     public void pressedSend(MouseEvent mouseEvent) {
@@ -251,7 +254,7 @@ public class LivingRoomController extends ObservableViewClient implements Contro
             } while (ValidColumn(columnforthisturn, n));
             int finalN = n;
             this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
-            SendbuttonAble = true;
+            SendbuttonAble = false;
             Col0.setImage(null);
             Col1.setImage(null);
             Col2.setImage(null);
