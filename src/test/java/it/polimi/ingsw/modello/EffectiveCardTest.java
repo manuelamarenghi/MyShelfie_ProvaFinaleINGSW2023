@@ -1,5 +1,6 @@
 package it.polimi.ingsw.modello;
 
+import it.polimi.ingsw.modello.CommonGoalCard.Col2G;
 import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,19 @@ class EffectiveCardTest {
     al=effectiveCard.getAllScores();
     al.add(1);
     assertNotSame(effectiveCard.getAllScores(), al);
-  }
+  }//
+    @Test
+    public void checkShow(){
+        CommonGoalCards commonGoalCard = new Col2G();
+        EffectiveCard effectiveCard = new EffectiveCard(commonGoalCard);
+        effectiveCard.show();
+    }
+    @Test
+    public void checkDescription(){
+        CommonGoalCards commonGoalCard = new Col2G();
+        EffectiveCard effectiveCard = new EffectiveCard(commonGoalCard);
+        String desc;
+        desc=effectiveCard.description();
+        System.out.println(desc);
+    }
 }

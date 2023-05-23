@@ -47,5 +47,10 @@ public class DoubleTest {
         library.getCardinPos(5,4).setColour("B");
         assertTrue(doubleCard.check(library));
     }
+    @Test
+    public void checkShow(){
+        doubleCard.showCommonCard();
+        System.out.println(doubleCard.getDesc());
+    }
 
 }

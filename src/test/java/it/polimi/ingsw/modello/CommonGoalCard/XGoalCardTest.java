@@ -45,5 +45,10 @@ class XGoalCardTest {
         Library library = new Library();
         assertFalse(xcard.expired(library));
     }
+    @Test
+    public void checkShow(){
+        xcard.showCommonCard();
+        System.out.println(xcard.getDesc());
     }
+}
 
