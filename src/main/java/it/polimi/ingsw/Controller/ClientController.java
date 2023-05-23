@@ -31,6 +31,7 @@ public class ClientController implements ObserverViewClient {
         this.virtualModel.addObserver(this.view);
 
     }
+
     public ClientController(ViewClient view) {
         this.view = view;
         this.virtualModel = new VirtualModel();
@@ -42,7 +43,7 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void setServerInfo(String ipAddress) {
         try {
-            this.socketClient=new SocketClient(ipAddress,16847);
+            this.socketClient = new SocketClient(ipAddress, 16847);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -96,7 +97,10 @@ public class ClientController implements ObserverViewClient {
             view.onShowNewBoardReq(virtualModel.getBoard());
             virtualModel.setCardSelect(cards);
             int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
-            view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
+            if (coloum.length == 0)
+                view.onNotifyCardsAreNotAdjacentReq();
+            else
+                view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
         } else
             view.onNotifyCardsAreNotAdjacentReq();
     }

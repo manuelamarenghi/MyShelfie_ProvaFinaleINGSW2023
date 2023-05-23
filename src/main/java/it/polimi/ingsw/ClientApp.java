@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ClientApp {
     public static void main(String[] args) throws IOException, InterruptedException {
         Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost", 16847);
+        SocketClient socketClient = new SocketClient("192.168.43.216", 16847);
          socketClient.readMessage();
 
 
