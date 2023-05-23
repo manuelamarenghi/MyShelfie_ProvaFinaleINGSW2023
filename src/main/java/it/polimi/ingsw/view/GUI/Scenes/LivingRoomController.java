@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -126,7 +127,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         tiles.put("blue", imageB);
     }
     public void start() {
-    public void initialize() {
         libraries.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             try {
                 pressedLibraries(mouseEvent);
