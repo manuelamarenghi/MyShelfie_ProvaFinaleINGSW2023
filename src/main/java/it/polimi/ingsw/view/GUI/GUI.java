@@ -92,6 +92,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
+        System.out.println("colonne possibili arrivtaet");
         Platform.runLater(() -> livingController.ShowColumn(x));
     }
 
@@ -165,6 +166,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
+        System.out.println("setto personal" + personalGoalCard.getNumn_png());
         Platform.runLater(() -> livingController.setPP(personalGoalCard.getNumn_png()));
     }
 
@@ -184,6 +186,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         common1 = new CGController();
         common2 = new CGController();
+        common2.addAllObservers(observers);
+        common1.addAllObservers(observers);
         Platform.runLater(() -> common1.setImageAndText(cards[0].getCommonCard().getNumberCard(), cards[0].getCommonCard().getDesc()));
         Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
@@ -192,22 +196,30 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onNotifyMexInChat(String getnickname, String mex, String dest) {
         Platform.runLater(() -> chatController.arrivedMex(getnickname, mex, dest));
     }
-
     @Override
     public void onPressedButtonChange(String scene) {
         switch (scene) {
             case "common1":
                 Platform.runLater(() ->{
+                    System.out.println("cerco di entrare in common1\n");
                     SceneController.setRootPane(common1, "CG.fxml");
                 });
+                break;
             case "common2":
+                System.out.println("cerco di entrare in common2\n");
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
+                break;
             case "living":
+                System.out.println("cerco di entrare in living\n");
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
+                break;
             case "chat":
+                System.out.println("cerco di entrare in chat\n");
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
+                break;
             case "wait":
                 Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
+                break;
         }
     }
 

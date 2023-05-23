@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-import java.io.InputStream;
+import java.util.Objects;
 
 public class CGController extends ObservableViewClient implements GenericSceneController {
     public Button theButton = new Button();
@@ -23,14 +23,13 @@ public class CGController extends ObservableViewClient implements GenericSceneCo
     public void initialize() {
         box.getStyleClass().add("card");
         theLabel.getStyleClass().add("text");
+        theButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
     }
 
     //
     public void setImageAndText(int numberImage, String descr) {
         String path = "/images/CommonGoalCards/" + numberImage + ".png";
-        InputStream is;
-        is = this.getClass().getResourceAsStream("/images/CommonGoalCards/1.png");
-        Image image = new Image(is);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(path)).toString());
         imageView.setImage(image);
         theLabel.setText(descr);
     }
