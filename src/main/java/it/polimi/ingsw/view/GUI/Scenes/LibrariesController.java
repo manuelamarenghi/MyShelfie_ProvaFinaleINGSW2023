@@ -22,19 +22,22 @@ public class LibrariesController extends ObservableViewClient implements Generic
     @FXML
     private StackPane Stackpane;
     @FXML
-    private GridPane GridLibrary;
+    private GridPane GridLibrary = new GridPane();
     @FXML
-    private ImageView Backgroundlibrary;
+    private ImageView Backgroundlibrary = new ImageView();
     @FXML
-    private Button ButtonBack;
+    private Button ButtonBack = new Button();
     @FXML
-    private TextField TextFieldd;
+    private TextField TextFieldd = new TextField();
+    @FXML
+    private Button OKButton = new Button();
 
     public void initialize() {
         Stackpane = new StackPane();
         Backgroundlibrary.toBack();
         setTiles();
-
+        ButtonBack.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
+        OKButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedOK);
     }
 
     public void setTiles() {
