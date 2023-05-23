@@ -102,5 +102,10 @@ public class Diagonal5Test {
         library.getCardinPos(4, 4).setColour("blue");
         assertFalse(diagonal.check(library));
     }
+    @Test
+    public void checkShow(){
+        diagonal.showCommonCard();
+        System.out.println(diagonal.getDesc());
+    }
 }
 

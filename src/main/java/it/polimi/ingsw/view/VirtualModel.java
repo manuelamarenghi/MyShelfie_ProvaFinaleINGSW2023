@@ -65,6 +65,14 @@ public class VirtualModel extends VMObservable {
         return players;
     }
 
+    public ArrayList<String> getPlayersNickname(){
+        ArrayList<String> nicknames = new ArrayList<>();
+        for(Player p:players){
+            nicknames.add(p.getNickname());
+        }
+        return  nicknames;
+    }
+
     public void setPlayers(ArrayList<String> players) {
         for (String p : players) {
             this.players.add(new Player(p));

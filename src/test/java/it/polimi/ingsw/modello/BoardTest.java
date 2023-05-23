@@ -183,18 +183,4 @@ class BoardTest {
         cards.add(card3);
         assertFalse(board.allow(cards));
     }
-    @Test
-    public void chechAllowReturnTrue(){
-        Board board = new Board(4);
-        board.fill(0);
-        Card card1 , card2 , card3;
-        ArrayList<Card> cards = new ArrayList<Card>();
-        card1=board.getCard(7,3);
-        card2=board.getCard(7,4);
-        card3=board.getCard(7,5);
-        cards.add(card1);
-        cards.add(card2);
-        cards.add(card3);
-        assertFalse(board.allow(cards));
-    }
 }

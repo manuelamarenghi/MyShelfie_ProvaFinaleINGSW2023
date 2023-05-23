@@ -213,4 +213,9 @@ class StairsGoalCardTest {
         Library library = new Library();
         assertFalse(stair.expired(library));
     }
+    @Test
+    public void checkShow(){
+        stair.showCommonCard();
+        System.out.println(stair.getDesc());
+    }
 }
