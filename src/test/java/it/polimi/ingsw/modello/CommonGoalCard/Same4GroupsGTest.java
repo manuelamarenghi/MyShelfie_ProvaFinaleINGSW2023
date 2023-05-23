@@ -76,5 +76,9 @@ class Same4GroupsGTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
-
+    @Test
+    public void checkShow(){
+        card.showCommonCard();
+        System.out.println(card.getDesc());
+    }
 }

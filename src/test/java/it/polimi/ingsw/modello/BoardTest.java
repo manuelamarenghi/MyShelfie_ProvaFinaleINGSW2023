@@ -183,4 +183,12 @@ class BoardTest {
         cards.add(card3);
         assertFalse(board.allow(cards));
     }
+    @Test
+    public void checkTakeCard(){
+        Board b = new Board(2);
+        Position p = new Position(1,3);
+        b.fill(0);
+        b.takeCard(p);
+        assertEquals(b.getCard(1,3).getColour() ,"" );
+    }
 }

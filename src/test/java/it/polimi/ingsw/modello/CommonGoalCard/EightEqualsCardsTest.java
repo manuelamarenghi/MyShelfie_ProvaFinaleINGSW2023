@@ -90,4 +90,9 @@ class EightEqualsCardsTest {
         Library library = new Library();
         Assertions.assertFalse(eightEC.check(library));
     }
+    @Test
+    public void checkShow(){
+        eightEC.showCommonCard();
+        System.out.println(eightEC.getDesc());
+    }
 }
