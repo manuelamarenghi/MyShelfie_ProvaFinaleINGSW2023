@@ -19,6 +19,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     public GUI(LivingRoomController livingController, ChatController chatController, WaitingController wait) {
         this.livingController = livingController;
+        this.livingController.start();
         this.chatController = chatController;
         this.waitcontr = wait;
         livingController.addAllObservers(observers);
@@ -112,7 +113,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
-
+        Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
     }
 
     @Override

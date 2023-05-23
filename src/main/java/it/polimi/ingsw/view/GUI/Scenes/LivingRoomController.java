@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -49,15 +48,15 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     @FXML
     private AnchorPane ancor = new AnchorPane();
     @FXML
-    private ImageView background = new ImageView();
+    private ImageView background=new ImageView();
     @FXML
-    private GridPane gameBoard = new GridPane();
+    private GridPane gameBoard=new GridPane();
     @FXML
-    private ImageView backgroundlibrary = new ImageView();
+    private ImageView backgroundlibrary=new ImageView();
     @FXML
-    private GridPane gameBoardlibrary = new GridPane();
+    private GridPane gameBoardlibrary=new GridPane();
     @FXML
-    private TextArea messageServer = new TextArea();
+    private TextArea messageServer=new TextArea();
     @FXML
     private TextField inputUser = new TextField();
     @FXML
@@ -92,6 +91,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void setTiles() {
+        //InputStream is;
+        //tiles=Collections.synchronizedMap(new HashMap<>())
         imageY = new Image[3];
         //is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
         imageY[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow1.png")).toString());
@@ -124,6 +125,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
+    public void start() {
     public void initialize() {
         libraries.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             try {
@@ -157,9 +159,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             for (int j = 0; j < 9; j++) {
                 if (cards[i][j] != null) {
                     String color = cards[i][j].getColour();
-                    if (color != "" && color != null) {
+                    System.out.println(color);
+                    if (color!=null && !color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
-                        ImageView image = new ImageView(this.tiles.get(color)[x]);
+                        ImageView image = new ImageView((this.tiles.get(color))[x]);
                         image.setFitWidth(32);
                         image.setFitHeight(33);
                         gameBoard.add(image, j, i);
@@ -221,10 +224,12 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void setPP(int x) {
         String c = String.valueOf(x);
-        String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
-        InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        String name = "/images/personal_goal_cards/Personal_Goals"+c + ".png";
+        System.out.println(name);
+        System.out.println(c);
+        //InputStream is;
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         PersonalCard = new ImageView(image);
     }
 
