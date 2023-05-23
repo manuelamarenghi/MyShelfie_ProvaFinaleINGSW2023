@@ -15,6 +15,6 @@ public interface ViewClient extends VMObserver{
     void askCardsToTakeFromBoard();
     void askForDissconection();
     void actionByPlayer();
-    void errorNickname(ArrayList<Player> players);
+    void errorNickname(ArrayList<String> players);
 
 }

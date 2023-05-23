@@ -15,4 +15,5 @@ public interface View extends Observer, Serializable {
     void updatelibrary(Library l,String nickname);
     void assignedChair(String name);
     void CreateMatch(Match m);
+
 }
