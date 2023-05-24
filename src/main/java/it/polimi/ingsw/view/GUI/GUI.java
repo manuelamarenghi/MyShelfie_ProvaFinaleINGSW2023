@@ -12,8 +12,8 @@ import java.util.HashMap;
 public class GUI extends ObservableViewClient implements ViewClient {
     private LivingRoomController livingController;
     private ChatController chatController;
-    private CGController common1;
-    private CGController common2;
+    private CG_oneController common1;
+    private CG_twoController common2;
     private String nickname;
     private WaitingController waitcontr;
 
@@ -147,15 +147,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
-<<<<<<<<< Temporary merge branch 1
-        Platform.runLater(()->{
+       /* Platform.runLater(()->{
             SceneController.setRootPane(observers,"living_room.fxml");
             livingController.setYourTurn(yourTurn);
         });
-=========
+*/
         Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
->>>>>>>>> Temporary merge branch 2
+
         askCardsToTakeFromBoard();
     }
 
@@ -190,8 +189,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
-        common1 = new CGController();
-        common2 = new CGController();
+        common1 = new CG_oneController();
+        common2 = new CG_twoController();
         Platform.runLater(() -> common1.setImageAndText(cards[0].getCommonCard().getNumberCard(), cards[0].getCommonCard().getDesc()));
         Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
@@ -208,14 +207,19 @@ public class GUI extends ObservableViewClient implements ViewClient {
                 Platform.runLater(() ->{
                     SceneController.setRootPane(common1, "CG.fxml");
                 });
+                break;
             case "common2":
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
+                break;
             case "living":
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
+                break;
             case "chat":
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
+                break;
             case "wait":
                 Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
+                break;
         }
     }
 

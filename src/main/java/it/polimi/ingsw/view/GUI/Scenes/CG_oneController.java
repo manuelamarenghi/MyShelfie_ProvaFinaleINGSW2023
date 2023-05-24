@@ -10,8 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
+import java.util.Objects;
 
-public class CGController extends ObservableViewClient implements GenericSceneController {
+public class CG_oneController extends ObservableViewClient implements GenericSceneController {
     public Button theButton = new Button();
     @FXML
     public VBox box = new VBox();
@@ -19,22 +20,17 @@ public class CGController extends ObservableViewClient implements GenericSceneCo
     public Label theLabel = new Label();
     @FXML
     public ImageView imageView=new ImageView();
-=========
-    public Label theLabel = new Label();
-    @FXML
-    public ImageView imageView = new ImageView();
->>>>>>>>> Temporary merge branch 2
 
     public void initialize() {
         box.getStyleClass().add("card");
         theLabel.getStyleClass().add("text");
     }
 
-    //
+
     public void setImageAndText(int numberImage, String descr) {
-        String path = "/images/CommonGoalCards/" + numberImage+".png";
-        //InputStream is;
-        //is = this.getClass().getResourceAsStream("/images/CommonGoalCards/1.png");
+        String c = String.valueOf(numberImage);
+        String path = "/images/CommonGoalCards/CommonGoal" + c+".png";
+        System.out.println(path);
         Image image = new Image(Objects.requireNonNull(this.getClass().getResource(path)).toString());
         imageView.setImage(image);
         theLabel.setText(descr);

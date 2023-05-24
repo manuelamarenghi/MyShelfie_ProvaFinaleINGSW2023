@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LibrariesController extends ObservableViewClient implements GenericSceneController {
     private Map<String, Image[]> tiles;
@@ -41,38 +42,36 @@ public class LibrariesController extends ObservableViewClient implements Generic
     }
 
     public void setTiles() {
-        InputStream is;
-        tiles = Collections.synchronizedMap(new HashMap<>());
         Image[] imageY = new Image[3];
-        is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
-        imageY[0] = new Image(is);
-        imageY[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/yellow/yellow2.png"));
-        imageY[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/yellow/yellow3.png"));
+        //is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
+        imageY[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow1.png")).toString());
+        imageY[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow2.png")).toString());
+        imageY[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow3.png")).toString());
         tiles.put("yellow", imageY);
         Image[] imageP = new Image[3];
-        imageP[0] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/pink/pink1.png"));
-        imageP[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/pink/pink2.png"));
-        imageP[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/pink/pink3.png"));
+        imageP[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink1.png")).toString());
+        imageP[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink2.png")).toString());
+        imageP[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink3.png")).toString());
         tiles.put("pink", imageP);
         Image[] imageW = new Image[3];
-        imageW[0] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/white/white1.png"));
-        imageW[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/white/white2.png"));
-        imageW[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/white/white3.png"));
+        imageW[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white1.png")).toString());
+        imageW[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white2.png")).toString());
+        imageW[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white3.png")).toString());
         tiles.put("white", imageW);
         Image[] imageG = new Image[3];
-        imageG[0] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/green/green1.png"));
-        imageG[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/green/green2.png"));
-        imageG[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/green/green3.png"));
+        imageG[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green1.png")).toString());
+        imageG[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green2.png")).toString());
+        imageG[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green3.png")).toString());
         tiles.put("green", imageG);
         Image[] imageL = new Image[3];
-        imageL[0] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue1.png"));
-        imageL[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue2.png"));
-        imageL[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/light_blue/light_blue3.png"));
+        imageL[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue1.png")).toString());
+        imageL[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue2.png")).toString());
+        imageL[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue3.png")).toString());
         tiles.put("lightBlue", imageL);
         Image[] imageB = new Image[3];
-        imageB[0] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/blue/blue1.png"));
-        imageB[1] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/blue/blue2.png"));
-        imageB[2] = new Image((InputStream) LibrariesController.class.getResourceAsStream("/images/item_tiles/blue/blue3.png"));
+        imageB[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue1.png")).toString());
+        imageB[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue2.png")).toString());
+        imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
 
@@ -89,7 +88,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
             for (int j = 1; j < 10; j += 2) {
                 if (cards[r][c] != null) {
                     String color = cards[r][c].getColour();
-                    if (color != "") {
+                    if (!Objects.equals(color, "")) {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView(this.tiles.get(color)[x]);
                         image.setFitWidth(21);
