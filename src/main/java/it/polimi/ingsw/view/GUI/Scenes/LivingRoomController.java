@@ -72,12 +72,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private int ableSend;
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
 
-
-    private Image[] imageB,imageY,imageP,imageW,imageG,imageL;
-
     public String getUserInput() {
-        inputUser.clear();
-        return inputUser.getText();
+
+        System.out.println(inputUser.getText().trim());
+        return inputUser.getText().trim();
     }
 
     public void setTextArea(String s) {
@@ -128,25 +126,20 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
-    public void initialize() {
-        libraries.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            try {
-                pressedLibraries(mouseEvent);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+    public void initialize(){
+        libraries.addEventHandler(MouseEvent.MOUSE_CLICKED,this::pressedLibraries);
         Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
         Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
         Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
+    }
+    public void start() {
+
         Token1set = false;
         SendbuttonAble = false;
         messageServer.setEditable(false);
         index = 0;
-        cardtaken = 3;
-        yourTurn = true;
         setTiles();
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
@@ -195,7 +188,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             for (int j = 1; j < 10; j += 2) {
                 if (cards[r][c] != null) {
                     String color = cards[r][c].getColour();
-                    if (color != "") {
+                    if (!color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView(this.tiles.get(color)[x]);
                         image.setFitWidth(21);
@@ -247,10 +240,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection(null));
     }
 
-    public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
+    public void pressedLibraries(MouseEvent mouseEvent)  {
         LibrariesController lcontr = new LibrariesController();
         String f = "libraries.fxml";
-        SceneController.setRootPane(observers, f);
+        SceneController.setRootPane(lcontr, f);
     }
 
     public void pressedChat(MouseEvent mouseEvent) {
@@ -294,9 +287,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     public void setTokenCommon(int x) {
         String name = "/images/scoring_tokens/scoring_" + x + ".png";
         InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
-        if (Token1set == false) {
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
+        if (!Token1set) {
             TokenCommon1.setImage(image);
             Token1set = true;
         } else {
@@ -307,16 +300,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     public void setChair() {
         String name = "/images/misc/firstplayertoken.png";
         InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         Chair.setImage(image);
     }
 
     public void setFirstFinished() {
         String name = "/images/scoring_tokens/end_game.png";
         InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         FirstFinished.setImage(image);
     }
 
@@ -325,8 +318,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         ImageView[] ViewScatola = {Col0, Col1, Col2, Col3, Col4};
         InputStream is;
         String name = "/images/Publisher_material/arrow.png";
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        //is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         for (int i : x) {
             ViewScatola[i].setImage(image);
             ViewScatola[i].setFitWidth(16);

@@ -198,14 +198,19 @@ public class GUI extends ObservableViewClient implements ViewClient {
                 Platform.runLater(() ->{
                     SceneController.setRootPane(common1, "CG.fxml");
                 });
+                break;
             case "common2":
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
+                break;
             case "living":
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
+                break;
             case "chat":
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
+                break;
             case "wait":
                 Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
+                break;
         }
     }
 
