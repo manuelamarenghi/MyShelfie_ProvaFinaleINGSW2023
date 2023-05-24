@@ -30,14 +30,14 @@ public class MexInChat extends Message implements Serializable {
 
     @Override
     public void MextoClientHandler(ClientHandler c, String s) {
-        String destinatario;
+        String receive;
         if (this.dest.size() > 1) {
-            destinatario = "Group Chat";
+            receive = "Group_Chat";
         } else {
-            destinatario = "you";
+            receive = "you";
         }
         if (dest.contains(s)) {
-            c.sendMessage(new Receiving_Mex(mex, nickname, destinatario));
+            c.sendMessage(new Receiving_Mex(mex, nickname, receive));
         }
     }
 
