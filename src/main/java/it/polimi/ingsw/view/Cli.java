@@ -494,6 +494,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         points.forEach((key, value) -> System.out.println("The points are " + key + " : " + value));
 
         out.println("The game is finished");
+        System.exit(0);
 
     }
 
