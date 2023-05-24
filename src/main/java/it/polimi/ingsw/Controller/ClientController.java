@@ -154,6 +154,7 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
+        socketClient.sendMessage(message);
     }
 
     @Override
@@ -175,5 +176,12 @@ public class ClientController implements ObserverViewClient {
 
     public void ChangeRoot(String scene) {
         view.onPressedButtonChange(scene);
+    }
+
+    @Override
+    public void ReadMessageChat(){
+        ArrayList<Receiving_Mex> message = virtualModel.getChatMessage();
+        view.readMessageChat(message,virtualModel.getPlayersNickname());
+        virtualModel.resetChatMessage();
     }
 }
