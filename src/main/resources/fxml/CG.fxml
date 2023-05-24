@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" prefHeight="608.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/19">
+           minWidth="-Infinity" prefHeight="608.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/19"
+           fx:controller="it.polimi.ingsw.view.GUI.Scenes.CGController">
    <children>
       <Group>
          <children>
@@ -45,7 +46,7 @@
                      </image>
                   </ImageView>
                   <Button fx:id="theButton" layoutX="36.0" layoutY="35.0" mnemonicParsing="false"
-                          prefHeight="38.0" prefWidth="75.0" text="Back"/>
+                          onMouseClicked="#pressedButton" prefHeight="38.0" prefWidth="75.0" text="Back"/>
                </children>
             </AnchorPane>
          </children>

@@ -46,6 +46,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
+        Platform.runLater(() -> livingController.getData().setBoard(board));
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -139,13 +140,22 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyNewNicknameReq() {
-
+        LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
+        Platform.runLater(() -> login.TryAgainNick());
     }
 
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
+<<<<<<<<< Temporary merge branch 1
+        Platform.runLater(()->{
+            SceneController.setRootPane(observers,"living_room.fxml");
+            livingController.setYourTurn(yourTurn);
+        });
+=========
+        Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
+>>>>>>>>> Temporary merge branch 2
         askCardsToTakeFromBoard();
     }
 
@@ -198,19 +208,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
                 Platform.runLater(() ->{
                     SceneController.setRootPane(common1, "CG.fxml");
                 });
-                break;
             case "common2":
                 Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
-                break;
             case "living":
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
-                break;
             case "chat":
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
-                break;
             case "wait":
                 Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
-                break;
         }
     }
 

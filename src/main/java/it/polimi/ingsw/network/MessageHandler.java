@@ -43,7 +43,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(UpdateBoard message) {
-
         virtualModel.updateBoard(message.getB());
         virtualModel.notifyObserver(obs -> obs.onShowNewBoardReq(message.getB()));
     }
@@ -72,7 +71,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(ShowColumn message) {
-
         virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), message.getCards(), virtualModel.getMe().getLibrary()));
     }
 
