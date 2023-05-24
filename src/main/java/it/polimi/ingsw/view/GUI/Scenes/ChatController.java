@@ -29,15 +29,16 @@ public class ChatController extends ObservableViewClient implements GenericScene
     private ArrayList<String> dest;
     private ArrayList<String> all;
     private String nickname;
-    private String selectedItem;
+    private String selectedItem = new String();
 
     public void initialize() {
-        selectedItem = new String();
         dest = new ArrayList<>();
         Chat.setEditable(false);
-        ArrayList<String> names = new ArrayList<>();
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
         Back.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
+        if (all != null) {
+            ReloadChat(all);
+        }
     }
 
     public void setYourNickname(String nick) {
@@ -70,6 +71,13 @@ public class ChatController extends ObservableViewClient implements GenericScene
                 }
             }
         });
+    }
+
+    public void ReloadChat(ArrayList<String> players) {
+        for (String name : players) {
+            ChatsAvaiable.getItems().add(name);
+        }
+        ChatsAvaiable.getItems().add("Group Chat");
     }
 
     public void pressedButton(MouseEvent mouseEvent) {

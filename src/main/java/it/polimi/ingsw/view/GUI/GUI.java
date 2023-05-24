@@ -81,6 +81,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score) {
         if (this.nickname.equals(nickname)) {
+            if (!livingController.isToken1set()) {
+                livingController.getData().setScore0(score);
+            } else {
+                livingController.getData().setScore1(score);
+            }
             Platform.runLater(() -> livingController.setTokenCommon(score));
         } else {
             onShowReq(nickname + " has reached a common goal taking " + score + " score\n");
@@ -89,6 +94,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
+        livingController.getData().setChair(true);
         Platform.runLater(() -> livingController.setChair());
     }
 
@@ -110,6 +116,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
+        livingController.getData().setFirstFinish(true);
         Platform.runLater(() -> livingController.setFirstFinished());
     }
 
@@ -126,9 +133,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onShowNewMyLibraryReq(Library l, String name) {
         if (name.equals(nickname)) {
+            livingController.getData().setLibrary(l);
             Platform.runLater(() -> livingController.createLibrary(l));
         } else {
             LibrariesController contr = new LibrariesController();
+            contr.addAllObservers(observers);
             Platform.runLater(() -> contr.createLibrary(l));
         }
     }
@@ -148,6 +157,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
+        livingController.getData().setLibrary(library);
         Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
         askCardsToTakeFromBoard();

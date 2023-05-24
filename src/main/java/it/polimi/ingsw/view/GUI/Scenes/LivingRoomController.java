@@ -6,7 +6,7 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
 import it.polimi.ingsw.modello.Position;
 import it.polimi.ingsw.view.GUI.SceneController;
-import it.polimi.ingsw.view.GUI.StorageLiving;
+import it.polimi.ingsw.view.GUI.Scenes.Storage.StorageLiving;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +22,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,6 +108,25 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 throw new RuntimeException(e);
             }
         });
+        if (stored.getLibrary() != null) {
+            createLibrary(stored.getLibrary());
+        }
+        if (stored.isChair()) {
+            setChair();
+        }
+        if (stored.isFirstFinish()) {
+            setFirstFinished();
+        }
+        if (stored.getPersonal() != -1) {
+            setPP(stored.getPersonal());
+        }
+        if (Token1set) {
+            Token1set = false;
+            setTokenCommon(stored.getScore0());
+        }
+        if (stored.getScore1() != -1) {
+            setTokenCommon(stored.getScore1());
+        }
         Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             pressedCommon1(mouseEvent);
         });
@@ -124,6 +142,12 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             pressedChat(mouseEvent);
         });
+        messageServer.setEditable(false);
+        stackPanelibrary = new StackPane();
+        backgroundlibrary.toBack();
+        stackPane = new StackPane();
+        background.toBack();
+        gameBoard.toFront();
     }
 
     public void setTiles() {
@@ -164,14 +188,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     public void start() {
         Token1set = false;
         SendbuttonAble = false;
-        messageServer.setEditable(false);
         index = 0;
         setTiles();
-        stackPanelibrary = new StackPane();
-        backgroundlibrary.toBack();
-        stackPane = new StackPane();
-        background.toBack();
-        gameBoard.toFront();
     }
 
     public void createBoard(Board b) {
@@ -245,6 +263,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void setPP(int x) {
+        stored.setPersonal(x);
         String c = String.valueOf(x);
         String name = "/images/personal_goal_cards/Personal_Goals"+c + ".png";
         Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
@@ -311,15 +330,17 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void setTokenCommon(int x) {
         String name = "/images/scoring_tokens/scoring_" + x + ".png";
-        InputStream is;
-        is = this.getClass().getResourceAsStream(name);
-        Image image = new Image(is);
+        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         if (Token1set == false) {
             TokenCommon1.setImage(image);
             Token1set = true;
         } else {
             TokenCommon2.setImage(image);
         }
+    }
+
+    public boolean isToken1set() {
+        return Token1set;
     }
 
     public void setChair() {

@@ -19,15 +19,22 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
     public Label theLabel = new Label();
     @FXML
     public ImageView imageView = new ImageView();
+    private int numb = -1;
+    private String descr;
 
     public void initialize() {
         box.getStyleClass().add("card");
         theLabel.getStyleClass().add("text");
         theButton.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
+        if (numb != -1) {
+            setImageAndText(numb, descr);
+        }
     }
 
     //
     public void setImageAndText(int numberImage, String descr) {
+        numb = numberImage;
+        this.descr = descr;
         String c = String.valueOf(numberImage);
         String path = "/images/CommonGoalCards/CommonGoal" + c + ".png";
         System.out.println(path);
