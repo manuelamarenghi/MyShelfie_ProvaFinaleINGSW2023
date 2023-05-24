@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.Player;
 import it.polimi.ingsw.network.observer.VMObserver;
 
@@ -17,4 +18,5 @@ public interface ViewClient extends VMObserver{
     void actionByPlayer();
     void errorNickname(ArrayList<String> players);
 
+    void readMessageChat(ArrayList<Receiving_Mex> message,ArrayList<String> players);
 }
