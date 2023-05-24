@@ -114,6 +114,7 @@ public class MatchController {
         //Order player accord with the chair
 
         String firstPlayer = match.getChair().getNickname();
+        connectClients.get(firstPlayer).assignedChair(firstPlayer);
         int indexFirst = players.indexOf(firstPlayer);
         ArrayList<String> playerInOrder = new ArrayList<>();
 

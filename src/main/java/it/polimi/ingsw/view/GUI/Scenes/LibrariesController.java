@@ -105,7 +105,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
     }
 
     public void pressedBack(MouseEvent mouseEvent) {
-        this.notifyObserver(observers -> observers.ChangeRoot("living"));
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }
 
 }

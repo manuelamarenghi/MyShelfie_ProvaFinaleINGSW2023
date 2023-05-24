@@ -47,7 +47,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
-        Platform.runLater(() -> livingController.getData().setBoard(board));
+        livingController.getData().setBoard(board);
+        System.out.println("sto settando la board e la aggioro");
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -204,7 +205,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyMexInChat(String getnickname, String mex, String dest) {
-        System.out.println("notifico view");
         Platform.runLater(() -> chatController.arrivedMex(getnickname, mex, dest));
     }
     @Override

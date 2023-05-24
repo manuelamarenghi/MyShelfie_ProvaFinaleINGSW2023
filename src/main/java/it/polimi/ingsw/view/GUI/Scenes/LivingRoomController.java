@@ -67,7 +67,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private boolean yourTurn, SendbuttonAble, Token1set;
     private int cardtaken;
     private int index;
-    private Position[] positions = new Position[3];
+    private Position[] positions;
     private int[] columnforthisturn;
     private int ableSend;
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
@@ -84,6 +84,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void setTextArea(String s) {
+        stored.setTextArea(s);
         messageServer.clear();
         messageServer.appendText(s);
     }
@@ -127,21 +128,14 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         if (stored.getScore1() != -1) {
             setTokenCommon(stored.getScore1());
         }
-        Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            pressedCommon1(mouseEvent);
-        });
-        Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            pressedCommon2(mouseEvent);
-        });
-        Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            pressedExit(mouseEvent);
-        });
-        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            pressedSend(mouseEvent);
-        });
-        Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            pressedChat(mouseEvent);
-        });
+        if (stored.getTextArea() != null) {
+            setTextArea(stored.getTextArea());
+        }
+        Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
+        Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
+        Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
+        Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
         messageServer.setEditable(false);
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
@@ -189,10 +183,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         Token1set = false;
         SendbuttonAble = false;
         index = 0;
-        setTiles();
     }
 
     public void createBoard(Board b) {
+        setTiles();
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -210,12 +204,11 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                             Integer rowIndex = GridPane.getRowIndex(clickedNode);
                             if (index < cardtaken && yourTurn) {
                                 image.getStyleClass().add("image");
-                                positions[index] = new Position(columnIndex, rowIndex);
+                                System.out.println(columnIndex + " e riga " + rowIndex + "alla pos " + index);
+                                positions[index] = new Position(rowIndex, columnIndex);
                                 index++;
                                 if (index == cardtaken) {
-                                    System.out.println(positions[0] + "e" + positions[1]);
-                                    this.notifyObserver(observers -> observers.handleTakeCard(positions));
-                                    removeHighlights();
+                                    ableSend = 4;
                                     index = 0;
                                     cardtaken = 0;
                                 }
@@ -228,13 +221,14 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void createLibrary(Library l) {
+        setTiles();
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
         for (int i = 1; i < 12; i += 2) {
             for (int j = 1; j < 10; j += 2) {
                 if (cards[r][c] != null) {
                     String color = cards[r][c].getColour();
-                    if (color != "") {
+                    if (color != null && !color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView(this.tiles.get(color)[x]);
                         image.setFitWidth(21);
@@ -293,6 +287,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void pressedSend(MouseEvent actionEvent) {
+        System.out.println(ableSend);
+        System.out.println(SendbuttonAble);
         int n;
         if (SendbuttonAble) {
             String s = getUserInput();
@@ -318,11 +314,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 if (n < 0 || n > 3) {
                     setTextArea("Please insert a valid number less or equal 3\n");
                 } else {
+                    positions = new Position[n];
                     ableSend = 1;
                     setCardtaken(n);
                     setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
                     index = 0;
                 }
+            } else if (ableSend == 4) {
+                this.notifyObserver(observers -> observers.handleTakeCard(positions));
+                ableSend = 1;
+                removeHighlights();
             }
         }
     }
