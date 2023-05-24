@@ -289,8 +289,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         SceneController.setRootPane(lcontr, f);
     }
     public void pressedChat(MouseEvent mouseEvent) {
-        System.out.println("ho schiaccoato chat\n");
-        this.notifyObserver(observers -> observers.ChangeRoot("chat"));
+        this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
     public void pressedSend(MouseEvent actionEvent) {
@@ -301,7 +300,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             inputUser.clear();
             if (ValidColumn(columnforthisturn, n)) {
                 int finalN = n;
-                this.notifyObserver(observers -> observers.handlePutInLibrary(finalN));
+                this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
                 SendbuttonAble = false;
                 Col0.setImage(null);
                 Col1.setImage(null);

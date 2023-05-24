@@ -189,6 +189,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
         chatController.addAllObservers(observers);
+        players.remove(nickname);
         Platform.runLater(() -> chatController.initialize());
         Platform.runLater(() -> chatController.setChats(players));
     }
@@ -197,13 +198,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         common2.addAllObservers(observers);
         common1.addAllObservers(observers);
-        System.out.println(cards[0].getCommonCard().getNumberCard() + "-" + cards[1].getCommonCard().getNumberCard());
         Platform.runLater(() -> common1.setImageAndText(cards[0].getCommonCard().getNumberCard(), cards[0].getCommonCard().getDesc()));
         Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
 
     @Override
     public void onNotifyMexInChat(String getnickname, String mex, String dest) {
+        System.out.println("notifico view");
         Platform.runLater(() -> chatController.arrivedMex(getnickname, mex, dest));
     }
     @Override

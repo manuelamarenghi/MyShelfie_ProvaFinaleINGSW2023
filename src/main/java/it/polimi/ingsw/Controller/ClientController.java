@@ -152,6 +152,7 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
+        socketClient.sendMessage(message);
     }
 
     @Override

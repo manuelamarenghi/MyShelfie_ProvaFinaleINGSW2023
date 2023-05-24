@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.Scenes;
 
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -57,6 +58,30 @@ public class ChatController extends ObservableViewClient implements GenericScene
         ChatsAvaiable.getItems().add("Group Chat");
         ArrayList<String> chat = new ArrayList<>();
         StoredChat.put("Group Chat", chat);
+        ChatsAvaiable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Chat.clear();
+                selectedItem = (String) ChatsAvaiable.getSelectionModel().getSelectedItem();
+                if (selectedItem.equals("Group Chat")) {
+                    dest = all;
+                } else {
+                    dest.add(selectedItem);
+                }
+                if (!StoredChat.get(selectedItem).isEmpty()) {
+                    for (String x : StoredChat.get(selectedItem)) {
+                        Chat.appendText(x + "\n");
+                    }
+                }
+            }
+        });
+    }
+
+    public void ReloadChat(ArrayList<String> players) {
+        for (String name : players) {
+            ChatsAvaiable.getItems().add(name);
+        }
+        ChatsAvaiable.getItems().add("Group Chat");
         ChatsAvaiable.setOnMouseClicked(event -> {
             Chat.clear();
             selectedItem = (String) ChatsAvaiable.getSelectionModel().getSelectedItem();
@@ -73,13 +98,6 @@ public class ChatController extends ObservableViewClient implements GenericScene
         });
     }
 
-    public void ReloadChat(ArrayList<String> players) {
-        for (String name : players) {
-            ChatsAvaiable.getItems().add(name);
-        }
-        ChatsAvaiable.getItems().add("Group Chat");
-    }
-
     public void pressedButton(MouseEvent mouseEvent) {
         String mex = WriteArea.getText();
         WriteArea.clear();
@@ -90,6 +108,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
         } else {
             StoredChat.get(dest.get(0));
         }
+        System.out.println(dest);
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(dest, message));
         dest.clear();
     }
@@ -107,15 +126,15 @@ public class ChatController extends ObservableViewClient implements GenericScene
 
     public void arrivedMex(String getnickname, String mex, String dest) {
         if (dest.equals("you")) {
-            StoredChat.get(getnickname).add(getnickname + ": " + mex + "\n");
+            StoredChat.get(getnickname).add(mex + "\n");
         } else {
-            StoredChat.get("Group Chat").add(getnickname + ": " + mex + "\n");
+            StoredChat.get("Group Chat").add(mex + "\n");
         }
         if (selectedItem.equals(dest)) {
-            Chat.appendText(getnickname + ": " + mex + "\n");
+            Chat.appendText(mex + "\n");
         }
         if (selectedItem.equals(getnickname)) {
-            Chat.appendText(getnickname + ": " + mex + "\n");
+            Chat.appendText(mex + "\n");
         }
     }
 
