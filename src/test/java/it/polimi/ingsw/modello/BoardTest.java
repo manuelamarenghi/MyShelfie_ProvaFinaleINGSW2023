@@ -203,5 +203,6 @@ class BoardTest {
         testCards.add(test2);
         assertTrue(b.allow(testCards));
     }
+    //
 
 }
