@@ -12,8 +12,8 @@ import java.util.HashMap;
 public class GUI extends ObservableViewClient implements ViewClient {
     private LivingRoomController livingController;
     private ChatController chatController;
-    private CGController common1;
-    private CGController common2;
+    private CG_oneController common1;
+    private CG_twoController common2;
     private String nickname;
     private WaitingController waitcontr;
 
@@ -22,15 +22,16 @@ public class GUI extends ObservableViewClient implements ViewClient {
         this.livingController.start();
         this.chatController = chatController;
         this.waitcontr = wait;
-        livingController.addAllObservers(observers);
-        chatController.addAllObservers(observers);
         waitcontr.addAllObservers(observers);
+        common1 = new CG_oneController();
+        common2 = new CG_twoController();
     }
 
     @Override
     public void onShowReq(String s) {
         System.out.println(s);
         if (s.equals("Server message: Start Game")) {
+            livingController.addAllObservers(observers);
             onPressedButtonChange("living");
         } else {
             Platform.runLater(() -> livingController.setTextArea(s));
@@ -46,6 +47,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewBoardReq(Board board) {
+        Platform.runLater(() -> livingController.getData().setBoard(board));
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -81,7 +83,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
         if (this.nickname.equals(nickname)) {
             Platform.runLater(() -> livingController.setTokenCommon(score));
         } else {
-            onShowReq(nickname + " has reached a common goal taking " + score + " score");
+            onShowReq(nickname + " has reached a common goal taking " + score + " score\n");
         }
     }
 
@@ -92,13 +94,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
-        System.out.println("colonne possibili arrivtaet");
         Platform.runLater(() -> livingController.ShowColumn(x));
     }
 
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-        Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid"));
+        Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid\n"));
         askCardsToTakeFromBoard();
     }
 
@@ -161,12 +162,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-        Platform.runLater(() -> livingController.setTextArea(current_player + "is playing"));
+        Platform.runLater(() -> livingController.setTextArea(current_player + " is playing"));
     }
 
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
-        System.out.println("setto personal" + personalGoalCard.getNumn_png());
         Platform.runLater(() -> livingController.setPP(personalGoalCard.getNumn_png()));
     }
 
@@ -178,16 +178,16 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
+        chatController.addAllObservers(observers);
         Platform.runLater(() -> chatController.initialize());
         Platform.runLater(() -> chatController.setChats(players));
     }
 
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
-        common1 = new CGController();
-        common2 = new CGController();
         common2.addAllObservers(observers);
         common1.addAllObservers(observers);
+        System.out.println(cards[0].getCommonCard().getNumberCard() + "-" + cards[1].getCommonCard().getNumberCard());
         Platform.runLater(() -> common1.setImageAndText(cards[0].getCommonCard().getNumberCard(), cards[0].getCommonCard().getDesc()));
         Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
@@ -200,21 +200,15 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onPressedButtonChange(String scene) {
         switch (scene) {
             case "common1":
-                Platform.runLater(() ->{
-                    System.out.println("cerco di entrare in common1\n");
-                    SceneController.setRootPane(common1, "CG.fxml");
-                });
+                Platform.runLater(() -> SceneController.setRootPane(common1, "CG.fxml"));
                 break;
             case "common2":
-                System.out.println("cerco di entrare in common2\n");
-                Platform.runLater(() -> SceneController.setRootPane(common2, "CG.fxml"));
+                Platform.runLater(() -> SceneController.setRootPane(common2, "CG_two.fxml"));
                 break;
             case "living":
-                System.out.println("cerco di entrare in living\n");
                 Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
                 break;
             case "chat":
-                System.out.println("cerco di entrare in chat\n");
                 Platform.runLater(() -> SceneController.setRootPane(chatController, "chat.fxml"));
                 break;
             case "wait":

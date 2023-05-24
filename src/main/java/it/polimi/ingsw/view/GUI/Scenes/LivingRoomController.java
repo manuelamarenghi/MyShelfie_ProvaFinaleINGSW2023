@@ -6,6 +6,7 @@ import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
 import it.polimi.ingsw.modello.Position;
 import it.polimi.ingsw.view.GUI.SceneController;
+import it.polimi.ingsw.view.GUI.StorageLiving;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -71,9 +72,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private int[] columnforthisturn;
     private int ableSend;
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
+    private StorageLiving stored = new StorageLiving();
+
+    public StorageLiving getData() {
+        return stored;
+    }
 
     public String getUserInput() {
-        return inputUser.getText();
+        if (inputUser.getText() != "") {
+            return inputUser.getText();
+        } else return null;
     }
 
     public void setTextArea(String s) {
@@ -91,6 +99,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void initialize() {
+        if (stored.getBoard() != null) {
+            createBoard(stored.getBoard());
+        }
         libraries.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             try {
                 pressedLibraries(mouseEvent);
@@ -98,11 +109,21 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 throw new RuntimeException(e);
             }
         });
-        Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
-        Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
-        Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
-        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
-        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
+        Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            pressedCommon1(mouseEvent);
+        });
+        Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            pressedCommon2(mouseEvent);
+        });
+        Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            pressedExit(mouseEvent);
+        });
+        Send.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            pressedSend(mouseEvent);
+        });
+        Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            pressedChat(mouseEvent);
+        });
     }
 
     public void setTiles() {
@@ -249,6 +270,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         SceneController.setRootPane(lcontr, f);
     }
     public void pressedChat(MouseEvent mouseEvent) {
+        System.out.println("ho schiaccoato chat\n");
         this.notifyObserver(observers -> observers.ChangeRoot("chat"));
     }
 

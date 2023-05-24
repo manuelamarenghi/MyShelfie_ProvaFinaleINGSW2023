@@ -170,6 +170,7 @@ public class ClientController implements ObserverViewClient {
     }
 
     public void ChangeRoot(String scene) {
+        System.out.println("sono nel client controller");
         view.onPressedButtonChange(scene);
     }
 }
