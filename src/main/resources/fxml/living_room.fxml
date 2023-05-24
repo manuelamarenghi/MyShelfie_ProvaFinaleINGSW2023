@@ -19,7 +19,7 @@
                         <Button fx:id="Common2" layoutX="241.0" layoutY="22.0" mnemonicParsing="false" prefHeight="38.0"
                                 prefWidth="114.0" text="C.C. 2"/>
                         <Button fx:id="Exit" layoutX="831.0" layoutY="16.0" mnemonicParsing="false" text="Exit"/>
-                        <Button layoutX="46.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
+                        <Button fx:id="Chat" layoutX="46.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
                                 prefWidth="114.0" text="Chat"/>
                         <ImageView fx:id="PersonalCard" fitHeight="169.0" fitWidth="120.0" layoutX="502.0"
                                    layoutY="54.0" pickOnBounds="true" preserveRatio="true">

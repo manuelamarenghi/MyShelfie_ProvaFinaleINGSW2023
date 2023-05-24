@@ -97,11 +97,13 @@ public class ClientController implements ObserverViewClient {
             view.onShowNewBoardReq(virtualModel.getBoard());
             virtualModel.setCardSelect(cards);
             int[] coloum = virtualModel.getMe().getLibrary().showColumn(cards.size());
-            view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
+            if (coloum.length == 0)
+                view.onNotifyCardsAreNotAdjacentReq();
+            else
+                view.onShowPossibleColumnReq(coloum, cards, virtualModel.getMe().getLibrary());
         } else
             view.onNotifyCardsAreNotAdjacentReq();
     }
-
     /**
      * The method sends a message to socket client to put a card in the library
      */
@@ -168,6 +170,7 @@ public class ClientController implements ObserverViewClient {
     }
 
     public void ChangeRoot(String scene) {
+        System.out.println("sono nel client controller");
         view.onPressedButtonChange(scene);
     }
 }
