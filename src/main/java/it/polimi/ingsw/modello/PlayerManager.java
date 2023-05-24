@@ -46,9 +46,7 @@ public class PlayerManager implements Serializable {
     }
     /*
      */
-    /**
-     *Puts the card in the library
-     */
+    /*
     public void putCard ( Card[] selectedCards , Player player , int coloumn){
         int counter = 0 ;
         int i ;
@@ -64,7 +62,7 @@ public class PlayerManager implements Serializable {
             return ;
         }
         player.getLibrary().setColumn( listOfCards , selectedCards.length);
-    }
+    }*/
 
     /**
      * the method lets you see the personal goal card

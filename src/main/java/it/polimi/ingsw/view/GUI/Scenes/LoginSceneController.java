@@ -32,7 +32,10 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     }
 
 
-
+    /**
+     * The method in the login scene asks the player's nickname and number of players
+     * @param actionEvent
+     */
     public void onClick(ActionEvent actionEvent) {
         if(!askNumb) {
             if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
@@ -54,17 +57,26 @@ public class LoginSceneController extends ObservableViewClient implements Generi
         //if(keyEvent.getCode()== KeyCode.ENTER)onClick(null);
     }
 
+    /**
+     * Th method is used to ask the player it's nickname
+     * @param keyEvent
+     */
     public void onEnterNick(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) onClick(null);
 
     }
 
-
+    /**
+     * The method is used to print a message when a plyer tries to connect before the first player has decided the number of players
+     */
     public void Connect_before_first() {
         Area.setVisible(true);
         Area.appendText("First player is deciding number of players.Please try again\n");
     }
 
+    /**
+     * The method is used to ask the number of players
+     */
     public void NumbPlayer() {
         askNumb =true;
         name_txt.setText("Insert number of player between 2,3,4:");
@@ -83,6 +95,9 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 */
     }
 
+    /**
+     * The method is used to print a message when the number of player is alreday full
+     */
     public void GameFull() {
         Area.appendText("I'm sorry.The game is already full of players\n");
     }

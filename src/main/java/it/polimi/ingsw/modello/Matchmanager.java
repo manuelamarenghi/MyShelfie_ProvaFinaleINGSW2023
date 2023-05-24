@@ -82,6 +82,11 @@ public abstract class Matchmanager implements Serializable {
       max_rnd--;
     }
   }
+
+  /**
+   * the method generates the personal goal cards that have been memorized in the json file
+   * @return
+   */
   private ArrayList<PersonalGoalCard> generateArrayFromJSON(){
     /*String jsonPath;
     ArrayList<PersonalGoalCard> arrayList=new ArrayList<>(12);

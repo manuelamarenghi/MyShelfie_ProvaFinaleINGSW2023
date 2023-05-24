@@ -66,7 +66,9 @@ public class Same4GroupsG implements CommonGoalCards, Serializable {
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method returns the description of the card
+     */
     @Override
     public String getDesc() {
         return "Four groups each containing at least 4 tiles of the same type (not necessarily in the depicted shape). \n" +

@@ -87,6 +87,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         cardtaken = x;
     }
 
+    /**
+     * The method sets the colours of the tiles with the correponding images
+     */
     public void setTiles() {
         InputStream is;
         tiles = Collections.synchronizedMap(new HashMap<>());
@@ -137,6 +140,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         gameBoard.toFront();
     }
 
+    /**
+     * The method is needed to create a board
+     * @param b
+     */
     public void createBoard(Board b) {
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
@@ -169,6 +176,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * The method is needed to create a library
+     * @param l
+     */
     public void createLibrary(Library l) {
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
@@ -191,6 +202,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * The method sets the labels with texts that indicate you to take the cards
+     */
     public void TakeCards() {
         Integer n;
         do {
@@ -222,28 +236,53 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         PersonalCard = new ImageView(image);
     }
 
+    /**
+     * Shows the first common goal card
+     * @param mouseEvent
+     */
     public void pressedCommon1(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common1"));
     }
 
+    /**
+     * Shows the second common goal card
+     * @param mouseEvent
+     */
     public void pressedCommon2(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("common2"));
     }
 
+    /**
+     * Lets you exit the game
+     * @param mouseEvent
+     */
     public void pressedExit(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.handleDisconection(null));
     }
 
+    /***
+     *Brings you to the interface that asks you which player's library you want to see
+     * @param mouseEvent
+     * @throws IOException
+     */
     public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
         LibrariesController lcontr = new LibrariesController();
         String f = "libraries.fxml";
         SceneController.setRootPane(observers, f);
     }
 
+    /**
+     * Opens the chat interface
+     * @param mouseEvent
+     */
     public void pressedChat(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
+    /**
+     * Sends a message when th eplayer types something
+     * @param mouseEvent
+     */
     public void pressedSend(MouseEvent mouseEvent) {
         int n;
         if (SendbuttonAble) {
@@ -263,6 +302,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * Sets the token for common goal cards
+     * @param x
+     */
     public void setTokenCommon(int x) {
         String name = "/images/scoring_tokens/scoring_" + x + ".png";
         InputStream is;
@@ -292,6 +335,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         FirstFinished.setImage(image);
     }
 
+    /**
+     * The method shows to the player where they can put their cards
+     * @param x
+     */
     public void ShowColumn(int[] x) {
         Integer n;
         ImageView[] ViewScatola = {Col0, Col1, Col2, Col3, Col4};

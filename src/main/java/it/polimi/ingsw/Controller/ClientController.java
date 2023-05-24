@@ -39,6 +39,10 @@ public class ClientController implements ObserverViewClient {
 
     }
 
+    /**
+     * Method to set information for the server
+     * @param ipAddress
+     */
 
     @Override
     public void setServerInfo(String ipAddress) {
@@ -56,6 +60,11 @@ public class ClientController implements ObserverViewClient {
 
     }
 
+    /**
+     * Method to send a message to handle a new player in the game
+     * @param nickname
+     */
+
     public void handleEnterPlayer(String nickname) {
         EnterPlayer message = new EnterPlayer(nickname);
         socketClient.sendMessage(message);
@@ -69,6 +78,11 @@ public class ClientController implements ObserverViewClient {
         Numb_Player message = new Numb_Player(numeberOfPlayers, virtualModel.getMe().getNickname());
         socketClient.sendMessage(message);
     }
+
+    /**
+     * A method to send a message to create a match
+     * @param match
+     */
 
     public void handleCreateMatch(Match match) {
         Created_Match message = new Created_Match(match);
@@ -113,20 +127,35 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+    /**
+     * A method to ask the server for the coloumns where it can put the cards
+     * @param numberOfCards
+     * @param name
+     */
     public void handleColoumnRequest(int numberOfCards, String name) {
         ColumnRequest message = new ColumnRequest(numberOfCards, name);
         socketClient.sendMessage(message);
     }
 
+    /**
+     * A method to ask the virtualModel to see the bpard
+     */
     @Override
     public void handleSeeBoard() {
         view.onShowNewBoardReq(virtualModel.getBoard());
     }
 
+    /**
+     * A method to ask the virtual model to show the personal goal card
+     */
     @Override
     public void handleSeePersonalCard() {
         view.onNotifyPersonalCardReq(virtualModel.getMe().getPersonalCard());
     }
+
+    /**
+     * A method to ask the virtual model to see the common goal card
+     */
 
     @Override
     public void handleSeeCommonCard() {
@@ -151,11 +180,21 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
+    /**
+     * A method to send a message for the chat
+     * @param dest
+     * @param mex
+     */
     @Override
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
         socketClient.sendMessage(message);
     }
+
+    /**
+     * A method to set the nickname of the player
+     * @param nickname
+     */
 
     @Override
     public void setNickname(String nickname) {
@@ -167,6 +206,10 @@ public class ClientController implements ObserverViewClient {
 
     }*/
 
+    /**
+     * A method to ask virtual model to see someones else's library
+     * @param nickname
+     */
     public void SeeSomeoneLibrary(String nickname) {
         if (!virtualModel.getPlayersNickname().contains(nickname))
             view.errorNickname(virtualModel.getPlayersNickname());
@@ -174,9 +217,17 @@ public class ClientController implements ObserverViewClient {
             view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
     }
 
+    /**
+     * A method to change a scene in GUI
+     * @param scene
+     */
     public void ChangeRoot(String scene) {
         view.onPressedButtonChange(scene);
     }
+
+    /**
+     * A method to read a message in chat
+     */
 
     @Override
     public void ReadMessageChat(){

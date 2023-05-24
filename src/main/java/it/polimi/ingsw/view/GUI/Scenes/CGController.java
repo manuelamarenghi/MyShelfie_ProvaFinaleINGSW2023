@@ -25,7 +25,11 @@ public class CGController extends ObservableViewClient implements GenericSceneCo
         theLabel.getStyleClass().add("text");
     }
 
-    //
+    /**
+     * The method sets the image and description of the common goal card
+     * @param numberImage
+     * @param descr
+     */
     public void setImageAndText(int numberImage, String descr) {
         String path = "/images/CommonGoalCards/" + numberImage + ".png";
         InputStream is;
@@ -35,6 +39,10 @@ public class CGController extends ObservableViewClient implements GenericSceneCo
         theLabel.setText(descr);
     }
 
+    /**
+     * The method is needed to change the scene when the button is pressed
+     * @param mouseEvent
+     */
     public void pressedButton(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }

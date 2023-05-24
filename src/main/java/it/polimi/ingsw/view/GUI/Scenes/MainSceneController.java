@@ -24,11 +24,19 @@ public class MainSceneController extends ObservableViewClient implements Generic
         Stack.getChildren().add(Background);
     }
 
+    /**
+     * The method is used to change the scnee to the connect scene when the game starts
+     * @param action
+     */
     public void onClickPlay(ActionEvent action) {
         SceneController.setRootPane(observers, "connect_scene.fxml");
 
     }
 
+    /**
+     * The method is used to quit the game
+     * @param action
+     */
     public void onClickExit(ActionEvent action) {
         Stage stage = (Stage) btn_exit.getScene().getWindow();
         stage.close();

@@ -27,6 +27,9 @@ public class Cli extends ObservableViewClient implements ViewClient {
         //this.clientController=clientController;
     }
 
+    /**
+     * a method to print at the start of the game
+     */
     public void init() {
 
         out.println("Welcome to My Shelfie Game!");
@@ -94,6 +97,10 @@ public class Cli extends ObservableViewClient implements ViewClient {
         return number;
     }
 
+    /**
+     * Method called at the start of the game that asks the nickname to the player
+     * @throws InterruptedException
+     */
     public void start() throws InterruptedException {
         out.println("Welcome to My shelfie game");
         askNickname();
@@ -345,6 +352,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(finalDest, finalMessage));
 
     }
+
+    /**
+     * A method to read the messages in the chat
+     * @param message
+     * @param players
+     */
     @Override
     public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
         for (Receiving_Mex m : message) {
@@ -470,6 +483,10 @@ public class Cli extends ObservableViewClient implements ViewClient {
         out.println("Player" + player.getNickname() + "has returned to the game");
     }
 
+    /**
+     * A method that gets called when the player is connected to the server
+     * @param nickname
+     */
     @Override
     public void onNotifyPlayerConnectionReq(String nickname) {
         if (nickname.equals(this.nickname)) {
@@ -579,7 +596,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     * the methodnotifies if the dissconnection has been done successfully
+     * the method notifies if the dissconnection has been done successfully
      */
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
@@ -587,7 +604,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     *
+     *A method that asks the player to select another nickname becaues the selected one is already taken
      */
     @Override
     public void onNotifyNewNicknameReq() {
@@ -595,6 +612,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
         askNickname();
     }
 
+    /**
+     * A method that tells the player that now it's his turn
+     * @param board to show the board to the player
+     * @param library player's library
+     */
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         out.println(nickname + ": it's your turn");
@@ -606,21 +628,36 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A metho dthat tells the player that now it's turn is over
+     * @param current_player
+     */
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
         out.println("Your turn is over , now it is " + current_player + "'s turn");
     }
 
+    /**
+     * The method tells the player the player that is playing right now
+     * @param current_player
+     */
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
         out.println(current_player + " is playing right now .");
     }
 
+    /**
+     * A method to show the personal goal card
+     * @param personalGoalCard
+     */
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         personalGoalCard.showPersonalGoalCard();
     }
 
+    /**
+     * a method to ask the nickname to the player
+     */
     @Override
     public void NotifyaskNicknameReq() {
         try {
@@ -643,6 +680,10 @@ public class Cli extends ObservableViewClient implements ViewClient {
         System.out.println("The players in the match: " + players.toString());
     }
 
+    /**
+     * a method to show the common goal card and it's description
+     * @param cards
+     */
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         for (EffectiveCard effectiveCard : cards) {

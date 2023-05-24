@@ -60,12 +60,17 @@ public class Square2G implements CommonGoalCards, Serializable {
         }
         return false;
     }
+    /**
+     * expired() let you know if the player can still reach the goal or not
+     */
 
     @Override
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method returns the description of the card
+     */
     @Override
     public String getDesc() {
         return "Two groups each containing 4 tiles of the same type in a 2x2 square. \n" +

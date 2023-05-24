@@ -10,17 +10,23 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
     public int getNumberCard() {
         return numberCard;
     }
-
+    /**
+     * the method checks if the the target is completed or not
+     */
     @Override
     public boolean check(Library library) {
         return sxStair(library) || dxStair(library) || sxShiftedStair(library) || dxShiftedStair(library);
     }
-
+    /**
+     * expired() let you know if the player can still reach the goal or not
+     */
     @Override
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method returns the description of the card
+     */
     @Override
     public String getDesc() {
         return "Five columns of increasing or decreasing height.\n" +
@@ -28,6 +34,9 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
                 "each next column must be made of exactly one more tile. \n" +
                 "Tiles can be of any type.\n";
     }
+    /**
+     * The method shows an example of the target
+     */
 
     @Override
     public void showCommonCard() {
@@ -58,6 +67,11 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
 
     }
 
+    /**
+     * the method checks if the stair is from left
+     * @param library
+     * @return
+     */
     private static boolean sxStair(Library library) {
         for (int i = 0; i < 5; i++) {
             if (!(library.getFilledColumnNumber(i) == 5 - i && library.getFilledRowNumber(5 - i) == 5 - i))
@@ -65,6 +79,11 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
         }
         return true;
     }
+    /**
+     * the method checks if the stair is from right
+     * @param library
+     * @return
+     */
 
     private static boolean dxStair(Library library) {
         for (int i = 5; i > 0; i--) {
@@ -72,12 +91,22 @@ public class StairsGoalCard implements CommonGoalCards, Serializable {
         }
         return true;
     }
+    /**
+     * the method checks if the stair is from left but shifted of one line
+     * @param library
+     * @return
+     */
     private static boolean sxShiftedStair(Library library){
         for(int i=0;i<5;i++){
             if(!(library.getFilledColumnNumber(i)==6-i&& library.getFilledRowNumber(5-i-1)==5-i))return false;
         }
         return true;
     }
+    /**
+     * the method checks if the stair is from right but shifted of one line
+     * @param library
+     * @return
+     */
     private static boolean dxShiftedStair(Library library){
         for(int i=5;i>0;i--){
             if(!(library.getFilledColumnNumber(i-1)==i+1&& library.getFilledRowNumber(i-1)==i))return false;

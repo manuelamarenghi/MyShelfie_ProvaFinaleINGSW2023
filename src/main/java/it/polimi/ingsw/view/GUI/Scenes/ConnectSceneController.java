@@ -26,6 +26,11 @@ public class ConnectSceneController extends ObservableViewClient implements Gene
         image.fitHeightProperty();
         Stack.getChildren().add(image);
     }
+
+    /**
+     * The method is needed to connect to the server
+     * @param actionEvent
+     */
     public void onClick(ActionEvent actionEvent) {
         if (!validate(ip_txb.getText().trim())) ip_txt.setText("Inserire un ip valido:");
         else {

@@ -8,6 +8,10 @@ public class WaitingController extends ObservableViewClient implements GenericSc
     @FXML
     public ListView<String> listPlayer;
 
+    /**
+     * The method is used to set the player's name
+     * @param name
+     */
     public void setPlayer(String name) {
         //listPlayer=new ListView<>();
         listPlayer.getItems().add(name);

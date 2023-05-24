@@ -31,6 +31,9 @@ public class ChatController extends ObservableViewClient implements GenericScene
     private String nickname;
     private String selectedItem;
 
+    /**
+     * A method to intialize thw scene
+     */
     public void initialize() {
         selectedItem = new String();
         dest = new ArrayList<>();
@@ -42,6 +45,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         nickname = nick;
     }
 
+    /**
+     * Amethod that shows the chat with other players playing the game
+     * @param players
+     */
     public void setChats(ArrayList<String> players) {
         all = new ArrayList<>();
         StoredChat = Collections.synchronizedMap(new HashMap<>());
@@ -70,6 +77,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         });
     }
 
+    /**
+     * the method is a mouse event  that lets you send a message to the chat
+     * @param mouseEvent
+     */
     public void pressedButton(MouseEvent mouseEvent) {
         String mex = WriteArea.getText();
         WriteArea.clear();
@@ -84,6 +95,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         dest.clear();
     }
 
+    /**
+     * The method lets you remove the player from the chat when it has been disconnected
+     * @param name
+     */
     public void removePlayer(String name) {
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
@@ -95,6 +110,12 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    /**
+     * The method shows the message that has arrived
+     * @param getnickname
+     * @param mex
+     * @param dest
+     */
     public void arrivedMex(String getnickname, String mex, String dest) {
         if (dest.equals("you")) {
             StoredChat.get(getnickname).add(getnickname + ": " + mex + "\n");
@@ -109,6 +130,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    /**
+     * The method lets return to the living room interface
+     * @param mouseEvent
+     */
     public void pressedBack(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }

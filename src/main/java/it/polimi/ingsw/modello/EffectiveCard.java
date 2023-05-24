@@ -30,6 +30,12 @@ public class EffectiveCard extends Observable implements ObserverCC, Serializabl
             allScores.add(i);
         }
     }
+
+    /**
+     * the method updates the observer the state of the player's library for the goal
+     * @param player
+     * @return
+     */
     public boolean update(Player player){
 
         if(commonCard.check(player.getLibrary())){

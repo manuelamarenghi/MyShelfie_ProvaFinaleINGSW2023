@@ -11,10 +11,19 @@ import java.util.concurrent.Callable;
 public class InputReadTask implements Callable<String> {
     private final BufferedReader br;
 
+    /**
+     * Method to take input from the player
+     */
     public InputReadTask() {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /**
+     * A methos that return the input read from the playe r
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public String call() throws IOException, InterruptedException {
         String input;

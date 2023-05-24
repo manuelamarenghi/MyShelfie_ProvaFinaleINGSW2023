@@ -11,18 +11,28 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
     public int getNumberCard() {
         return numberCard;
     }
-
+    /**
+     * Checks if the library of the player has completed the goal or not
+     * @param library
+     * @return
+     */
     @Override
     public boolean check(Library library) {
 
         return sxDiagonal(library) || sxDiagonalShift(library) || dxDiagonal(library) || dxDiagonalShift(library);
     }
-
+    /**
+     * The method checks if the goal is still achieveable
+     * @param library
+     * @return
+     */
     @Override
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method shows the goal
+     */
     @Override
     public void showCommonCard() {
         Library library = new Library();
@@ -34,11 +44,20 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         System.out.println("This is an example of a library that respects this goal");
         library.showLibrary();
     }
-
+    /**
+     * the method returns the description of the card
+     * @return
+     */
     @Override
     public String getDesc() {
         return "Five tiles of the same type forming a diagonal.\n ";
     }
+
+    /**
+     * the method gets called in the check method and checks if the diagonal to respect the the goal starts from left
+     * @param library
+     * @return
+     */
 
     private boolean sxDiagonal(Library library) {
         String color;
@@ -55,6 +74,11 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         }
         return true;
     }
+    /**
+     * the method gets called in the check method and checks if the diagonal to respect the the goal starts from right
+     * @param library
+     * @return
+     */
     private boolean dxDiagonal(Library library){
         String color;
         if(!library.getCardinPos(0,4).getColour().equals(""))
@@ -70,6 +94,12 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         }
         return true;
     }
+    /**
+     * the method gets called in the check method and checks if the diagonal to respect the the goal starts from left
+     * but from the first line
+     * @param library
+     * @return
+     */
 
     private boolean sxDiagonalShift(Library library)
     {
@@ -87,6 +117,12 @@ public class Diagonal5CardG implements CommonGoalCards, Serializable {
         }
         return true;
     }
+    /**
+     * the method gets called in the check method and checks if the diagonal to respect the the goal starts from right
+     * but from the first line
+     * @param library
+     * @return
+     */
 
     private boolean dxDiagonalShift(Library library)
     {

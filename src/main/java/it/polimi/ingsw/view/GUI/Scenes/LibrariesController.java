@@ -37,6 +37,9 @@ public class LibrariesController extends ObservableViewClient implements Generic
 
     }
 
+    /**
+     * The method sets the tiles for the library based on their colours
+     */
     public void setTiles() {
         InputStream is;
         tiles = Collections.synchronizedMap(new HashMap<>());
@@ -73,12 +76,20 @@ public class LibrariesController extends ObservableViewClient implements Generic
         tiles.put("blue", imageB);
     }
 
+    /**
+     * The method is connected to an Ok button that you press when you have typed the name of the player whoose library you want to see
+     * @param mouseEvent
+     */
     public void pressedOK(MouseEvent mouseEvent) {
         String nickname = TextFieldd.getText();
         TextFieldd.clear();
         this.notifyObserver(observerViewClient -> observerViewClient.SeeSomeoneLibrary(nickname));
     }
 
+    /**
+     * The method is used to create a library
+     * @param l
+     */
     public void createLibrary(Library l) {
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
@@ -101,6 +112,10 @@ public class LibrariesController extends ObservableViewClient implements Generic
         }
     }
 
+    /**
+     * The method is connected to a button that lets you return to the living room
+     * @param mouseEvent
+     */
     public void pressedBack(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }

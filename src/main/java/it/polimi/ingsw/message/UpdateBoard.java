@@ -5,6 +5,9 @@ import it.polimi.ingsw.network.MessageHandler;
 
 import java.io.Serializable;
 
+/**
+ * Class to send a message that sends the updated state of tha board
+ */
 public class UpdateBoard extends Message implements Serializable {
     Board b;
     public UpdateBoard(Board b){

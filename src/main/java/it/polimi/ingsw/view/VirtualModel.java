@@ -58,12 +58,26 @@ public class VirtualModel extends VMObservable {
     public ArrayList<Receiving_Mex> getChatMessage(){
         return chatMessage;
     }
+
+    /**
+     * The method adds a message to the chat
+     * @param message
+     */
     public void addChatMessage(Receiving_Mex message){
         chatMessage.add(message);
     }
+
+    /**
+     * The method resets the chat
+     */
     public void resetChatMessage(){
         chatMessage = new ArrayList<>();
     }
+
+    /**
+     * The method sets the player as the first player to finish the game if it happens
+     * @param firstFinish
+     */
     public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;

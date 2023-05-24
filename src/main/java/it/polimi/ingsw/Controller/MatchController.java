@@ -43,7 +43,10 @@ public class MatchController {
 
     public Match getMatch(){return match;}
 
-
+    /**
+     * The method adds the name of the player to the arrayList of the players
+     * @param nickname
+     */
     private void addPlayers(String nickname){
         players.add(nickname);
     }
@@ -165,6 +168,11 @@ public class MatchController {
          v.EndGame(results);
         }
     }
+
+    /**
+     * The method sets the player as the player who finished first
+     * @param p
+     */
     private void firstFinish(Player p){
         turnController.setLastRound(true);
         match.setFirstFinish(p);
@@ -257,6 +265,11 @@ public class MatchController {
 
     }
 
+    /**
+     * The method is used to handle the cards selected by the player and to put them in the selected coloumn
+     * @param m is a message containing the selected cards and the selected coloumn
+     */
+
     public void handler(PlayerAction m) {
         cardSelect = m.getCards();
         int column = m.getColumn();
@@ -293,6 +306,12 @@ public class MatchController {
     }
 
     //----------------------VIRTUALVIEW METHODS----------------
+
+    /**
+     * The method is used to add a the virtual view
+     * @param nickname is the nickname of the player
+     * @param virtualView is an instance of the virtual view passed
+     */
     public void addVirtualView(String nickname,VirtualView virtualView){
         connectClients.put(nickname,virtualView);
         match.addObserver(virtualView);

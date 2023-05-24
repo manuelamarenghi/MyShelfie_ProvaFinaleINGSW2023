@@ -5,6 +5,9 @@ import it.polimi.ingsw.network.MessageHandler;
 
 import java.io.Serializable;
 
+/**
+ * Class to send a message to create a new match
+ */
 public class Created_Match extends Message implements Serializable {
     Match match;
     public Created_Match(Match match) {

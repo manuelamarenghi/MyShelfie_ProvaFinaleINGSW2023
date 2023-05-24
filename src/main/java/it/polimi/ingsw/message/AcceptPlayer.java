@@ -14,7 +14,7 @@ public class AcceptPlayer extends Message implements Serializable {
         super(name,"accepted_in_the_match");
     }
 
-public void visit(MessageHandler controller){
+    public void visit(MessageHandler controller){
     controller.handle(this);
 }
 }
