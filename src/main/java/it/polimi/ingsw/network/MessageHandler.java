@@ -279,6 +279,7 @@ public class MessageHandler implements Observer {
 
     public void handle(Receiving_Mex message) {
         virtualModel.notifyObserver(obs -> obs.onNotifyMexInChat(message.getnickname(), message.getMex(), message.getDest()));
+        virtualModel.addChatMessage(message);
     }
 }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.view.GUI.Scenes.*;
 import it.polimi.ingsw.view.ObservableViewClient;
@@ -222,6 +223,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void errorNickname(ArrayList<String> players) {
+
+    }
+
+    @Override
+    public void readMessageChat(ArrayList<Receiving_Mex> message,ArrayList<String> players) {
 
     }
 }
