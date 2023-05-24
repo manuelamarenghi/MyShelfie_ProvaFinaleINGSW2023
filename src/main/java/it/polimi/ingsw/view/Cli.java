@@ -345,7 +345,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(finalDest, finalMessage));
 
     }
-
     @Override
     public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
         for (Receiving_Mex m : message) {
