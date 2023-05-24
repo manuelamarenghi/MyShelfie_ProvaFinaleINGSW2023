@@ -45,13 +45,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     @FXML
     private StackPane stackPane = new StackPane();
     @FXML
-<<<<<<<<< Temporary merge branch 1
     private StackPane stackPanelibrary;
     private Map<String, Image[]> tiles=Collections.synchronizedMap(new HashMap<>());
-=========
-    private StackPane stackPanelibrary = new StackPane();
-    private Map<String, Image[]> tiles = Collections.synchronizedMap(new HashMap<>());
->>>>>>>>> Temporary merge branch 2
     @FXML
     private AnchorPane ancor = new AnchorPane();
     @FXML
