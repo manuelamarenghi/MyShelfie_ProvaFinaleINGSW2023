@@ -15,13 +15,14 @@ import java.util.stream.Collectors;
 
 public class FinalController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private ImageView FIrstStar, SecStar, Third, Four;
+    private ImageView FIrstStar = new ImageView(), SecStar = new ImageView(), Third = new ImageView(), Four = new ImageView();
     @FXML
-    private Text FirstPlace, SecondPlace, ThirdPlace, FourPlace;
+    private Text FirstPlace = new Text(), SecondPlace = new Text(), ThirdPlace = new Text(), FourPlace = new Text();
     @FXML
-    private Text ScoreOne, ScoreTwo, ScoreThird, FourScore;
+    private Text ScoreOne = new Text(), ScoreTwo = new Text(), ScoreThird = new Text(), FourScore = new Text();
 
     public void initialize() {
+
         FirstPlace.toFront();
         SecondPlace.toFront();
         ThirdPlace.toFront();
