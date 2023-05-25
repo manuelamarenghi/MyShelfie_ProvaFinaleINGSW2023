@@ -5,7 +5,6 @@ import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.observer.VMObservable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class VirtualModel extends VMObservable {
     private ArrayList<Player> players;
@@ -55,15 +54,18 @@ public class VirtualModel extends VMObservable {
         return firstFinish;
     }
 
-    public ArrayList<Receiving_Mex> getChatMessage(){
+    public ArrayList<Receiving_Mex> getChatMessage() {
         return chatMessage;
     }
-    public void addChatMessage(Receiving_Mex message){
+
+    public void addChatMessage(Receiving_Mex message) {
         chatMessage.add(message);
     }
-    public void resetChatMessage(){
+
+    public void resetChatMessage() {
         chatMessage = new ArrayList<>();
     }
+
     public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
@@ -78,12 +80,12 @@ public class VirtualModel extends VMObservable {
         return players;
     }
 
-    public ArrayList<String> getPlayersNickname(){
+    public ArrayList<String> getPlayersNickname() {
         ArrayList<String> nicknames = new ArrayList<>();
-        for(Player p:players){
+        for (Player p : players) {
             nicknames.add(p.getNickname());
         }
-        return  nicknames;
+        return nicknames;
     }
 
     public void setPlayers(ArrayList<String> players) {

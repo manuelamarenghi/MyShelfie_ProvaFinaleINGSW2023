@@ -79,9 +79,11 @@ public class ClientController implements ObserverViewClient {
      * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard(Position[] positions) {
+        System.out.println(positions[0].getX());
         int i;
         ArrayList<Card> cards = new ArrayList<>();
         for (i = 0; i < positions.length; i++) {
+            System.out.println(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates());
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
                 return;
@@ -89,7 +91,6 @@ public class ClientController implements ObserverViewClient {
                 cards.add(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()));
             }
         }
-
         if (virtualModel.getBoard().allow(cards)) {
             for (Card card : cards) {
                 virtualModel.getBoard().takeCard(card.getCoordinates());
@@ -104,11 +105,11 @@ public class ClientController implements ObserverViewClient {
         } else
             view.onNotifyCardsAreNotAdjacentReq();
     }
-
     /**
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
+        System.out.println("mando colonna scelta");
         PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(), virtualModel.getCardSelect(), x);
         socketClient.sendMessage(message);
     }
@@ -160,6 +161,7 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void setNickname(String nickname) {
         virtualModel.setMe(nickname);
+        view.setNickname(nickname);
     }
 
     /*public void addViewObserver(ViewClient view) {
@@ -179,9 +181,9 @@ public class ClientController implements ObserverViewClient {
     }
 
     @Override
-    public void ReadMessageChat(){
+    public void ReadMessageChat() {
         ArrayList<Receiving_Mex> message = virtualModel.getChatMessage();
-        view.readMessageChat(message,virtualModel.getPlayersNickname());
+        view.readMessageChat(message, virtualModel.getPlayersNickname());
         virtualModel.resetChatMessage();
     }
 }

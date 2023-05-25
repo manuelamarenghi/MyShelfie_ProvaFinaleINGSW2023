@@ -28,7 +28,7 @@ public class MatchController {
     public MatchController(){
         this.match = new Match();
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
-        this.disconnectClients=new ArrayList<>();
+        this.disconnectClients = new ArrayList<>();
         players = new ArrayList<>();
     }
     public VirtualView getVirtualView(String nickname){
@@ -60,9 +60,9 @@ public class MatchController {
             if (connectClients.isEmpty()) {
                 addVirtualView(nickname, virtualView);
                 addPlayers(nickname);
-                virtualView.AcceptNewPlayer(nickname);
+                virtualView.AcceptNewPlayer(nickname, false);
                 match.setPlayers(new Player(nickname));
-               // match.getPlayerByNickname(nickname).setView(virtualView);
+                // match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
             } else if (numberOfPlayers != null) {
                 if (connectClients.size() < numberOfPlayers) {
@@ -71,8 +71,10 @@ public class MatchController {
                     match.setPlayers(new Player(nickname));
                     //match.getPlayerByNickname(nickname).setView(virtualView);
                     for (VirtualView v : connectClients.values()) {
-                        if (!connectClients.equals(connectClients.get(nickname))) {
-                            v.AcceptNewPlayer(nickname);
+                        if (!v.equals(connectClients.get(nickname))) {
+                            v.AcceptNewPlayer(nickname, false);
+                        } else {
+                            v.AcceptNewPlayer(nickname, true);
                         }
                     }
                     if (connectClients.size() == match.getPlayerNumber()) {
@@ -112,6 +114,7 @@ public class MatchController {
         //Order player accord with the chair
 
         String firstPlayer = match.getChair().getNickname();
+        connectClients.get(firstPlayer).assignedChair(firstPlayer);
         int indexFirst = players.indexOf(firstPlayer);
         ArrayList<String> playerInOrder = new ArrayList<>();
 
@@ -190,23 +193,26 @@ public class MatchController {
             v.updateanotherplayerconnect(nickname, false, null);
         }
     }
+
     /**
      * PlayerBack() when a player that have been disconnected returns
+     *
      * @param name
      */
-    public void PlayerBack(String name,VirtualView virtualView){
-        Player player=null;
-        for(Player p: disconnectClients)
-        {
-            if(p.getNickname().equals(name)){  player=p;}
+    public void PlayerBack(String name, VirtualView virtualView) {
+        Player player = null;
+        for (Player p : disconnectClients) {
+            if (p.getNickname().equals(name)) {
+                player = p;
+            }
         }
-        connectClients.put(name,virtualView);
-        virtualView.AcceptNewPlayer(name);
+        connectClients.put(name, virtualView);
+        virtualView.AcceptNewPlayer(name, true);
         if (isStarted) {
             for (EffectiveCard e : match.getCommonCards()) {
                 e.addObserver(connectClients.get(name));
             }
-            connectClients.get(name).AcceptNewPlayer(name);
+            connectClients.get(name).AcceptNewPlayer(name, true);
             connectClients.get(name).updateboard(match.getBoard());
             connectClients.get(name).sendCommonCard(match.getCommonCards());
         }

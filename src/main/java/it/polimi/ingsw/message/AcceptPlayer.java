@@ -1,7 +1,6 @@
 package it.polimi.ingsw.message;
 
 
-import it.polimi.ingsw.Controller.MatchController;
 import it.polimi.ingsw.network.MessageHandler;
 
 import java.io.Serializable;
@@ -10,11 +9,18 @@ import java.io.Serializable;
  * message from server to client after a player entered the game
  */
 public class AcceptPlayer extends Message implements Serializable {
-    public AcceptPlayer(String name){
-        super(name,"accepted_in_the_match");
+    boolean you;
+
+    public AcceptPlayer(String name, Boolean you) {
+        super(name, "accepted_in_the_match");
+        this.you = you;
     }
 
-public void visit(MessageHandler controller){
-    controller.handle(this);
-}
+    public boolean isYou() {
+        return you;
+    }
+
+    public void visit(MessageHandler controller) {
+        controller.handle(this);
+    }
 }

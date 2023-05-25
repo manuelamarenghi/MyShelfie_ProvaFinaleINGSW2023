@@ -23,7 +23,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Message message) {
-
         if (!message.getType().equals("Pong!"))
             virtualModel.notifyObserver(obs -> obs.onShowReq("Server message: " + message.getType()));
     }
@@ -44,9 +43,10 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(UpdateBoard message) {
-
+        System.out.println("è arrivata nuova board");
         virtualModel.updateBoard(message.getB());
         virtualModel.notifyObserver(obs -> obs.onShowNewBoardReq(message.getB()));
+        System.out.println("board mandata");
     }
 
 
@@ -73,7 +73,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(ShowColumn message) {
-
         virtualModel.notifyObserver(obs -> obs.onShowPossibleColumnReq(message.getX(), message.getCards(), virtualModel.getMe().getLibrary()));
     }
 
@@ -83,7 +82,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(WaitList message) {
-
         virtualModel.notifyObserver(obs -> obs.onNotifyGameFullReq());
     }
 
@@ -129,12 +127,11 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(ChairAssigned message) {
-        //if(message.getnickname().equals(virtualModel.getMe().getNickname()))
         virtualModel.updateChair(message.getnickname());
         if (virtualModel.getMe().getNickname().equals(virtualModel.getChair().getNickname())) {
             if (!virtualModel.isMyTurn()) {
-                virtualModel.updateIsMyTurn();
                 virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
+                virtualModel.updateIsMyTurn();
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }
         } else {
@@ -151,14 +148,13 @@ public class MessageHandler implements Observer {
         virtualModel.notifyObserver(obs -> obs.onNotifyCardsAreNotAdjacentReq());
 
     }
-
     /**
      * handle AcceptPlayer messages and notify the player's view if him or another player have been accepted.
      *
      * @param message
      */
     public void handle(AcceptPlayer message) {
-        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerConnectionReq(message.getnickname()));
+        virtualModel.notifyObserver(obs -> obs.onNotifyPlayerConnectionReq(message.getnickname(), message.isYou()));
     }
 
 
@@ -202,7 +198,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(Disconnection_Answer message) {
-
         virtualModel.removePlayer(message.getnickname());
         virtualModel.notifyObserver(obs -> obs.onNotifyDisconnectionReqAcceptedAns());
     }

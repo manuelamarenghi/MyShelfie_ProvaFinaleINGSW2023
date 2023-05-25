@@ -37,18 +37,19 @@ public class DoubleTest {
         library.getCardinPos(1,0).setColour("V");
         library.getCardinPos(2,0).setColour("G");
         library.getCardinPos(3,0).setColour("G");
-        library.getCardinPos(4,0).setColour("B");
-        library.getCardinPos(5,0).setColour("B");
-        library.getCardinPos(0,4).setColour("V");
-        library.getCardinPos(1,4).setColour("V");
-        library.getCardinPos(2,4).setColour("G");
-        library.getCardinPos(3,4).setColour("G");
-        library.getCardinPos(4,4).setColour("B");
-        library.getCardinPos(5,4).setColour("B");
+        library.getCardinPos(4, 0).setColour("B");
+        library.getCardinPos(5, 0).setColour("B");
+        library.getCardinPos(0, 4).setColour("V");
+        library.getCardinPos(1, 4).setColour("V");
+        library.getCardinPos(2, 4).setColour("G");
+        library.getCardinPos(3, 4).setColour("G");
+        library.getCardinPos(4, 4).setColour("B");
+        library.getCardinPos(5, 4).setColour("B");
         assertTrue(doubleCard.check(library));
     }
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         doubleCard.showCommonCard();
         System.out.println(doubleCard.getDesc());
     }

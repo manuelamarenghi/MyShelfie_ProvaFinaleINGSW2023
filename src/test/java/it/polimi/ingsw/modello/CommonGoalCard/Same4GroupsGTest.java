@@ -67,17 +67,19 @@ class Same4GroupsGTest {
         library.showLibrary();
         Assertions.assertTrue(card.check(library));
     }
+
     /**
      * check3() to see when the library is empty
      */
     @Test
     void check3() {
-        Library library=new Library();
+        Library library = new Library();
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         card.showCommonCard();
         System.out.println(card.getDesc());
     }

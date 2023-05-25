@@ -207,10 +207,9 @@ public class Board implements Serializable {
         }
 
         for (Card ca : cards) {
-            if(ca.getCoordinates().getX()==0 || ca.getCoordinates().getX()==8 || ca.getCoordinates().getY()==0 || ca.getCoordinates().getY()==8){
+            if (ca.getCoordinates().getX() == 0 || ca.getCoordinates().getX() == 8 || ca.getCoordinates().getY() == 0 || ca.getCoordinates().getY() == 8) {
 
-            }
-            else{
+            } else {
                 if (board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == notUsableCard ||
                         board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == notUsableCard ||
                         board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == notUsableCard ||

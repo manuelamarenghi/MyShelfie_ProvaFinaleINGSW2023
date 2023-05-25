@@ -7,30 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" prefHeight="608.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/19"
-           fx:controller="it.polimi.ingsw.view.GUI.Scenes.CGController">
+           minWidth="-Infinity" prefHeight="608.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/19">
    <children>
       <Group>
          <children>
             <AnchorPane prefHeight="608.0" prefWidth="892.0">
                <children>
-                  <StackPane layoutX="125.0" layoutY="88.0" prefHeight="404.0" prefWidth="611.0">
+                  <StackPane layoutX="195.0" layoutY="88.0" prefHeight="378.0" prefWidth="541.0">
                      <children>
-                        <ImageView fx:id="imageView" fitHeight="404.0" fitWidth="614.0" pickOnBounds="true"
+                        <ImageView fx:id="imageView" fitHeight="367.0" fitWidth="528.0" pickOnBounds="true"
                                    preserveRatio="true"/>
                      </children>
                   </StackPane>
-                  <VBox fx:id="box" alignment="CENTER" layoutX="187.0" layoutY="520.0" prefHeight="63.0"
-                        prefWidth="526.0">
+                  <VBox fx:id="box" alignment="CENTER" layoutX="187.0" layoutY="511.0" prefHeight="72.0"
+                        prefWidth="552.0">
                      <children>
-                        <Label fx:id="theLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0"
-                               prefWidth="396.0">
-                           <font>
-                              <Font size="14.0"/>
-                           </font>
-                        </Label>
+                        <Label fx:id="theLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0"
+                               prefWidth="534.0"/>
                      </children>
                   </VBox>
                   <ImageView fitHeight="96.0" fitWidth="177.0" layoutX="14.0" layoutY="492.0" pickOnBounds="true"
@@ -45,8 +39,8 @@
                         <Image url="@../images/misc/gattorosso.png"/>
                      </image>
                   </ImageView>
-                  <Button fx:id="theButton" layoutX="36.0" layoutY="35.0" mnemonicParsing="false"
-                          onMouseClicked="#pressedButton" prefHeight="38.0" prefWidth="75.0" text="Back"/>
+                  <Button fx:id="theButton" layoutX="36.0" layoutY="35.0" mnemonicParsing="false" prefHeight="38.0"
+                          prefWidth="75.0" text="Back"/>
                </children>
             </AnchorPane>
          </children>

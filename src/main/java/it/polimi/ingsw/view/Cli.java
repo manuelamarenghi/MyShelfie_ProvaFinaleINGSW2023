@@ -5,7 +5,6 @@ import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 
 import java.io.PrintStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +17,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     private Thread inputThread;
     private ClientController clientController;
     private String nickname;
+
 
     /**
      * Default constructor.
@@ -345,6 +345,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(finalDest, finalMessage));
 
     }
+
     @Override
     public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
         for (Receiving_Mex m : message) {
@@ -471,7 +472,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (nickname.equals(this.nickname)) {
             out.println("Connected");
             this.nickname = nickname;
@@ -659,6 +660,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onPressedButtonChange(String scene) {
+
+    }
+
+    @Override
+    public void setNickname(String nickname) {
 
     }
 }
