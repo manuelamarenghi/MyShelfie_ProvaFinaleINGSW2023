@@ -130,6 +130,11 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    public void addPlayer(String name) {
+        StoredChat.put(name, new ArrayList<>());
+        all.add(name);
+    }
+
     public void arrivedMex(String getnickname, String mex, String dest) {
         if (dest.equals("you")) {
             StoredChat.get(getnickname).add(mex + "\n");

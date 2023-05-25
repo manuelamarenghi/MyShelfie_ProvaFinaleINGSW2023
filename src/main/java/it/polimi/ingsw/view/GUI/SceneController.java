@@ -89,6 +89,10 @@ public class SceneController extends ObservableViewClient {
             activeScene.setRoot(root);
             SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
             SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
+            if (fxml.equals("FinalScene.fxml")) {
+                SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
+                SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
+            }
         } catch (IOException e) {
         }
     }
@@ -126,7 +130,8 @@ public class SceneController extends ObservableViewClient {
             //activeScene = scene;
             SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
             SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
-            if (fxml.equals("FinalScenes")) {
+            if (fxml.equals("FinalScene.fxml")) {
+                SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
                 SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
             }
         } catch (IOException e) {

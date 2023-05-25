@@ -64,12 +64,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
         Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game\n"));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + "has left the game\n"));
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "is back in the game\n"));
+        Platform.runLater(() -> chatController.addPlayer(player.getNickname()));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + "is back in the game\n"));
     }
 
     @Override
@@ -92,7 +93,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
             }
             Platform.runLater(() -> livingController.setTokenCommon(score));
         } else {
-            onShowReq(nickname + " has reached a common goal taking " + score + " score\n");
+            Platform.runLater(() -> livingController.appendText(nickname + " has reached a common goal taking " + score + " score\n"));
         }
     }
 
@@ -110,6 +111,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
         Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid\n"));
+        Platform.runLater(() -> livingController.removeHighlights());
         askCardsToTakeFromBoard();
     }
 

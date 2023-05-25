@@ -22,7 +22,6 @@ public class FinalController extends ObservableViewClient implements GenericScen
     private Text ScoreOne = new Text(), ScoreTwo = new Text(), ScoreThird = new Text(), FourScore = new Text();
 
     public void initialize() {
-
         FirstPlace.toFront();
         SecondPlace.toFront();
         ThirdPlace.toFront();

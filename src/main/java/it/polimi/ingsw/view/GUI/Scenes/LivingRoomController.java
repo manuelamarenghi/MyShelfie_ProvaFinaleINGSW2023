@@ -89,6 +89,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         messageServer.appendText(s);
     }
 
+    public void appendText(String s) {
+        messageServer.appendText(s);
+    }
+
     public void setYourTurn(boolean x) {
         yourTurn = x;
     }
@@ -291,8 +295,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             String s = getUserInput();
             n = Integer.parseInt(s);
             inputUser.clear();
-            if (ValidColumn(columnforthisturn, n)) {
-                int finalN = n;
+            if (ValidColumn(columnforthisturn, n - 1)) {
+                int finalN = n - 1;
                 this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
                 SendbuttonAble = false;
                 Col0.setImage(null);
