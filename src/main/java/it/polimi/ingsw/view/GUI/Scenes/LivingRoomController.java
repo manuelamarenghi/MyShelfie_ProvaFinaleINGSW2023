@@ -5,7 +5,6 @@ import it.polimi.ingsw.modello.Board;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.Library;
 import it.polimi.ingsw.modello.Position;
-import it.polimi.ingsw.view.GUI.SceneController;
 import it.polimi.ingsw.view.GUI.Scenes.Storage.StorageLiving;
 import it.polimi.ingsw.view.ObservableViewClient;
 import javafx.collections.ObservableList;
@@ -22,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -142,6 +142,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         stackPane = new StackPane();
         background.toBack();
         gameBoard.toFront();
+        setTiles();
     }
 
     public void setTiles() {
@@ -180,13 +181,13 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         tiles.put("blue", imageB);
     }
     public void start() {
+        setTiles();
         Token1set = false;
         SendbuttonAble = false;
         index = 0;
     }
 
     public void createBoard(Board b) {
-        setTiles();
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -204,7 +205,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                             Integer rowIndex = GridPane.getRowIndex(clickedNode);
                             if (index < cardtaken && yourTurn) {
                                 image.getStyleClass().add("image");
-                                System.out.println(columnIndex + " e riga " + rowIndex + "alla pos " + index);
                                 positions[index] = new Position(rowIndex, columnIndex);
                                 index++;
                                 if (index == cardtaken) {
@@ -214,6 +214,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                                 }
                             }
                         });
+                    } else {
+                        final int col = i;
+                        final int row = j;
+                        gameBoard.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == row && GridPane.getRowIndex(node) == col);
                     }
                 }
             }
@@ -221,7 +225,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void createLibrary(Library l) {
-        setTiles();
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
         for (int i = 1; i < 12; i += 2) {
@@ -244,7 +247,6 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void TakeCards() {
-        setTextArea("Insert the number of items you want to take");
         ableSend = 2;
     }
 
@@ -277,18 +279,13 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
-        LibrariesController lcontr = new LibrariesController();
-        lcontr.addAllObservers(observers);
-        String f = "libraries.fxml";
-        SceneController.setRootPane(lcontr, f);
+        this.notifyObserver(observers -> observers.ChangeRoot("library"));
     }
     public void pressedChat(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
     public void pressedSend(MouseEvent actionEvent) {
-        System.out.println(ableSend);
-        System.out.println(SendbuttonAble);
         int n;
         if (SendbuttonAble) {
             String s = getUserInput();
@@ -323,15 +320,18 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             } else if (ableSend == 4) {
                 this.notifyObserver(observers -> observers.handleTakeCard(positions));
                 ableSend = 1;
-                removeHighlights();
+                // removeHighlights();
             }
         }
     }
 
     public void setTokenCommon(int x) {
         String name = "/images/scoring_tokens/scoring_" + x + ".png";
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
-        if (Token1set == false) {
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        assert is != null;
+        Image image = new Image(is);
+        if (!Token1set) {
             TokenCommon1.setImage(image);
             Token1set = true;
         } else {
@@ -345,20 +345,29 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     public void setChair() {
         String name = "/images/misc/firstplayertoken.png";
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        assert is != null;
+        Image image = new Image(is);
         Chair.setImage(image);
     }
 
     public void setFirstFinished() {
         String name = "/images/scoring_tokens/end_game.png";
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        assert is != null;
+        Image image = new Image(is);
         FirstFinished.setImage(image);
     }
 
     public void ShowColumn(int[] x) {
         ImageView[] ViewScatola = {Col0, Col1, Col2, Col3, Col4};
         String name = "/images/Publisher_material/arrow.png";
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        assert is != null;
+        Image image = new Image(is);
         for (int i : x) {
             ViewScatola[i].setImage(image);
             ViewScatola[i].setFitWidth(16);

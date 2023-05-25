@@ -16,13 +16,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
     private CG_twoController common2;
     private String nickname;
     private WaitingController waitcontr;
+    private LibrariesController lcontr;
 
     public GUI(LivingRoomController livingController, ChatController chatController, WaitingController wait) {
         this.livingController = livingController;
         this.livingController.start();
         this.chatController = chatController;
         this.waitcontr = wait;
-        waitcontr.addAllObservers(observers);
+        lcontr = new LibrariesController();
         common1 = new CG_oneController();
         common2 = new CG_twoController();
     }
@@ -31,7 +32,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onShowReq(String s) {
         System.out.println(s);
         if (s.equals("Server message: Start Game")) {
+            lcontr.addAllObservers(observers);
             livingController.addAllObservers(observers);
+            waitcontr.addAllObservers(observers);
             onPressedButtonChange("living");
         } else {
             Platform.runLater(() -> livingController.setTextArea(s));
@@ -48,7 +51,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onShowNewBoardReq(Board board) {
         livingController.getData().setBoard(board);
-        System.out.println("sto settando la board e la aggioro");
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
@@ -61,12 +63,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
         Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game"));
+        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game\n"));
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "is back in the game"));
+        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "is back in the game\n"));
     }
 
     @Override
@@ -133,13 +135,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewMyLibraryReq(Library l, String name) {
+        System.out.println("voglio vedere libreria di" + name);
         if (name.equals(nickname)) {
             livingController.getData().setLibrary(l);
             Platform.runLater(() -> livingController.createLibrary(l));
         } else {
-            LibrariesController contr = new LibrariesController();
-            contr.addAllObservers(observers);
-            Platform.runLater(() -> contr.createLibrary(l));
+            Platform.runLater(() -> lcontr.createLibrary(l));
         }
     }
 
@@ -161,6 +162,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
         livingController.getData().setLibrary(library);
         Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
+        Platform.runLater(() -> livingController.setTextArea("Insert the number of items you want to take"));
         askCardsToTakeFromBoard();
     }
 
@@ -225,6 +227,8 @@ public class GUI extends ObservableViewClient implements ViewClient {
             case "wait":
                 Platform.runLater(() -> SceneController.setRootPane(waitcontr, "WaitController.fxml"));
                 break;
+            case "library":
+                Platform.runLater(() -> SceneController.setRootPane(lcontr, "libraries.fxml"));
         }
     }
 

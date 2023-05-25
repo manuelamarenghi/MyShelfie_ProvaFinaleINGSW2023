@@ -43,8 +43,10 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(UpdateBoard message) {
+        System.out.println("è arrivata nuova board");
         virtualModel.updateBoard(message.getB());
         virtualModel.notifyObserver(obs -> obs.onShowNewBoardReq(message.getB()));
+        System.out.println("board mandata");
     }
 
 
@@ -80,7 +82,6 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(WaitList message) {
-
         virtualModel.notifyObserver(obs -> obs.onNotifyGameFullReq());
     }
 
@@ -126,11 +127,10 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(ChairAssigned message) {
-        //if(message.getnickname().equals(virtualModel.getMe().getNickname()))
         virtualModel.updateChair(message.getnickname());
         if (virtualModel.getMe().getNickname().equals(virtualModel.getChair().getNickname())) {
-            virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
             if (!virtualModel.isMyTurn()) {
+                virtualModel.notifyObserver(obs -> obs.onNotifyChairAssignedReq(message.getnickname()));
                 virtualModel.updateIsMyTurn();
                 virtualModel.notifyObserver(obs -> obs.onNotifyIsYourTurnReq(virtualModel.getBoard(), virtualModel.getMe().getLibrary()));
             }

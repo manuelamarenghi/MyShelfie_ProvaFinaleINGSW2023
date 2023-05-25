@@ -126,6 +126,9 @@ public class SceneController extends ObservableViewClient {
             //activeScene = scene;
             SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/background_livingroom.css").toExternalForm());
             SceneController.getActiveScene().getStylesheets().remove(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
+            if (fxml.equals("FinalScenes")) {
+                SceneController.getActiveScene().getStylesheets().add(SceneController.class.getResource("/css/InitalBackground.css").toExternalForm());
+            }
         } catch (IOException e) {
             System.out.println(e.toString());
         }

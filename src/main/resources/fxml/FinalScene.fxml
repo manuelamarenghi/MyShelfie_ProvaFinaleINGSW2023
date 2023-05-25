@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.*?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+   <children>
+      <Group>
+         <children>
+            <AnchorPane prefHeight="608.0" prefWidth="892.0">
+               <children>
+                  <ImageView fitHeight="500.0" fitWidth="628.0" layoutX="173.0" layoutY="108.0" pickOnBounds="true"
+                             preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Publisher_material/classifica.png"/>
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="FIrstStar" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="224.0"
+                             pickOnBounds="true" preserveRatio="true">
+
+                  </ImageView>
+                  <ImageView fx:id="SecStar" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="273.0"
+                             pickOnBounds="true" preserveRatio="true">
+
+                  </ImageView>
+                  <ImageView fx:id="Third" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="327.0"
+                             pickOnBounds="true" preserveRatio="true">
+
+                  </ImageView>
+                  <ImageView fx:id="Four" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="382.0"
+                             pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+                  <Text fx:id="FirstPlace" layoutX="321.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="142.13671875">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="SecondPlace" layoutX="321.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="142.13671875">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="ThirdPlace" layoutX="321.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="142.13671875">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="FourPlace" layoutX="321.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="142.13671875">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="ScoreOne" layoutX="507.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="49.33673095703125">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="ScoreTwo" layoutX="507.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="49.33673095703125">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="ScoreThird" layoutX="507.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="49.33673095703125">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+                  <Text fx:id="FourScore" layoutX="507.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                        wrappingWidth="49.33673095703125">
+                     <font>
+                        <Font size="18.0"/>
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </Group>
+   </children>
+</StackPane>

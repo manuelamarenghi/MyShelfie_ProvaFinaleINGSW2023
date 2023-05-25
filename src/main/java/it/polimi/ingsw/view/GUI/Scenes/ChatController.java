@@ -102,6 +102,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
         String mex = WriteArea.getText();
         WriteArea.clear();
         Chat.appendText("You: " + mex + "\n");
+        StoredChat.get(selectedItem).add("You: " + mex + "\n");
         String message = nickname + ": " + mex;
         if (dest.size() != 1) {
             StoredChat.get("Group Chat");
