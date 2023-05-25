@@ -96,6 +96,10 @@ public class LibrariesController extends ObservableViewClient implements Generic
                         image.setFitWidth(21);
                         image.setFitHeight(22);
                         GridLibrary.add(image, j, i);
+                    } else {
+                        final int col = i;
+                        final int row = j;
+                        GridLibrary.getChildren().removeIf(node -> GridPane.getColumnIndex(node) == row && GridPane.getRowIndex(node) == col);
                     }
                 }
                 c++;

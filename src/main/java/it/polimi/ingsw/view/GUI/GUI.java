@@ -130,7 +130,10 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
-        //interfaccia fine gioco
+        FinalController finalcontr = new FinalController();
+        finalcontr.addAllObservers(observers);
+        Platform.runLater(() -> SceneController.setRootPane(finalcontr, "FinalScene.fxml"));
+        Platform.runLater(() -> finalcontr.SetClassification(point));
     }
 
     @Override
@@ -229,6 +232,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
                 break;
             case "library":
                 Platform.runLater(() -> SceneController.setRootPane(lcontr, "libraries.fxml"));
+                break;
         }
     }
 
