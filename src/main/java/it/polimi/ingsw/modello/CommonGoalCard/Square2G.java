@@ -18,7 +18,7 @@ public class Square2G implements CommonGoalCards, Serializable {
 
     @Override
     public boolean check(Library library) {
-        int r, c, i, indexToSkip1 = -1, indexToSkip2 = -1;
+        int r, c, i, indexToSkip1 = -1, indexToSkip2 = -1 , totalSquares=0;
         int[] numOfSquares = {0, 0, 0, 0, 0, 0};
         for (r = 0; r < 5; r++) {
             for (c = 0; c < 4; c++) {
@@ -54,9 +54,10 @@ public class Square2G implements CommonGoalCards, Serializable {
             }
         }
         for(i=0 ; i<6 ; i++){
-            if(numOfSquares[i]>=2){
-                return true;
-            }
+            totalSquares = totalSquares + numOfSquares[i];
+        }
+        if(totalSquares >=2){
+            return true;
         }
         return false;
     }
