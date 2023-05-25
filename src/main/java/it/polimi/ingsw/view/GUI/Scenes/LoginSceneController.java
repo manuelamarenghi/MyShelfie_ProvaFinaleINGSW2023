@@ -40,8 +40,8 @@ public class LoginSceneController extends ObservableViewClient implements Generi
                 this.notifyObserver(observers -> observers.handleEnterPlayer(name_txb.getText()));
             this.notifyObserver(observers -> observers.setNickname(name_txb.getText()));
         } else {
-            String numb = name_txb.getText();
-            if (Integer.parseInt(numb) != 2 && Integer.parseInt(numb) != 3 && Integer.parseInt(numb) != 4) {
+            String numb = name_txb.getText().trim();
+            if (!numb.equals("2") && !numb.equals("3")  && !numb.equals("4")) {
                 name_txt.setText("Insert a valid number");
             }
             this.notifyObserver(observers -> observers.ChangeRoot("wait"));
