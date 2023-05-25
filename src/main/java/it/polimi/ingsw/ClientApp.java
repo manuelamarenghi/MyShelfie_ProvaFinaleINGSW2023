@@ -21,16 +21,12 @@ public class ClientApp {
         }
 
         if (cliParam) {
-            Match match = new Match();
-            SocketClient socketClient = new SocketClient("192.168.43.216", 16847);
-            socketClient.readMessage();
-
 
             Cli cli = new Cli();
 
-            ClientController clientController = new ClientController(cli, socketClient);
+            ClientController clientController = new ClientController(cli);
             cli.addObserver(clientController);
-            cli.start();
+            cli.init();
         } else {
             Application.launch(JavaFXApplication.class);
         }

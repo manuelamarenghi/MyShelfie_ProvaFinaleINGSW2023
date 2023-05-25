@@ -21,16 +21,6 @@ public class ClientController implements ObserverViewClient {
     //localhost
     //16847
 
-    public ClientController(ViewClient view, SocketClient socketClient) {
-        this.view = view;
-        this.virtualModel = new VirtualModel();
-        this.socketClient = socketClient;
-        socketClient.enablePinger(true);
-        this.messageHandler = new MessageHandler(this.virtualModel);
-        this.socketClient.addObserver(this.messageHandler);
-        this.virtualModel.addObserver(this.view);
-
-    }
 
     public ClientController(ViewClient view) {
         this.view = view;
