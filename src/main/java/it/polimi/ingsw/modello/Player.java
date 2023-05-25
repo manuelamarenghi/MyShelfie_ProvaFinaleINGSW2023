@@ -17,7 +17,6 @@ public class Player implements Serializable {
     private boolean state;
     private PersonalGoalCard personalCard;
     private PlayerManager plManag;
-    private View view;
 
     public Player(String nickname){
         this.nickname = nickname;
@@ -71,13 +70,6 @@ public class Player implements Serializable {
 
     public PlayerManager getPlayerManager(){
         return plManag;
-    }
-
-    public View getView() {
-        return view;
-    }
-    public void setView(View view) {
-        this.view = view;
     }
 
     public void setLibrary(Library library) {
