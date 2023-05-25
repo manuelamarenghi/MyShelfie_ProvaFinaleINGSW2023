@@ -38,6 +38,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
         Back.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
         if (all != null) {
+            System.out.println(all);
             ReloadChat(all);
         }
     }
@@ -61,10 +62,13 @@ public class ChatController extends ObservableViewClient implements GenericScene
         ChatsAvaiable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                dest.clear();
                 Chat.clear();
                 selectedItem = (String) ChatsAvaiable.getSelectionModel().getSelectedItem();
                 if (selectedItem.equals("Group Chat")) {
-                    dest = all;
+                    for (String x : all) {
+                        dest.add(x);
+                    }
                 } else {
                     dest.add(selectedItem);
                 }
@@ -86,7 +90,9 @@ public class ChatController extends ObservableViewClient implements GenericScene
             Chat.clear();
             selectedItem = (String) ChatsAvaiable.getSelectionModel().getSelectedItem();
             if (selectedItem.equals("Group Chat")) {
-                dest = all;
+                for (String x : all) {
+                    dest.add(x);
+                }
             } else {
                 dest.add(selectedItem);
             }
@@ -109,14 +115,13 @@ public class ChatController extends ObservableViewClient implements GenericScene
         } else {
             StoredChat.get(dest.get(0));
         }
-        System.out.println(dest);
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(dest, message));
-        dest.clear();
     }
 
     public void removePlayer(String name) {
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
+        System.out.println("rimuoviamo persona");
         all.remove(name);
         for (String s : allname) {
             if (s.equals(name)) {
