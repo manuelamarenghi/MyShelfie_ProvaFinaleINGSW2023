@@ -12,6 +12,10 @@ public class MessageHandler implements Observer {
 
     }
 
+    /**
+     * An override method for the design pattern visit
+     * @param message
+     */
     @Override
     public void update(Message message) {
         message.visit(this);
@@ -256,6 +260,11 @@ public class MessageHandler implements Observer {
         virtualModel.notifyObserver(obs -> obs.onNotifyAllPlayerReq(message.getPlayers()));
     }
 
+    /**
+     * handle Connected before first player message , it is needed to handle the situation when a player tries to connect
+     * before the first player has not decided
+     * @param message
+     */
     public void handle(Connected_Before_FirstPlayer message) {
         try {
             virtualModel.notifyObserver(obs -> obs.onShowReq(message.getType()));
@@ -271,12 +280,20 @@ public class MessageHandler implements Observer {
         }
     }
 
+    /**
+     * a handle method to send the effective common goal cards
+     * @param message
+     */
     public void handle(Send_EffectiveCard message) {
         virtualModel.setCommonCards(message.getCards());
         virtualModel.notifyObserver(obs -> obs.onNotifyCommonCards(message.getCards()));
 
     }
 
+    /**
+     * a handle message to handle a message that hass been recieved from the server
+     * @param message
+     */
     public void handle(Receiving_Mex message) {
         virtualModel.notifyObserver(obs -> obs.onNotifyMexInChat(message.getnickname(), message.getMex(), message.getDest()));
         virtualModel.addChatMessage(message);

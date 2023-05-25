@@ -5,6 +5,9 @@ import it.polimi.ingsw.modello.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * An interface to be implemented by Cli and GUI
+ */
 public interface VMObserver {
     void onShowReq(String s);
 

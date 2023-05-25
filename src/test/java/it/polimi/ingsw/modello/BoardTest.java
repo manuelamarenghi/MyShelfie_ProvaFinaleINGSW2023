@@ -195,8 +195,20 @@ class BoardTest {
     public void checkAllow(){
         Board b = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
-        Card test1 = new Card("Green" , new Position(0,3));
-        Card test2 = new Card("Green" , new Position(0,4));
+        b.fill(0);
+        Card test1 = b.getCard(4,0);
+        Card test2 = b.getCard(5,0);
+        testCards.add(test1);
+        testCards.add(test2);
+        assertTrue(b.allow(testCards));
+    }
+    @Test
+    public void checkAllow2(){
+        Board b = new Board(4);
+        ArrayList<Card> testCards = new ArrayList<Card>();
+        b.fill(0);
+        Card test1 = b.getCard(3,8);
+        Card test2 = b.getCard(4,8);
         testCards.add(test1);
         testCards.add(test2);
         assertTrue(b.allow(testCards));

@@ -22,6 +22,12 @@ public class SocketClient extends Client{
     private final ScheduledExecutorService pinger;
     private String nickname;
 
+    /**
+     * A socket Client constructore without the name of the player
+     * @param address
+     * @param port
+     * @throws IOException
+     */
     public SocketClient(String address,int port) throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
@@ -30,6 +36,14 @@ public class SocketClient extends Client{
         this.messageReader = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
+
+    /**
+     * A socket Client constructore with the name of the player
+     * @param address
+     * @param port
+     * @param nickname
+     * @throws IOException
+     */
     public SocketClient(String address, int port, String nickname) throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
@@ -39,6 +53,11 @@ public class SocketClient extends Client{
         this.pinger = Executors.newSingleThreadScheduledExecutor();
         this.nickname=nickname;
     }
+
+    /**
+     * A method to send message to the server
+     * @param message
+     */
 
     @Override
     public synchronized void sendMessage(Message message) {
@@ -67,6 +86,10 @@ public class SocketClient extends Client{
         });
     }
 
+    /**
+     * A method to dissconnect the socket
+     */
+
     @Override
     public void disconnect() {
         try{
@@ -78,6 +101,7 @@ public class SocketClient extends Client{
            notifyObserver(new Message(nickname,"Couldn't disconnect"));
         }
     }
+
     public void enablePinger(boolean enabled) {
         if (enabled) {
             pinger.scheduleAtFixedRate(() -> sendMessage(new Message(nickname,"Ping!")), 0, 1000, TimeUnit.MILLISECONDS);
