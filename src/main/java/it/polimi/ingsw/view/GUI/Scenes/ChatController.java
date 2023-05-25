@@ -80,7 +80,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
 
     public void ReloadChat(ArrayList<String> players) {
         System.out.println("All: "+Arrays.toString(players.toArray()));
-        for (String name : players) {
+        for (String name : StoredChat.keySet()) {
             ChatsAvaiable.getItems().add(name);
         }
         //ChatsAvaiable.getItems().add("Group Chat");
