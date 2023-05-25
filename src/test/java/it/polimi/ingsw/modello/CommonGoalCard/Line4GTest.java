@@ -278,4 +278,9 @@ class Line4GTest {
         library.getCardinPos(3, 3).setColour("V");
         Assertions.assertTrue(card.expired(library));
     }
+
+    @Test
+    public void checkShow() {
+        System.out.println(card.getDesc());
+    }
 }

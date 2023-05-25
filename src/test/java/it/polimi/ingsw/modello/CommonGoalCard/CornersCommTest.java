@@ -49,10 +49,16 @@ public class CornersCommTest {
     }
 
     @Test
-    public void expiredFalse(){
+    public void expiredFalse() {
         Library library = new Library();
         library.getCardinPos(5, 0).setColour("red");
         library.getCardinPos(5, 4).setColour("red");
         assertFalse(corners.expired(library));
+    }
+
+    @Test
+    public void checkShow() {
+        corners.showCommonCard();
+        System.out.println(corners.getDesc());
     }
 }

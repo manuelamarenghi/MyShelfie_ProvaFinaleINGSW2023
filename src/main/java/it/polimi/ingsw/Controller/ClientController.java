@@ -151,6 +151,7 @@ public class ClientController implements ObserverViewClient {
         Disconnection message = new Disconnection(name);
         socketClient.sendMessage(message);
     }
+
     @Override
     public void handleMexChat(ArrayList<String> dest, String mex) {
         MexInChat message = new MexInChat(mex, virtualModel.getMe().getNickname(), dest);
@@ -169,10 +170,20 @@ public class ClientController implements ObserverViewClient {
     }*/
 
     public void SeeSomeoneLibrary(String nickname) {
-        view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
+        if (!virtualModel.getPlayersNickname().contains(nickname))
+            view.errorNickname(virtualModel.getPlayersNickname());
+        else
+            view.onShowNewMyLibraryReq(virtualModel.getPlayer(nickname).getLibrary(), nickname);
     }
 
     public void ChangeRoot(String scene) {
         view.onPressedButtonChange(scene);
+    }
+
+    @Override
+    public void ReadMessageChat() {
+        ArrayList<Receiving_Mex> message = virtualModel.getChatMessage();
+        view.readMessageChat(message, virtualModel.getPlayersNickname());
+        virtualModel.resetChatMessage();
     }
 }

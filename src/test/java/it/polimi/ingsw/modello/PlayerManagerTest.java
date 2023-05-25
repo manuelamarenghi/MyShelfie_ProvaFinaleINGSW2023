@@ -1,13 +1,9 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.modello.CommonGoalCard.CornersCommG;
-import it.polimi.ingsw.modello.CommonGoalCard.XGoalCard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerManagerTest {
     /*private Player player;
@@ -216,4 +212,18 @@ Commentato per il problema della view
 
     }
 */
+@Test
+public void checkShowPersonalGoal() {
+    Card[] cards = new Card[6];
+    cards[0] = new Card("lightBlue", new Position(1, 1));
+    cards[1] = new Card("white", new Position(2, 2));
+    cards[2] = new Card("blue", new Position(3, 3));
+    cards[3] = new Card("green", new Position(4, 2));
+    cards[4] = new Card("yellow", new Position(4, 4));
+    cards[5] = new Card("pink", new Position(3, 4));
+    PersonalGoalCard personalGoalCard = new PersonalGoalCard(cards);
+    Player player = new Player("Lovish");
+    player.setPersonalCard(personalGoalCard);
+    player.getPlayerManager().showPersonalGoal(player);
+}
 }

@@ -56,4 +56,10 @@ class Square2GTest {
         l.getCardinPos(1, 4).setColour("blue");
         assertFalse(square2G.check(l));
     }
+
+    @Test
+    public void checkShow() {
+        square2G.showCommonCard();
+        System.out.println(square2G.getDesc());
+    }
 }

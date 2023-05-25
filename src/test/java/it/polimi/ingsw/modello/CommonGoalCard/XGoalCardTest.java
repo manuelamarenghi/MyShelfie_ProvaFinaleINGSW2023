@@ -35,15 +35,22 @@ class XGoalCardTest {
                 library.getCardinPos(j-2,i+2).setColour("pink");
                 library.getCardinPos(j,i+2).setColour("white");
                 library.getCardinPos(j-2,i).setColour("yellow");
-                if(xcard.check(library)) fail();
+                if (xcard.check(library)) fail();
             }
         }
         assertTrue(true);
     }
+
     @Test
-    void checkIfExpired(){
+    void checkIfExpired() {
         Library library = new Library();
         assertFalse(xcard.expired(library));
     }
+
+    @Test
+    public void checkShow() {
+        xcard.showCommonCard();
+        System.out.println(xcard.getDesc());
     }
+}
 

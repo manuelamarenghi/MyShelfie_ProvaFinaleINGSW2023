@@ -19,7 +19,6 @@ import java.io.IOException;
 public class JavaFXApplication extends Application {
     Button button;
 
-    //
     public static void main(String[] args) {
         launch(args);
     }

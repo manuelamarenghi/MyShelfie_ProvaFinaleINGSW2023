@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.Controller.ClientController;
+import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 
 import java.io.PrintStream;
@@ -140,6 +141,26 @@ public class Cli extends ObservableViewClient implements ViewClient {
         int i, x, y;
         int numberOfCards = -1;
 
+        String action = "";
+        System.out.println("Write 'action' if you don't take card\n" +
+                "Write other if you take card");
+        try {
+            action = readLine();
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+        while (action.equals("action")) {
+            actionByPlayer();
+            System.out.println("Write 'action' if you don't tak card\n" +
+                    "Write other if you take card");
+            try {
+                action = readLine();
+            } catch (ExecutionException e) {
+                out.println("WRONG_INPUT");
+            }
+        }
+
         String question = "How many card do you want to take";
         String questionX = "Type the x value of the card to take";
         String questionY = "Type the y value of the card to take";
@@ -190,6 +211,26 @@ public class Cli extends ObservableViewClient implements ViewClient {
             }
         }
         out.println();
+        String action = "";
+        System.out.println("Write 'action' if you don't choose the column\n" +
+                "Write other if you take card");
+        try {
+            action = readLine();
+        } catch (ExecutionException e) {
+            out.println("WRONG_INPUT");
+        }
+
+        while (action.equals("action")) {
+            actionByPlayer();
+            System.out.println("Write 'action' if you don't tak card\n" +
+                    "Write other if you take card");
+            try {
+                action = readLine();
+            } catch (ExecutionException e) {
+                out.println("WRONG_INPUT");
+            }
+        }
+
         String question = "Select the coloumn to put your cards from the shown coloumns.";
         for (i = 0; i < excludedNumbers.size(); i++) {
             excludedNumbersArrayList.add(excludedNumbers.get(i));
@@ -213,23 +254,31 @@ public class Cli extends ObservableViewClient implements ViewClient {
                 "1-See the board \n" +
                 "2-See your personal card \n" +
                 "3-See the common goal card\n" +
-                "4-See the library of other players\n");
+                "4-See the library of other players\n" +
+                "5-Chat");
         String question = "Write the number of action";
         try {
-            int actionNumber = numberInput(1, 4, null, question);
+            int actionNumber = numberInput(1, 5, null, question);
             switch (actionNumber) {
                 case 1:
                     this.notifyObserver(observerViewClient -> observerViewClient.handleSeeBoard());
+                    break;
                 case 2:
                     this.notifyObserver(observerViewClient -> observerViewClient.handleSeePersonalCard());
+                    break;
                 case 3:
                     this.notifyObserver(observerViewClient -> observerViewClient.handleSeeCommonCard());
+                    break;
                 case 4:
                     seeOtherLibrary();
+                    break;
+                case 5:
+                    this.notifyObserver(observerViewClient -> observerViewClient.ReadMessageChat());
             }
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
+
 
     }
 
@@ -250,15 +299,76 @@ public class Cli extends ObservableViewClient implements ViewClient {
     /**
      * Don't have player with this nickname.
      */
-    public void errorNickname(ArrayList<Player> players) {
+    public void errorNickname(ArrayList<String> players) {
         System.out.println("Not exist the player with this nickname." +
                 "Choose other nickname");
         System.out.println("The nickname of the players in the game");
-        for (Player player : players) {
-            System.out.print(player.getNickname() + " , ");
+        for (String player : players) {
+            System.out.print(player + " , ");
         }
 
         seeOtherLibrary();
+    }
+
+
+    /**
+     * The method can chat with other player
+     */
+
+    public void sendMessageChat(ArrayList<String> players) {
+        ArrayList<String> dest = new ArrayList<>();
+        String message = "";
+
+        try {
+            System.out.println("list of player can you send message:\n");
+
+            for (String player : players) {
+                if (!player.equals(nickname)) {
+                    System.out.println(players.indexOf(player) + " : " + player);
+                }
+            }
+            System.out.println(players.size() + " : " + "Group Chat");
+            String question = "Choose player, write the corresponding number";
+            int action = numberInput(0, players.size(), null, question);
+            if (action < players.size())
+                dest.add(players.get(action));
+            else
+                dest = new ArrayList<>(players);
+            System.out.println("Write message");
+            message = readLine();
+        } catch (ExecutionException e) {
+            System.out.println("WRONG_INPUT");
+        }
+
+        ArrayList<String> finalDest = dest;
+        String finalMessage = message;
+        this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(finalDest, finalMessage));
+
+    }
+
+    @Override
+    public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
+        for (Receiving_Mex m : message) {
+            String mex = "";
+            if (m.getDest().equals("Group_Chat"))
+                mex += "Group Chat - ";
+            else
+                mex += "Private Chat - ";
+            mex += m.getnickname() + " : " + m.getMex();
+            System.out.println(mex);
+
+        }
+        try {
+            String question = "1-Send Message\n" +
+                    "2-Exit chat\n";
+            int action = numberInput(1, 2, null, question);
+            if (action == 1)
+                sendMessageChat(players);
+            else
+                return;
+        } catch (ExecutionException e) {
+            System.out.println("WRONG_INPUT");
+        }
     }
 
     /**
@@ -362,7 +472,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
+    public void onNotifyPlayerConnectionReq(String nickname) {
         if (nickname.equals(this.nickname)) {
             out.println("Connected");
             this.nickname = nickname;
@@ -455,6 +565,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         points.forEach((key, value) -> System.out.println("The points are " + key + " : " + value));
 
         out.println("The game is finished");
+        System.exit(0);
 
     }
 

@@ -40,4 +40,6 @@ public interface ObserverViewClient {
     void handleMexChat(ArrayList<String> dest, String message);
 
     void ChangeRoot(String scene);
+
+    void ReadMessageChat();
 }

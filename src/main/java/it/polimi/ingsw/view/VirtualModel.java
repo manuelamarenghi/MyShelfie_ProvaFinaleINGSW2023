@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 import it.polimi.ingsw.network.observer.VMObservable;
 
@@ -16,6 +17,7 @@ public class VirtualModel extends VMObservable {
     private EffectiveCard[] CommonCards;
 
     private ArrayList<Card> cardSelect;
+    private ArrayList<Receiving_Mex> chatMessage;
 
 
     public VirtualModel() {
@@ -29,6 +31,7 @@ public class VirtualModel extends VMObservable {
         this.board = null;
         this.me.setLibrary(new Library());
         this.cardSelect = new ArrayList<>();
+        this.chatMessage = new ArrayList<>();
     }
 
     public ArrayList<Card> getCardSelect() {
@@ -51,6 +54,18 @@ public class VirtualModel extends VMObservable {
         return firstFinish;
     }
 
+    public ArrayList<Receiving_Mex> getChatMessage() {
+        return chatMessage;
+    }
+
+    public void addChatMessage(Receiving_Mex message) {
+        chatMessage.add(message);
+    }
+
+    public void resetChatMessage() {
+        chatMessage = new ArrayList<>();
+    }
+
     public void setFirstFinish(String firstFinish) {
         for (Player player : this.players) {
             if (player.getNickname().equals(firstFinish)) this.firstFinish = player;
@@ -63,6 +78,14 @@ public class VirtualModel extends VMObservable {
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public ArrayList<String> getPlayersNickname() {
+        ArrayList<String> nicknames = new ArrayList<>();
+        for (Player p : players) {
+            nicknames.add(p.getNickname());
+        }
+        return nicknames;
     }
 
     public void setPlayers(ArrayList<String> players) {

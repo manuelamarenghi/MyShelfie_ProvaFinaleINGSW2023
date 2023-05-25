@@ -93,14 +93,21 @@ public class Diagonal5Test {
         library.getCardinPos(4, 0).setColour("blue");
         assertFalse(diagonal.check(library));
     }
+
     @Test
-    public void sxDiagonalNoCompleta(){
+    public void sxDiagonalNoCompleta() {
         Library library = new Library();
         library.getCardinPos(0, 0).setColour("blue");
         library.getCardinPos(1, 1).setColour("blue");
         library.getCardinPos(3, 3).setColour("blue");
         library.getCardinPos(4, 4).setColour("blue");
         assertFalse(diagonal.check(library));
+    }
+
+    @Test
+    public void checkShow() {
+        diagonal.showCommonCard();
+        System.out.println(diagonal.getDesc());
     }
 }
 

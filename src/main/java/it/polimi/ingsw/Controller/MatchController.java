@@ -81,7 +81,7 @@ public class MatchController {
                         startGame();
                     }
                 } else {
-                    connectClients.get(nickname).Gamefull();
+                    virtualView.Gamefull();
                     return false;
                 }
             } else {

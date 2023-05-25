@@ -116,4 +116,10 @@ class Line2GTest {
         assertFalse(line2G.expired(l));
 
     }
+
+    @Test
+    public void checkShow() {
+        line2G.showCommonCard();
+        System.out.println(line2G.getDesc());
+    }
 }
