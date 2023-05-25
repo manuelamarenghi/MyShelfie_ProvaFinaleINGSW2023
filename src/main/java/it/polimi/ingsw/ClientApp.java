@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.GUI.JavaFXApplication;
 import javafx.application.Application;
@@ -21,16 +19,12 @@ public class ClientApp {
         }
 
         if (cliParam) {
-            Match match = new Match();
-            SocketClient socketClient = new SocketClient("192.168.43.216", 16847);
-            socketClient.readMessage();
-
 
             Cli cli = new Cli();
 
-            ClientController clientController = new ClientController(cli, socketClient);
+            ClientController clientController = new ClientController(cli);
             cli.addObserver(clientController);
-            cli.start();
+            cli.init();
         } else {
             Application.launch(JavaFXApplication.class);
         }

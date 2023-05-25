@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 
@@ -15,7 +14,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     private final PrintStream out;
     private Thread inputThread;
-    private ClientController clientController;
+
     private String nickname;
 
 
@@ -27,11 +26,26 @@ public class Cli extends ObservableViewClient implements ViewClient {
         //this.clientController=clientController;
     }
 
+    private static boolean validate(final String ip) {
+        if (ip.equals("localhost")) return true;
+        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+        return ip.matches(PATTERN);
+    }
+
     public void init() {
-
+        String address;
         out.println("Welcome to My Shelfie Game!");
+        try {
+            do {
+                out.print("IP ADDRESS : ");
+                address = readLine();
+            } while (!validate(address));
+            String finalAddress = address;
+            this.notifyObserver(observerViewClient -> observerViewClient.setServerInfo(finalAddress));
 
-        askNickname();
+        } catch (ExecutionException e) {
+            System.out.println("WRONG_INPUT");
+        }
     }
 
     /**

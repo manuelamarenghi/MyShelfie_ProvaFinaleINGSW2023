@@ -32,7 +32,7 @@ public class JavaFXApplication extends Application {
         ClientController clientController = new ClientController(gui);
         gui.addObserver(clientController);
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/main_scene.fxml"));
+        loader.setLocation(getClass().getResource("/fxml/FinalScene.fxml"));
         Parent root = null;
         try {
             root = loader.load();
