@@ -207,21 +207,27 @@ public class Board implements Serializable {
         }
 
         for (Card ca : cards) {
-            if (board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == notUsableCard ||
-                    board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == notUsableCard ||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == notUsableCard ||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == notUsableCard ||
-                    board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == emptyCard ||
-                    board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == emptyCard ||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == emptyCard ||
-                    board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == emptyCard
-            ) {
+            if(ca.getCoordinates().getX()==0 || ca.getCoordinates().getX()==8 || ca.getCoordinates().getY()==0 || ca.getCoordinates().getY()==8){
 
-
-            } else {
-                return false;
             }
-        }
+            else{
+                if (board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == notUsableCard ||
+                        board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == notUsableCard ||
+                        board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == notUsableCard ||
+                        board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == notUsableCard ||
+                        board[ca.getCoordinates().getX() + 1][ca.getCoordinates().getY()] == emptyCard ||
+                        board[ca.getCoordinates().getX() - 1][ca.getCoordinates().getY()] == emptyCard ||
+                        board[ca.getCoordinates().getX()][ca.getCoordinates().getY() + 1] == emptyCard ||
+                        board[ca.getCoordinates().getX()][ca.getCoordinates().getY() - 1] == emptyCard
+                ) {
+
+
+                } else {
+                    return false;
+                }
+            }
+
+        }//Fine ciclo for
 
         return true;
     }

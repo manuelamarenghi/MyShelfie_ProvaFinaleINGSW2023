@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
+
     @Test
     public void checkZeroZeroHasCoordinatesNullTest(){
         Board board = new Board(4);
@@ -191,4 +192,17 @@ class BoardTest {
         b.takeCard(p);
         assertEquals(b.getCard(1,3).getColour() ,"" );
     }
+
+    @Test
+    public void checkAllow(){
+        Board b = new Board(4);
+        ArrayList<Card> testCards = new ArrayList<Card>();
+        Card test1 = new Card("Green" , new Position(0,3));
+        Card test2 = new Card("Green" , new Position(0,4));
+        testCards.add(test1);
+        testCards.add(test2);
+        assertTrue(b.allow(testCards));
+    }
+    //
+
 }
