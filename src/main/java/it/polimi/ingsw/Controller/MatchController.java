@@ -18,7 +18,7 @@ public class MatchController {
     private Integer numberOfPlayers;
     private ArrayList<String> players;
     private TurnController turnController;
-    private Map<Player, VirtualView> disconnectClients;
+    private ArrayList<Player> disconnectClients;
     private Map<String, VirtualView> connectClients;
     private boolean isStarted = false;
     ArrayList<Card> cardSelect;
@@ -28,7 +28,7 @@ public class MatchController {
     public MatchController(){
         this.match = new Match();
         this.connectClients = Collections.synchronizedMap(new HashMap<>());
-        this.disconnectClients=Collections.synchronizedMap(new HashMap<>());
+        this.disconnectClients = new ArrayList<>();
         players = new ArrayList<>();
     }
     public VirtualView getVirtualView(String nickname){
@@ -62,14 +62,14 @@ public class MatchController {
                 addPlayers(nickname);
                 virtualView.AcceptNewPlayer(nickname, false);
                 match.setPlayers(new Player(nickname));
-                match.getPlayerByNickname(nickname).setView(virtualView);
+                // match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
             } else if (numberOfPlayers != null) {
                 if (connectClients.size() < numberOfPlayers) {
                     addVirtualView(nickname, virtualView);
                     addPlayers(nickname);
                     match.setPlayers(new Player(nickname));
-                    match.getPlayerByNickname(nickname).setView(virtualView);
+                    //match.getPlayerByNickname(nickname).setView(virtualView);
                     for (VirtualView v : connectClients.values()) {
                         if (!v.equals(connectClients.get(nickname))) {
                             v.AcceptNewPlayer(nickname, false);
@@ -181,7 +181,7 @@ public class MatchController {
      */
     public void removeClient(String nickname) {
         Player p = match.getPlayerByNickname(nickname);
-        disconnectClients.put(p, connectClients.get(nickname));
+        disconnectClients.add(p);
         if (isStarted) {
             for (EffectiveCard e : match.getCommonCards()) {
                 e.removeObserver(connectClients.get(nickname));
@@ -193,23 +193,28 @@ public class MatchController {
             v.updateanotherplayerconnect(nickname, false, null);
         }
     }
+
     /**
      * PlayerBack() when a player that have been disconnected returns
+     *
      * @param name
      */
-    public void PlayerBack(String name){
-        Player player=null;
-        for(Player p: disconnectClients.keySet())
-        {
-            if(p.getNickname().equals(name)){  player=p;}
+    public void PlayerBack(String name, VirtualView virtualView) {
+        Player player = null;
+        for (Player p : disconnectClients) {
+            if (p.getNickname().equals(name)) {
+                player = p;
+            }
         }
-        connectClients.put(name,disconnectClients.get(player));
+        connectClients.put(name, virtualView);
+        virtualView.AcceptNewPlayer(name, true);
         if (isStarted) {
             for (EffectiveCard e : match.getCommonCards()) {
                 e.addObserver(connectClients.get(name));
             }
-            disconnectClients.get(player).updateboard(match.getBoard());
-            disconnectClients.get(player).sendCommonCard(match.getCommonCards());
+            connectClients.get(name).AcceptNewPlayer(name, true);
+            connectClients.get(name).updateboard(match.getBoard());
+            connectClients.get(name).sendCommonCard(match.getCommonCards());
         }
         match.getPlayers().add(player);
         disconnectClients.remove(player);

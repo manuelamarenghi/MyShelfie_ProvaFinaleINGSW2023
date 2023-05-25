@@ -1,7 +1,5 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.view.View;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,6 @@ public class Player implements Serializable {
     private boolean state;
     private PersonalGoalCard personalCard;
     private PlayerManager plManag;
-    private View view;
 
     public Player(String nickname){
         this.nickname = nickname;
@@ -71,13 +68,6 @@ public class Player implements Serializable {
 
     public PlayerManager getPlayerManager(){
         return plManag;
-    }
-
-    public View getView() {
-        return view;
-    }
-    public void setView(View view) {
-        this.view = view;
     }
 
     public void setLibrary(Library library) {

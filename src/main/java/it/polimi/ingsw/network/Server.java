@@ -38,7 +38,7 @@ public class Server {
             System.out.println(clientsconnected);
         }
         else{
-            matchController.PlayerBack(nickname);
+            matchController.PlayerBack(nickname, new VirtualView(clientHandler));
             clientsconnected.add(nickname);
             clientdisconnected.remove(nickname);
             clientHandlerMap.put(nickname, clientHandler);
