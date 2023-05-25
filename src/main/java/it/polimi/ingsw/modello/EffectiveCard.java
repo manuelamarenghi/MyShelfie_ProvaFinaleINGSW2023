@@ -36,6 +36,7 @@ public class EffectiveCard extends Observable implements ObserverCC, Serializabl
             player.setCommonGoalScore(allScores.get(0));
             notifyObserver(new Assigned_CC(allScores.get(0), player.getNickname(),this));
             allScores.remove(0);
+            player.removeObserver(this);
         }
         return commonCard.expired(player.getLibrary());
 
