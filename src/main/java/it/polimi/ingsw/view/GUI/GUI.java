@@ -138,7 +138,6 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onShowNewMyLibraryReq(Library l, String name) {
-        System.out.println("voglio vedere libreria di" + name);
         if (name.equals(nickname)) {
             livingController.getData().setLibrary(l);
             Platform.runLater(() -> livingController.createLibrary(l));
