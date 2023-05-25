@@ -472,7 +472,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (nickname.equals(this.nickname)) {
             out.println("Connected");
             this.nickname = nickname;
