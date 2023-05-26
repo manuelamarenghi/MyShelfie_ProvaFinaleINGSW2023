@@ -6,36 +6,38 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class EffectiveCardTest {
 @Test
     void checkIfWork(){
     CommonGoalCards cgc=new XGoalCard();
     EffectiveCard effectiveCard=new EffectiveCard(cgc);
-    ArrayList<Integer> al=new ArrayList<>();
+    ArrayList<Integer> al = new ArrayList<>();
     al.add(1);
     al.add(1);
     al.add(1);
     al.add(1);
     al.add(1);
     effectiveCard.setAllScores(al);
-    al=effectiveCard.getAllScores();
+    al = effectiveCard.getAllScores();
     al.add(1);
     assertNotSame(effectiveCard.getAllScores(), al);
-  }//
+}//
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         CommonGoalCards commonGoalCard = new Col2G();
         EffectiveCard effectiveCard = new EffectiveCard(commonGoalCard);
         effectiveCard.show();
     }
+
     @Test
-    public void checkDescription(){
+    public void checkDescription() {
         CommonGoalCards commonGoalCard = new Col2G();
         EffectiveCard effectiveCard = new EffectiveCard(commonGoalCard);
         String desc;
-        desc=effectiveCard.description();
+        desc = effectiveCard.description();
         System.out.println(desc);
     }
 }

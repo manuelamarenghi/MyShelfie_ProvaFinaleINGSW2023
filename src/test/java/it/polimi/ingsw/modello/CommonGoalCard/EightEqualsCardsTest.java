@@ -85,13 +85,15 @@ class EightEqualsCardsTest {
         library.getCardinPos(4, 0).setColour("white");
         Assertions.assertTrue(eightEC.check(library));
     }
+
     @Test
-    void checkIfClassWorksProperlyEmpty(){
+    void checkIfClassWorksProperlyEmpty() {
         Library library = new Library();
         Assertions.assertFalse(eightEC.check(library));
     }
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         eightEC.showCommonCard();
         System.out.println(eightEC.getDesc());
     }

@@ -150,8 +150,9 @@ class Col3GTest {
 
         assertFalse(col3G.expired(l));
     }
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         col3G.showCommonCard();
         System.out.println(col3G.getDesc());
     }

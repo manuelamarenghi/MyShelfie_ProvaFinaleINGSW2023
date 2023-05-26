@@ -18,7 +18,7 @@ public interface VMObserver {
 
     void onNotifyPlayerReconnectionReq(Player player);
 
-    void onNotifyPlayerConnectionReq(String nickname);
+    void onNotifyPlayerConnectionReq(String nickname, boolean you);
 
     void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score);
 
@@ -59,4 +59,6 @@ public interface VMObserver {
     void onNotifyMexInChat(String getnickname, String mex, String dest);
 
     void onPressedButtonChange(String scene);
+
+    void setNickname(String nickname);
 }

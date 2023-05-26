@@ -5,7 +5,6 @@ import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 
 import java.io.PrintStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +15,9 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     private final PrintStream out;
     private Thread inputThread;
-    private ClientController clientController;
+
     private String nickname;
+
 
     /**
      * Default constructor.
@@ -28,10 +28,25 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     public void init() {
-
+        String address;
         out.println("Welcome to My Shelfie Game!");
+        try {
+            do {
+                out.print("IP ADDRESS : ");
+                address = readLine();
+            } while (!validate(address));
+            String finalAddress = address;
+            this.notifyObserver(observerViewClient -> observerViewClient.setServerInfo(finalAddress));
 
-        askNickname();
+        } catch (ExecutionException e) {
+            System.out.println("WRONG_INPUT");
+        }
+    }
+
+    private static boolean validate(final String ip) {
+        if (ip.equals("localhost")) return true;
+        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+        return ip.matches(PATTERN);
     }
 
     /**
@@ -345,6 +360,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(finalDest, finalMessage));
 
     }
+
     @Override
     public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
         for (Receiving_Mex m : message) {
@@ -471,7 +487,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     @Override
-    public void onNotifyPlayerConnectionReq(String nickname) {
+    public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (nickname.equals(this.nickname)) {
             out.println("Connected");
             this.nickname = nickname;
@@ -659,6 +675,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     @Override
     public void onPressedButtonChange(String scene) {
+
+    }
+
+    @Override
+    public void setNickname(String nickname) {
 
     }
 }

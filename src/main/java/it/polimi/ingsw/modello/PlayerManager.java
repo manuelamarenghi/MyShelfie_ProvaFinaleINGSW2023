@@ -1,11 +1,8 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.network.observer.Observer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class PlayerManager implements Serializable {
     /**
@@ -15,9 +12,8 @@ public class PlayerManager implements Serializable {
     public void notifyAllObservers(Player player){
         ArrayList<ObserverCC> observers = new ArrayList<>(player.getObservers());
 
-        for(ObserverCC observer: observers)
-        {
-            if(observer.update(player))
+        for (ObserverCC observer : observers) {
+            if (observer.update(player))
                 player.removeObserver(observer);
         }
 

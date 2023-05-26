@@ -1,7 +1,5 @@
 package it.polimi.ingsw.modello;
 
-import it.polimi.ingsw.view.View;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
