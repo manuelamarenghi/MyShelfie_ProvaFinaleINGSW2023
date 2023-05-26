@@ -104,11 +104,6 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
-    public void handleColoumnRequest(int numberOfCards, String name) {
-        ColumnRequest message = new ColumnRequest(numberOfCards, name);
-        socketClient.sendMessage(message);
-    }
-
     @Override
     public void handleSeeBoard() {
         view.onShowNewBoardReq(virtualModel.getBoard());
@@ -122,14 +117,6 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void handleSeeCommonCard() {
         view.onNotifyCommonCards(virtualModel.getCommonGoalCards());
-    }
-
-    /**
-     * the method sends a message to socket client to calculate points for the player
-     */
-    public void handleFinalPoint(String name) {
-        FinalPointRequest message = new FinalPointRequest(name);
-        socketClient.sendMessage(message);
     }
 
     /**

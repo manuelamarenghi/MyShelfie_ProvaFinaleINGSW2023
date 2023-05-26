@@ -178,6 +178,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * one player finish library, notify all player last round
+     *
+     * @param p player finish
+     */
     private void firstFinish(Player p) {
         turnController.setLastRound(true);
         match.setFirstFinish(p);
@@ -278,7 +283,7 @@ public class MatchController {
 
         numberOfPlayers = numberPlayer.getNumb();
 
-        System.out.println("il numero di giocatori è " + numberPlayer.getNumb());
+        System.out.println("The number of players is " + numberPlayer.getNumb());
         for (VirtualView v : connectClients.values()) {
             v.sendNumbPlayer(numberOfPlayers);
         }

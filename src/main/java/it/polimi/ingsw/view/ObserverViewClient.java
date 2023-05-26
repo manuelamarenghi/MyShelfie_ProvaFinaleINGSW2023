@@ -21,10 +21,6 @@ public interface ObserverViewClient {
 
     void handlePutInLibrary(int x);
 
-    void handleColoumnRequest(int numberOfCards, String name);
-
-    void handleFinalPoint(String name);
-
     void handleDisconection(String name);
 
     void handleSeeBoard();
