@@ -69,11 +69,9 @@ public class ClientController implements ObserverViewClient {
      * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard(Position[] positions) {
-        System.out.println(positions[0].getX());
         int i;
         ArrayList<Card> cards = new ArrayList<>();
         for (i = 0; i < positions.length; i++) {
-            System.out.println(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates());
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
                 return;
