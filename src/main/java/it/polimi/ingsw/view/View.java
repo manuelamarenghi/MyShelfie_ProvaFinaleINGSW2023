@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.modello.*;
+import it.polimi.ingsw.modello.Board;
+import it.polimi.ingsw.modello.Library;
+import it.polimi.ingsw.modello.Match;
 import it.polimi.ingsw.network.observer.Observer;
 
 import java.io.Serializable;

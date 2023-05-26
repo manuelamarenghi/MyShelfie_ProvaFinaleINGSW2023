@@ -11,17 +11,25 @@ import java.io.IOException;
 
 public class ClientApp {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Match match = new Match();
-        SocketClient socketClient = new SocketClient("localhost", 16847);
-         socketClient.readMessage();
+        boolean cliParam = false; // default value
 
+        for (String arg : args) {
+            if (arg.equals("--cli") || arg.equals("-c")) {
+                cliParam = true;
+                break;
+            }
+        }
 
-        Cli cli = new Cli();
+        if (cliParam) {
 
-        ClientController clientController = new ClientController(cli, socketClient);
-         cli.addObserver(clientController);
-         cli.start();
-        //Application.launch(JavaFXApplication.class);
+            Cli cli = new Cli();
+
+            ClientController clientController = new ClientController(cli);
+            cli.addObserver(clientController);
+            cli.init();
+        } else {
+            Application.launch(JavaFXApplication.class);
+        }
     }
 }
 

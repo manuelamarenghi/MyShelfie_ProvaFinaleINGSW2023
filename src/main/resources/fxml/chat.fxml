@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="521.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/19"
-           fx:controller="it.polimi.ingsw.view.GUI.Scenes.ChatController">
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="stack" prefHeight="521.0" prefWidth="150.0"
+           xmlns="http://javafx.com/javafx/19">
    <children>
       <Group>
          <children>
@@ -24,8 +24,8 @@
                   </Text>
                   <TextArea fx:id="Chat" layoutX="299.0" layoutY="30.0" prefHeight="418.0" prefWidth="334.0"/>
                   <TextField fx:id="WriteArea" layoutX="299.0" layoutY="500.0" prefHeight="31.0" prefWidth="334.0"/>
-                  <Button fx:id="Send" layoutX="676.0" layoutY="488.0" mnemonicParsing="false"
-                          onMouseClicked="#pressedButton" prefHeight="42.0" prefWidth="65.0" text="Send"/>
+                  <Button fx:id="Send" layoutX="676.0" layoutY="488.0" mnemonicParsing="false" prefHeight="42.0"
+                          prefWidth="65.0" text="Send"/>
                   <ImageView fitHeight="314.0" fitWidth="280.0" layoutX="7.0" layoutY="320.0" pickOnBounds="true"
                              preserveRatio="true">
                      <image>
@@ -38,8 +38,7 @@
                         <Image url="@../images/Publisher_material/Cats.png"/>
                      </image>
                   </ImageView>
-                  <Button fx:id="Back" layoutX="803.0" layoutY="18.0" mnemonicParsing="false"
-                          onMouseClicked="#pressedBack" text="Back"/>
+                  <Button fx:id="Back" layoutX="803.0" layoutY="18.0" mnemonicParsing="false" text="Back"/>
                </children>
             </AnchorPane>
          </children>

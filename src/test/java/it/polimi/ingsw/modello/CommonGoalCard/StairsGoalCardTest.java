@@ -4,7 +4,8 @@ import it.polimi.ingsw.modello.CommonGoalCards;
 import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StairsGoalCardTest {
     CommonGoalCards stair=new StairsGoalCard();
@@ -208,13 +209,15 @@ class StairsGoalCardTest {
 
 
     }
+
     @Test
-    void checkIfExpired(){
+    void checkIfExpired() {
         Library library = new Library();
         assertFalse(stair.expired(library));
     }
+
     @Test
-    public void checkShow(){
+    public void checkShow() {
         stair.showCommonCard();
         System.out.println(stair.getDesc());
     }

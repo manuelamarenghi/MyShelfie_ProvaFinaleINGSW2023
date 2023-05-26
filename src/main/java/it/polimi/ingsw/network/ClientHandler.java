@@ -45,8 +45,8 @@ public class ClientHandler implements Runnable {
             System.out.println("Inizio a gestire messaggio");
             handleClientConnection();
         } catch (Exception e) {
-            //disconnect();
             System.out.println(e);
+            disconnect();
         }
     }
     /**
@@ -95,8 +95,8 @@ public class ClientHandler implements Runnable {
                         }
                     }
         } catch (ClassCastException | ClassNotFoundException | IOException e) {
-            //disconnect();
             System.out.println(e);
+            disconnect();
         }
     }
     /**
@@ -110,7 +110,7 @@ public class ClientHandler implements Runnable {
 
         } catch (IOException e) {
             System.out.println(e);
-            //disconnect();
+            disconnect();
         }
     }
     public boolean isConnected() {

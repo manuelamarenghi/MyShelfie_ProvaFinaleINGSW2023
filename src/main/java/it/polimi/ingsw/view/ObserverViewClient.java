@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public interface ObserverViewClient {
     void setServerInfo(String ipAddress);
+
     void handleEnterPlayer(String nickname);
 
     void handleCreateBoard(int numeberOfPlayers);
@@ -26,10 +27,11 @@ public interface ObserverViewClient {
 
     void handleDisconection(String name);
 
-     void handleSeeBoard();
+    void handleSeeBoard();
 
-     void handleSeePersonalCard();
-     void handleSeeCommonCard();
+    void handleSeePersonalCard();
+
+    void handleSeeCommonCard();
 
     void setNickname(String nickname);
 
@@ -38,5 +40,6 @@ public interface ObserverViewClient {
     void handleMexChat(ArrayList<String> dest, String message);
 
     void ChangeRoot(String scene);
+
     void ReadMessageChat();
 }
