@@ -2,7 +2,6 @@ package it.polimi.ingsw.modello;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PlayerManager implements Serializable {
     /**
@@ -17,49 +16,6 @@ public class PlayerManager implements Serializable {
                 player.removeObserver(observer);
         }
 
-    }
-
-    /**
-     * the method lets you select the cards from the board ant put them in the library
-     */
-    /*
-    public Card[] selectCard(Player player , Board board , ArrayList<Card> selectedCardsTemp ){
-        int l;
-        Position tempPosition;
-        Card [] selectedCards  = {};
-        if(!board.allow(selectedCardsTemp)){
-            return null;
-        }
-        else{
-            for(l=0 ; l<selectedCardsTemp.size() ; l++){
-                selectedCards[l]=selectedCardsTemp.get(l);
-                tempPosition=new Position(selectedCardsTemp.get(l).getCoordinates().getX() , selectedCardsTemp.get(l).getCoordinates().getY());
-                board.takeCard(tempPosition);
-            }
-        }
-        return selectedCards;
-        //Da sistemare i test qunado il metodo take action in library e quando il metodo turn in library saranno aggiornati
-    }
-    /*
-     */
-    /**
-     *Puts the card in the library
-     */
-    public void putCard ( Card[] selectedCards , Player player , int coloumn){
-        int counter = 0 ;
-        int i ;
-        int [] freeColoumns ={};
-        ArrayList<Card> listOfCards = new ArrayList<Card>(Arrays.asList(selectedCards));
-        freeColoumns=player.getLibrary().showColumn(selectedCards.length);
-        for(i=0 ; i< freeColoumns.length ; i++){
-            if(coloumn==freeColoumns[i]){
-                counter++;
-            }
-        }
-        if(counter!=1){
-            return ;
-        }
-        player.getLibrary().setColumn( listOfCards , selectedCards.length);
     }
 
     /**

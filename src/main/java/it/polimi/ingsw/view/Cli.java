@@ -26,11 +26,21 @@ public class Cli extends ObservableViewClient implements ViewClient {
         //this.clientController=clientController;
     }
 
+    /**
+     * check ip address
+     *
+     * @param ip ip address server
+     * @return true: valide ip address
+     */
     private static boolean validate(final String ip) {
         if (ip.equals("localhost")) return true;
         String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
         return ip.matches(PATTERN);
     }
+
+    /**
+     * The method initial game
+     */
 
     public void init() {
         String address;
@@ -108,11 +118,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         return number;
     }
 
-    public void start() throws InterruptedException {
-        out.println("Welcome to My shelfie game");
-        askNickname();
-        Thread.sleep(10000);
-    }
 
     /**
      * The method asks to the user the nickname it wants to use
@@ -201,10 +206,10 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     * The method returns the coloumns in which the card can be put
+     * The method returns the columns in which the card can be put
      *
-     * @param x
-     * @param library
+     * @param x       possible columns
+     * @param library player library
      */
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
@@ -389,7 +394,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
      * The method asks the player if it wants to get dissconnected or not
      */
 
-
     @Override
     public void askForDissconection() {
         out.println("Are you sure that you want to dissconnect?");
@@ -407,26 +411,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
         }
-    }
-
-    /**
-     * The method sends a request to get the coloumns where it can put its cards
-     */
-
-    public void requestForColumns() {
-        int numberOfCards;
-        //Accedere al metodo nella virtual model per vedere se le carte richieste sono valide e avere il loro numero
-        //clientController.handleColoumnRequest(numberOfCards , nickname);
-    }
-
-    /**
-     * The method sends a request to get the final points
-     */
-    public void requestForFinalPoint() {
-        out.println("The Final points for every player are the following");
-        this.notifyObserver(observerViewClient -> observerViewClient.handleFinalPoint(nickname));
-        //clientController.handleFinalPoint(nickname);
-        //Fare la richiesta di show final point al virtual model
     }
 
     /**
@@ -472,7 +456,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has left the game");
+        out.println("Player " + player.getNickname() + "has left the game");
     }
 
     /**
@@ -482,7 +466,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     //@Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has returned to the game");
+        out.println("Player " + player.getNickname() + "has returned to the game");
     }
 
     @Override
@@ -492,7 +476,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             this.nickname = nickname;
             notifyObserver(obs -> obs.setNickname(nickname));
         } else {
-            out.println("The player" + nickname + " has entered in the game");
+            out.println("The player " + nickname + " has entered in the game");
         }
     }
 
@@ -529,7 +513,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
-        out.println("Le carte selezionate non possono essere estratte, estrarre altre carte");
+        out.println("Selected cards cannot be selected, choose other cards");
         askCardsToTakeFromBoard();
 
     }
