@@ -67,14 +67,12 @@ public class MatchController {
                 addPlayers(nickname);
                 virtualView.AcceptNewPlayer(nickname, false);
                 match.setPlayers(new Player(nickname));
-                // match.getPlayerByNickname(nickname).setView(virtualView);
                 connectClients.get(nickname).askNumbPlayer();
             } else if (numberOfPlayers != null) {
                 if (connectClients.size() < numberOfPlayers) {
                     addVirtualView(nickname, virtualView);
                     addPlayers(nickname);
                     match.setPlayers(new Player(nickname));
-                    //match.getPlayerByNickname(nickname).setView(virtualView);
                     for (VirtualView v : connectClients.values()) {
                         if (!v.equals(connectClients.get(nickname))) {
                             v.AcceptNewPlayer(nickname, false);
@@ -195,19 +193,20 @@ public class MatchController {
      */
     public void removeClient(String nickname) {
         Player p = match.getPlayerByNickname(nickname);
-        disconnectClients.add(p);
         if (isStarted) {
+            disconnectClients.add(p);
             for (EffectiveCard e : match.getCommonCards()) {
                 e.removeObserver(connectClients.get(nickname));
             }
+            if (turnController.getActivePlayer().equals(nickname))
+                nextPlayer();
         }
         match.getPlayers().remove(p);
         connectClients.remove(nickname);
+        players.remove(nickname);
         for (VirtualView v : connectClients.values()) {
             v.updateanotherplayerconnect(nickname, false, null);
         }
-        if(turnController.getActivePlayer().equals(nickname))
-            nextPlayer();
     }
 
     /**
@@ -224,27 +223,31 @@ public class MatchController {
         }
         connectClients.put(name, virtualView);
         virtualView.AcceptNewPlayer(name, true);
-        if (isStarted) {
-            for (EffectiveCard e : match.getCommonCards()) {
-                e.addObserver(connectClients.get(name));
-            }
-            connectClients.get(name).AcceptNewPlayer(name, true);
-            connectClients.get(name).updateboard(match.getBoard());
-            connectClients.get(name).sendCommonCard(match.getCommonCards());
-        }
+
         match.getPlayers().add(player);
         disconnectClients.remove(player);
-        for (VirtualView v : connectClients.values()) {
-            if (v.equals(connectClients.get(player.getNickname()))) {
-                for (Player p : match.getPlayers()) {
-                    v.update(new SendingPlayer(p));
+        if (isStarted) {
+            for (VirtualView v : connectClients.values()) {
+                if (v.equals(connectClients.get(player.getNickname()))) {
+                    for (EffectiveCard e : match.getCommonCards()) {
+                        e.addObserver(connectClients.get(name));
+                    }
+                    v.sendAllPlayers(players);
+                    connectClients.get(name).updateboard(match.getBoard());
+                    connectClients.get(name).sendCommonCard(match.getCommonCards());
+                    v.sendPersonalCard(player.getPersonalCard());
+                    for (Player p : match.getPlayers()) {
+                        v.updatelibrary(p.getLibrary(), p.getNickname());
+                    }
+
+                } else {
+                    v.updateanotherplayerconnect(name, true, player);
                 }
-            } else {
-                v.updateanotherplayerconnect(name, true, player);
             }
         }
     }
-    //------------------------On message received-------------------------------------------
+
+//------------------------On message received-------------------------------------------
 
     /**
      * received generic message

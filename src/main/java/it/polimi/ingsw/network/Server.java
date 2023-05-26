@@ -37,7 +37,7 @@ public class Server {
             }}
             System.out.println(clientsconnected);
         }
-        else{
+        else {
             matchController.PlayerBack(nickname, new VirtualView(clientHandler));
             clientsconnected.add(nickname);
             clientdisconnected.remove(nickname);
@@ -49,11 +49,13 @@ public class Server {
      * removeClient() when a client leave the game
      */
     public void removeClient(String nickname){
-        disconnettedclientMap.put(nickname,clientHandlerMap.get(nickname));
+        clientHandlerMap.get(nickname).sendMessage(new Disconnection_Answer(nickname));
+        if(matchController.getIsStarted() == true) {
+            disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
+            clientdisconnected.add(nickname);
+        }
         clientHandlerMap.remove(nickname);
-        clientdisconnected.add(nickname);
         matchController.removeClient(nickname);
-        disconnettedclientMap.get(nickname).sendMessage(new Disconnection_Answer(nickname));
     }
     /**
      * HandleDisconnection() when the connection ends
@@ -67,9 +69,11 @@ public class Server {
             }
         }
         System.out.println("starting disconnection");
-        clientdisconnected.add(nickname);
+        if(matchController.getIsStarted() == true) {
+            clientdisconnected.add(nickname);
+            disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
+        }
         clientsconnected.remove(nickname);
-        disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
         clientHandlerMap.remove(nickname);
         matchController.removeClient(nickname);
         System.out.println(clientsconnected);
