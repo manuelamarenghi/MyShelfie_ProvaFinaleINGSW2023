@@ -458,7 +458,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has left the game");
+        out.println("Player " + player.getNickname() + "has left the game");
     }
 
     /**
@@ -468,7 +468,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
      */
     //@Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        out.println("Player" + player.getNickname() + "has returned to the game");
+        out.println("Player " + player.getNickname() + "has returned to the game");
     }
 
     @Override
@@ -478,7 +478,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
             this.nickname = nickname;
             notifyObserver(obs -> obs.setNickname(nickname));
         } else {
-            out.println("The player" + nickname + " has entered in the game");
+            out.println("The player " + nickname + " has entered in the game");
         }
     }
 
