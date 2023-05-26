@@ -29,7 +29,7 @@ public class ConnectSceneController extends ObservableViewClient implements Gene
     public void onClick(ActionEvent actionEvent) {
         if (!validate(ip_txb.getText().trim())) ip_txt.setText("Inserire un ip valido:");
         else {
-            new Thread(() ->this.notifyObserver(obs -> obs.setServerInfo(ip_txb.getText()))).start();
+            this.notifyObserver(obs -> obs.setServerInfo(ip_txb.getText()));
 
         }
         ip_txb.clear();
