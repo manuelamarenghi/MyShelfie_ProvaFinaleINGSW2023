@@ -12,7 +12,11 @@ public class DoubleCommG implements CommonGoalCards, Serializable {
     public int getNumberCard() {
         return numberCard;
     }
-
+    /**
+     * Checks if the library of the player has completed the goal or not
+     * @param library
+     * @return
+     */
     @Override
     public boolean check(Library library) {
 
@@ -27,12 +31,18 @@ public class DoubleCommG implements CommonGoalCards, Serializable {
             return true;
         else return false;
     }
-
+    /**
+     * The method checks if the goal is still achieveable
+     * @param library
+     * @return
+     */
     @Override
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method shows the goal
+     */
     @Override
     public void showCommonCard() {
 
@@ -52,7 +62,10 @@ public class DoubleCommG implements CommonGoalCards, Serializable {
         System.out.println("This is an example of a library that respects this goal");
         library.showLibrary();
     }
-
+    /**
+     * the method returns the description of the card
+     * @return
+     */
     @Override
     public String getDesc() {
         return "Six groups each containing at least 2 tiles of the same type (not necessarily in the depicted shape). \n" +

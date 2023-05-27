@@ -23,6 +23,12 @@ public class JavaFXApplication extends Application {
         launch(args);
     }
 
+    /**
+     * A method to start the GUI interface
+     * @param primaryStage
+     * @throws IllegalArgumentException
+     * @throws IOException
+     */
     @Override
     public void start(Stage primaryStage) throws IllegalArgumentException, IOException {
         LivingRoomController living = new LivingRoomController();

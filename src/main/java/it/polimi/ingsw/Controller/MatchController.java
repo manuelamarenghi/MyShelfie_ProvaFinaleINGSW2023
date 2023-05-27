@@ -290,6 +290,12 @@ public class MatchController {
 
     }
 
+    /**
+     * A handler method that gets called when a player decides to pick some card from the board and updates the board
+     * and the library
+     * @param m
+     */
+
     public void handler(PlayerAction m) {
         cardSelect = m.getCards();
         int column = m.getColumn();
@@ -327,6 +333,12 @@ public class MatchController {
     }
 
     //----------------------VIRTUALVIEW METHODS----------------
+
+    /**
+     * A method to add the virtualView
+     * @param nickname
+     * @param virtualView
+     */
     public void addVirtualView(String nickname, VirtualView virtualView) {
         connectClients.put(nickname, virtualView);
         match.addObserver(virtualView);

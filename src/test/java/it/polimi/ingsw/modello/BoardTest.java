@@ -184,26 +184,97 @@ class BoardTest {
         cards.add(card3);
         assertFalse(board.allow(cards));
     }
-
     @Test
-    public void checkTakeCard() {
+    public void checkTakeCard(){
         Board b = new Board(2);
-        Position p = new Position(1, 3);
+        Position p = new Position(1,3);
         b.fill(0);
         b.takeCard(p);
-        assertEquals(b.getCard(1, 3).getColour(), "");
+        assertEquals(b.getCard(1,3).getColour() ,"" );
     }
 
     @Test
-    public void checkAllow() {
+    public void checkAllow(){
         Board b = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
-        Card test1 = new Card("Green", new Position(0, 3));
-        Card test2 = new Card("Green", new Position(0, 4));
+        Card test1 = new Card("Green" , new Position(0,3));
+        Card test2 = new Card("Green" , new Position(0,4));
         testCards.add(test1);
         testCards.add(test2);
         assertTrue(b.allow(testCards));
     }
-    //
+    @Test
+    public void checkAllow2(){
+        Board board = new Board(4);
+        board.fill(0);
+        Card card1, card2, card3;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        card1 = board.getCard(5, 1);
+        card2 = board.getCard(4, 2);
+        cards.add(card1);
+        cards.add(card2);
+        assertFalse(board.allow(cards));
+    }
+    @Test
+    public void checkAllow3(){
+        Board b = new Board(4);
+        ArrayList<Card> testCards = new ArrayList<Card>();
+        Card test1 = new Card("Green" , new Position(4,2));
+        Card test2 = new Card("Green" , new Position(5,1));
+        testCards.add(test1);
+        testCards.add(test2);
+        assertFalse(b.allow(testCards));
+    }
+    @Test
+    public void checkAllow4(){
+        Board board = new Board(4);
+        board.fill(0);
+        Card card1, card2, card3;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        card1 = board.getCard(4, 6);
+        card2 = board.getCard(4, 7);
+        card3 = board.getCard(3 , 8);
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        assertFalse(board.allow(cards));
+    }
+    @Test
+    public void checkAllow5(){
+        Board board = new Board(2);
+        board.fill(0);
+        Card card1, card2, card3 , card4 , card5;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        card1 = board.getCard(5, 2);
+        card2 = board.getCard(6, 3);
+        card3 = board.getCard(6, 4);
+        //card4 = board.getCard(7,4);
+        //card5 = board.getCard(7,5);
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        board.takeCard(new Position(7,4));
+        board.takeCard(new Position(7,5));
+        assertFalse(board.allow(cards));
+    }
+    @Test
+    public void checkAllow6(){
+        Board board = new Board(2);
+        board.fill(0);
+        Card card1, card2, card3 , card4 , card5;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        card1 = board.getCard(6, 3);
+        card2 = board.getCard(6, 4);
+        card3 = board.getCard(6, 5);
+        //card4 = board.getCard(7,4);
+        //card5 = board.getCard(7,5);
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        board.takeCard(new Position(7,4));
+        board.takeCard(new Position(7,5));
+        assertTrue(board.allow(cards));
+    }
+
 
 }

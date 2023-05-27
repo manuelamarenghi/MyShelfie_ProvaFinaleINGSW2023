@@ -19,7 +19,6 @@ public class VirtualModel extends VMObservable {
     private ArrayList<Card> cardSelect;
     private ArrayList<Receiving_Mex> chatMessage;
 
-
     public VirtualModel() {
         this.players = new ArrayList<>();
         this.me = new Player("missing_nickname");
@@ -102,10 +101,18 @@ public class VirtualModel extends VMObservable {
         this.players.removeIf(player -> player.getNickname().equals(nickname));
     }
 
+    /**
+     * A method to update the board
+     * @param board
+     */
     public void updateBoard(Board board) {
         this.board = board;
     }
 
+    /**
+     * A method to update the chair
+     * @param nickname
+     */
     public void updateChair(String nickname) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) this.chair = player;
@@ -144,6 +151,9 @@ public class VirtualModel extends VMObservable {
         this.me = new Player(me);
     }
 
+    /**
+     * A method to update all plyers' common goal score
+     */
     public void updateCommonScore(String nickname, int score) {
         for (Player player : this.players) {
             if (player.getNickname().equals(nickname)) player.setCommonGoalScore(score);

@@ -99,6 +99,9 @@ public class Line2G implements CommonGoalCards, Serializable {
         }
         return false;
     }
+    /**
+     *the method returns the description of the card
+     */
 
     @Override
     public String getDesc() {
@@ -113,17 +116,17 @@ public class Line2G implements CommonGoalCards, Serializable {
     @Override
     public void showCommonCard() {
         Library l = new Library();
-        l.getCardinPos(0, 0).setColour("green");
-        l.getCardinPos(1, 0).setColour("yellow");
-        l.getCardinPos(2, 0).setColour("white");
-        l.getCardinPos(3, 0).setColour("lightBlue");
-        l.getCardinPos(4, 0).setColour("blue");
+        l.getCardinPos(5, 0).setColour("green");
+        l.getCardinPos(5, 1).setColour("yellow");
+        l.getCardinPos(5, 2).setColour("white");
+        l.getCardinPos(5, 3).setColour("blue");
+        l.getCardinPos(5, 4).setColour("lightBlue");
 
-        l.getCardinPos(0, 2).setColour("green");
-        l.getCardinPos(1, 2).setColour("yellow");
-        l.getCardinPos(2, 2).setColour("white");
-        l.getCardinPos(3, 2).setColour("lightBlue");
-        l.getCardinPos(4, 2).setColour("blue");
+        l.getCardinPos(4, 0).setColour("green");
+        l.getCardinPos(4, 1).setColour("yellow");
+        l.getCardinPos(4, 2).setColour("white");
+        l.getCardinPos(4, 3).setColour("blue");
+        l.getCardinPos(4, 4).setColour("lightBlue");
         System.out.println("This is an example of a library that respects this goal");
         l.showLibrary();
     }
