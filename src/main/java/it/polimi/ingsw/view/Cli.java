@@ -365,6 +365,13 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A method to read the messages from the chat
+     *
+     * @param message
+     * @param players
+     */
+
     @Override
     public void readMessageChat(ArrayList<Receiving_Mex> message, ArrayList<String> players) {
         for (Receiving_Mex m : message) {
@@ -468,6 +475,13 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void onNotifyPlayerReconnectionReq(Player player) {
         out.println("Player " + player.getNickname() + "has returned to the game");
     }
+
+    /**
+     * A notify method when a player is connected to the game
+     *
+     * @param nickname
+     * @param you
+     */
 
     @Override
     public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
@@ -586,7 +600,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     *
+     * A notify method , to choose another nickname
      */
     @Override
     public void onNotifyNewNicknameReq() {
@@ -594,6 +608,12 @@ public class Cli extends ObservableViewClient implements ViewClient {
         askNickname();
     }
 
+    /**
+     * A notify method to notify the player that it's his turn
+     *
+     * @param board
+     * @param library
+     */
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         out.println(nickname + ": it's your turn");
@@ -605,16 +625,31 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A method to notify the player that his turn has ended
+     *
+     * @param current_player
+     */
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
         out.println("Your turn is over , now it is " + current_player + "'s turn");
     }
 
+    /**
+     * A notify method to tell the player the player's name who is playing right  now
+     *
+     * @param current_player
+     */
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
         out.println(current_player + " is playing right now .");
     }
 
+    /**
+     * A notify mehod to show the personal goal card
+     *
+     * @param personalGoalCard
+     */
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         personalGoalCard.showPersonalGoalCard();
@@ -642,6 +677,11 @@ public class Cli extends ObservableViewClient implements ViewClient {
         System.out.println("The players in the match: " + players.toString());
     }
 
+    /**
+     * A notify method to see and get the description of the common goal cards
+     *
+     * @param cards
+     */
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         for (EffectiveCard effectiveCard : cards) {

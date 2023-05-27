@@ -106,6 +106,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         cardtaken = x;
     }
 
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         if (stored.getBoard() != null) {
             createBoard(stored.getBoard());
@@ -157,6 +160,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         setTiles();
     }
 
+    /**
+     * A method to set the tiles to the corresponding images
+     */
     public void setTiles() {
         //InputStream is;
         //tiles=Collections.synchronizedMap(new HashMap<>())
@@ -192,6 +198,10 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
         tiles.put("blue", imageB);
     }
+
+    /**
+     * A method to start the game
+     */
     public void start() {
         setTiles();
         Token1set = false;
@@ -199,13 +209,18 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         index = 0;
     }
 
+    /**
+     * A method to create the board
+     *
+     * @param b
+     */
     public void createBoard(Board b) {
         Card[][] cards = b.getBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (cards[i][j] != null) {
                     String color = cards[i][j].getColour();
-                    if (color!=null && !color.equals("")) {
+                    if (color != null && !color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView((this.tiles.get(color))[x]);
                         image.setFitWidth(32);
@@ -236,6 +251,11 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * A metho to create the library
+     *
+     * @param l
+     */
     public void createLibrary(Library l) {
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
@@ -258,10 +278,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * A method to take the cards
+     */
     public void TakeCards() {
         ableSend = 2;
     }
 
+    /**
+     * A method to remove the highlights
+     */
     public void removeHighlights() {
         ObservableList<Node> children = gameBoard.getChildren();
         for (Node n : children) {
@@ -270,33 +296,69 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * A method to set the personal goal card
+     *
+     * @param x
+     */
     public void setPP(int x) {
         stored.setPersonal(x);
         String c = String.valueOf(x);
-        String name = "/images/personal_goal_cards/Personal_Goals"+c + ".png";
+        String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
         Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         PersonalCard.setImage(image);
     }
 
+    /**
+     * A button to see the common goal card 1
+     *
+     * @param mouseEvent
+     */
     public void pressedCommon1(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.ChangeRoot("common1"));
     }
 
+    /**
+     * A button to see the common goal card 2
+     *
+     * @param mouseEvent
+     */
     public void pressedCommon2(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.ChangeRoot("common2"));
     }
 
+    /**
+     * A button to exit
+     *
+     * @param mouseEvent
+     */
     public void pressedExit(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.handleDisconection(null));
     }
 
+    /**
+     * A button to see the libraries
+     *
+     * @param mouseEvent
+     */
     public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
         this.notifyObserver(observers -> observers.ChangeRoot("library"));
     }
+
+    /**
+     * A button to see the chat
+     *
+     * @param mouseEvent
+     */
     public void pressedChat(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("chat"));
     }
 
+    /**
+     * A button to send the text written
+     *
+     * @param actionEvent
+     */
     public void pressedSend(MouseEvent actionEvent) {
         int n;
         if (SendbuttonAble) {
@@ -337,6 +399,11 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         }
     }
 
+    /**
+     * A method to set the token for the common goal card
+     *
+     * @param x
+     */
     public void setTokenCommon(int x) {
         String name = "/images/scoring_tokens/scoring_" + x + ".png";
         InputStream is;
@@ -355,6 +422,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         return Token1set;
     }
 
+    /**
+     * A method to set the chair to tha player selected
+     */
     public void setChair() {
         String name = "/images/misc/firstplayertoken.png";
         InputStream is;
@@ -364,6 +434,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         Chair.setImage(image);
     }
 
+    /**
+     * A method to set the player who finished the game first
+     */
     public void setFirstFinished() {
         String name = "/images/scoring_tokens/end_game.png";
         InputStream is;
@@ -373,6 +446,11 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         FirstFinished.setImage(image);
     }
 
+    /**
+     * A method to show the coloumns where the player can put the cards
+     *
+     * @param x
+     */
     public void ShowColumn(int[] x) {
         ImageView[] ViewScatola = {Col0, Col1, Col2, Col3, Col4};
         String name = "/images/Publisher_material/arrow.png";
@@ -390,6 +468,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         columnforthisturn = x;
     }
 
+    /**
+     * A metho to check if the coloumns are valid or not
+     */
     public boolean ValidColumn(int[] x, int y) {
         for (int i = 0; i < x.length; i++) {
             if (x[i] == y) {

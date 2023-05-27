@@ -29,6 +29,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
         common2 = new CG_twoController();
     }
 
+    /**
+     * A method that shows the living room when the game starts
+     *
+     * @param s
+     */
     @Override
     public void onShowReq(String s) {
         System.out.println(s);
@@ -49,6 +54,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A method for the number of players request
+     */
     @Override
     public void onNumbPlayerReq() {
         LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
@@ -56,30 +64,54 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A method that shows the new board
+     *
+     * @param board
+     */
     @Override
     public void onShowNewBoardReq(Board board) {
         livingController.getData().setBoard(board);
         Platform.runLater(() -> livingController.createBoard(board));
     }
 
+    /**
+     * A method to use when the number of players is already full
+     */
     @Override
     public void onNotifyGameFullReq() {
         LoginSceneController login = new LoginSceneController();
         Platform.runLater(() -> login.GameFull());
     }
 
+    /**
+     * A method to notify when a player has left the game
+     *
+     * @param player
+     */
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
         Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
         Platform.runLater(() -> livingController.appendText(player.getNickname() + " has left the game\n"));
     }
 
+    /**
+     * A method to notify when the player is back in the game after the dissconnection
+     *
+     * @param player
+     */
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
         Platform.runLater(() -> chatController.addPlayer(player.getNickname()));
         Platform.runLater(() -> livingController.appendText(player.getNickname() + " is back in the game\n"));
     }
 
+    /**
+     * A notify method when a player is connected to the game
+     *
+     * @param nickname
+     * @param you
+     */
     @Override
     public void onNotifyPlayerConnectionReq(String nickname, boolean you) {
         if (you) {
@@ -90,6 +122,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
         }
     }
 
+    /**
+     * A mathod to notify when the common goal has been completed
+     *
+     * @param nickname
+     * @param completedEffectiveCard
+     * @param score
+     */
     @Override
     public void onNotifyReachedCommonGoalCardReq(String nickname, EffectiveCard completedEffectiveCard, int score) {
         if (this.nickname.equals(nickname)) {
@@ -104,17 +143,32 @@ public class GUI extends ObservableViewClient implements ViewClient {
         }
     }
 
+    /**
+     * A notify method to notify the name of the player to who the chair has been assigned
+     *
+     * @param nickname
+     */
     @Override
     public void onNotifyChairAssignedReq(String nickname) {
         livingController.getData().setChair(true);
         Platform.runLater(() -> livingController.setChair());
     }
 
+    /**
+     * A notify method to show the possible coloumns where the cards can be put
+     *
+     * @param x
+     * @param cards
+     * @param library
+     */
     @Override
     public void onShowPossibleColumnReq(int[] x, ArrayList<Card> cards, Library library) {
         Platform.runLater(() -> livingController.ShowColumn(x));
     }
 
+    /**
+     * A method to notify the player that the cards are not adjacent
+     */
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
         Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid\n"));
@@ -127,17 +181,32 @@ public class GUI extends ObservableViewClient implements ViewClient {
         // vuoto
     }
 
+    /**
+     * A method to notify the player who has finished the game first
+     *
+     * @param player
+     */
     @Override
     public void onNotifyPlayerFinishedFirstReq(Player player) {
         livingController.getData().setFirstFinish(true);
         Platform.runLater(() -> livingController.setFirstFinished());
     }
 
+    /**
+     * A method to notify when the match has started
+     *
+     * @param players
+     */
     @Override
     public void onNotifyMatchHasStartedReq(ArrayList<Player> players) {
         Platform.runLater(() -> SceneController.setRootPane(livingController, "living_room.fxml"));
     }
 
+    /**
+     * A method to notify the final score board of the game
+     *
+     * @param point
+     */
     @Override
     public void onShowFinalScoreBoardReq(HashMap<String, Integer> point) {
         FinalController finalcontr = new FinalController();
@@ -146,6 +215,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
         Platform.runLater(() -> finalcontr.SetClassification(point));
     }
 
+    /**
+     * A method to create and show a new library for the player
+     *
+     * @param l
+     * @param name
+     */
     @Override
     public void onShowNewMyLibraryReq(Library l, String name) {
         if (name.equals(nickname)) {
@@ -156,18 +231,30 @@ public class GUI extends ObservableViewClient implements ViewClient {
         }
     }
 
+    /**
+     * A method to notify when a player decides to dissconnect
+     */
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
         Platform.runLater(() -> livingController.setTextArea("Disconnection accepted.Bye"));
 
     }
 
+    /**
+     * A method to notify the player that it has to select an another nickname
+     */
     @Override
     public void onNotifyNewNicknameReq() {
         LoginSceneController login = (LoginSceneController) SceneController.getActiveController();
         Platform.runLater(() -> login.TryAgainNick());
     }
 
+    /**
+     * A method to notify the player that it's their turn
+     *
+     * @param board
+     * @param library
+     */
     @Override
     public void onNotifyIsYourTurnReq(Board board, Library library) {
         boolean yourTurn = true;
@@ -178,6 +265,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
         askCardsToTakeFromBoard();
     }
 
+    /**
+     * A method to notify the player that their turn has ended
+     *
+     * @param current_player
+     */
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
         boolean yourTurn = false;
@@ -185,22 +277,42 @@ public class GUI extends ObservableViewClient implements ViewClient {
         Platform.runLater(() -> livingController.setTextArea("Your turn is over\n"));
     }
 
+    /**
+     * A method to notify the player which player is playing right now
+     *
+     * @param current_player
+     */
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
         Platform.runLater(() -> livingController.setTextArea(current_player + " is playing\n"));
     }
 
+    /**
+     * A method to notify the player about their personal goal card
+     *
+     * @param personalGoalCard
+     */
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         Platform.runLater(() -> livingController.setPP(personalGoalCard.getNumn_png()));
     }
 
+    /**
+     * A method to Ask the player their nickname
+     *
+     * @throws InterruptedException
+     */
     @Override
     public void NotifyaskNicknameReq() throws InterruptedException {
         LoginSceneController login = new LoginSceneController();
         Platform.runLater(() -> login.Connect_before_first());
     }
 
+    /**
+     * The method prints the players of the match
+     *
+     * @param players
+     */
     @Override
     public void onNotifyAllPlayerReq(ArrayList<String> players) {
         chatController.addAllObservers(observers);
@@ -209,6 +321,11 @@ public class GUI extends ObservableViewClient implements ViewClient {
         Platform.runLater(() -> chatController.setChats(players));
     }
 
+    /**
+     * A notify method to see and get the description of the common goal cards
+     *
+     * @param cards
+     */
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         common2.addAllObservers(observers);
@@ -217,10 +334,23 @@ public class GUI extends ObservableViewClient implements ViewClient {
         Platform.runLater(() -> common2.setImageAndText(cards[1].getCommonCard().getNumberCard(), cards[1].getCommonCard().getDesc()));
     }
 
+    /**
+     * A method to send the message recived int he chat to destination
+     *
+     * @param getnickname
+     * @param mex
+     * @param dest
+     */
     @Override
     public void onNotifyMexInChat(String getnickname, String mex, String dest) {
         Platform.runLater(() -> chatController.arrivedMex(getnickname, mex, dest));
     }
+
+    /**
+     * A methos to set the scene for the GUI
+     *
+     * @param scene
+     */
     @Override
     public void onPressedButtonChange(String scene) {
         switch (scene) {
@@ -245,12 +375,20 @@ public class GUI extends ObservableViewClient implements ViewClient {
         }
     }
 
+    /**
+     * A method to set the player's nickname
+     *
+     * @param nickname
+     */
     @Override
     public void setNickname(String nickname) {
         this.nickname = nickname;
         chatController.setYourNickname(nickname);
     }
 
+    /**
+     * A method to ask the player thier nickname
+     */
     @Override
     public void askNickname() {
         Platform.runLater(() -> SceneController.setRootPane(observers, "login_scene.fxml"));
@@ -261,6 +399,9 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     }
 
+    /**
+     * A metho to ask the player to take card from the board
+     */
     @Override
     public void askCardsToTakeFromBoard() {
         Platform.runLater(() -> livingController.TakeCards());

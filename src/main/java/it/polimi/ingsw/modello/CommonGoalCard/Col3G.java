@@ -144,6 +144,11 @@ public class Col3G implements CommonGoalCards, Serializable {
         l.showLibrary();
     }
 
+    /**
+     * Returns the description of the card
+     *
+     * @return
+     */
     @Override
     public String getDesc() {
         return "Three columns each formed by 6 tiles of maximum three different types.\n" +

@@ -7,6 +7,10 @@ import it.polimi.ingsw.modello.Card;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Class to send a message to put the selected cards in a coloumn of the library
+ */
+
 public class PlayerAction extends Message implements Serializable {
     private ArrayList<Card> cards = new ArrayList<>();
     private int column;

@@ -34,6 +34,9 @@ public class LibrariesController extends ObservableViewClient implements Generic
     private Button OKButton = new Button();
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
 
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         Stackpane = new StackPane();
         Backgroundlibrary.toBack();
@@ -42,6 +45,9 @@ public class LibrariesController extends ObservableViewClient implements Generic
         setTiles();
     }
 
+    /**
+     * A method to set the tiles with the corresponding images
+     */
     public void setTiles() {
         InputStream is;
         is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
@@ -77,12 +83,22 @@ public class LibrariesController extends ObservableViewClient implements Generic
         tiles.put("blue", imageB);
     }
 
+    /**
+     * An ok button when the player types another player's name to see their library
+     *
+     * @param mouseEvent
+     */
     public void pressedOK(MouseEvent mouseEvent) {
         String nickname = TextFieldd.getText();
         TextFieldd.clear();
         this.notifyObserver(obs -> obs.SeeSomeoneLibrary(nickname));
     }
 
+    /**
+     * A method to create a library
+     *
+     * @param l
+     */
     public void createLibrary(Library l) {
         Card[][] cards = l.getLibrary();
         int r = 0, c = 0;
@@ -109,6 +125,11 @@ public class LibrariesController extends ObservableViewClient implements Generic
         }
     }
 
+    /**
+     * A metod that brings you back to the living room scene
+     *
+     * @param mouseEvent
+     */
     public void pressedBack(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }
