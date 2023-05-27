@@ -25,7 +25,6 @@ public interface CommonGoalCards extends Serializable {
 
     /**
      * getDesc() can read the common goal card description
-     *
      * @return
      */
     public String getDesc();

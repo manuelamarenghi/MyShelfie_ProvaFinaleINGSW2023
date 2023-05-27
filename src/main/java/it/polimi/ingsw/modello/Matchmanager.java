@@ -113,7 +113,7 @@ public abstract class Matchmanager implements Serializable {
   }
 
   /**
-   * IsEmpyBoard() checks if board is empty
+   * IsEmptyBoard() checks if board is empty
    */
   public void IsEmptyBoard(Match m) {
     int countSingolCard = 0;
@@ -124,40 +124,6 @@ public abstract class Matchmanager implements Serializable {
     }
     if (countSingolCard == group.size())
       m.getBoard().fill(countSingolCard);
-  }
-  /**
-   * classification() returns an arraylist of players based on their scores
-   */
-  public ArrayList<Player> classification(Match m){
-    ArrayList<Player> classification=new ArrayList<>(m.getPlayers().size());
-    int j=1;
-    HashMap<String,Integer> score = m.getMatchmanager().results(m);
-
-    int[]scores = new int[m.getPlayerNumber()];
-    int k=0;
-    for(Integer s : score.values())
-    {
-      scores[k] = s;
-      k++;
-    }
-    int[] position= new int[]{0, 1, 2, 3};
-    for (int i = 0; i < 4; ++i) {
-      int key = scores[i];
-      while(j!=4 && key>scores[j]){
-        int temp=position[i];
-        position[i]=position[j];
-        position[j]=temp;
-        temp=scores[j];
-        scores[j]=scores[i];
-        scores[i]=temp;
-        j++;
-      }
-      j=i+1;
-    }
-    for(Integer i: position){
-      classification.add(m.getPlayers().get(i));
-    }
-    return classification;
   }
   /**
    * showCommGoal() let you see CommonCards in a given match

@@ -104,7 +104,7 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(PlayerReturned message) {
-
+        virtualModel.addPlayer(message.getP());
         virtualModel.notifyObserver(obs -> obs.onNotifyPlayerReconnectionReq(virtualModel.getPlayer(message.getnickname())));
     }
 
