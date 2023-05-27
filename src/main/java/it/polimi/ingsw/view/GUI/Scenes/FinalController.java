@@ -45,7 +45,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                     InputStream is;
                     switch (i) {
                         case 0:
-                            is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
+                            is = this.getClass().getResourceAsStream("/images/Publisher_material/trofeo.png");
                             Image image = new Image(is);
                             FIrstStar.setImage(image);
                             FirstPlace.setText(s);
