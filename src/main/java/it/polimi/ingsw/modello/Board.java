@@ -196,7 +196,7 @@ public class Board implements Serializable {
                     ((cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1)) ||
                     ((cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1)) ||
                     ((cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1)))
-                    && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY()) && (cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY()))
+                    && (cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX()) && (cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX()))
             {
 
             } else {

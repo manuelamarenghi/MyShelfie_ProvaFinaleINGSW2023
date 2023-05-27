@@ -28,7 +28,9 @@ public class ChatController extends ObservableViewClient implements GenericScene
     private ArrayList<String> all;
     private String nickname;
     private String selectedItem =new String();
-
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         dest = new ArrayList<>();
         Chat.setEditable(false);
@@ -39,10 +41,18 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    /**
+     * A metho for the player to set their nickname
+     * @param nick
+     */
     public void setYourNickname(String nick) {
         nickname = nick;
     }
 
+    /**
+     * A method to set the group chats and all the personal chats
+     * @param players
+     */
     public void setChats(ArrayList<String> players) {
         all = new ArrayList<>();
         StoredChat = Collections.synchronizedMap(new HashMap<>());
@@ -78,6 +88,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         });
     }
 
+    /**
+     * A method to reload the chat
+     * @param players
+     */
     public void ReloadChat(ArrayList<String> players) {
         System.out.println("All: "+Arrays.toString(players.toArray()));
         for (String name : StoredChat.keySet()) {
@@ -102,6 +116,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         });
     }
 
+    /**
+     * A message to send the message bu prssing the button
+     * @param mouseEvent
+     */
     public void pressedButton(MouseEvent mouseEvent) {
         String mex = WriteArea.getText();
         WriteArea.clear();
@@ -118,6 +136,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         dest.clear();
     }
 
+    /**
+     * A method to remove the player from the chat
+     * @param name
+     */
     public void removePlayer(String name) {
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
@@ -129,6 +151,12 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    /**
+     * A method to show a message that has been recived
+     * @param getnickname
+     * @param mex
+     * @param dest
+     */
     public void arrivedMex(String getnickname, String mex, String dest) {
         System.out.println(dest);
         if (dest.equals("you")||StoredChat.get("Group Chat")==null) {
@@ -144,6 +172,10 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    /**
+     * A method that brings you back to the living room by pressing the button
+     * @param mouseEvent
+     */
     public void pressedBack(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }

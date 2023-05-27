@@ -21,7 +21,10 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     @FXML
     private StackPane Stack;
     public TextField name_txb;
-
+    /**
+     * A button to see the common goal card 1
+     * @param mouseEvent
+     */
     public void initialize() {
         Area.setEditable(false);
         Area.setVisible(false);
@@ -32,7 +35,10 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     }
 
 
-
+    /**
+     * A button in the login scene to sendd the nickname selcted
+     * @param actionEvent
+     */
     public void onClick(ActionEvent actionEvent) {
         if (!askNumb) {
             if (name_txb.getText().trim().equals("")) System.out.println("Inserire un nome");
@@ -60,11 +66,16 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
     }
 
-
+    /**
+     * A method to show a message if the player tries to connect before the first player
+     */
     public void Connect_before_first() {
         name_txt.setText("First player is deciding number of players.Please try again");
     }
 
+    /**
+     * A method to select the number of player
+     */
     public void NumbPlayer() {
         askNumb = true;
         name_txt.setText("Insert number of player between 2,3,4:");
@@ -83,10 +94,16 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 */
     }
 
+    /**
+     * A message to show if the game is already full
+     */
     public void GameFull() {
         Area.appendText("I'm sorry.The game is already full of players\n");
     }
 
+    /**
+     * A message to show if the nickname is already taken
+     */
     public void TryAgainNick() {
         name_txt.setText("Nickname already taken.Try again");
     }

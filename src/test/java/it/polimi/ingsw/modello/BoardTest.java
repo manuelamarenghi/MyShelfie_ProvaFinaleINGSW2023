@@ -257,6 +257,24 @@ class BoardTest {
         board.takeCard(new Position(7,5));
         assertFalse(board.allow(cards));
     }
+    @Test
+    public void checkAllow6(){
+        Board board = new Board(2);
+        board.fill(0);
+        Card card1, card2, card3 , card4 , card5;
+        ArrayList<Card> cards = new ArrayList<Card>();
+        card1 = board.getCard(6, 3);
+        card2 = board.getCard(6, 4);
+        card3 = board.getCard(6, 5);
+        //card4 = board.getCard(7,4);
+        //card5 = board.getCard(7,5);
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
+        board.takeCard(new Position(7,4));
+        board.takeCard(new Position(7,5));
+        assertTrue(board.allow(cards));
+    }
 
 
 }

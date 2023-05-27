@@ -15,7 +15,9 @@ public class MainSceneController extends ObservableViewClient implements Generic
     private StackPane Stack;
     public Button btn_play;
     public Button btn_exit;
-
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         Background = new ImageView();
         Background.getStyleClass().add("Background");
@@ -24,11 +26,19 @@ public class MainSceneController extends ObservableViewClient implements Generic
         Stack.getChildren().add(Background);
     }
 
+    /**
+     * A button in the scene that lets you play
+     * @param action
+     */
     public void onClickPlay(ActionEvent action) {
         SceneController.setRootPane(observers, "connect_scene.fxml");
 
     }
 
+    /**
+     * A button in the scene to exit
+     * @param action
+     */
     public void onClickExit(ActionEvent action) {
         Stage stage = (Stage) btn_exit.getScene().getWindow();
         stage.close();

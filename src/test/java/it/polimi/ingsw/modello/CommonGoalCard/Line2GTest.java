@@ -122,4 +122,5 @@ class Line2GTest {
         line2G.showCommonCard();
         System.out.println(line2G.getDesc());
     }
+
 }

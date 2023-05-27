@@ -22,6 +22,12 @@ public class SocketClient extends Client{
     private final ScheduledExecutorService pinger;
     private String nickname;
 
+    /**
+     * First constructor for the socket client
+     * @param address
+     * @param port
+     * @throws IOException
+     */
     public SocketClient(String address,int port) throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
@@ -30,6 +36,14 @@ public class SocketClient extends Client{
         this.messageReader = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
     }
+
+    /**
+     * Second constructor for the socket client
+     * @param address
+     * @param port
+     * @param nickname
+     * @throws IOException
+     */
     public SocketClient(String address, int port, String nickname) throws IOException {
         this.socket = new Socket();
         this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
@@ -40,6 +54,10 @@ public class SocketClient extends Client{
         this.nickname=nickname;
     }
 
+    /**
+     * A method to send a message to the sockest server
+     * @param message
+     */
     @Override
     public synchronized void sendMessage(Message message) {
         try {
@@ -50,6 +68,10 @@ public class SocketClient extends Client{
             notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
         }
     }
+
+    /**
+     * A method to read a message recieved from the server
+     */
 
     @Override
     public synchronized void readMessage() {
@@ -67,6 +89,9 @@ public class SocketClient extends Client{
         });
     }
 
+    /**
+     * A method to disconnect
+     */
     @Override
     public void disconnect() {
         try{
@@ -78,6 +103,11 @@ public class SocketClient extends Client{
            notifyObserver(new Message(nickname,"Couldn't disconnect"));
         }
     }
+
+    /**
+     * A method to enable the pinger
+     * @param enabled
+     */
     public void enablePinger(boolean enabled) {
         if (enabled) {
             pinger.scheduleAtFixedRate(() -> sendMessage(new Message(nickname,"Ping!")), 0, 1000, TimeUnit.MILLISECONDS);

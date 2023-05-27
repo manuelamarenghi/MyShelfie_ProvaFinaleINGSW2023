@@ -20,7 +20,9 @@ public class FinalController extends ObservableViewClient implements GenericScen
     private Text FirstPlace, SecondPlace, ThirdPlace, FourPlace;
     @FXML
     private Text ScoreOne, ScoreTwo, ScoreThird, FourScore;
-
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         FirstPlace.toFront();
         SecondPlace.toFront();
@@ -31,6 +33,11 @@ public class FinalController extends ObservableViewClient implements GenericScen
         ScoreThird.toFront();
         FourScore.toFront();
     }
+
+    /**
+     * A method For the final scoreboard of the game
+     * @param point
+     */
     public void SetClassification(HashMap<String, Integer> point) {
         ArrayList<Integer> List = new ArrayList<>();
         for (int x : point.values()) {
