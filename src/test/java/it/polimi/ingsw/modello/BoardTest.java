@@ -184,22 +184,21 @@ class BoardTest {
         cards.add(card3);
         assertFalse(board.allow(cards));
     }
-
     @Test
-    public void checkTakeCard() {
+    public void checkTakeCard(){
         Board b = new Board(2);
-        Position p = new Position(1, 3);
+        Position p = new Position(1,3);
         b.fill(0);
         b.takeCard(p);
-        assertEquals(b.getCard(1, 3).getColour(), "");
+        assertEquals(b.getCard(1,3).getColour() ,"" );
     }
 
     @Test
-    public void checkAllow() {
+    public void checkAllow(){
         Board b = new Board(4);
         ArrayList<Card> testCards = new ArrayList<Card>();
-        Card test1 = new Card("Green", new Position(0, 3));
-        Card test2 = new Card("Green", new Position(0, 4));
+        Card test1 = new Card("Green" , new Position(0,3));
+        Card test2 = new Card("Green" , new Position(0,4));
         testCards.add(test1);
         testCards.add(test2);
         assertTrue(b.allow(testCards));

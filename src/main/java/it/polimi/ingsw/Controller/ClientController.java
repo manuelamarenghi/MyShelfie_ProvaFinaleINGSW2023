@@ -69,11 +69,9 @@ public class ClientController implements ObserverViewClient {
      * the sends a message to socket client in case it decides to pick a card from board
      */
     public void handleTakeCard(Position[] positions) {
-        System.out.println(positions[0].getX());
         int i;
         ArrayList<Card> cards = new ArrayList<>();
         for (i = 0; i < positions.length; i++) {
-            System.out.println(virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates());
             if (virtualModel.getBoard().getCard(positions[i].getX(), positions[i].getY()).getCoordinates() == null) {
                 view.onNotifyCardsAreNotAdjacentReq();
                 return;
@@ -104,11 +102,6 @@ public class ClientController implements ObserverViewClient {
         socketClient.sendMessage(message);
     }
 
-    public void handleColoumnRequest(int numberOfCards, String name) {
-        ColumnRequest message = new ColumnRequest(numberOfCards, name);
-        socketClient.sendMessage(message);
-    }
-
     @Override
     public void handleSeeBoard() {
         view.onShowNewBoardReq(virtualModel.getBoard());
@@ -122,14 +115,6 @@ public class ClientController implements ObserverViewClient {
     @Override
     public void handleSeeCommonCard() {
         view.onNotifyCommonCards(virtualModel.getCommonGoalCards());
-    }
-
-    /**
-     * the method sends a message to socket client to calculate points for the player
-     */
-    public void handleFinalPoint(String name) {
-        FinalPointRequest message = new FinalPointRequest(name);
-        socketClient.sendMessage(message);
     }
 
     /**

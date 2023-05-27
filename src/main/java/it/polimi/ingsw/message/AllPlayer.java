@@ -4,6 +4,9 @@ import it.polimi.ingsw.network.MessageHandler;
 
 import java.util.ArrayList;
 
+/**
+ * A message containing all the players of the game
+ */
 public class AllPlayer extends Message {
     private ArrayList<String> players;
 

@@ -2,6 +2,9 @@ package it.polimi.ingsw.message;
 
 import it.polimi.ingsw.network.MessageHandler;
 
+/**
+ * Class to identify the destination and sender of the message
+ */
 public class Receiving_Mex extends Message {
     public String dest;
     public String mex;
