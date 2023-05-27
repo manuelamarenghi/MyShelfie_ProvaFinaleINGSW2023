@@ -39,7 +39,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
             onPressedButtonChange("living");
         } else {
             Platform.runLater(() -> livingController.setTextArea(s));
+            if (s.equals("Server message: You are back in the game")) {
+                lcontr.addAllObservers(observers);
+                livingController.addAllObservers(observers);
+                waitcontr.addAllObservers(observers);
+                onPressedButtonChange("living");
+            }
         }
+
     }
 
     @Override
@@ -64,13 +71,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
         Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
-        Platform.runLater(() -> livingController.appendText(player.getNickname() + "has left the game\n"));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + " has left the game\n"));
     }
 
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
         Platform.runLater(() -> chatController.addPlayer(player.getNickname()));
-        Platform.runLater(() -> livingController.appendText(player.getNickname() + "is back in the game\n"));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + " is back in the game\n"));
     }
 
     @Override
@@ -167,7 +174,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
         livingController.getData().setLibrary(library);
         Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
-        Platform.runLater(() -> livingController.setTextArea("Insert the number of items you want to take"));
+        Platform.runLater(() -> livingController.setTextArea("Insert the number of items you want to take\n"));
         askCardsToTakeFromBoard();
     }
 
@@ -175,12 +182,12 @@ public class GUI extends ObservableViewClient implements ViewClient {
     public void onNotifyYourTurnIsEndedReq(String current_player) {
         boolean yourTurn = false;
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
-        Platform.runLater(() -> livingController.setTextArea("Your turn is over"));
+        Platform.runLater(() -> livingController.setTextArea("Your turn is over\n"));
     }
 
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-        Platform.runLater(() -> livingController.setTextArea(current_player + " is playing"));
+        Platform.runLater(() -> livingController.setTextArea(current_player + " is playing\n"));
     }
 
     @Override

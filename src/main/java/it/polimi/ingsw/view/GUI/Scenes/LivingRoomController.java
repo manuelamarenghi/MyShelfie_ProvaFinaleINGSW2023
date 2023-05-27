@@ -72,6 +72,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private int ableSend;
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
     private StorageLiving stored = new StorageLiving();
+    @FXML
+    private TextArea Notes = new TextArea();
 
     public StorageLiving getData() {
         return stored;
@@ -90,7 +92,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     }
 
     public void appendText(String s) {
-        messageServer.appendText(s);
+        stored.setNote(s);
+        Notes.clear();
+        Notes.appendText(s);
     }
 
     public void setYourTurn(boolean x) {
@@ -135,12 +139,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         if (stored.getTextArea() != null) {
             setTextArea(stored.getTextArea());
         }
+        if (stored.getNote() != null) {
+            appendText(stored.getNote());
+        }
         Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
         Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
         Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
         Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
         messageServer.setEditable(false);
+        Notes.setEditable(false);
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
         stackPane = new StackPane();
@@ -318,7 +326,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                     positions = new Position[n];
                     ableSend = 1;
                     setCardtaken(n);
-                    setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
+                    setTextArea("Select cards in the order you want to put in your library\n");
                     index = 0;
                 }
             } else if (ableSend == 4) {

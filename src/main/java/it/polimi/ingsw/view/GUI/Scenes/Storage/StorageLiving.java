@@ -12,6 +12,7 @@ public class StorageLiving {
     private int Score1 = -1;
     private boolean FirstFinish = false;
     private String TextArea = new String();
+    private String note = new String();
 
     public Board getBoard() {
         return Board;
@@ -76,5 +77,13 @@ public class StorageLiving {
 
     public void setTextArea(String textArea) {
         TextArea = textArea;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

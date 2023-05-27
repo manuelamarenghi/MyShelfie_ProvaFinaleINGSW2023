@@ -231,7 +231,7 @@ public class MatchController {
         }
         connectClients.put(name, virtualView);
         virtualView.AcceptNewPlayer(name, true);
-
+        virtualView.GenericMessage("server", "You are back in the game");
         match.getPlayers().add(player);
         disconnectClients.remove(player);
         if (isStarted) {
