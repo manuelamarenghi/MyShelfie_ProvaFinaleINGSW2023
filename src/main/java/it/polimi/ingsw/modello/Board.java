@@ -228,7 +228,6 @@ public class Board implements Serializable {
             }
 
         }//Fine ciclo for
-
         return true;
     }
 

@@ -11,7 +11,9 @@ public class XGoalCard implements CommonGoalCards, Serializable {
     public int getNumberCard() {
         return numberCard;
     }
-
+    /**
+     * the method checks if the the target is completed or not
+     */
     @Override
     public boolean check(Library library) {
         for (int i = 0; i < 3; i++) {
@@ -25,17 +27,24 @@ public class XGoalCard implements CommonGoalCards, Serializable {
         }
         return false;
     }
+    /**
+     * expired() let you know if the player can still reach the goal or not
+     */
 
     @Override
     public boolean expired(Library library) {
         return false;
     }
-
+    /**
+     *the method returns the description of the card
+     */
     @Override
     public String getDesc() {
         return "Five tiles of the same type forming an X.\n";
     }
-
+    /**
+     * The method shows an example of the target
+     */
     @Override
     public void showCommonCard() {
 

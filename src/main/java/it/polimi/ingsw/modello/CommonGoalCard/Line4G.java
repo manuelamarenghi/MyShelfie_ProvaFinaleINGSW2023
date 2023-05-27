@@ -50,7 +50,7 @@ public class Line4G implements CommonGoalCards, Serializable {
     }
 
     /**
-     * getImage() let you see this goal
+     * showCommonCard let you see this goal
      */
     @Override
     public void showCommonCard() {
@@ -114,6 +114,9 @@ public class Line4G implements CommonGoalCards, Serializable {
         }
         return false;
     }
+    /**
+     *the method returns the description of the card
+     */
 
     @Override
     public String getDesc() {

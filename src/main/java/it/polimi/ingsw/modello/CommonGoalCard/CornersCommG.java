@@ -14,6 +14,11 @@ public class CornersCommG implements CommonGoalCards, Serializable {
         return numberCard;
     }
 
+    /**
+     * Checks if the library of the player has completed the goal or not
+     * @param library
+     * @return
+     */
     public boolean check(Library library) {
 
         Card card00 = new Card(library.getCardinPos(0, 0).getColour(), library.getCardinPos(0, 0).getCoordinates());
@@ -33,6 +38,12 @@ public class CornersCommG implements CommonGoalCards, Serializable {
             return false;
         }
     }
+
+    /**
+     * The method checks if the goal is still achieveable
+     * @param library
+     * @return
+     */
 
     public boolean expired(Library library){
         boolean expire = false;
@@ -58,6 +69,9 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
     }
 
+    /**
+     *the method shows the goal
+     */
     @Override
     public void showCommonCard() {
         Library library = new Library();
@@ -69,6 +83,10 @@ public class CornersCommG implements CommonGoalCards, Serializable {
         library.showLibrary();
     }
 
+    /**
+     * the method returns the description of the card
+     * @return
+     */
     @Override
     public String getDesc() {
         return "Four tiles of the same type in the four corners of the bookshelf.\n ";
