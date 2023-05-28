@@ -40,11 +40,13 @@ public class FinalController extends ObservableViewClient implements GenericScen
         Set<String> key = point.keySet();
         int i = 0;
         for (String s : key) {
+            System.out.println(s);
             while (i < sortedList.size()) {
                 if (point.get(s).equals(sortedList.get(i))) {
                     InputStream is;
                     switch (i) {
                         case 0:
+                            System.out.println("sono prima");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/trofeo.png");
                             Image image = new Image(is);
                             FIrstStar.setImage(image);
@@ -53,6 +55,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 1:
+                            System.out.println("sono secoda");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imageo = new Image(is);
                             SecStar.setImage(imageo);
@@ -61,6 +64,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 2:
+                            System.out.println("sono terza");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imagea = new Image(is);
                             Third.setImage(imagea);
@@ -69,6 +73,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 3:
+                            System.out.println("sono quarta");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imageu = new Image(is);
                             Four.setImage(imageu);
