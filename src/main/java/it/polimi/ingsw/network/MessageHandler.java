@@ -48,10 +48,8 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(UpdateBoard message) {
-        System.out.println("è arrivata nuova board");
         virtualModel.updateBoard(message.getB());
         virtualModel.notifyObserver(obs -> obs.onShowNewBoardReq(message.getB()));
-        System.out.println("board mandata");
     }
 
 

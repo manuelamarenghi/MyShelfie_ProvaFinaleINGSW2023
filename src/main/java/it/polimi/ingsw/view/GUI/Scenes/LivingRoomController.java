@@ -385,11 +385,15 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 if (n < 0 || n > 3) {
                     setTextArea("Please insert a valid number less or equal 3\n");
                 } else {
-                    positions = new Position[n];
-                    ableSend = 1;
-                    setCardtaken(n);
-                    setTextArea("Select cards in the order you want to put in your library\n");
-                    index = 0;
+                    if (stored.getLibrary().showColumn(n).length == 0) {
+                        setTextArea("Please insert a number of cards you can put in your library\n");
+                    } else {
+                        positions = new Position[n];
+                        ableSend = 1;
+                        setCardtaken(n);
+                        setTextArea("Select cards in the order you want to put in your library\n");
+                        index = 0;
+                    }
                 }
             } else if (ableSend == 4) {
                 this.notifyObserver(observers -> observers.handleTakeCard(positions));

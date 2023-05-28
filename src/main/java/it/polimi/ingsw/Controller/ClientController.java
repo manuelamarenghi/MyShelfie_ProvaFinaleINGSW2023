@@ -114,7 +114,6 @@ public class ClientController implements ObserverViewClient {
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
-        System.out.println("mando colonna scelta");
         PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(), virtualModel.getCardSelect(), x);
         socketClient.sendMessage(message);
     }
