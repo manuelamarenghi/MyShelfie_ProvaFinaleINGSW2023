@@ -24,10 +24,13 @@ public class DoubleCommG implements CommonGoalCards, Serializable {
 
         ArrayList<Integer> adjacent = library.getgroup();
         int count = 0;
-
         for (Integer i : adjacent) {
-            if (i >= 2)
+            if (i == 2) {
                 count++;
+            }
+            if (i > 2) {
+                count = count + (i / 2);
+            }
         }
         if (count >= 6)
             return true;
