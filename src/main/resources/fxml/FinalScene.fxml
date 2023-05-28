@@ -17,7 +17,7 @@
                           <Image url="@../images/Publisher_material/classifica.png"/>
                       </image>
                   </ImageView>
-                   <ImageView fx:id="FIrstStar" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="224.0"
+                   <ImageView fx:id="FIrstStar" fitHeight="43.0" fitWidth="39.0" layoutX="272.0" layoutY="219.0"
                               pickOnBounds="true" preserveRatio="true">
 
                    </ImageView>
@@ -32,12 +32,6 @@
                    <ImageView fx:id="Four" fitHeight="31.0" fitWidth="33.0" layoutX="276.0" layoutY="382.0"
                               pickOnBounds="true" preserveRatio="true">
                    </ImageView>
-                   <Text fx:id="FirstPlace" layoutX="321.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                         wrappingWidth="142.13671875">
-                       <font>
-                           <Font size="18.0"/>
-                       </font>
-                   </Text>
                    <Text fx:id="SecondPlace" layoutX="321.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0"
                          wrappingWidth="142.13671875">
                        <font>
@@ -74,18 +68,30 @@
                            <Font size="18.0"/>
                        </font>
                    </Text>
-                   <ImageView fitHeight="204.0" fitWidth="378.0" layoutX="282.0" layoutY="25.0" pickOnBounds="true"
-                              preserveRatio="true" rotate="3.4">
-                       <image>
-                           <Image url="@../images/Publisher_material/scrittafinale.png"/>
-                       </image>
-                   </ImageView>
                    <Text fx:id="ScoreOne" layoutX="507.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
                          wrappingWidth="49.33673095703125">
                        <font>
                            <Font size="18.0"/>
                        </font>
                    </Text>
+                   <Text fx:id="FirstPlace" layoutX="321.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                         wrappingWidth="142.13671875">
+                       <font>
+                           <Font size="18.0"/>
+                       </font>
+                   </Text>
+                   <ImageView fitHeight="177.0" fitWidth="355.0" layoutX="294.0" layoutY="20.0" pickOnBounds="true"
+                              preserveRatio="true">
+                       <image>
+                           <Image url="@../images/Publisher_material/leaderboard-title.png"/>
+                       </image>
+                   </ImageView>
+                   <ImageView fitHeight="346.0" fitWidth="193.0" layoutX="33.0" layoutY="330.0" pickOnBounds="true"
+                              preserveRatio="true">
+                       <image>
+                           <Image url="@../images/Publisher_material/imgbin_trophy-png.png"/>
+                       </image>
+                   </ImageView>
                </children>
             </AnchorPane>
          </children>
