@@ -365,17 +365,21 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             String s = getUserInput();
             n = Integer.parseInt(s);
             inputUser.clear();
-            if (ValidColumn(columnforthisturn, n - 1)) {
-                int finalN = n - 1;
-                this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
-                SendbuttonAble = false;
-                Col0.setImage(null);
-                Col1.setImage(null);
-                Col2.setImage(null);
-                Col3.setImage(null);
-                Col4.setImage(null);
+            if (!stored.getBoard().Group().contains(n)) {
+                setTextArea("There aren't enough adjacent cards for this number\n");
             } else {
-                setTextArea("Insert a valid column you want to choose\n");
+                if (ValidColumn(columnforthisturn, n - 1)) {
+                    int finalN = n - 1;
+                    this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
+                    SendbuttonAble = false;
+                    Col0.setImage(null);
+                    Col1.setImage(null);
+                    Col2.setImage(null);
+                    Col3.setImage(null);
+                    Col4.setImage(null);
+                } else {
+                    setTextArea("Insert a valid column you want to choose\n");
+                }
             }
         } else {
             if (ableSend == 2) {

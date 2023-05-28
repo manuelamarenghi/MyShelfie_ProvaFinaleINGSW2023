@@ -188,12 +188,13 @@ public class MatchController {
      */
     private void firstFinish(Player p) {
         turnController.setLastRound(true);
-        match.setFirstFinish(p);
-        for (VirtualView v : connectClients.values()) {
-            v.FirstFinished(match.getFirstFinish().getNickname());
+        if (match.getFirstFinish().getNickname().equals("")) {
+            match.setFirstFinish(p);
+            for (VirtualView v : connectClients.values()) {
+                v.FirstFinished(match.getFirstFinish().getNickname());
+            }
         }
     }
-
     /**
      * removeClient() when a client wants to live or has problem with the connection
      *
@@ -325,7 +326,6 @@ public class MatchController {
 
             System.out.println("Finish control library full");
             match.getPlayerByNickname(nickname).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(nickname));
-            System.out.println("call next player");
             nextPlayer();
 
             System.out.println("next player");
