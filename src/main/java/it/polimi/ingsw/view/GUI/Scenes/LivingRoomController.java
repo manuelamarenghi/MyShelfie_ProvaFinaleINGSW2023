@@ -22,10 +22,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -365,22 +362,18 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             String s = getUserInput();
             n = Integer.parseInt(s);
             inputUser.clear();
-            if (!stored.getBoard().Group().contains(n)) {
-                setTextArea("There aren't enough adjacent cards for this number\n");
+            if (ValidColumn(columnforthisturn, n - 1)) {
+                int finalN = n - 1;
+                this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
+                SendbuttonAble = false;
+                Col0.setImage(null);
+                Col1.setImage(null);
+                Col2.setImage(null);
+                Col3.setImage(null);
+                Col4.setImage(null);
             } else {
-                if (ValidColumn(columnforthisturn, n - 1)) {
-                    int finalN = n - 1;
-                    this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
-                    SendbuttonAble = false;
-                    Col0.setImage(null);
-                    Col1.setImage(null);
-                    Col2.setImage(null);
-                    Col3.setImage(null);
-                    Col4.setImage(null);
-                } else {
-                    setTextArea("Insert a valid column you want to choose\n");
+                setTextArea("Insert a valid column you want to choose\n");
                 }
-            }
         } else {
             if (ableSend == 2) {
                 String s = getUserInput();
@@ -389,14 +382,18 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 if (n < 0 || n > 3) {
                     setTextArea("Please insert a valid number less or equal 3\n");
                 } else {
-                    if (stored.getLibrary().showColumn(n).length == 0) {
-                        setTextArea("Please insert a number of cards you can put in your library\n");
+                    if (!ValidInputNumb(n)) {
+                        setTextArea("There aren't enough adjacent cards for this number\n");
                     } else {
-                        positions = new Position[n];
-                        ableSend = 1;
-                        setCardtaken(n);
-                        setTextArea("Select cards in the order you want to put in your library\n");
-                        index = 0;
+                        if (stored.getLibrary().showColumn(n).length == 0) {
+                            setTextArea("Please insert a number of cards you can put in your library\n");
+                        } else {
+                            positions = new Position[n];
+                            ableSend = 1;
+                            setCardtaken(n);
+                            setTextArea("Select cards in the order you want to put in your library\n");
+                            index = 0;
+                        }
                     }
                 }
             } else if (ableSend == 4) {
@@ -482,6 +479,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     public boolean ValidColumn(int[] x, int y) {
         for (int i = 0; i < x.length; i++) {
             if (x[i] == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean ValidInputNumb(int x) {
+        ArrayList<Integer> groups = stored.getBoard().Group();
+        for (int y : groups) {
+            if (y >= x) {
                 return true;
             }
         }
