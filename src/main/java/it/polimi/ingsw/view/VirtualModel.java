@@ -103,6 +103,7 @@ public class VirtualModel extends VMObservable {
 
     /**
      * A method to update the board
+     *
      * @param board
      */
     public void updateBoard(Board board) {
@@ -111,6 +112,7 @@ public class VirtualModel extends VMObservable {
 
     /**
      * A method to update the chair
+     *
      * @param nickname
      */
     public void updateChair(String nickname) {

@@ -22,10 +22,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * this class represent the main interface of the game which handle changes of scenes after user or server requests
@@ -72,6 +69,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
     private int ableSend;
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
     private StorageLiving stored = new StorageLiving();
+    @FXML
+    private TextArea Notes = new TextArea();
 
     public StorageLiving getData() {
         return stored;
@@ -89,6 +88,12 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         messageServer.appendText(s);
     }
 
+    public void appendText(String s) {
+        stored.setNote(s);
+        Notes.clear();
+        Notes.appendText(s);
+    }
+
     public void setYourTurn(boolean x) {
         yourTurn = x;
     }
@@ -97,6 +102,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         System.out.println(x);
         cardtaken = x;
     }
+
     /**
      * A method to initialize all the attributes
      */
@@ -133,12 +139,16 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         if (stored.getTextArea() != null) {
             setTextArea(stored.getTextArea());
         }
+        if (stored.getNote() != null) {
+            appendText(stored.getNote());
+        }
         Common1.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon1);
         Common2.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedCommon2);
         Exit.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedExit);
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedSend);
         Chat.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedChat);
         messageServer.setEditable(false);
+        Notes.setEditable(false);
         stackPanelibrary = new StackPane();
         backgroundlibrary.toBack();
         stackPane = new StackPane();
@@ -198,6 +208,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A method to create the board
+     *
      * @param b
      */
     public void createBoard(Board b) {
@@ -206,7 +217,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             for (int j = 0; j < 9; j++) {
                 if (cards[i][j] != null) {
                     String color = cards[i][j].getColour();
-                    if (color!=null && !color.equals("")) {
+                    if (color != null && !color.equals("")) {
                         int x = (int) Math.floor(Math.random() * (3));
                         ImageView image = new ImageView((this.tiles.get(color))[x]);
                         image.setFitWidth(32);
@@ -239,6 +250,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A metho to create the library
+     *
      * @param l
      */
     public void createLibrary(Library l) {
@@ -283,46 +295,56 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A method to set the personal goal card
+     *
      * @param x
      */
     public void setPP(int x) {
         stored.setPersonal(x);
         String c = String.valueOf(x);
-        String name = "/images/personal_goal_cards/Personal_Goals"+c + ".png";
+        String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
         Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
         PersonalCard.setImage(image);
     }
 
     /**
      * A button to see the common goal card 1
+     *
      * @param mouseEvent
      */
     public void pressedCommon1(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.ChangeRoot("common1"));
     }
+
     /**
      * A button to see the common goal card 2
+     *
      * @param mouseEvent
      */
     public void pressedCommon2(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.ChangeRoot("common2"));
     }
+
     /**
      * A button to exit
+     *
      * @param mouseEvent
      */
     public void pressedExit(MouseEvent mouseEvent) {
         this.notifyObserver(observers -> observers.handleDisconection(null));
     }
+
     /**
      * A button to see the libraries
+     *
      * @param mouseEvent
      */
     public void pressedLibraries(MouseEvent mouseEvent) throws IOException {
         this.notifyObserver(observers -> observers.ChangeRoot("library"));
     }
+
     /**
      * A button to see the chat
+     *
      * @param mouseEvent
      */
     public void pressedChat(MouseEvent mouseEvent) {
@@ -331,6 +353,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A button to send the text written
+     *
      * @param actionEvent
      */
     public void pressedSend(MouseEvent actionEvent) {
@@ -339,8 +362,8 @@ public class LivingRoomController extends ObservableViewClient implements Generi
             String s = getUserInput();
             n = Integer.parseInt(s);
             inputUser.clear();
-            if (ValidColumn(columnforthisturn, n)) {
-                int finalN = n;
+            if (ValidColumn(columnforthisturn, n - 1)) {
+                int finalN = n - 1;
                 this.notifyObserver(observerViewClient -> observerViewClient.handlePutInLibrary(finalN));
                 SendbuttonAble = false;
                 Col0.setImage(null);
@@ -350,7 +373,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 Col4.setImage(null);
             } else {
                 setTextArea("Insert a valid column you want to choose\n");
-            }
+                }
         } else {
             if (ableSend == 2) {
                 String s = getUserInput();
@@ -359,11 +382,19 @@ public class LivingRoomController extends ObservableViewClient implements Generi
                 if (n < 0 || n > 3) {
                     setTextArea("Please insert a valid number less or equal 3\n");
                 } else {
-                    positions = new Position[n];
-                    ableSend = 1;
-                    setCardtaken(n);
-                    setTextArea("Select cards from the gameBoard by clicking on them in the order you want to put in your library");
-                    index = 0;
+                    if (!ValidInputNumb(n)) {
+                        setTextArea("There aren't enough adjacent cards for this number\n");
+                    } else {
+                        if (stored.getLibrary().showColumn(n).length == 0) {
+                            setTextArea("Please insert a number of cards you can put in your library\n");
+                        } else {
+                            positions = new Position[n];
+                            ableSend = 1;
+                            setCardtaken(n);
+                            setTextArea("Select cards in the order you want to put in your library\n");
+                            index = 0;
+                        }
+                    }
                 }
             } else if (ableSend == 4) {
                 this.notifyObserver(observers -> observers.handleTakeCard(positions));
@@ -375,6 +406,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A method to set the token for the common goal card
+     *
      * @param x
      */
     public void setTokenCommon(int x) {
@@ -421,6 +453,7 @@ public class LivingRoomController extends ObservableViewClient implements Generi
 
     /**
      * A method to show the coloumns where the player can put the cards
+     *
      * @param x
      */
     public void ShowColumn(int[] x) {
@@ -439,12 +472,23 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         SendbuttonAble = true;
         columnforthisturn = x;
     }
+
     /**
      * A metho to check if the coloumns are valid or not
      */
     public boolean ValidColumn(int[] x, int y) {
         for (int i = 0; i < x.length; i++) {
             if (x[i] == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean ValidInputNumb(int x) {
+        ArrayList<Integer> groups = stored.getBoard().Group();
+        for (int y : groups) {
+            if (y >= x) {
                 return true;
             }
         }

@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.view.VirtualView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class TurnController {
 

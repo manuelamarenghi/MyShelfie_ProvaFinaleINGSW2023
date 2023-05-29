@@ -14,6 +14,7 @@ public class MessageHandler implements Observer {
 
     /**
      * An update method for the visitor patern that forwards the message to the message class
+     *
      * @param message
      */
     @Override
@@ -47,10 +48,8 @@ public class MessageHandler implements Observer {
      * @param message
      */
     public void handle(UpdateBoard message) {
-        System.out.println("è arrivata nuova board");
         virtualModel.updateBoard(message.getB());
         virtualModel.notifyObserver(obs -> obs.onShowNewBoardReq(message.getB()));
-        System.out.println("board mandata");
     }
 
 
@@ -257,6 +256,7 @@ public class MessageHandler implements Observer {
 
     /**
      * A handle method for the message when a player tries to connect before the first player
+     *
      * @param message
      */
     public void handle(Connected_Before_FirstPlayer message) {
@@ -276,6 +276,7 @@ public class MessageHandler implements Observer {
 
     /**
      * A handle method to send the effective common goal cards
+     *
      * @param message
      */
     public void handle(Send_EffectiveCard message) {
@@ -286,6 +287,7 @@ public class MessageHandler implements Observer {
 
     /**
      * A handle method for a message recieved
+     *
      * @param message
      */
     public void handle(Receiving_Mex message) {

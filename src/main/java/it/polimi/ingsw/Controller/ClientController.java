@@ -21,6 +21,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * Constructor of the controller class
+     *
      * @param view
      */
     public ClientController(ViewClient view) {
@@ -32,6 +33,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * Method to set the information for the server
+     *
      * @param ipAddress
      */
     @Override
@@ -52,6 +54,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A method to handle a message for a new player that has entered in the game
+     *
      * @param nickname
      */
     public void handleEnterPlayer(String nickname) {
@@ -70,6 +73,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A handle method to send a message to the socket client when a math is being created
+     *
      * @param match
      */
     public void handleCreateMatch(Match match) {
@@ -105,11 +109,11 @@ public class ClientController implements ObserverViewClient {
         } else
             view.onNotifyCardsAreNotAdjacentReq();
     }
+
     /**
      * The method sends a message to socket client to put a card in the library
      */
     public void handlePutInLibrary(int x) {
-        System.out.println("mando colonna scelta");
         PlayerAction message = new PlayerAction(virtualModel.getMe().getNickname(), virtualModel.getCardSelect(), x);
         socketClient.sendMessage(message);
     }
@@ -140,6 +144,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * The method tells the server to dissconect
+     *
      * @param name
      */
     public void handleDisconection(String name) {
@@ -149,6 +154,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A handle method for the message to handle a new message recived in the chat
+     *
      * @param dest
      * @param mex
      */
@@ -160,6 +166,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A handle method for the message to set the player's nickname
+     *
      * @param nickname
      */
     @Override
@@ -175,6 +182,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A method to see some other player's library through the virtual model
+     *
      * @param nickname
      */
     public void SeeSomeoneLibrary(String nickname) {
@@ -186,6 +194,7 @@ public class ClientController implements ObserverViewClient {
 
     /**
      * A method to change the scene
+     *
      * @param scene
      */
     public void ChangeRoot(String scene) {

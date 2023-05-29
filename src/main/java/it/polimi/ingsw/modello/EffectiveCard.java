@@ -20,27 +20,28 @@ public class EffectiveCard extends Observable implements ObserverCC, Serializabl
         return commonCard;
     }
     public ArrayList<Integer> getAllScores(){
-        ArrayList<Integer>tmp=new ArrayList<>();
-        Collections.copy(this.allScores,tmp);
+        ArrayList<Integer> tmp = new ArrayList<>();
+        Collections.copy(this.allScores, tmp);
         return tmp;
     }
-    public void setAllScores(ArrayList<Integer> scores)
-    {
-        for( Integer i : scores){
+
+    public void setAllScores(ArrayList<Integer> scores) {
+        for (Integer i : scores) {
             allScores.add(i);
         }
     }
 
     /**
      * the method updates the observer the state of the player's library for the goal
+     *
      * @param player
      * @return
      */
-    public boolean update(Player player){
+    public boolean update(Player player) {
 
-        if(commonCard.check(player.getLibrary())){
+        if (commonCard.check(player.getLibrary())) {
             player.setCommonGoalScore(allScores.get(0));
-            notifyObserver(new Assigned_CC(allScores.get(0), player.getNickname(),this));
+            notifyObserver(new Assigned_CC(allScores.get(0), player.getNickname(), this));
             allScores.remove(0);
             player.removeObserver(this);
         }

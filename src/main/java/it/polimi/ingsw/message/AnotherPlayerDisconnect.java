@@ -11,6 +11,7 @@ public class AnotherPlayerDisconnect extends Message implements Serializable {
     public AnotherPlayerDisconnect(String name){
         super(name,"player_disconnected");
     }
+
     public void visit(MessageHandler controller){
         controller.handle(this);
     }

@@ -31,6 +31,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method that shows the living room when the game starts
+     *
      * @param s
      */
     @Override
@@ -43,7 +44,14 @@ public class GUI extends ObservableViewClient implements ViewClient {
             onPressedButtonChange("living");
         } else {
             Platform.runLater(() -> livingController.setTextArea(s));
+            if (s.equals("Server message: You are back in the game")) {
+                lcontr.addAllObservers(observers);
+                livingController.addAllObservers(observers);
+                waitcontr.addAllObservers(observers);
+                onPressedButtonChange("living");
+            }
         }
+
     }
 
     /**
@@ -58,6 +66,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method that shows the new board
+     *
      * @param board
      */
     @Override
@@ -77,25 +86,29 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify when a player has left the game
+     *
      * @param player
      */
     @Override
     public void onNotifyPlayerDisconnectionReq(Player player) {
         Platform.runLater(() -> chatController.removePlayer(player.getNickname()));
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "has left the game\n"));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + " has left the game\n"));
     }
 
     /**
      * A method to notify when the player is back in the game after the dissconnection
+     *
      * @param player
      */
     @Override
     public void onNotifyPlayerReconnectionReq(Player player) {
-        Platform.runLater(() -> livingController.setTextArea(player.getNickname() + "is back in the game\n"));
+        Platform.runLater(() -> chatController.addPlayer(player.getNickname()));
+        Platform.runLater(() -> livingController.appendText(player.getNickname() + " is back in the game\n"));
     }
 
     /**
      * A notify method when a player is connected to the game
+     *
      * @param nickname
      * @param you
      */
@@ -111,6 +124,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A mathod to notify when the common goal has been completed
+     *
      * @param nickname
      * @param completedEffectiveCard
      * @param score
@@ -125,12 +139,13 @@ public class GUI extends ObservableViewClient implements ViewClient {
             }
             Platform.runLater(() -> livingController.setTokenCommon(score));
         } else {
-            onShowReq(nickname + " has reached a common goal taking " + score + " score\n");
+            Platform.runLater(() -> livingController.appendText(nickname + " has reached a common goal taking " + score + " score\n"));
         }
     }
 
     /**
      * A notify method to notify the name of the player to who the chair has been assigned
+     *
      * @param nickname
      */
     @Override
@@ -141,6 +156,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify method to show the possible coloumns where the cards can be put
+     *
      * @param x
      * @param cards
      * @param library
@@ -156,8 +172,10 @@ public class GUI extends ObservableViewClient implements ViewClient {
     @Override
     public void onNotifyCardsAreNotAdjacentReq() {
         Platform.runLater(() -> livingController.setTextArea("Cards are not adjacent. Take some valid\n"));
+        Platform.runLater(() -> livingController.removeHighlights());
         askCardsToTakeFromBoard();
     }
+
     @Override
     public void onNotifyNumbPlayerReq(int playerNum) {
         // vuoto
@@ -165,6 +183,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify the player who has finished the game first
+     *
      * @param player
      */
     @Override
@@ -175,6 +194,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify when the match has started
+     *
      * @param players
      */
     @Override
@@ -184,6 +204,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify the final score board of the game
+     *
      * @param point
      */
     @Override
@@ -196,6 +217,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to create and show a new library for the player
+     *
      * @param l
      * @param name
      */
@@ -229,6 +251,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify the player that it's their turn
+     *
      * @param board
      * @param library
      */
@@ -238,32 +261,35 @@ public class GUI extends ObservableViewClient implements ViewClient {
         livingController.getData().setLibrary(library);
         Platform.runLater(() -> livingController.createLibrary(library));
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
-        Platform.runLater(() -> livingController.setTextArea("Insert the number of items you want to take"));
+        Platform.runLater(() -> livingController.setTextArea("Insert the number of items you want to take\n"));
         askCardsToTakeFromBoard();
     }
 
     /**
      * A method to notify the player that their turn has ended
+     *
      * @param current_player
      */
     @Override
     public void onNotifyYourTurnIsEndedReq(String current_player) {
         boolean yourTurn = false;
         Platform.runLater(() -> livingController.setYourTurn(yourTurn));
-        Platform.runLater(() -> livingController.setTextArea("Your turn is over"));
+        Platform.runLater(() -> livingController.setTextArea("Your turn is over\n"));
     }
 
     /**
      * A method to notify the player which player is playing right now
+     *
      * @param current_player
      */
     @Override
     public void onNotifyWhoIsPlayingNowReq(String current_player) {
-        Platform.runLater(() -> livingController.setTextArea(current_player + " is playing"));
+        Platform.runLater(() -> livingController.setTextArea(current_player + " is playing\n"));
     }
 
     /**
      * A method to notify the player about their personal goal card
+     *
      * @param personalGoalCard
      */
     @Override
@@ -273,6 +299,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to Ask the player their nickname
+     *
      * @throws InterruptedException
      */
     @Override
@@ -280,6 +307,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
         LoginSceneController login = new LoginSceneController();
         Platform.runLater(() -> login.Connect_before_first());
     }
+
     /**
      * The method prints the players of the match
      *
@@ -292,8 +320,10 @@ public class GUI extends ObservableViewClient implements ViewClient {
         Platform.runLater(() -> chatController.initialize());
         Platform.runLater(() -> chatController.setChats(players));
     }
+
     /**
      * A notify method to see and get the description of the common goal cards
+     *
      * @param cards
      */
     @Override
@@ -306,6 +336,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to send the message recived int he chat to destination
+     *
      * @param getnickname
      * @param mex
      * @param dest
@@ -317,6 +348,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A methos to set the scene for the GUI
+     *
      * @param scene
      */
     @Override
@@ -345,6 +377,7 @@ public class GUI extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to set the player's nickname
+     *
      * @param nickname
      */
     @Override

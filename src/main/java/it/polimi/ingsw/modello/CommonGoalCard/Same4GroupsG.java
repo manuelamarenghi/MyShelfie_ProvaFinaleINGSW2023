@@ -23,10 +23,13 @@ public class Same4GroupsG implements CommonGoalCards, Serializable {
     public boolean check(Library library) {
         ArrayList<Integer> adjacent = library.getgroup();
         int count = 0;
-
         for (Integer i : adjacent) {
-            if (i >= 4)
+            if (i == 4) {
                 count++;
+            }
+            if (i > 4) {
+                count = count + (i / 4);
+            }
         }
         if (count >= 4)
             return true;
@@ -66,8 +69,9 @@ public class Same4GroupsG implements CommonGoalCards, Serializable {
     public boolean expired(Library library) {
         return false;
     }
+
     /**
-     *the method returns the description of the card
+     * the method returns the description of the card
      */
     @Override
     public String getDesc() {

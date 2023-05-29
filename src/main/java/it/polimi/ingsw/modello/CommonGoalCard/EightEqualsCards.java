@@ -14,8 +14,10 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
     }
 
     private final int DIMENSION = 8;
+
     /**
      * Checks if the library of the player has completed the goal or not
+     *
      * @param library
      * @return
      */
@@ -32,8 +34,8 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
             if (card.getColour().equals("green")) indexGreen++;
             if (card.getColour().equals("yellow")) indexYellow++;
             if(card.getColour().equals("lightBlue"))indexLightBLue++;
-            if(card.getColour().equals("white"))indexWhite++;
-            if(card.getColour().equals("pink"))indexPink++;
+            if (card.getColour().equals("white")) indexWhite++;
+            if (card.getColour().equals("pink")) indexPink++;
         }
         return indexPink >= DIMENSION ||
                 indexBlue >= DIMENSION ||
@@ -42,8 +44,10 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
                 indexGreen >= DIMENSION ||
                 indexWhite >= DIMENSION;
     }
+
     /**
      * The method checks if the goal is still achieveable
+     *
      * @param library
      * @return
      */
@@ -54,8 +58,10 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
         //to prove the impossibility of completing the task I would have to control tons of cases and to verify all one at a time
         return false;
     }
+
     /**
      * the method returns the description of the card
+     *
      * @return
      */
 
@@ -64,8 +70,9 @@ public class EightEqualsCards implements CommonGoalCards, Serializable {
         return "Eight tiles of the same type. \n" +
                 "There’s no restriction about the position of these tiles.\n";
     }
+
     /**
-     *the method shows the goal
+     * the method shows the goal
      */
 
     @Override

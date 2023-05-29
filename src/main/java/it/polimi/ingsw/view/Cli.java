@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.Controller.ClientController;
 import it.polimi.ingsw.message.Receiving_Mex;
 import it.polimi.ingsw.modello.*;
 
@@ -28,6 +27,18 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
+     * check ip address
+     *
+     * @param ip ip address server
+     * @return true: valide ip address
+     */
+    private static boolean validate(final String ip) {
+        if (ip.equals("localhost")) return true;
+        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+        return ip.matches(PATTERN);
+    }
+
+    /**
      * The method initial game
      */
 
@@ -45,18 +56,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
         } catch (ExecutionException e) {
             System.out.println("WRONG_INPUT");
         }
-    }
-
-    /**
-     * check ip address
-     *
-     * @param ip ip address server
-     * @return true: valide ip address
-     */
-    private static boolean validate(final String ip) {
-        if (ip.equals("localhost")) return true;
-        String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
-        return ip.matches(PATTERN);
     }
 
     /**
@@ -294,7 +293,6 @@ public class Cli extends ObservableViewClient implements ViewClient {
                     break;
                 case 5:
                     this.notifyObserver(observerViewClient -> observerViewClient.ReadMessageChat());
-                    break;
             }
         } catch (ExecutionException e) {
             out.println("WRONG_INPUT");
@@ -369,6 +367,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to read the messages from the chat
+     *
      * @param message
      * @param players
      */
@@ -479,6 +478,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify method when a player is connected to the game
+     *
      * @param nickname
      * @param you
      */
@@ -529,6 +529,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     public void onNotifyCardsAreNotAdjacentReq() {
         out.println("Selected cards cannot be selected, choose other cards");
         askCardsToTakeFromBoard();
+
     }
 
     /**
@@ -591,7 +592,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
     }
 
     /**
-     * the method notifies if the dissconnection has been done successfully
+     * the methodnotifies if the dissconnection has been done successfully
      */
     @Override
     public void onNotifyDisconnectionReqAcceptedAns() {
@@ -609,6 +610,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify method to notify the player that it's his turn
+     *
      * @param board
      * @param library
      */
@@ -625,6 +627,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A method to notify the player that his turn has ended
+     *
      * @param current_player
      */
     @Override
@@ -634,6 +637,7 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify method to tell the player the player's name who is playing right  now
+     *
      * @param current_player
      */
     @Override
@@ -643,12 +647,14 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify mehod to show the personal goal card
+     *
      * @param personalGoalCard
      */
     @Override
     public void onNotifyPersonalCardReq(PersonalGoalCard personalGoalCard) {
         personalGoalCard.showPersonalGoalCard();
     }
+
     @Override
     public void NotifyaskNicknameReq() {
         try {
@@ -673,12 +679,14 @@ public class Cli extends ObservableViewClient implements ViewClient {
 
     /**
      * A notify method to see and get the description of the common goal cards
+     *
      * @param cards
      */
     @Override
     public void onNotifyCommonCards(EffectiveCard[] cards) {
         for (EffectiveCard effectiveCard : cards) {
             effectiveCard.show();
+
             System.out.println("DESCRIPTION : " + effectiveCard.description());
         }
     }
