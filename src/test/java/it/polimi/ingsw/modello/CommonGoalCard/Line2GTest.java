@@ -13,17 +13,24 @@ class Line2GTest {
     @Test
     public void checkIfCheckReturnsTrue() {
         Library l = new Library();
-        l.getCardinPos(0, 0).setColour("green");
-        l.getCardinPos(0, 1).setColour("yellow");
-        l.getCardinPos(0, 2).setColour("white");
-        l.getCardinPos(0, 3).setColour("blue");
-        l.getCardinPos(0, 4).setColour("lightBlue");
+        l.getCardinPos(3, 0).setColour("blue");
+        l.getCardinPos(3, 1).setColour("green");
+        l.getCardinPos(3, 2).setColour("yellow");
+        l.getCardinPos(3, 3).setColour("pink");
+        l.getCardinPos(3, 4).setColour("lightBlue");
 
-        l.getCardinPos(2, 0).setColour("green");
-        l.getCardinPos(2, 1).setColour("yellow");
-        l.getCardinPos(2, 2).setColour("white");
-        l.getCardinPos(2, 3).setColour("blue");
-        l.getCardinPos(2, 4).setColour("lightBlue");
+        l.getCardinPos(4, 0).setColour("blue");
+        l.getCardinPos(4, 1).setColour("blue");
+        l.getCardinPos(4, 2).setColour("blue");
+        l.getCardinPos(4, 3).setColour("blue");
+        l.getCardinPos(4, 4).setColour("blue");
+
+        l.getCardinPos(5, 0).setColour("pink");
+        l.getCardinPos(5, 1).setColour("yellow");
+        l.getCardinPos(5, 2).setColour("white");
+        l.getCardinPos(5, 3).setColour("lightBlue");
+        l.getCardinPos(5, 4).setColour("blue");
+        l.showLibrary();
         assertTrue(line2G.check(l));
 
     }

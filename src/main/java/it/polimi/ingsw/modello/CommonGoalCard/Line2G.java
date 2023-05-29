@@ -99,6 +99,9 @@ public class Line2G implements CommonGoalCards, Serializable {
         }
         return false;
     }
+    /**
+     *the method returns the description of the card
+     */
 
     /**
      * the method returns the description of the card

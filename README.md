@@ -1,87 +1,40 @@
-# Corso Ingegneria del Software 2023 - Cremona
+# Prova Finale di Ingegneria del Software - AA 2022-23
+![alt text](src/main/resources/images/Publisher_material/myshelfie.png)
 
-## Project Setupp
+Il progetto consiste nell’implementazione di un sistema distribuito composto da un singolo server in grado di gestire una partita alla volta e più client (uno per giocatore). Il server è in grado di supportare una partita alla volta utilizzando il pattern MVC (Model-View-Controller).
+La rete è stata gestita tramite l'utilizzo di socket e relativo sistema di messaggistica client-server.
 
-In order to set up your project, follow these steps.
+Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
-### Clone and push the template to your repo
 
-On GitHub user settings, scroll down to `Developer settings`, then `Personal access token`.
+# Documentazione
 
-Create one token to be used in place of password when prompted after git command line operations (remember to store it safely).
+### UML
+Sono riportate di seguito il diagramma UML delle classi implementate ai fini del gioco:
+- [UML 1](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml1.jpeg)
+- [UML 2](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml2.jpeg)
+- [UML 3](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml3.jpeg)
 
-Using the git command line client for your OS, type the following commands:
+### JavaDoc
+Al seguente link è possibile consultare la documentazione Java delle classi implementate: [JavaDoc](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/tree/main/Javadoc)
 
-```bash
- # clone the repo on your current folder, naming the remote as 'template'
- git clone https://github.com/dragonbanana/ingsoft-2023 --origin template
- # move to the cloned repo
- cd ingsoft-2023/
- # add your repository as 'origin' (default) remote
- git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME
- # push the template project to your github repository, setting
- git push --set-upstream origin main
- # alternatively, if you already have some content in your repo (e.g., a README)
- # and YOU WANT TO OVERWRITE IT, force the push
- git push --force --set-upstream origin main
+### Documentazione Gestione Messaggi Client-Server
+Al seguente link è possibile visionare una documentazione dettagliata della gestione dei messaggi Client-Server di cui fa uso l'applicazione: [protocollo](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/Descrizione_della_Gestione_dei_Messaggi_nel_Progetto_MyShelfie.docx)
 
-```
+### Strumenti utilizzati
+|Libreria/Plugin|Descrizione|
+|---------------|-----------|
+|__Maven__|Strumento di automazione della compilazione utilizzato principalmente per progetti Java.|
+|__JavaFx__|Libreria grafica per realizzare interfacce utente.|
+|__JUnit__|Framework di unit testing.|
 
-then, you can safely remove the 'template' remote by typing `git remote rm template`.
-
-### Customize your project files
-
-- Open the `pom.xml` file in a text editor and substitute the two occurrences of **xxx** with your **team_name**.
-- Substitute the occurence of **xxx** with your **team_name** in `Dockerfile`.
-- Open `.github/workflows/docker.yaml` and replace on line 29 `pentabanana/ingsoft-2023:latest` with `{your_dockerhub_repository}/{team_name}:latest`
-- Import it in IntelliJ
-- Customize the `README.md`
-- In order to check that everything worked fine, try to build with Maven:
-    - from IntelliJ:
-        - right-click on the project
-        - select `Maven->Reload Project`
-        - wait for the build to complete and make sure you have a build success
-        - right-click on class `Main` and select `Main App.main()`
-        - right-click on class `CalculatorTest` and select `Run CalculatorTest`
-
-### Commit and push your changes:
-
-```
-git commit -am "customize project"
-git push origin main
-```
-
-### [OPTIONAL] Configure Github Actions for Continuous Integration and Delivery
-
-- Block your `main` branch:
-    - Go to your Github repository.
-    - Navigate to `Settings`.
-    - On the left select `Branches`.
-    - Add a Branch Protection Rule by pressing `Add rule`.
-    - Insert `main` as branch name pattern.
-    - In section `Protect matching branches`, enable the option `Require a pull request before merging`.
-    - Go to the bottom, and press `Create`.
-- Add Dockerhub secrets is working:
-    - Go to your Github repository.
-    - Navigate to `Settings`.
-    - On the left select `Secrets and Variables -> Actions`.
-    - Press button `New Repository Secrets`.
-    - In the `Name` textfield insert `DOCKERHUB_USERNAME` and in the `Secret` textfield insert your **dockerhub_username** (for example pentabanana).
-    - Retrieve your Dockerhub token from Dockerhub:
-        - Go to your Dockerhub setting page (`My Settings`).
-        - Navigate to `Security`.
-        - Press `New Access Token`.
-        - Insert a name.
-        - It will display an Access Token, copy it. It will be displayed only once.
-    - Go back to the `Secrets and Variables -> Actions` page and press button `New Repository Secrets`.
-    - In the `Name` textfield insert `DOCKERHUB_TOKEN` and in the `Secret` textfield insert your **dockerhub_access_token** you copied before.
-
-### [OPTIONAL] Git Workflow
-
-- Create a branch
-- Add changes to your file
-- Create pull request
-- Assign reviewer to the code
-- Review the code
-- Check pipeline errors
-- Merge pull request
+## Funzionalità
+### Funzionalità Sviluppate
+- Regole Complete
+- CLI
+- GUI
+- Socket
+- 2 FA (Funzionalità Avanzate):
+    - __Chat:__ possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
+    - __Resistenza alle disconnessioni:__ possibilità per ogni giocatore di disconnettersi e riconnettersi al gioco e relativa gestione da parte del server.
+- Docker Images del server.
