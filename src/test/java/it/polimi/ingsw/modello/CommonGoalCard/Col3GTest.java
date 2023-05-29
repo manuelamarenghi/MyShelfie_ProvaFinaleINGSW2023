@@ -12,25 +12,26 @@ class Col3GTest {
     public void checkIfCheckReturnTrue() {
         Library l = new Library();
         l.getCardinPos(0, 0).setColour("green");
-        l.getCardinPos(1, 0).setColour("yellow");
-        l.getCardinPos(2, 0).setColour("blue");
+        l.getCardinPos(1, 0).setColour("white");
+        l.getCardinPos(2, 0).setColour("green");
         l.getCardinPos(3, 0).setColour("green");
-        l.getCardinPos(4, 0).setColour("blue");
-        l.getCardinPos(5, 0).setColour("green");
+        l.getCardinPos(4, 0).setColour("lightBlue");
+        l.getCardinPos(5, 0).setColour("lightBlue");
 
-        l.getCardinPos(0, 2).setColour("green");
-        l.getCardinPos(1, 2).setColour("white");
-        l.getCardinPos(2, 2).setColour("white");
-        l.getCardinPos(3, 2).setColour("white");
-        l.getCardinPos(4, 2).setColour("green");
+        l.getCardinPos(0, 2).setColour("white");
+        l.getCardinPos(1, 2).setColour("green");
+        l.getCardinPos(2, 2).setColour("pink");
+        l.getCardinPos(3, 2).setColour("green");
+        l.getCardinPos(4, 2).setColour("white");
         l.getCardinPos(5, 2).setColour("green");
 
         l.getCardinPos(0, 4).setColour("green");
-        l.getCardinPos(1, 4).setColour("blue");
-        l.getCardinPos(2, 4).setColour("lightBlue");
-        l.getCardinPos(3, 4).setColour("lightBlue");
-        l.getCardinPos(4, 4).setColour("lightBlue");
-        l.getCardinPos(5, 4).setColour("green");
+        l.getCardinPos(1, 4).setColour("green");
+        l.getCardinPos(2, 4).setColour("green");
+        l.getCardinPos(3, 4).setColour("blue");
+        l.getCardinPos(4, 4).setColour("green");
+        l.getCardinPos(5, 4).setColour("yellow");
+        l.showLibrary();
         assertTrue(col3G.check(l));
     }
     @Test
