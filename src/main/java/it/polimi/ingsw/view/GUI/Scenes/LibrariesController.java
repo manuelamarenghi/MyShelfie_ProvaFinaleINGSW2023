@@ -33,6 +33,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
     @FXML
     private Button OKButton = new Button();
     private Image[] imageB, imageY, imageP, imageW, imageG, imageL;
+
     /**
      * A method to initialize all the attributes
      */
@@ -84,6 +85,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
 
     /**
      * An ok button when the player types another player's name to see their library
+     *
      * @param mouseEvent
      */
     public void pressedOK(MouseEvent mouseEvent) {
@@ -94,6 +96,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
 
     /**
      * A method to create a library
+     *
      * @param l
      */
     public void createLibrary(Library l) {
@@ -124,6 +127,7 @@ public class LibrariesController extends ObservableViewClient implements Generic
 
     /**
      * A metod that brings you back to the living room scene
+     *
      * @param mouseEvent
      */
     public void pressedBack(MouseEvent mouseEvent) {

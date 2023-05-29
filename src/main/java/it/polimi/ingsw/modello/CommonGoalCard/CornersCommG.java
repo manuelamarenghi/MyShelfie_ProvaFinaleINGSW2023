@@ -16,6 +16,7 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
     /**
      * Checks if the library of the player has completed the goal or not
+     *
      * @param library
      * @return
      */
@@ -28,12 +29,11 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
 
         if (card00.getColour() != "" && card04.getColour() != "" && card50.getColour() != "" && card54.getColour() != "") {
-            if(card00.getColour() == card04.getColour() && card04.getColour() == card50.getColour()
+            if (card00.getColour() == card04.getColour() && card04.getColour() == card50.getColour()
                     && card50.getColour() == card54.getColour())
                 return true;
             else return false;
-        }
-        else {
+        } else {
             expired(library);
             return false;
         }
@@ -41,26 +41,27 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
     /**
      * The method checks if the goal is still achieveable
+     *
      * @param library
      * @return
      */
 
-    public boolean expired(Library library){
+    public boolean expired(Library library) {
         boolean expire = false;
         ArrayList<Card> cards = new ArrayList<Card>();
-        if(library.getCardinPos(0,0).getColour()!="")
-            cards.add(new Card(library.getCardinPos(0,0).getColour(),library.getCardinPos(0,0).getCoordinates()));
-        if(library.getCardinPos(0,4).getColour()!="")
-            cards.add(new Card(library.getCardinPos(0,4).getColour(),library.getCardinPos(0,4).getCoordinates()));
-        if(library.getCardinPos(5,0).getColour()!="")
-            cards.add(new Card(library.getCardinPos(5,0).getColour(),library.getCardinPos(5,0).getCoordinates()));
+        if (library.getCardinPos(0, 0).getColour() != "")
+            cards.add(new Card(library.getCardinPos(0, 0).getColour(), library.getCardinPos(0, 0).getCoordinates()));
+        if (library.getCardinPos(0, 4).getColour() != "")
+            cards.add(new Card(library.getCardinPos(0, 4).getColour(), library.getCardinPos(0, 4).getCoordinates()));
+        if (library.getCardinPos(5, 0).getColour() != "")
+            cards.add(new Card(library.getCardinPos(5, 0).getColour(), library.getCardinPos(5, 0).getCoordinates()));
         if(library.getCardinPos(5,4).getColour()!="")
             cards.add(new Card(library.getCardinPos(5,4).getColour(),library.getCardinPos(5,4).getCoordinates()));
 
         String colore = cards.get(0).getColour();
 
-        for ( Card c: cards){
-            if(c.getColour().equals(colore) == false){
+        for (Card c : cards) {
+            if (c.getColour().equals(colore) == false) {
                 expire = true;
             }
         }
@@ -70,7 +71,7 @@ public class CornersCommG implements CommonGoalCards, Serializable {
     }
 
     /**
-     *the method shows the goal
+     * the method shows the goal
      */
     @Override
     public void showCommonCard() {
@@ -85,6 +86,7 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
     /**
      * the method returns the description of the card
+     *
      * @return
      */
     @Override

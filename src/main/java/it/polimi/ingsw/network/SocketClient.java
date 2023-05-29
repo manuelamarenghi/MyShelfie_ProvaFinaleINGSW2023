@@ -12,8 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SocketClient extends Client{
-    private final int TIMEOUT=10000;
+public class SocketClient extends Client {
+    private final int TIMEOUT = 10000;
     private final Socket socket;
     private final ObjectOutputStream outputStream;
     private final ObjectInputStream inputStream;
@@ -24,13 +24,14 @@ public class SocketClient extends Client{
 
     /**
      * First constructor for the socket client
+     *
      * @param address
      * @param port
      * @throws IOException
      */
-    public SocketClient(String address,int port) throws IOException {
+    public SocketClient(String address, int port) throws IOException {
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
+        this.socket.connect(new InetSocketAddress(address, port), TIMEOUT);
         this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         this.inputStream = new ObjectInputStream(socket.getInputStream());
         this.messageReader = Executors.newSingleThreadExecutor();
@@ -39,6 +40,7 @@ public class SocketClient extends Client{
 
     /**
      * Second constructor for the socket client
+     *
      * @param address
      * @param port
      * @param nickname
@@ -46,16 +48,17 @@ public class SocketClient extends Client{
      */
     public SocketClient(String address, int port, String nickname) throws IOException {
         this.socket = new Socket();
-        this.socket.connect(new InetSocketAddress(address,port),TIMEOUT);
+        this.socket.connect(new InetSocketAddress(address, port), TIMEOUT);
         this.outputStream = new ObjectOutputStream(socket.getOutputStream());
         this.inputStream = new ObjectInputStream(socket.getInputStream());
         this.messageReader = Executors.newSingleThreadExecutor();
         this.pinger = Executors.newSingleThreadScheduledExecutor();
-        this.nickname=nickname;
+        this.nickname = nickname;
     }
 
     /**
      * A method to send a message to the sockest server
+     *
      * @param message
      */
     @Override
@@ -63,9 +66,9 @@ public class SocketClient extends Client{
         try {
             outputStream.writeObject(message);
             outputStream.reset();
-        }catch(IOException exception){
+        } catch (IOException exception) {
             System.out.println("errore nel mandare mex");
-            notifyObserver(new Message(message.getnickname(),"Couldn't send message"));
+            notifyObserver(new Message(message.getnickname(), "Couldn't send message"));
         }
     }
 
@@ -75,14 +78,14 @@ public class SocketClient extends Client{
 
     @Override
     public synchronized void readMessage() {
-        messageReader.execute(()->{
-            while(!messageReader.isShutdown()){
+        messageReader.execute(() -> {
+            while (!messageReader.isShutdown()) {
                 Message message;
-                try{
-                    message=(Message)inputStream.readObject();
+                try {
+                    message = (Message) inputStream.readObject();
                     //System.out.println(message.getType());
-                }catch(IOException|ClassNotFoundException exception){
-                    message=new Message(nickname,"Connection lost with server.");
+                } catch (IOException | ClassNotFoundException exception) {
+                    message = new Message(nickname, "Connection lost with server.");
                 }
                 notifyObserver(message);
             }
@@ -94,23 +97,24 @@ public class SocketClient extends Client{
      */
     @Override
     public void disconnect() {
-        try{
-            if(!socket.isClosed()){
+        try {
+            if (!socket.isClosed()) {
                 messageReader.shutdown();
                 socket.close();
             }
-        }catch(IOException exception){
-           notifyObserver(new Message(nickname,"Couldn't disconnect"));
+        } catch (IOException exception) {
+            notifyObserver(new Message(nickname, "Couldn't disconnect"));
         }
     }
 
     /**
      * A method to enable the pinger
+     *
      * @param enabled
      */
     public void enablePinger(boolean enabled) {
         if (enabled) {
-            pinger.scheduleAtFixedRate(() -> sendMessage(new Message(nickname,"Ping!")), 0, 1000, TimeUnit.MILLISECONDS);
+            pinger.scheduleAtFixedRate(() -> sendMessage(new Message(nickname, "Ping!")), 0, 1000, TimeUnit.MILLISECONDS);
         } else {
             pinger.shutdownNow();
         }

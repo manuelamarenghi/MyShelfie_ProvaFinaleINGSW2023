@@ -1,7 +1,10 @@
 package it.polimi.ingsw.Controller;
 
 
-import it.polimi.ingsw.message.*;
+import it.polimi.ingsw.message.Connected_Before_FirstPlayer;
+import it.polimi.ingsw.message.Message;
+import it.polimi.ingsw.message.Numb_Player;
+import it.polimi.ingsw.message.PlayerAction;
 import it.polimi.ingsw.modello.Card;
 import it.polimi.ingsw.modello.EffectiveCard;
 import it.polimi.ingsw.modello.Match;
@@ -185,12 +188,13 @@ public class MatchController {
      */
     private void firstFinish(Player p) {
         turnController.setLastRound(true);
-        match.setFirstFinish(p);
-        for (VirtualView v : connectClients.values()) {
-            v.FirstFinished(match.getFirstFinish().getNickname());
+        if (match.getFirstFinish().getNickname().equals("")) {
+            match.setFirstFinish(p);
+            for (VirtualView v : connectClients.values()) {
+                v.FirstFinished(match.getFirstFinish().getNickname());
+            }
         }
     }
-
     /**
      * removeClient() when a client wants to live or has problem with the connection
      *
@@ -228,7 +232,7 @@ public class MatchController {
         }
         connectClients.put(name, virtualView);
         virtualView.AcceptNewPlayer(name, true);
-
+        virtualView.GenericMessage("server", "You are back in the game");
         match.getPlayers().add(player);
         disconnectClients.remove(player);
         if (isStarted) {
@@ -293,6 +297,7 @@ public class MatchController {
     /**
      * A handler method that gets called when a player decides to pick some card from the board and updates the board
      * and the library
+     *
      * @param m
      */
 
@@ -321,7 +326,6 @@ public class MatchController {
 
             System.out.println("Finish control library full");
             match.getPlayerByNickname(nickname).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(nickname));
-            System.out.println("call next player");
             nextPlayer();
 
             System.out.println("next player");
@@ -336,6 +340,7 @@ public class MatchController {
 
     /**
      * A method to add the virtualView
+     *
      * @param nickname
      * @param virtualView
      */

@@ -11,6 +11,7 @@ public class AskNewNickname extends Message implements Serializable {
     public AskNewNickname() {
         super("server","changing_nickname");
     }
+
     public void visit(MessageHandler controller){
         controller.handle(this);
     }

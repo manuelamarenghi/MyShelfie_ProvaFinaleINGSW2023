@@ -21,6 +21,7 @@ public class CG_twoController extends ObservableViewClient implements GenericSce
     public ImageView imageViewTwo = new ImageView();
     private int numb = -1;
     private String descr;
+
     /**
      * A method to initialize all the attributes
      */
@@ -32,8 +33,10 @@ public class CG_twoController extends ObservableViewClient implements GenericSce
             setImageAndText(numb, descr);
         }
     }
+
     /**
      * A method to set the text and image for the scene
+     *
      * @param numberImage
      * @param descr
      */
@@ -47,8 +50,10 @@ public class CG_twoController extends ObservableViewClient implements GenericSce
         imageViewTwo.setImage(image);
         theLabelTwo.setText(descr);
     }
+
     /**
      * A method the birgs you back to the living room by pressing the button
+     *
      * @param mouseEvent
      */
     public void pressedButton(MouseEvent mouseEvent) {

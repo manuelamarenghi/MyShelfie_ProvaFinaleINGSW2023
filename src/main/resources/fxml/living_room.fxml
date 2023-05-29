@@ -12,17 +12,17 @@
             <children>
                 <AnchorPane layoutX="203.0" layoutY="73.0" prefHeight="608.0" prefWidth="892.0">
                     <children>
-                        <Button fx:id="libraries" layoutX="47.0" layoutY="23.0" mnemonicParsing="false"
+                        <Button fx:id="libraries" layoutX="64.0" layoutY="23.0" mnemonicParsing="false"
                                 prefHeight="37.0" prefWidth="113.0" text="libraries"/>
                         <Button fx:id="Common1" layoutX="241.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
                                 prefWidth="114.0" text="C.C. 1"/>
                         <Button fx:id="Common2" layoutX="241.0" layoutY="22.0" mnemonicParsing="false" prefHeight="38.0"
                                 prefWidth="114.0" text="C.C. 2"/>
                         <Button fx:id="Exit" layoutX="831.0" layoutY="16.0" mnemonicParsing="false" text="Exit"/>
-                        <Button fx:id="Chat" layoutX="46.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
+                        <Button fx:id="Chat" layoutX="63.0" layoutY="82.0" mnemonicParsing="false" prefHeight="38.0"
                                 prefWidth="114.0" text="Chat"/>
-                        <ImageView fx:id="PersonalCard" fitHeight="169.0" fitWidth="120.0" layoutX="502.0"
-                                   layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="PersonalCard" fitHeight="191.0" fitWidth="137.0" layoutX="427.0"
+                                   layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                         </ImageView>
                         <StackPane fx:id="stackPane" layoutX="47.0" layoutY="166.0" prefHeight="364.0"
                                    prefWidth="364.0">
@@ -35,11 +35,14 @@
                                 </ImageView>
                                 <GridPane fx:id="gameBoard" prefHeight="329.0" prefWidth="336.0">
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375"
-                                                           minWidth="10.0" prefWidth="48.4"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375"
-                                                           minWidth="10.0" prefWidth="39.199981689453125"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375" minWidth="0.0"
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES"
+                                                           maxWidth="209.5999755859375" minWidth="10.0"
+                                                           prefWidth="48.4"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="209.5999755859375" minWidth="10.0"
+                                                           prefWidth="39.199981689453125"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="209.5999755859375" minWidth="0.0"
                                                            prefWidth="35.800018310546875"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375"
                                                            minWidth="10.0" prefWidth="35.20002441406251"/>
@@ -47,16 +50,20 @@
                                                            minWidth="10.0" prefWidth="39.19999999999999"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375"
                                                            minWidth="10.0" prefWidth="37.599999999999994"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375"
-                                                           minWidth="10.0" prefWidth="36.79996337890623"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.5999755859375" minWidth="0.0"
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="209.5999755859375" minWidth="10.0"
                                                            prefWidth="36.79996337890623"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.399959564209" minWidth="10.0"
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="209.5999755859375" minWidth="0.0"
+                                                           prefWidth="36.79996337890623"/>
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES"
+                                                           maxWidth="302.399959564209" minWidth="10.0"
                                                            prefWidth="54.5999755859375"/>
                                     </columnConstraints>
                                     <rowConstraints>
                                         <RowConstraints maxHeight="122.00000610351563" minHeight="10.0"
-                                                        prefHeight="49.0000244140625" vgrow="SOMETIMES"/>
+                                                        prefHeight="49.0000244140625" valignment="BOTTOM"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="122.00000610351563" minHeight="0.0"
                                                         prefHeight="35.399975585937504" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="122.00000610351563" minHeight="10.0"
@@ -70,9 +77,10 @@
                                         <RowConstraints maxHeight="165.8000244140625" minHeight="0.0"
                                                         prefHeight="34.39997558593748" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="223.8" minHeight="10.0" prefHeight="38.4000244140625"
-                                                        vgrow="SOMETIMES"/>
+                                                        valignment="CENTER" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="272.7999633789062" minHeight="10.0"
-                                                        prefHeight="53.39996337890625" vgrow="SOMETIMES"/>
+                                                        prefHeight="53.39996337890625" valignment="TOP"
+                                                        vgrow="SOMETIMES"/>
                                     </rowConstraints>
                                 </GridPane>
                             </children>
@@ -92,24 +100,27 @@
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.39996337890625"
                                                            minWidth="10.0" prefWidth="35.99996337890625"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="0.0"
-                                                           prefWidth="21.60003662109375"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="65.0"
+                                                           minWidth="0.0" prefWidth="21.60003662109375"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.20001220703126" minWidth="0.0"
                                                            prefWidth="16.00003662109375"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.20001220703126"
-                                                           minWidth="2.9999511718750043"
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="62.20001220703126" minWidth="2.9999511718750043"
                                                            prefWidth="19.199963378906247"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.20001220703126"
                                                            minWidth="5.199987792968756" prefWidth="15.999951171874997"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="67.4000244140625"
-                                                           minWidth="9.200000000000003" prefWidth="20.00001220703126"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="67.4000244140625" minWidth="9.200000000000003"
+                                                           prefWidth="20.00001220703126"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.8000244140625" minWidth="10.0"
                                                            prefWidth="19.199987792968756"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.800048828125" minWidth="0.0"
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="68.800048828125" minWidth="0.0"
                                                            prefWidth="20.799999999999983"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="82.80000000000001"
                                                            minWidth="10.0" prefWidth="16.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.20001220703125" minWidth="0.0"
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+                                                           maxWidth="91.20001220703125" minWidth="0.0"
                                                            prefWidth="21.800048828125"/>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.79998779296875"
                                                            minWidth="0.0" prefWidth="39.199951171875"/>
@@ -118,27 +129,32 @@
                                         <RowConstraints maxHeight="30.599981689453124" minHeight="0.0"
                                                         prefHeight="22.399993896484375" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="53.000006103515624" minHeight="0.0"
-                                                        prefHeight="22.400018310546876" vgrow="SOMETIMES"/>
+                                                        prefHeight="22.400018310546876" valignment="CENTER"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="66.40001525878907" minHeight="0.0"
                                                         prefHeight="13.599981689453124" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="92.6000274658203" minHeight="0.0"
-                                                        prefHeight="17.60002746582031" vgrow="SOMETIMES"/>
+                                                        prefHeight="17.60002746582031" valignment="CENTER"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="105.20001831054688" minHeight="7.1999664306640625"
                                                         prefHeight="11.199993896484372" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="130.8000244140625" minHeight="10.0"
-                                                        prefHeight="20.000006103515616" vgrow="SOMETIMES"/>
+                                                        prefHeight="20.000006103515616" valignment="CENTER"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="56.600012207031256" minHeight="3.999987792968753"
                                                         prefHeight="11.999963378906244" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="73.0000244140625" minHeight="10.0"
-                                                        prefHeight="20.800012207031244" vgrow="SOMETIMES"/>
+                                                        prefHeight="20.800012207031244" valignment="CENTER"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="60.0" minHeight="4.800024414062506"
                                                         prefHeight="10.39996337890625" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="55.4000244140625" minHeight="3.7999633789062557"
-                                                        prefHeight="20.799975585937517" vgrow="SOMETIMES"/>
+                                                        prefHeight="20.799975585937517" valignment="CENTER"
+                                                        vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="45.79998779296875" minHeight="7.999987792968739"
                                                         prefHeight="11.20001220703125" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="62.40001220703124" minHeight="6.000024414062494"
-                                                        prefHeight="20.0" vgrow="SOMETIMES"/>
+                                                        prefHeight="20.0" valignment="CENTER" vgrow="SOMETIMES"/>
                                         <RowConstraints maxHeight="49.599999999999994" minHeight="5.199999999999989"
                                                         prefHeight="49.599999999999994" vgrow="SOMETIMES"/>
                                     </rowConstraints>
@@ -148,9 +164,9 @@
                                 </GridPane>
                             </children>
                         </StackPane>
-                        <TextArea fx:id="messageServer" layoutX="642.0" layoutY="49.0" prefHeight="65.0"
-                                  prefWidth="220.0"/>
-                        <TextField fx:id="inputUser" layoutX="715.0" layoutY="122.0" prefHeight="26.0"
+                        <TextArea fx:id="messageServer" layoutX="585.0" layoutY="49.0" prefHeight="74.0"
+                                  prefWidth="288.0"/>
+                        <TextField fx:id="inputUser" layoutX="711.0" layoutY="133.0" prefHeight="26.0"
                                    prefWidth="94.0"/>
                         <ImageView fx:id="Chair" fitHeight="132.0" fitWidth="137.0" layoutX="731.0" layoutY="462.0"
                                    pickOnBounds="true" preserveRatio="true"/>
@@ -170,7 +186,8 @@
                                    pickOnBounds="true" preserveRatio="true"/>
                         <ImageView fx:id="FirstFinished" fitHeight="53.0" fitWidth="54.0" layoutX="796.0"
                                    layoutY="259.0" pickOnBounds="true" preserveRatio="true"/>
-                        <Button fx:id="Send" layoutX="828.0" layoutY="123.0" mnemonicParsing="false" text="send"/>
+                        <Button fx:id="Send" layoutX="828.0" layoutY="134.0" mnemonicParsing="false" text="send"/>
+                        <TextArea fx:id="Notes" layoutX="47.0" layoutY="548.0" prefHeight="39.0" prefWidth="364.0"/>
                     </children>
                 </AnchorPane>
             </children>

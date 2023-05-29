@@ -21,8 +21,10 @@ public class LoginSceneController extends ObservableViewClient implements Generi
     @FXML
     private StackPane Stack;
     public TextField name_txb;
+
     /**
      * A button to see the common goal card 1
+     *
      * @param mouseEvent
      */
     public void initialize() {
@@ -37,6 +39,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
     /**
      * A button in the login scene to sendd the nickname selcted
+     *
      * @param actionEvent
      */
     public void onClick(ActionEvent actionEvent) {
@@ -47,7 +50,7 @@ public class LoginSceneController extends ObservableViewClient implements Generi
             this.notifyObserver(observers -> observers.setNickname(name_txb.getText()));
         } else {
             String numb = name_txb.getText().trim();
-            if (!numb.equals("2") && !numb.equals("3")  && !numb.equals("4")) {
+            if (!numb.equals("2") && !numb.equals("3") && !numb.equals("4")) {
                 name_txt.setText("Insert a valid number");
             }
             this.notifyObserver(observers -> observers.ChangeRoot("wait"));

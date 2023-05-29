@@ -89,7 +89,7 @@ public class Line2G implements CommonGoalCards, Serializable {
                 numberOfCards++;
             }
             for(i=0 ; i<6 ; i++){
-                if(differentTypes[i]>1){
+                if (differentTypes[i] > 1) {
                     differentLines--;
                 }
             }
@@ -99,8 +99,9 @@ public class Line2G implements CommonGoalCards, Serializable {
         }
         return false;
     }
+
     /**
-     *the method returns the description of the card
+     * the method returns the description of the card
      */
 
     @Override

@@ -1,8 +1,6 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.Controller.ClientController;
-import it.polimi.ingsw.modello.Match;
-import it.polimi.ingsw.network.SocketClient;
 import it.polimi.ingsw.view.Cli;
 import it.polimi.ingsw.view.GUI.JavaFXApplication;
 import javafx.application.Application;

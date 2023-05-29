@@ -53,14 +53,15 @@ public class Square2G implements CommonGoalCards, Serializable {
 
             }
         }
-        for(i=0 ; i<6 ; i++){
+        for (i = 0; i < 6; i++) {
             totalSquares = totalSquares + numOfSquares[i];
         }
-        if(totalSquares >=2){
+        if (totalSquares >= 2) {
             return true;
         }
         return false;
     }
+
     /**
      * expired() let you know if the player can still reach the goal or not
      */
@@ -69,8 +70,9 @@ public class Square2G implements CommonGoalCards, Serializable {
     public boolean expired(Library library) {
         return false;
     }
+
     /**
-     *the method returns the description of the card
+     * the method returns the description of the card
      */
     @Override
     public String getDesc() {

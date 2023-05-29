@@ -36,6 +36,7 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
 
     /**
      * A method to set the text and image for the scene
+     *
      * @param numberImage
      * @param descr
      */
@@ -52,6 +53,7 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
 
     /**
      * A method the birgs you back to the living room by pressing the button
+     *
      * @param mouseEvent
      */
     public void pressedButton(MouseEvent mouseEvent) {

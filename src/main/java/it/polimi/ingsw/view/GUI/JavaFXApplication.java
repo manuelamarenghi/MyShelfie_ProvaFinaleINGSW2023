@@ -25,6 +25,7 @@ public class JavaFXApplication extends Application {
 
     /**
      * A method to start the GUI interface
+     *
      * @param primaryStage
      * @throws IllegalArgumentException
      * @throws IOException

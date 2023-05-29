@@ -15,14 +15,12 @@ import java.util.stream.Collectors;
 
 public class FinalController extends ObservableViewClient implements GenericSceneController {
     @FXML
-    private ImageView FIrstStar, SecStar, Third, Four;
+    private ImageView FIrstStar = new ImageView(), SecStar = new ImageView(), Third = new ImageView(), Four = new ImageView();
     @FXML
-    private Text FirstPlace, SecondPlace, ThirdPlace, FourPlace;
+    private Text FirstPlace = new Text(), SecondPlace = new Text(), ThirdPlace = new Text(), FourPlace = new Text();
     @FXML
-    private Text ScoreOne, ScoreTwo, ScoreThird, FourScore;
-    /**
-     * A method to initialize all the attributes
-     */
+    private Text ScoreOne = new Text(), ScoreTwo = new Text(), ScoreThird = new Text(), FourScore = new Text();
+
     public void initialize() {
         FirstPlace.toFront();
         SecondPlace.toFront();
@@ -33,11 +31,6 @@ public class FinalController extends ObservableViewClient implements GenericScen
         ScoreThird.toFront();
         FourScore.toFront();
     }
-
-    /**
-     * A method For the final scoreboard of the game
-     * @param point
-     */
     public void SetClassification(HashMap<String, Integer> point) {
         ArrayList<Integer> List = new ArrayList<>();
         for (int x : point.values()) {
@@ -47,12 +40,14 @@ public class FinalController extends ObservableViewClient implements GenericScen
         Set<String> key = point.keySet();
         int i = 0;
         for (String s : key) {
+            System.out.println(s);
             while (i < sortedList.size()) {
                 if (point.get(s).equals(sortedList.get(i))) {
                     InputStream is;
                     switch (i) {
                         case 0:
-                            is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
+                            System.out.println("sono prima");
+                            is = this.getClass().getResourceAsStream("/images/Publisher_material/trofeo.png");
                             Image image = new Image(is);
                             FIrstStar.setImage(image);
                             FirstPlace.setText(s);
@@ -60,6 +55,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 1:
+                            System.out.println("sono secoda");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imageo = new Image(is);
                             SecStar.setImage(imageo);
@@ -68,6 +64,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 2:
+                            System.out.println("sono terza");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imagea = new Image(is);
                             Third.setImage(imagea);
@@ -76,6 +73,7 @@ public class FinalController extends ObservableViewClient implements GenericScen
                             i = 5;
                             break;
                         case 3:
+                            System.out.println("sono quarta");
                             is = this.getClass().getResourceAsStream("/images/Publisher_material/stellina.png");
                             Image imageu = new Image(is);
                             Four.setImage(imageu);
