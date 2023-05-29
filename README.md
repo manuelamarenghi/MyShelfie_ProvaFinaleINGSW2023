@@ -35,5 +35,5 @@ Al seguente link è possibile visionare una documentazione dettagliata della ges
 - GUI
 - Socket
 - 2 FA (Funzionalità Avanzate):
-    - __Chat:__possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
+    - __Chat:__ possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
     - __Resistenza alle disconnessioni:__ possibilità per ogni giocatore di disconnettersi e riconnettersi al gioco e relativa gestione da parte del server.
