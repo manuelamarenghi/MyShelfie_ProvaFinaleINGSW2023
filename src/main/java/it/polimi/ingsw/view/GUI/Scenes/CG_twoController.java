@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 public class CG_twoController extends ObservableViewClient implements GenericSceneController {
@@ -45,8 +46,9 @@ public class CG_twoController extends ObservableViewClient implements GenericSce
         this.descr = descr;
         String c = String.valueOf(numberImage);
         String path = "/images/CommonGoalCards/CommonGoal" + c + ".png";
-        System.out.println(path);
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(path)).toString());
+        InputStream is;
+        is = this.getClass().getResourceAsStream(path);
+        Image image = new Image(Objects.requireNonNull(is));
         imageViewTwo.setImage(image);
         theLabelTwo.setText(descr);
     }

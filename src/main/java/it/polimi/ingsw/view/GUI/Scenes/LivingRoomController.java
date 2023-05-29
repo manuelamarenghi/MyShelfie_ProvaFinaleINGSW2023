@@ -161,38 +161,54 @@ public class LivingRoomController extends ObservableViewClient implements Generi
      * A method to set the tiles to the corresponding images
      */
     public void setTiles() {
-        //InputStream is;
-        //tiles=Collections.synchronizedMap(new HashMap<>())
+        InputStream is;
         imageY = new Image[3];
-        //is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
-        imageY[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow1.png")).toString());
-        imageY[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow2.png")).toString());
-        imageY[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/yellow/yellow3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow1.png");
+        imageY[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow2.png");
+        imageY[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/yellow/yellow3.png");
+        imageY[2] = new Image(Objects.requireNonNull(is));
         tiles.put("yellow", imageY);
         imageP = new Image[3];
-        imageP[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink1.png")).toString());
-        imageP[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink2.png")).toString());
-        imageP[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/pink/pink3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/pink/pink1.png");
+        imageP[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/pink/pink2.png");
+        imageP[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/pink/pink3.png");
+        imageP[2] = new Image(Objects.requireNonNull(is));
         tiles.put("pink", imageP);
         imageW = new Image[3];
-        imageW[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white1.png")).toString());
-        imageW[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white2.png")).toString());
-        imageW[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/white/white3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/white/white1.png");
+        imageW[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/white/white2.png");
+        imageW[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/white/white3.png");
+        imageW[2] = new Image(Objects.requireNonNull(is));
         tiles.put("white", imageW);
         imageG = new Image[3];
-        imageG[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green1.png")).toString());
-        imageG[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green2.png")).toString());
-        imageG[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/green/green3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/green/green1.png");
+        imageG[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/green/green2.png");
+        imageG[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/green/green3.png");
+        imageG[2] = new Image(Objects.requireNonNull(is));
         tiles.put("green", imageG);
         imageL = new Image[3];
-        imageL[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue1.png")).toString());
-        imageL[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue2.png")).toString());
-        imageL[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/light_blue/light_blue3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/light_blue/light_blue1.png");
+        imageL[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/light_blue/light_blue2.png");
+        imageL[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/light_blue/light_blue3.png");
+        imageL[2] = new Image(Objects.requireNonNull(is));
         tiles.put("lightBlue", imageL);
         imageB = new Image[3];
-        imageB[0] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue1.png")).toString());
-        imageB[1] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue2.png")).toString());
-        imageB[2] = new Image(Objects.requireNonNull(this.getClass().getResource("/images/item_tiles/blue/blue3.png")).toString());
+        is = this.getClass().getResourceAsStream("/images/item_tiles/blue/blue1.png");
+        imageB[0] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/blue/blue2.png");
+        imageB[1] = new Image(Objects.requireNonNull(is));
+        is = this.getClass().getResourceAsStream("/images/item_tiles/blue/blue3.png");
+        imageB[2] = new Image(Objects.requireNonNull(is));
         tiles.put("blue", imageB);
     }
 
@@ -302,7 +318,9 @@ public class LivingRoomController extends ObservableViewClient implements Generi
         stored.setPersonal(x);
         String c = String.valueOf(x);
         String name = "/images/personal_goal_cards/Personal_Goals" + c + ".png";
-        Image image = new Image(Objects.requireNonNull(this.getClass().getResource(name)).toString());
+        InputStream is;
+        is = this.getClass().getResourceAsStream(name);
+        Image image = new Image(Objects.requireNonNull(is));
         PersonalCard.setImage(image);
     }
 
