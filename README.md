@@ -1,5 +1,5 @@
 # Prova Finale di Ingegneria del Software - AA 2022-23
-![alt text](src/main/resources/images/myshelfie.png)
+![alt text](src/main/resources/images/Publisher_material/myshelfie.png)
 ## Project Setupp
 
 In order to set up your project, follow these steps.
