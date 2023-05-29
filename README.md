@@ -14,11 +14,11 @@ Sono riportate di seguito il diagramma UML delle classi implementate ai fini del
 - [UML 1](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml1.jpeg)
 - [UML 2](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml2.jpeg)
 - [UML 3](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml3.jpeg)
-- 
+
 ### JavaDoc
 Al seguente link è possibile consultare la documentazione Java delle classi implementate: 
 
 ### Documentazione Gestione Messaggi Client-Server
-Al seguente link è possibile visionare una documentazione dettagliata della gestione dei messaggi Client-Server di cui fa uso l'applicazione: 
+Al seguente link è possibile visionare una documentazione dettagliata della gestione dei messaggi Client-Server di cui fa uso l'applicazione: [protocollo](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/Descrizione_della_Gestione_dei_Messaggi_nel_Progetto_MyShelfie.docx)
 
 
