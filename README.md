@@ -5,7 +5,9 @@ Il progetto consiste nell’implementazione di un sistema distribuito composto d
 La rete è stata gestita tramite l'utilizzo di socket e relativo sistema di messaggistica client-server.
 
 Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
-#Documentazione
+
+
+# Documentazione
 
 ### Clone and push the template to your repo
 
