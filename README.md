@@ -11,7 +11,8 @@ Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
 ### UML
 Sono riportate di seguito il diagramma UML delle classi implementate ai fini del gioco:
-- [UML Iniziali]
-- [UML Finali]
+- [UML 1](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml1.jpeg)
+- [UML 2](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml2.jpeg)
+- [UML 3](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml3.jpeg)
 
 
