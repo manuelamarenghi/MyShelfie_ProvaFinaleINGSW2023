@@ -123,6 +123,11 @@ public class ChatController extends ObservableViewClient implements GenericScene
     }
 
     public void removePlayer(String name) {
+        ChatsAvaiable.getItems().remove(name);
+        StoredChat.remove(name);
+        System.out.println("rimuoviamo persona");
+        all.remove(name);
+        /*
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
         System.out.println("rimuoviamo persona");
@@ -134,6 +139,8 @@ public class ChatController extends ObservableViewClient implements GenericScene
                 }
             }
         }
+
+         */
     }
 
     public void addPlayer(String name) {
