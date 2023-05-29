@@ -3,7 +3,6 @@ package it.polimi.ingsw.modello.CommonGoalCard;
 import it.polimi.ingsw.modello.Library;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DoubleTest {
@@ -26,8 +25,8 @@ public class DoubleTest {
         library.getCardinPos(3,3).setColour("V");
         library.getCardinPos(3,2).setColour("V");
         library.getCardinPos(1,2).setColour("R");
-        library.getCardinPos(5,4).setColour("G");
-        assertFalse(doubleCard.check(library));
+        library.getCardinPos(5, 4).setColour("G");
+        assertTrue(doubleCard.check(library));
     }
 
     @Test

@@ -22,6 +22,9 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
     private int numb = -1;
     private String descr;
 
+    /**
+     * A method to initialize all the attributes
+     */
     public void initialize() {
         box.getStyleClass().add("card");
         theLabel.getStyleClass().add("text");
@@ -31,7 +34,12 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
         }
     }
 
-    //
+    /**
+     * A method to set the text and image for the scene
+     *
+     * @param numberImage
+     * @param descr
+     */
     public void setImageAndText(int numberImage, String descr) {
         numb = numberImage;
         this.descr = descr;
@@ -43,6 +51,11 @@ public class CG_oneController extends ObservableViewClient implements GenericSce
         theLabel.setText(descr);
     }
 
+    /**
+     * A method the birgs you back to the living room by pressing the button
+     *
+     * @param mouseEvent
+     */
     public void pressedButton(MouseEvent mouseEvent) {
         this.notifyObserver(observerViewClient -> observerViewClient.ChangeRoot("living"));
     }

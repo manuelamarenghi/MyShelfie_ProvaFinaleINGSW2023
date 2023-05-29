@@ -2,7 +2,6 @@ package it.polimi.ingsw.modello;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PlayerManager implements Serializable {
     /**

@@ -28,16 +28,16 @@ public class Server {
      * addClient() when a new client connected to the game
      */
     public void addClient(String nickname,ClientHandler clientHandler) {
-        if (!clientdisconnected.contains(nickname)){
-            synchronized(this){
-               if(matchController.loginHandler(nickname, new VirtualView(clientHandler)) ){
-                clientsconnected.add(nickname);
-                clientHandlerMap.put(nickname, clientHandler);
-                System.out.println("il giocatore "+nickname+" si è connesso");
-            }}
+        if (!clientdisconnected.contains(nickname)) {
+            synchronized (this) {
+                if (matchController.loginHandler(nickname, new VirtualView(clientHandler))) {
+                    clientsconnected.add(nickname);
+                    clientHandlerMap.put(nickname, clientHandler);
+                    System.out.println("il giocatore " + nickname + " si è connesso");
+                }
+            }
             System.out.println(clientsconnected);
-        }
-        else {
+        } else {
             matchController.PlayerBack(nickname, new VirtualView(clientHandler));
             clientsconnected.add(nickname);
             clientdisconnected.remove(nickname);
@@ -48,9 +48,9 @@ public class Server {
     /**
      * removeClient() when a client leave the game
      */
-    public void removeClient(String nickname){
+    public void removeClient(String nickname) {
         clientHandlerMap.get(nickname).sendMessage(new Disconnection_Answer(nickname));
-        if(matchController.getIsStarted() == true) {
+        if (matchController.getIsStarted() == true) {
             disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
             clientdisconnected.add(nickname);
         }
@@ -69,7 +69,7 @@ public class Server {
             }
         }
         System.out.println("starting disconnection");
-        if(matchController.getIsStarted() == true) {
+        if (matchController.getIsStarted() == true) {
             clientdisconnected.add(nickname);
             disconnettedclientMap.put(nickname, clientHandlerMap.get(nickname));
         }

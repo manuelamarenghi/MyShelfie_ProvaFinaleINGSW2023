@@ -182,20 +182,21 @@ public class Board implements Serializable {
             }
         }
         if (cards.size() == 3) {
-            if (((cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1) && (cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1)) ||
+            if ((((cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1) && (cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1)) ||
                     ((cards.get(2).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1) && (cards.get(1).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1)) ||
                     ((cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1) && (cards.get(2).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1)) ||
                     ((cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1) && (cards.get(0).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1)) ||
                     ((cards.get(0).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1) && (cards.get(1).getCoordinates().getX() == cards.get(0).getCoordinates().getX() + 1)) ||
-                    ((cards.get(1).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1) && (cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1))
-            ) {
+                    ((cards.get(1).getCoordinates().getX() == cards.get(2).getCoordinates().getX() + 1) && (cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX() + 1)))
+                    && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY()) && (cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY())) {
                 //ok Cards are adicent
-            } else if (((cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1) && (cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1)) ||
+            } else if ((((cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1) && (cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1)) ||
                     ((cards.get(2).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1) && (cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1)) ||
                     ((cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1) && (cards.get(2).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1)) ||
                     ((cards.get(2).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1)) ||
                     ((cards.get(0).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(1).getCoordinates().getY() == cards.get(0).getCoordinates().getY() + 1)) ||
-                    ((cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1))) {
+                    ((cards.get(1).getCoordinates().getY() == cards.get(2).getCoordinates().getY() + 1) && (cards.get(0).getCoordinates().getY() == cards.get(1).getCoordinates().getY() + 1)))
+                    && (cards.get(0).getCoordinates().getX() == cards.get(1).getCoordinates().getX()) && (cards.get(2).getCoordinates().getX() == cards.get(1).getCoordinates().getX())) {
 
             } else {
                 return false;
@@ -227,7 +228,6 @@ public class Board implements Serializable {
             }
 
         }//Fine ciclo for
-
         return true;
     }
 

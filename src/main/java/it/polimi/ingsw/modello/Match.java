@@ -18,8 +18,8 @@ public class Match extends Observable implements Serializable {
 
     private int playerNumber;
 private Board board;
-private Player firstFinish;
-private Player chair;
+    private Player firstFinish = new Player("");
+    private Player chair;
 private EffectiveCard[] CommonCards=new EffectiveCard[2];
 private Matchmanager matchmanager;
     /**

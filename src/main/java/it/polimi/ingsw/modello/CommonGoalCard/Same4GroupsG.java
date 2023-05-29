@@ -23,10 +23,13 @@ public class Same4GroupsG implements CommonGoalCards, Serializable {
     public boolean check(Library library) {
         ArrayList<Integer> adjacent = library.getgroup();
         int count = 0;
-
         for (Integer i : adjacent) {
-            if (i >= 4)
+            if (i == 4) {
                 count++;
+            }
+            if (i > 4) {
+                count = count + (i / 4);
+            }
         }
         if (count >= 4)
             return true;
@@ -67,6 +70,9 @@ public class Same4GroupsG implements CommonGoalCards, Serializable {
         return false;
     }
 
+    /**
+     * the method returns the description of the card
+     */
     @Override
     public String getDesc() {
         return "Four groups each containing at least 4 tiles of the same type (not necessarily in the depicted shape). \n" +

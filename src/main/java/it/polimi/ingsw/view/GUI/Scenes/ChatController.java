@@ -27,7 +27,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
     private ArrayList<String> dest;
     private ArrayList<String> all;
     private String nickname;
-    private String selectedItem =new String();
+    private String selectedItem = new String();
 
     public void initialize() {
         dest = new ArrayList<>();
@@ -35,6 +35,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
         Send.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedButton);
         Back.addEventHandler(MouseEvent.MOUSE_CLICKED, this::pressedBack);
         if (all != null) {
+            System.out.println(all);
             ReloadChat(all);
         }
     }
@@ -53,7 +54,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
             ChatsAvaiable.getItems().add(name);
 
         }
-        if(all.size()>1) {
+        if (all.size() > 1) {
             ChatsAvaiable.getItems().add("Group Chat");
             ArrayList<String> chat = new ArrayList<>();
             StoredChat.put("Group Chat", chat);
@@ -62,10 +63,13 @@ public class ChatController extends ObservableViewClient implements GenericScene
         ChatsAvaiable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                dest.clear();
                 Chat.clear();
                 selectedItem = ChatsAvaiable.getSelectionModel().getSelectedItem().toString();
                 if (selectedItem.equals("Group Chat")) {
-                    dest = all;
+                    for (String x : all) {
+                        dest.add(x);
+                    }
                 } else {
                     dest.add(selectedItem);
                 }
@@ -79,7 +83,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
     }
 
     public void ReloadChat(ArrayList<String> players) {
-        System.out.println("All: "+Arrays.toString(players.toArray()));
+        System.out.println("All: " + Arrays.toString(players.toArray()));
         for (String name : StoredChat.keySet()) {
             ChatsAvaiable.getItems().add(name);
         }
@@ -89,7 +93,9 @@ public class ChatController extends ObservableViewClient implements GenericScene
             dest.clear();
             selectedItem = ChatsAvaiable.getSelectionModel().getSelectedItem().toString();
             if (selectedItem.equals("Group Chat")) {
-                dest = all;
+                for (String x : all) {
+                    dest.add(x);
+                }
             } else {
                 dest.add(selectedItem);
             }
@@ -113,14 +119,13 @@ public class ChatController extends ObservableViewClient implements GenericScene
         } else {
             StoredChat.get(dest.get(0));
         }
-        System.out.println(dest);
         this.notifyObserver(observerViewClient -> observerViewClient.handleMexChat(dest, message));
-        dest.clear();
     }
 
     public void removePlayer(String name) {
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
+        System.out.println("rimuoviamo persona");
         all.remove(name);
         for (String s : allname) {
             if (s.equals(name)) {
@@ -129,9 +134,14 @@ public class ChatController extends ObservableViewClient implements GenericScene
         }
     }
 
+    public void addPlayer(String name) {
+        StoredChat.put(name, new ArrayList<>());
+        all.add(name);
+    }
+
     public void arrivedMex(String getnickname, String mex, String dest) {
         System.out.println(dest);
-        if (dest.equals("you")||StoredChat.get("Group Chat")==null) {
+        if (dest.equals("you") || StoredChat.get("Group Chat") == null) {
             StoredChat.get(getnickname).add(mex + "\n");
         } else {
             StoredChat.get("Group Chat").add(mex + "\n");
