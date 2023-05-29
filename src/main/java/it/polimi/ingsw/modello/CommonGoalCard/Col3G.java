@@ -28,22 +28,22 @@ public class Col3G implements CommonGoalCards, Serializable {
                 differentColours[i]=0;
             }
             for(r=0 ;r<6 ; r++){
-                if (library.getCardinPos(r, c).getColour() == "green") {
+                if (library.getCardinPos(r, c).getColour().equals("green")) {
                     differentColours[0]++;
                     numberOfCards++;
-                } else if (library.getCardinPos(r, c).getColour() == "white") {
+                } else if (library.getCardinPos(r, c).getColour().equals("white")) {
                     differentColours[1]++;
                     numberOfCards++;
-                } else if (library.getCardinPos(r, c).getColour() == "yellow") {
+                } else if (library.getCardinPos(r, c).getColour().equals("yellow")) {
                     differentColours[2]++;
                     numberOfCards++;
-                } else if (library.getCardinPos(r, c).getColour() == "blue") {
+                } else if (library.getCardinPos(r, c).getColour().equals("blue")) {
                     differentColours[3]++;
                     numberOfCards++;
-                } else if (library.getCardinPos(r, c).getColour() == "lightBlue") {
+                } else if (library.getCardinPos(r, c).getColour().equals("lightBlue")) {
                     differentColours[4]++;
                     numberOfCards++;
-                } else if (library.getCardinPos(r, c).getColour() == "pink") {
+                } else if (library.getCardinPos(r, c).getColour().equals("pink")) {
                     differentColours[5]++;
                     numberOfCards++;
                 }
@@ -81,17 +81,17 @@ public class Col3G implements CommonGoalCards, Serializable {
                 differentTypes[i]=0;
             }
             for(r=0 ;r<6 ; r++){
-                if (library.getCardinPos(r, c).getColour() == "green") {
+                if (library.getCardinPos(r, c).getColour().equals("green")) {
                     differentTypes[0]++;
-                } else if (library.getCardinPos(r, c).getColour() == "white") {
+                } else if (library.getCardinPos(r, c).getColour().equals("white")) {
                     differentTypes[1]++;
-                } else if (library.getCardinPos(r, c).getColour() == "yellow") {
+                } else if (library.getCardinPos(r, c).getColour().equals("yellow")) {
                     differentTypes[2]++;
-                } else if (library.getCardinPos(r, c).getColour() == "blue") {
+                } else if (library.getCardinPos(r, c).getColour().equals("blue")) {
                     differentTypes[3]++;
-                } else if (library.getCardinPos(r, c).getColour() == "lightBlue") {
+                } else if (library.getCardinPos(r, c).getColour().equals("lightBlue")) {
                     differentTypes[4]++;
-                } else if (library.getCardinPos(r, c).getColour() == "pink") {
+                } else if (library.getCardinPos(r, c).getColour().equals("pink")) {
                     differentTypes[5]++;
                 }
             }

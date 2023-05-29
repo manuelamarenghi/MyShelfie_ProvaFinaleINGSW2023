@@ -29,8 +29,8 @@ public class CornersCommG implements CommonGoalCards, Serializable {
 
 
         if (card00.getColour() != "" && card04.getColour() != "" && card50.getColour() != "" && card54.getColour() != "") {
-            if (card00.getColour() == card04.getColour() && card04.getColour() == card50.getColour()
-                    && card50.getColour() == card54.getColour())
+            if (card00.getColour().equals(card04.getColour()) && card04.getColour().equals(card50.getColour())
+                    && card50.getColour().equals(card54.getColour()))
                 return true;
             else return false;
         } else {
