@@ -9,6 +9,9 @@ Interazione e gameplay: linea di comando (CLI) e grafica (GUI).
 
 # Documentazione
 
-### Clone and push the template to your repo
+### UML
+Sono riportate di seguito il diagramma UML delle classi implementate ai fini del gioco:
+- [UML Iniziali]
+- [UML Finali]
 
 
