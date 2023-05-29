@@ -73,7 +73,6 @@ public class DoubleCommG implements CommonGoalCards, Serializable {
 
     /**
      * the method returns the description of the card
-     *
      * @return
      */
     @Override
