@@ -175,10 +175,13 @@ public class MatchController {
      * Send the score to the player
      */
     public void endGame() {
+        System.out.println("Finish Game");
         HashMap<String, Integer> results = match.getMatchmanager().results(match);
         for (VirtualView v : connectClients.values()) {
             v.EndGame(results);
         }
+        isStarted = false;
+        System.exit(0);
     }
 
     /**
@@ -202,6 +205,14 @@ public class MatchController {
      */
     public void removeClient(String nickname) {
         Player p = match.getPlayerByNickname(nickname);
+        match.getPlayers().remove(p);
+        connectClients.remove(nickname);
+        players.remove(nickname);
+
+        if(connectClients.isEmpty() || numberOfPlayers == 2 ) {
+            endGame();
+        }
+
         if (isStarted) {
             disconnectClients.add(p);
             for (EffectiveCard e : match.getCommonCards()) {
@@ -210,12 +221,11 @@ public class MatchController {
             if (turnController.getActivePlayer().equals(nickname))
                 nextPlayer();
         }
-        match.getPlayers().remove(p);
-        connectClients.remove(nickname);
-        players.remove(nickname);
+
         for (VirtualView v : connectClients.values()) {
             v.updateanotherplayerconnect(nickname, false, null);
         }
+
     }
 
     /**
@@ -302,38 +312,39 @@ public class MatchController {
      */
 
     public void handler(PlayerAction m) {
-        cardSelect = m.getCards();
-        int column = m.getColumn();
-        String nickname = m.getnickname();
+        if(isStarted) {
+            cardSelect = m.getCards();
+            int column = m.getColumn();
+            String nickname = m.getnickname();
 
-        if (match.getBoard().allow(cardSelect)) {
-            for (Card card : cardSelect) {
-                match.getBoard().takeCard(card.getCoordinates());
+            if (match.getBoard().allow(cardSelect)) {
+                for (Card card : cardSelect) {
+                    match.getBoard().takeCard(card.getCoordinates());
+                }
+                match.getMatchmanager().IsEmptyBoard(match);
+                for (VirtualView v : connectClients.values()) {
+                    v.updateboard(match.getBoard());
+                }
+                System.out.println("update board");
+                match.getPlayerByNickname(nickname).getLibrary().setColumn(cardSelect, column);
+
+                for (VirtualView v : connectClients.values()) {
+                    v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(), m.getnickname());
+                }
+                System.out.println("update library");
+                if (match.getPlayerByNickname(nickname).getLibrary().isFull())
+                    firstFinish(match.getPlayerByNickname(nickname));
+
+                System.out.println("Finish control library full");
+                match.getPlayerByNickname(nickname).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(nickname));
+                nextPlayer();
+
+                System.out.println("next player");
+
+            } else {
+                connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
             }
-            match.getMatchmanager().IsEmptyBoard(match);
-            for (VirtualView v : connectClients.values()) {
-                v.updateboard(match.getBoard());
-            }
-            System.out.println("update board");
-            match.getPlayerByNickname(nickname).getLibrary().setColumn(cardSelect, column);
-
-            for (VirtualView v : connectClients.values()) {
-                v.updatelibrary(match.getPlayerByNickname(m.getnickname()).getLibrary(), m.getnickname());
-            }
-            System.out.println("update library");
-            if (match.getPlayerByNickname(nickname).getLibrary().isFull())
-                firstFinish(match.getPlayerByNickname(nickname));
-
-            System.out.println("Finish control library full");
-            match.getPlayerByNickname(nickname).getPlayerManager().notifyAllObservers(match.getPlayerByNickname(nickname));
-            nextPlayer();
-
-            System.out.println("next player");
-
-        } else {
-            connectClients.get(m.getnickname()).NotallowedCard(m.getnickname());
         }
-
     }
 
     //----------------------VIRTUALVIEW METHODS----------------
