@@ -21,4 +21,19 @@ Al seguente link è possibile consultare la documentazione Java delle classi imp
 ### Documentazione Gestione Messaggi Client-Server
 Al seguente link è possibile visionare una documentazione dettagliata della gestione dei messaggi Client-Server di cui fa uso l'applicazione: [protocollo](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/Descrizione_della_Gestione_dei_Messaggi_nel_Progetto_MyShelfie.docx)
 
+### Strumenti utilizzati
+|Libreria/Plugin|Descrizione|
+|---------------|-----------|
+|__Maven__|Strumento di automazione della compilazione utilizzato principalmente per progetti Java.|
+|__JavaFx__|Libreria grafica per realizzare interfacce utente.|
+|__JUnit__|Framework di unit testing.|
 
+## Funzionalità
+### Funzionalità Sviluppate
+- Regole Complete
+- CLI
+- GUI
+- Socket
+- 2 FA (Funzionalità Avanzate):
+    - __Chat:__possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
+    - __Resistenza alle disconnessioni:__ possibilità per ogni giocatore di disconnettersi e riconnettersi al gioco e relativa gestione da parte del server.
