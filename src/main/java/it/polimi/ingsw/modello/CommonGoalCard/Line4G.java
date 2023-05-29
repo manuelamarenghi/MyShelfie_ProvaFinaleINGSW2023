@@ -27,21 +27,22 @@ public class Line4G implements CommonGoalCards, Serializable {
         int j = 0;
         for (int i = 0; i < 6; i++) {
             while (j < 5 && temp< 4) {
-                if (!library.getCardinPos(i, j).getColour().isEmpty()) {
+                if (!library.getCardinPos(i, j).getColour().equals("")) {
                     if (!n.contains(library.getCardinPos(i, j).getColour())) {
-                        n.add(temp, library.getCardinPos(i, j).getColour());
+                        n.add(library.getCardinPos(i, j).getColour());
                         temp++;
                     }
                     j++;
-                    if (j == 5 && temp<4) {
+                    if (j == 5 && temp < 4) {
                         x++;
                     }
+                } else {
+                    j = 5;
                 }
-                else{ j=5;}
             }
             j = 0;
-            n.clear();
-            temp=0;
+            n = new ArrayList<String>();
+            temp = 0;
         }
         if (x >= 4) {
             return true;

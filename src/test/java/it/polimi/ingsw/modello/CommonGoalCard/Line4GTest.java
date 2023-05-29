@@ -186,6 +186,34 @@ class Line4GTest {
         library.showLibrary();
         Assertions.assertFalse(card.check(library));
     }
+
+    @Test
+    void check9() {
+        Library library = new Library();
+        library.getCardinPos(5, 0).setColour("pink");
+        library.getCardinPos(5, 1).setColour("pink");
+        library.getCardinPos(5, 2).setColour("pink");
+        library.getCardinPos(5, 3).setColour("pink");
+        library.getCardinPos(5, 4).setColour("blue");
+        library.getCardinPos(4, 0).setColour("yellow");
+        library.getCardinPos(4, 1).setColour("yellow");
+        library.getCardinPos(4, 2).setColour("green");
+        library.getCardinPos(4, 3).setColour("pink");
+        library.getCardinPos(4, 4).setColour("green");
+        library.getCardinPos(3, 0).setColour("green");
+        library.getCardinPos(3, 1).setColour("green");
+        library.getCardinPos(3, 2).setColour("green");
+        library.getCardinPos(3, 3).setColour("green");
+        library.getCardinPos(3, 4).setColour("green");
+        library.getCardinPos(2, 0).setColour("blue");
+        library.getCardinPos(2, 1).setColour("green");
+        library.getCardinPos(2, 2).setColour("green");
+        library.getCardinPos(2, 3).setColour("white");
+        library.getCardinPos(2, 4).setColour("blue");
+        library.showLibrary();
+        Assertions.assertTrue(card.check(library));
+    }
+
     /**
      * getImage() to see the output of the method in the card
      */
@@ -193,6 +221,7 @@ class Line4GTest {
     void getImage() {
         card.showCommonCard();
     }
+
     /**
      * expired1() tests when library's full and doesn't respect the goal
      */
