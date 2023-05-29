@@ -1,4 +1,5 @@
-# Corso Ingegneria del Software 2023 - Cremona
+# Prova Finale di Ingegneria del Software - AA 2022-23
+![alt text](src/main/resources/images/myshelfie.png)
 
 ## Project Setupp
 
