@@ -27,9 +27,9 @@ public class Line4G implements CommonGoalCards, Serializable {
         int j = 0;
         for (int i = 0; i < 6; i++) {
             while (j < 5 && temp< 4) {
-                if (!library.getCardinPos(i, j).getColour().isEmpty()) {
+                if (!library.getCardinPos(i, j).getColour().equals("")) {
                     if (!n.contains(library.getCardinPos(i, j).getColour())) {
-                        n.add(temp, library.getCardinPos(i, j).getColour());
+                        n.add(library.getCardinPos(i, j).getColour());
                         temp++;
                     }
                     j++;
@@ -40,7 +40,7 @@ public class Line4G implements CommonGoalCards, Serializable {
                 else{ j=5;}
             }
             j = 0;
-            n.clear();
+            n = new ArrayList<>();
             temp=0;
         }
         if (x >= 4) {
@@ -84,34 +84,6 @@ public class Line4G implements CommonGoalCards, Serializable {
      */
     @Override
     public boolean expired(Library library) {
-        int j=0;
-        ArrayList<String> colors = new ArrayList<String>();
-        int n=0;
-        int x=0;
-        for(int i=0;i<6;i++){
-            while(j<5 && x<4){
-                if(!library.getCardinPos(i, j).getColour().isEmpty()){
-                    if(!colors.contains(library.getCardinPos(i, j).getColour())){
-                        colors.add(x,library.getCardinPos(i,j).getColour());
-                        x++;
-                    }
-                    if(x>3){
-                        n++;
-                    }
-                    j++;
-                }
-                else{
-                    n++;
-                    j++;
-                }
-            }
-            j = 0;
-            colors.clear();
-            x = 0;
-        }
-        if (n > 3) {
-            return true;
-        }
         return false;
     }
     /**
