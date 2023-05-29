@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.GUI.Scenes;
 
 import it.polimi.ingsw.view.ObservableViewClient;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -123,12 +122,15 @@ public class ChatController extends ObservableViewClient implements GenericScene
     }
 
     public void removePlayer(String name) {
+        ChatsAvaiable.getItems().remove(name);
+        StoredChat.remove(name);
+        System.out.println("rimuoviamo persona");
+        all.remove(name);
+        /*
         ObservableList<String> allname = ChatsAvaiable.getItems();
         StoredChat.remove(name);
         System.out.println("rimuoviamo persona");
         all.remove(name);
-        ChatsAvaiable.getItems().remove(name);
-       /* allname.remove(name);
         if (allname.size() > 1) {
             for (String s : allname) {
                 if (s.equals(name)) {
