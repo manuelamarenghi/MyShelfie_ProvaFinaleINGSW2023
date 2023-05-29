@@ -16,7 +16,7 @@ Sono riportate di seguito il diagramma UML delle classi implementate ai fini del
 - [UML 3](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/uml3.jpeg)
 
 ### JavaDoc
-Al seguente link è possibile consultare la documentazione Java delle classi implementate: 
+Al seguente link è possibile consultare la documentazione Java delle classi implementate: [JavaDoc](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/tree/main/Javadoc)
 
 ### Documentazione Gestione Messaggi Client-Server
 Al seguente link è possibile visionare una documentazione dettagliata della gestione dei messaggi Client-Server di cui fa uso l'applicazione: [protocollo](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/uml/Descrizione_della_Gestione_dei_Messaggi_nel_Progetto_MyShelfie.docx)
@@ -37,3 +37,4 @@ Al seguente link è possibile visionare una documentazione dettagliata della ges
 - 2 FA (Funzionalità Avanzate):
     - __Chat:__ possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
     - __Resistenza alle disconnessioni:__ possibilità per ogni giocatore di disconnettersi e riconnettersi al gioco e relativa gestione da parte del server.
+- Docker Images del server.
