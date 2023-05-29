@@ -44,10 +44,12 @@ public class ThreePlayers extends Matchmanager implements Serializable {
         score.add(6);
         score.add(4);
         int i,j;
+
         i=(int)Math.floor(Math.random() * (12) );
         do {
             j=(int)Math.floor(Math.random() * (12) );
         }while(i==j);
+
         chosen[0]=new EffectiveCard(l.get(i));
         chosen[0].setAllScores(score);
         chosen[1]=new EffectiveCard(l.get(j));
