@@ -1,0 +1,12 @@
+controller
+it.polimi.ingsw
+it.polimi.ingsw.Controller
+it.polimi.ingsw.message
+it.polimi.ingsw.modello
+it.polimi.ingsw.modello.CommonGoalCard
+it.polimi.ingsw.network
+it.polimi.ingsw.network.observer
+it.polimi.ingsw.view
+it.polimi.ingsw.view.GUI
+it.polimi.ingsw.view.GUI.Scenes
+it.polimi.ingsw.view.GUI.Scenes.Storage
