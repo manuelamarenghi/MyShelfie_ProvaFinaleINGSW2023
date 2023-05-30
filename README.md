@@ -38,3 +38,13 @@ Al seguente link è possibile visionare una documentazione dettagliata della ges
     - __Chat:__ possibilità per ogni giocatore di scambiare messaggi tramite chat privata o di gruppo.
     - __Resistenza alle disconnessioni:__ possibilità per ogni giocatore di disconnettersi e riconnettersi al gioco e relativa gestione da parte del server.
 - Docker Images del server.
+
+## Compilazione e packaging
+I jar sono stati realizzati con l'ausilio di Maven Package.
+Di seguito sono forniti i jar precompilati.
+Per compilare i jar autonomamente, posizionarsi nella root del progetto e lanciare il comando:
+```
+mvn clean package
+```
+I jar compilati verranno posizionati all'interno della cartella ```target/``` con i nomi
+```my_client_shelfie.jar``` e ```my_server_shelfie.jar```.
