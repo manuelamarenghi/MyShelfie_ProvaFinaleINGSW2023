@@ -48,3 +48,6 @@ mvn clean package
 ```
 I jar compilati verranno posizionati all'interno della cartella ```target/``` con i nomi
 ```my_client_shelfie.jar``` e ```my_server_shelfie.jar```.
+
+### Jars
+I Jar del progetto possono essere scaricati al seguente link: [Jars]().
