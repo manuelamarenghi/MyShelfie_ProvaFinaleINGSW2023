@@ -47,13 +47,12 @@ Per compilare i jar autonomamente, posizionarsi nella root del progetto e lancia
 mvn clean package
 ```
 I jar compilati verranno posizionati all'interno della cartella ```target/``` con i nomi
-```my_client_shelfie.jar``` e ```my_server_shelfie.jar```.
+```client_my_shelfie.jar``` e ```server_my_shelfie.jar```.
 
 ### Jars
 I Jar del progetto possono essere scaricati al seguente link: [Jars](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/finaljar).
 
 ## Esecuzione
-Questo progetto richiede una versione di Java 11 o superiore per essere eseguito correttamente.
 
 ### Client
 Le seguenti istruzioni descrivono come eseguire il client con interfaccia CLI o GUI.
@@ -61,20 +60,20 @@ Le seguenti istruzioni descrivono come eseguire il client con interfaccia CLI o 
 #### CLI
 Per lanciare Santorini Client CLI digitare da terminale il comando:
 ```
-java -jar my_client_shelfie.jar --cli
+java -jar client_my_shelfie.jar --cli
 ```
 #### GUI
 Per poter lanciare la modalità GUI sono disponibili due opzioni:
-- effettuare doppio click sull'eseguibile ```my_client_shelfie.jar```
+- effettuare doppio click sull'eseguibile ```client_my_shelfie.jar```
 - digitare da terminale il comando:
 ```
-java -jar my_client_shelfie.jar
+java -jar client_my_shelfie.jar
 ```
 
 ### Server
 Per lanciare Santorini Server digitare da terminale il comando:
 ```
-java -jar my_server_shelfie.jar [--port <port_number>]
+java -jar server_my_shelfie.jar [--port <port_number>]
 ```
 
 ## Componenti del gruppo
