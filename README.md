@@ -50,4 +50,4 @@ I jar compilati verranno posizionati all'interno della cartella ```target/``` co
 ```my_client_shelfie.jar``` e ```my_server_shelfie.jar```.
 
 ### Jars
-I Jar del progetto possono essere scaricati al seguente link: [Jars]().
+I Jar del progetto possono essere scaricati al seguente link: [Jars](https://github.com/manuelamarenghi/proj-ingsw-ThomasShelfie/blob/main/finaljar).
