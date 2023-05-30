@@ -3,15 +3,16 @@ package it.polimi.ingsw.modello;
 import it.polimi.ingsw.message.UpdateBoard;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+
 
 public abstract class Matchmanager implements Serializable {
 
@@ -19,7 +20,7 @@ public abstract class Matchmanager implements Serializable {
    * this class manage actions in a match
    * the match class initialized one of his subclasses according to player's number
    */
-  public Matchmanager(){
+  public Matchmanager() {
 
   }
   /**
@@ -86,14 +87,18 @@ public abstract class Matchmanager implements Serializable {
     String jsonPath;
     ArrayList<PersonalGoalCard> arrayList=new ArrayList<>(12);
     Card[] cards;
-
     {
       try {
-        URL resource = getClass().getClassLoader().getResource("json/PersonalGoalCards.json");
-        File file = new File(resource.toURI());
+        JSONParser jsonParser = new JSONParser();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("json/PersonalGoalCards.json");
+        //  URL resource = getClass().getClassLoader().getResource("json/PersonalGoalCards.json");
+        jsonPath = new String(is.readAllBytes());
+        //InputStreamReader inputStreamReader=new InputStreamReader(is);
+        //jsonArray=(JSONArray) jsonParser.parse(inputStreamReader);
+        File file = new File(Objects.requireNonNull(is).toString());
         //jsonPath = new String(Files.readAllBytes(Paths.get("./proj-ingsw-ThomasShelfie/src/json/PersonalGoalCards.json")));
-        jsonPath = new String(Files.readAllBytes(file.toPath()));
-      } catch (URISyntaxException | IOException e) {
+        //jsonPath = new String(Files.readAllBytes(file.toPath()));
+      } catch (IOException e) {
         throw new RuntimeException(e);
       }
       JSONArray jsonArray=new JSONArray(jsonPath);
