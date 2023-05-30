@@ -33,15 +33,16 @@ public class Line4G implements CommonGoalCards, Serializable {
                         temp++;
                     }
                     j++;
-                    if (j == 5 && temp<4) {
+                    if (j == 5 && temp < 4) {
                         x++;
                     }
+                } else {
+                    j = 5;
                 }
-                else{ j=5;}
             }
             j = 0;
             n = new ArrayList<>();
-            temp=0;
+            temp = 0;
         }
         if (x >= 4) {
             return true;

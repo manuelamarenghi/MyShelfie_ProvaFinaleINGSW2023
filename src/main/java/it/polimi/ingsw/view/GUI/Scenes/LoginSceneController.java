@@ -24,8 +24,6 @@ public class LoginSceneController extends ObservableViewClient implements Generi
 
     /**
      * A button to see the common goal card 1
-     *
-     * @param mouseEvent
      */
     public void initialize() {
         Area.setEditable(false);

@@ -86,6 +86,7 @@ public class SocketClient extends Client {
                     //System.out.println(message.getType());
                 } catch (IOException | ClassNotFoundException exception) {
                     message = new Message(nickname, "Connection lost with server.");
+                    System.exit(0);
                 }
                 notifyObserver(message);
             }

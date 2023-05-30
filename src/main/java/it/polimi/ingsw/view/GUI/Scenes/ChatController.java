@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.GUI.Scenes;
 
 import it.polimi.ingsw.view.ObservableViewClient;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -138,9 +137,7 @@ public class ChatController extends ObservableViewClient implements GenericScene
                     ChatsAvaiable.getItems().remove(s);
                 }
             }
-        }
-
-         */
+        }*/
     }
 
     public void addPlayer(String name) {
